@@ -1,4 +1,11 @@
-import type { Match, MatchLens, Team, Venue } from "@/lib/types";
+import type {
+  Match,
+  MatchLens,
+  MatchQuestionAnswer,
+  PresetQuestionKey,
+  Team,
+  Venue,
+} from "@/lib/types";
 
 export const teams: Team[] = [
   {
@@ -243,5 +250,88 @@ export const cachedLenses: Record<string, MatchLens> = {
           "Group-stage results shape qualification and tiebreak scenarios.",
       },
     ],
+  },
+};
+
+export const cachedAnswers: Record<
+  string,
+  Partial<Record<PresetQuestionKey, MatchQuestionAnswer>>
+> = {
+  "mexico-south-africa": {
+    "explain-casually": {
+      key: "explain-casually",
+      question: "Explain this match casually",
+      shortLabel: "Explain casually",
+      answer:
+        "Mexico will probably have more of the ball and try to control the match through midfield. South Africa may be most dangerous when they recover possession and attack quickly before Mexico can reset.",
+      bullets: [
+        "Mexico should see more possession.",
+        "South Africa's best moments may come on quick breaks.",
+        "An early goal could make the match far more open.",
+      ],
+      sources: [
+        {
+          title: "Team profile: Mexico",
+          snippet:
+            "Possession-oriented profile with stronger midfield control.",
+        },
+        {
+          title: "Team profile: South Africa",
+          snippet:
+            "Transition threat, wide pace, and compact defensive shape.",
+        },
+      ],
+    },
+
+    "tactical-edge": {
+      key: "tactical-edge",
+      question: "Who has the tactical edge?",
+      shortLabel: "Tactical edge",
+      answer:
+        "Mexico has the clearer tactical edge if it can control central midfield and sustain possession without exposing space behind its fullbacks. South Africa's counterattacking pace is the main reason that edge is not decisive.",
+      bullets: [
+        "Mexico's advantage is midfield control.",
+        "South Africa's advantage is transition speed.",
+        "The key battle is possession security versus counterattacking space.",
+      ],
+      sources: [
+        {
+          title: "Team profile: Mexico",
+          snippet:
+            "Technical midfield quality and a possession-oriented setup.",
+        },
+        {
+          title: "Team profile: South Africa",
+          snippet:
+            "Athletic transition play and wide counterattacking threat.",
+        },
+      ],
+    },
+
+    "what-could-go-wrong": {
+      key: "what-could-go-wrong",
+      question: "What could make the forecast wrong?",
+      shortLabel: "What could go wrong?",
+      answer:
+        "The forecast assumes Mexico can establish control. An early South Africa goal, a red card, unexpected lineups, or poor possession security could overturn that script quickly.",
+      bullets: [
+        "An early goal could force Mexico into a riskier shape.",
+        "A red card would make the forecast mostly irrelevant.",
+        "Unexpected lineups may change the midfield balance.",
+        "Set pieces can override broader tactical advantages.",
+      ],
+      sources: [
+        {
+          title: "Tournament context",
+          snippet:
+            "Opening group-stage matches can become cautious or unusually volatile.",
+        },
+        {
+          title: "Match Lens uncertainty notes",
+          snippet:
+            "Lineups, fitness, cards, and early goals may materially alter the game.",
+        },
+      ],
+    },
   },
 };

@@ -1,4 +1,11 @@
-import { cachedLenses, matches, teams, venues } from "@/data/seed";
+import {
+  cachedAnswers,
+  cachedLenses,
+  matches,
+  teams,
+  venues,
+} from "@/data/seed";
+import type { PresetQuestionKey } from "@/lib/types";
 
 export function getTeamById(id: string) {
   return teams.find((team) => team.id === id);
@@ -60,4 +67,23 @@ export function formatKickoff(iso: string) {
     minute: "2-digit",
     timeZoneName: "short",
   }).format(new Date(iso));
+}
+
+export function getCachedAnswer(
+  matchId: string,
+  questionKey: PresetQuestionKey,
+) {
+  return cachedAnswers[matchId]?.[questionKey] ?? null;
+}
+
+export function getCachedAnswersForMatch(matchId: string) {
+  const answers = cachedAnswers[matchId];
+
+  if (!answers) {
+    return [];
+  }
+
+  return Object.values(answers).filter(
+    (answer): answer is NonNullable<typeof answer> => Boolean(answer),
+  );
 }

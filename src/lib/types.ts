@@ -54,3 +54,20 @@ export type MatchLens = {
     snippet: string;
   }[];
 };
+
+export type PresetQuestionKey =
+  | "explain-casually"
+  | "tactical-edge"
+  | "what-could-go-wrong";
+
+export type MatchQuestionAnswer = {
+  key: PresetQuestionKey;
+  question: string;
+  shortLabel: string;
+  answer: string;
+  bullets?: string[];
+  sources: {
+    title: string;
+    snippet: string;
+  }[];
+};

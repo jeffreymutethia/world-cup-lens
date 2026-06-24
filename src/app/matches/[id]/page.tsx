@@ -5,9 +5,14 @@ import { ArrowLeft, MapPin } from "lucide-react";
 import { AppShell } from "@/components/layout/app-shell";
 import { MatchForecastCard } from "@/components/match/match-forecast-card";
 import { MatchLensCards } from "@/components/match/match-lens-cards";
+import { MatchQa } from "@/components/match/match-qa";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatKickoff, getMatchViewModel } from "@/lib/lens";
+import {
+  formatKickoff,
+  getCachedAnswersForMatch,
+  getMatchViewModel,
+} from "@/lib/lens";
 
 type MatchPageProps = {
   params: Promise<{
@@ -24,6 +29,7 @@ export default async function MatchPage({ params }: MatchPageProps) {
   }
 
   const { match, homeTeam, awayTeam, venue, lens } = viewModel;
+  const cachedAnswers = getCachedAnswersForMatch(match.id);
 
   if (!lens) {
     return (
@@ -109,6 +115,8 @@ export default async function MatchPage({ params }: MatchPageProps) {
             awayTeam={awayTeam}
           />
         </section>
+
+        <MatchQa answers={cachedAnswers} />
       </div>
     </AppShell>
   );
