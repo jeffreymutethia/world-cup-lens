@@ -8,11 +8,11 @@ import { MatchLensCards } from "@/components/match/match-lens-cards";
 import { MatchQa } from "@/components/match/match-qa";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { formatKickoff } from "@/lib/lens";
 import {
-  formatKickoff,
   getCachedAnswersForMatch,
   getMatchViewModel,
-} from "@/lib/lens";
+} from "@/lib/supabase/repository";
 
 type MatchPageProps = {
   params: Promise<{
@@ -22,14 +22,14 @@ type MatchPageProps = {
 
 export default async function MatchPage({ params }: MatchPageProps) {
   const { id } = await params;
-  const viewModel = getMatchViewModel(id);
+  const viewModel = await getMatchViewModel(id);
 
   if (!viewModel) {
     notFound();
   }
 
   const { match, homeTeam, awayTeam, venue, lens } = viewModel;
-  const cachedAnswers = getCachedAnswersForMatch(match.id);
+  const cachedAnswers = await getCachedAnswersForMatch(match.id);
 
   if (!lens) {
     return (

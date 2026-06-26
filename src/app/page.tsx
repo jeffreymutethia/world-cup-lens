@@ -3,15 +3,21 @@ import { FeaturedMatchCard } from "@/components/match/featured-match-card";
 import { MatchCard } from "@/components/match/match-card";
 import { StandingsSnapshot } from "@/components/match/standings-snapshot";
 import { Badge } from "@/components/ui/badge";
-import { getAllMatchViewModels, getFeaturedMatchViewModel } from "@/lib/lens";
-import { teams } from "@/data/seed";
+import {
+  getAllMatchViewModels,
+  getFeaturedMatchViewModel,
+  getTeams,
+} from "@/lib/supabase/repository";
 
 const dateFilters = ["Today", "Tomorrow", "Sat Jun 13", "Sun Jun 14"];
 const groupFilters = ["All", "Group A", "Group B", "Group C", "Group D", "Hosts", "High volatility"];
 
-export default function Home() {
-  const featuredMatch = getFeaturedMatchViewModel();
-  const matches = getAllMatchViewModels();
+export default async function Home() {
+  const [featuredMatch, matches, teams] = await Promise.all([
+    getFeaturedMatchViewModel(),
+    getAllMatchViewModels(),
+    getTeams(),
+  ]);
   const groupATeams = teams.filter((team) => team.group === "A");
 
   if (!featuredMatch) {
