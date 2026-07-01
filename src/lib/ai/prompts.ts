@@ -1,4 +1,7 @@
 import type {
+  RetrievedChunk,
+} from "@/lib/ai/retrieve-context";
+import type {
   Team,
   Venue,
 } from "@/lib/types";
@@ -9,6 +12,7 @@ type BuildMatchLensPromptArgs = {
   venue: Venue;
   group: string;
   kickoffAt: string;
+  retrievedContext: RetrievedChunk[];
 };
 
 export function buildMatchLensPrompt({
@@ -17,7 +21,20 @@ export function buildMatchLensPrompt({
   venue,
   group,
   kickoffAt,
+  retrievedContext,
 }: BuildMatchLensPromptArgs) {
+  const contextBlock = retrievedContext
+    .map(
+      (chunk, index) => `
+SOURCE ${index + 1}
+Title: ${chunk.title}
+Type: ${chunk.docType}
+Content:
+${chunk.content}
+`.trim(),
+    )
+    .join("\n\n");
+
   return `
 Create a concise World Cup Match Lens for the supplied match.
 
@@ -84,12 +101,10 @@ ${awayTeam.name}
 - Do not overstate conclusions.
 
 6. sources
-Use readable titles such as:
-- "Team profile: ${homeTeam.name}"
-- "Team profile: ${awayTeam.name}"
-- "Venue profile: ${venue.name}"
-
-Source snippets must paraphrase only the supplied information.
+- Sources are attached by the application after generation.
+- Do not use source snippets as a place to add analysis.
+- Return schema-compliant placeholder source entries only if the schema requires them.
+- Source titles and snippets will be discarded and replaced deterministically.
 
 MATCH
 
@@ -108,5 +123,16 @@ ${JSON.stringify(awayTeam, null, 2)}
 VENUE
 
 ${JSON.stringify(venue, null, 2)}
+
+RETRIEVED SOURCE CONTEXT
+
+${contextBlock}
+
+GROUNDING RULES
+
+- Use the retrieved source context when making descriptive claims.
+- Do not cite a source that is not present in the retrieved context.
+- Source titles in the output must match retrieved source titles exactly.
+- If the retrieved context does not support a claim, omit the claim.
 `.trim();
 }

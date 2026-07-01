@@ -73,7 +73,9 @@ export async function POST(
     const {
       lens: generatedLens,
       model,
+      retrievedSources,
     } = await generateMatchLens({
+      match: viewModel.match,
       homeTeam: viewModel.homeTeam,
       awayTeam: viewModel.awayTeam,
       venue: viewModel.venue,
@@ -109,6 +111,7 @@ export async function POST(
     return NextResponse.json({
       matchId: id,
       model,
+      retrievedSources,
       lens: generatedLens,
     });
   } catch (error) {
