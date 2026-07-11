@@ -1,23 +1,48 @@
+import { connection } from "next/server";
+
 import { AppShell } from "@/components/layout/app-shell";
 import { FeaturedMatchCard } from "@/components/match/featured-match-card";
 import { MatchCard } from "@/components/match/match-card";
 import { StandingsSnapshot } from "@/components/match/standings-snapshot";
 import { Badge } from "@/components/ui/badge";
 import {
-  getAllMatchViewModels,
-  getFeaturedMatchViewModel,
-  getTeams,
+  getProviderMatchesForLocalDate,
 } from "@/lib/supabase/repository";
+import type { MatchViewModel } from "@/lib/supabase/repository";
+import {
+  getAllMatchViewModels as getSeededMatchViewModels,
+} from "@/lib/lens";
+import { teams as seededTeams } from "@/data/seed";
 
 const dateFilters = ["Today", "Tomorrow", "Sat Jun 13", "Sun Jun 14"];
 const groupFilters = ["All", "Group A", "Group B", "Group C", "Group D", "Hosts", "High volatility"];
 
 export default async function Home() {
-  const [featuredMatch, matches, teams] = await Promise.all([
-    getFeaturedMatchViewModel(),
-    getAllMatchViewModels(),
-    getTeams(),
-  ]);
+  await connection();
+
+  let providerMatches: MatchViewModel[] = [];
+
+  try {
+    providerMatches = await getProviderMatchesForLocalDate();
+  } catch (error) {
+    console.error("[home] provider matches unavailable:", error);
+  }
+
+  const usingProviderMatches = providerMatches.length > 0;
+  const matches = usingProviderMatches
+    ? providerMatches
+    : getSeededMatchViewModels();
+  const featuredMatch = matches[0] ?? null;
+  const teams = usingProviderMatches
+    ? Array.from(
+        new Map(
+          matches.flatMap(({ homeTeam, awayTeam }) => [
+            [homeTeam.id, homeTeam],
+            [awayTeam.id, awayTeam],
+          ]),
+        ).values(),
+      )
+    : seededTeams;
   const groupATeams = teams.filter((team) => team.group === "A");
 
   if (!featuredMatch) {
@@ -46,9 +71,13 @@ export default async function Home() {
         <section className="rounded-3xl bg-white/70 p-4 shadow-sm">
           <div className="mb-4 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <h2 className="text-lg font-semibold tracking-tight">Upcoming matches</h2>
+              <h2 className="text-lg font-semibold tracking-tight">
+                {usingProviderMatches ? "Today’s matches" : "Upcoming matches"}
+              </h2>
               <p className="text-sm text-slate-500">
-                Browse visually, then open a match to see the full Lens.
+                {usingProviderMatches
+                  ? "Live, upcoming, then completed fixtures in Los Angeles time."
+                  : "Browse visually, then open a match to see the full Lens."}
               </p>
             </div>
 

@@ -34,6 +34,12 @@ export function FeaturedMatchCard({
         <div>
           <div className="mb-4 flex flex-wrap items-center gap-2">
             <Badge variant="secondary">Group {match.group}</Badge>
+            {match.statusShort ? (
+              <Badge variant="outline">
+                {match.statusShort}
+                {match.elapsed != null ? ` · ${match.elapsed}′` : ""}
+              </Badge>
+            ) : null}
             {match.signalTags.map((tag) => (
               <Badge key={tag} variant="outline">
                 {tag}
@@ -48,8 +54,10 @@ export function FeaturedMatchCard({
               <p className="text-sm text-slate-500">{homeTeam.code}</p>
             </div>
 
-            <div className="rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-500">
-              VS
+            <div className="rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-600">
+              {match.homeScore != null || match.awayScore != null
+                ? `${match.homeScore ?? 0}–${match.awayScore ?? 0}`
+                : "VS"}
             </div>
 
             <div className="text-right">
@@ -61,6 +69,11 @@ export function FeaturedMatchCard({
 
           <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-slate-600">
             <span>{formatKickoff(match.kickoffAt)}</span>
+            {match.statusLong ? (
+              <span className="font-medium text-emerald-700">
+                {match.statusLong}
+              </span>
+            ) : null}
             <span className="hidden text-slate-300 sm:inline">•</span>
             <span className="flex items-center gap-1">
               <MapPin className="size-4" />

@@ -31,6 +31,11 @@ export type Match = {
   group: string;
   kickoffAt: string;
   signalTags: string[];
+  homeScore?: number | null;
+  awayScore?: number | null;
+  statusShort?: string | null;
+  statusLong?: string | null;
+  elapsed?: number | null;
 };
 
 export type MatchLens = {

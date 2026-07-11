@@ -66,6 +66,7 @@ export function formatKickoff(iso: string) {
     hour: "numeric",
     minute: "2-digit",
     timeZoneName: "short",
+    timeZone: "America/Los_Angeles",
   }).format(new Date(iso));
 }
 

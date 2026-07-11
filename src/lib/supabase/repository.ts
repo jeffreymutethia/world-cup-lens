@@ -38,6 +38,17 @@ type MatchRow = {
   group_name: string;
   kickoff_at: string;
   signal_tags: string[];
+  home_score?: number | null;
+  away_score?: number | null;
+  status_short?: string | null;
+  status_long?: string | null;
+  elapsed?: number | null;
+};
+
+type ProviderMatchRow = MatchRow & {
+  home_team: TeamRow | TeamRow[];
+  away_team: TeamRow | TeamRow[];
+  venue: VenueRow | VenueRow[];
 };
 
 type MatchLensRow = {
@@ -95,7 +106,157 @@ function mapMatch(row: MatchRow): Match {
     group: row.group_name,
     kickoffAt: row.kickoff_at,
     signalTags: row.signal_tags ?? [],
+    homeScore: row.home_score ?? null,
+    awayScore: row.away_score ?? null,
+    statusShort: row.status_short ?? null,
+    statusLong: row.status_long ?? null,
+    elapsed: row.elapsed ?? null,
   };
+}
+
+const LIVE_STATUSES = new Set([
+  "1H",
+  "HT",
+  "2H",
+  "ET",
+  "BT",
+  "P",
+  "LIVE",
+]);
+
+const UPCOMING_STATUSES = new Set(["NS", "TBD"]);
+const FINISHED_STATUSES = new Set(["FT", "AET", "PEN"]);
+
+function statusBucket(status: string | null | undefined) {
+  if (status && LIVE_STATUSES.has(status)) return 0;
+  if (status && UPCOMING_STATUSES.has(status)) return 1;
+  if (status && FINISHED_STATUSES.has(status)) return 2;
+  return 3;
+}
+
+function firstRelation<T>(relation: T | T[]) {
+  return Array.isArray(relation) ? relation[0] : relation;
+}
+
+function localDateKey(date: Date, timeZone: string) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+
+  const part = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((item) => item.type === type)?.value;
+
+  return `${part("year")}-${part("month")}-${part("day")}`;
+}
+
+function nextDateKey(dateKey: string) {
+  const [year, month, day] = dateKey.split("-").map(Number);
+  const next = new Date(Date.UTC(year, month - 1, day + 1));
+  return next.toISOString().slice(0, 10);
+}
+
+function localMidnightUtc(dateKey: string, timeZone: string) {
+  const [year, month, day] = dateKey.split("-").map(Number);
+  const desired = Date.UTC(year, month - 1, day);
+  let candidate = desired;
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    hourCycle: "h23",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    const parts = formatter.formatToParts(new Date(candidate));
+    const value = (type: Intl.DateTimeFormatPartTypes) =>
+      Number(parts.find((item) => item.type === type)?.value);
+    const represented = Date.UTC(
+      value("year"),
+      value("month") - 1,
+      value("day"),
+      value("hour"),
+      value("minute"),
+      value("second"),
+    );
+    candidate += desired - represented;
+  }
+
+  return new Date(candidate).toISOString();
+}
+
+export async function getProviderMatchesForLocalDate(
+  targetDate = new Date(),
+  timeZone = "America/Los_Angeles",
+): Promise<MatchViewModel[]> {
+  const dateKey = localDateKey(targetDate, timeZone);
+  const start = localMidnightUtc(dateKey, timeZone);
+  const end = localMidnightUtc(nextDateKey(dateKey), timeZone);
+  const supabase = createServerSupabaseClient();
+
+  const { data, error } = await supabase
+    .from("matches")
+    .select(
+      `
+      id,
+      home_team_id,
+      away_team_id,
+      venue_id,
+      group_name,
+      kickoff_at,
+      signal_tags,
+      home_score,
+      away_score,
+      status_short,
+      status_long,
+      elapsed,
+      home_team:teams!matches_home_team_id_fkey(
+        id, name, code, flag, group_name, summary,
+        strength_attack, strength_midfield, strength_defense, strength_transitions
+      ),
+      away_team:teams!matches_away_team_id_fkey(
+        id, name, code, flag, group_name, summary,
+        strength_attack, strength_midfield, strength_defense, strength_transitions
+      ),
+      venue:venues!matches_venue_id_fkey(id, name, city, country, summary)
+      `,
+    )
+    .eq("external_provider", "api-football")
+    .gte("kickoff_at", start)
+    .lt("kickoff_at", end)
+    .order("kickoff_at", { ascending: true });
+
+  if (error) {
+    throw new Error(`Failed to fetch today's provider matches: ${error.message}`);
+  }
+
+  return (data as ProviderMatchRow[])
+    .flatMap((row) => {
+      const homeTeam = firstRelation(row.home_team);
+      const awayTeam = firstRelation(row.away_team);
+      const venue = firstRelation(row.venue);
+
+      if (!homeTeam || !awayTeam || !venue) return [];
+
+      return [{
+        match: mapMatch(row),
+        homeTeam: mapTeam(homeTeam),
+        awayTeam: mapTeam(awayTeam),
+        venue: mapVenue(venue),
+        lens: null,
+      }];
+    })
+    .sort((left, right) =>
+      statusBucket(left.match.statusShort) -
+        statusBucket(right.match.statusShort) ||
+      left.match.kickoffAt.localeCompare(right.match.kickoffAt),
+    );
 }
 
 export async function getTeams(): Promise<Team[]> {

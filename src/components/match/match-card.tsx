@@ -19,6 +19,12 @@ export function MatchCard({ match, homeTeam, awayTeam, venue }: MatchCardProps) 
         <CardContent className="p-4">
           <div className="mb-3 flex flex-wrap items-center gap-2">
             <Badge variant="secondary">Group {match.group}</Badge>
+            {match.statusShort ? (
+              <Badge variant="outline">
+                {match.statusShort}
+                {match.elapsed != null ? ` · ${match.elapsed}′` : ""}
+              </Badge>
+            ) : null}
             {match.signalTags.slice(0, 2).map((tag) => (
               <Badge key={tag} variant="outline">
                 {tag}
@@ -28,14 +34,17 @@ export function MatchCard({ match, homeTeam, awayTeam, venue }: MatchCardProps) 
 
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
             <TeamMini team={homeTeam} />
-            <div className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-500">
-              VS
+            <div className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+              {match.homeScore != null || match.awayScore != null
+                ? `${match.homeScore ?? 0}–${match.awayScore ?? 0}`
+                : "VS"}
             </div>
             <TeamMini team={awayTeam} align="right" />
           </div>
 
           <div className="mt-4 space-y-2 text-xs text-slate-500">
             <p>{formatKickoff(match.kickoffAt)}</p>
+            {match.statusLong ? <p>{match.statusLong}</p> : null}
             <p className="flex items-center gap-1">
               <MapPin className="size-3.5" />
               {venue.name}, {venue.city}
