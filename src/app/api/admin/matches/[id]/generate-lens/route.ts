@@ -5,11 +5,8 @@ import {
 } from "next/server";
 
 import {
-  generateMatchLens,
-} from "@/lib/ai/generate-match-lens";
-import {
-  createAdminSupabaseClient,
-} from "@/lib/supabase/admin";
+  generateAndSaveMatchLens,
+} from "@/lib/ai/generate-and-save-match-lens";
 import {
   getMatchViewModel,
 } from "@/lib/supabase/repository";
@@ -74,39 +71,7 @@ export async function POST(
       lens: generatedLens,
       model,
       retrievedSources,
-    } = await generateMatchLens({
-      match: viewModel.match,
-      homeTeam: viewModel.homeTeam,
-      awayTeam: viewModel.awayTeam,
-      venue: viewModel.venue,
-      group: viewModel.match.group,
-      kickoffAt:
-        viewModel.match.kickoffAt,
-    });
-
-    const supabase =
-      createAdminSupabaseClient();
-
-    const { error } = await supabase
-      .from("match_lenses")
-      .upsert(
-        {
-          match_id: id,
-          lens_json: generatedLens,
-          model,
-          updated_at:
-            new Date().toISOString(),
-        },
-        {
-          onConflict: "match_id",
-        },
-      );
-
-    if (error) {
-      throw new Error(
-        `Failed to save generated Match Lens: ${error.message}`,
-      );
-    }
+    } = await generateAndSaveMatchLens(viewModel);
 
     return NextResponse.json({
       matchId: id,
