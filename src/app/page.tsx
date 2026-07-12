@@ -107,13 +107,14 @@ export default async function Home() {
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {matches.map(({ match, homeTeam, awayTeam, venue }) => (
+            {matches.map(({ match, homeTeam, awayTeam, venue, lens }) => (
               <MatchCard
                 key={match.id}
                 match={match}
                 homeTeam={homeTeam}
                 awayTeam={awayTeam}
                 venue={venue}
+                lens={lens}
               />
             ))}
           </div>

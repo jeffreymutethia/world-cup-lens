@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Match, Team, Venue } from "@/lib/types";
+import type { Match, MatchLens, Team, Venue } from "@/lib/types";
 import { formatKickoff } from "@/lib/lens";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,9 +10,16 @@ type MatchCardProps = {
   homeTeam: Team;
   awayTeam: Team;
   venue: Venue;
+  lens: MatchLens | null;
 };
 
-export function MatchCard({ match, homeTeam, awayTeam, venue }: MatchCardProps) {
+export function MatchCard({
+  match,
+  homeTeam,
+  awayTeam,
+  venue,
+  lens,
+}: MatchCardProps) {
   return (
     <Link href={`/matches/${match.id}`}>
       <Card className="h-full border-0 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
@@ -50,6 +57,18 @@ export function MatchCard({ match, homeTeam, awayTeam, venue }: MatchCardProps) 
               {venue.name}, {venue.city}
             </p>
           </div>
+
+          {lens ? (
+            <div className="mt-4 rounded-2xl bg-emerald-50 p-3 text-xs text-emerald-950">
+              <p className="font-semibold">
+                {lens.slightEdge ?? "Even"} · {lens.confidence} confidence ·{" "}
+                {lens.volatility} volatility
+              </p>
+              <p className="mt-1 line-clamp-2 leading-5">
+                {lens.expectedGame}
+              </p>
+            </div>
+          ) : null}
         </CardContent>
       </Card>
     </Link>

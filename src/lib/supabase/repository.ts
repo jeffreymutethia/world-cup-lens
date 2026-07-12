@@ -114,6 +114,10 @@ function mapMatch(row: MatchRow): Match {
   };
 }
 
+function mapMatchLens(row: MatchLensRow) {
+  return row.lens_json;
+}
+
 const LIVE_STATUSES = new Set([
   "1H",
   "HT",
@@ -236,7 +240,34 @@ export async function getProviderMatchesForLocalDate(
     throw new Error(`Failed to fetch today's provider matches: ${error.message}`);
   }
 
-  return (data as ProviderMatchRow[])
+  const providerRows = (data ?? []) as ProviderMatchRow[];
+
+  if (providerRows.length === 0) {
+    return [];
+  }
+
+  const { data: lensData, error: lensError } = await supabase
+    .from("match_lenses")
+    .select("match_id, lens_json")
+    .in(
+      "match_id",
+      providerRows.map((row) => row.id),
+    );
+
+  if (lensError) {
+    throw new Error(
+      `Failed to fetch today's cached Match Lenses: ${lensError.message}`,
+    );
+  }
+
+  const lensesByMatchId = new Map(
+    ((lensData ?? []) as MatchLensRow[]).map((row) => [
+      row.match_id,
+      mapMatchLens(row),
+    ]),
+  );
+
+  return providerRows
     .flatMap((row) => {
       const homeTeam = firstRelation(row.home_team);
       const awayTeam = firstRelation(row.away_team);
@@ -249,7 +280,7 @@ export async function getProviderMatchesForLocalDate(
         homeTeam: mapTeam(homeTeam),
         awayTeam: mapTeam(awayTeam),
         venue: mapVenue(venue),
-        lens: null,
+        lens: lensesByMatchId.get(row.id) ?? null,
       }];
     })
     .sort((left, right) =>
@@ -346,7 +377,7 @@ export async function getMatchLens(
     return null;
   }
 
-  return (data as MatchLensRow).lens_json;
+  return mapMatchLens(data as MatchLensRow);
 }
 
 export async function getCachedAnswersForMatch(

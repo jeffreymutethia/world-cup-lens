@@ -88,7 +88,10 @@ export function FeaturedMatchCard({
           </p>
 
           <div className="space-y-3">
-            <ForecastRow label="Slight edge" value={lens?.slightEdge ?? "TBD"} />
+            <ForecastRow
+              label="Slight edge"
+              value={lens ? (lens.slightEdge ?? "Even") : "TBD"}
+            />
             <ForecastRow label="Confidence" value={lens?.confidence ?? "TBD"} />
             <ForecastRow label="Volatility" value={lens?.volatility ?? "TBD"} />
           </div>
