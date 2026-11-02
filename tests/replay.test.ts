@@ -1,0 +1,176 @@
+import test from "node:test";
+import { isCachedLens, isCachedAnswer } from "../src/lib/cached-analysis";
+import { readFileSync } from "node:fs";
+import assert from "node:assert/strict";
+import { dateBounds, DEFAULT_ARCHIVE_DATE, findReplayMatch, isDateKey, loadReplay, loadReplayAnswers, localDateKey, parseReplaySelection, replayHref, replayScore, replayStatus, stageLabel, type ReplaySelection } from "../src/lib/replay";
+import type { Match, MatchViewModel } from "../src/lib/types";
+
+const archive: ReplaySelection = { mode: "archive", date: DEFAULT_ARCHIVE_DATE };
+const illustrative: ReplaySelection = { mode: "illustrative", date: "2026-06-11" };
+function fixture(id: string, kickoffAt = "2026-07-11T18:00:00Z", lens = false): MatchViewModel {
+  const team = { id: "test-team", name: "Test Team", code: "TST", flag: "", group: "A", summary: "Mock", strengths: { attack: 50, midfield: 50, defense: 50, transitions: 50 } };
+  return {
+    match: { id, homeTeamId: "home", awayTeamId: "away", venueId: "venue", group: "Quarter-finals", kickoffAt, signalTags: [] },
+    homeTeam: team, awayTeam: { ...team, id: "other" },
+    venue: { id: "venue", name: "Mock venue", city: "Mock city", country: "Mock country", summary: "Mock" },
+    lens: lens ? { headline: "Cached mock analysis", slightEdge: null, confidence: "Low", volatility: "Low", expectedGame: "Mock analysis.", whyItMatters: "Mock.", likelyGameScript: "Mock.", teamEdges: [], whatToWatch: [], casualFanGuide: "Mock.", uncertainty: [], sources: [] } : null,
+  };
+}
+
+test("strict calendar validation rejects malformed and nonexistent dates", () => {
+  for (const value of ["2026-2-01", "2026-02-30", "2026-13-01", "2026-00-01", "2026-07-11T00:00Z", "", "garbage", "2026-07-11 "]) assert.equal(isDateKey(value), false, value);
+  assert.equal(isDateKey("2024-02-29"), true);
+  assert.equal(isDateKey("2026-07-11"), true);
+  assert.throws(() => dateBounds("2026-02-30"));
+});
+
+test("defaults are fixed and mode-specific, never current-day based", () => {
+  assert.deepEqual(parseReplaySelection({}), { ok: true, selection: archive });
+  assert.deepEqual(parseReplaySelection({ mode: "illustrative" }), { ok: true, selection: illustrative });
+});
+
+test("invalid modes, duplicate query parameters and out-of-range dates are rejected", () => {
+  for (const params of [{ mode: "live" }, { mode: ["archive", "illustrative"] }, { date: ["2026-07-11"] }, { date: "2026-06-10" }, { date: "2026-07-20" }, { date: "2026-02-30" }, { date: "" }]) assert.equal(parseReplaySelection(params).ok, false);
+  for (const date of ["2026-06-11", "2026-07-19"]) assert.equal(parseReplaySelection({ date }).ok, true);
+});
+
+test("Los Angeles summer calendar boundaries are half-open UTC intervals", () => {
+  assert.deepEqual(dateBounds("2026-07-11"), { start: "2026-07-11T07:00:00.000Z", end: "2026-07-12T07:00:00.000Z" });
+  assert.equal(localDateKey(new Date("2026-07-11T06:59:59Z")), "2026-07-10");
+  assert.equal(localDateKey(new Date("2026-07-11T07:00:00Z")), "2026-07-11");
+});
+
+test("calendar boundaries handle winter and both daylight-saving transitions", () => {
+  assert.deepEqual(dateBounds("2026-01-10"), { start: "2026-01-10T08:00:00.000Z", end: "2026-01-11T08:00:00.000Z" });
+  assert.deepEqual(dateBounds("2026-03-08"), { start: "2026-03-08T08:00:00.000Z", end: "2026-03-09T07:00:00.000Z" });
+  assert.deepEqual(dateBounds("2026-11-01"), { start: "2026-11-01T07:00:00.000Z", end: "2026-11-02T08:00:00.000Z" });
+});
+
+test("archive reader receives explicit date; selection preserves cached analysis", async () => {
+  const row = fixture("provider-fixture", undefined, true);
+  const result = await loadReplay(archive, async (date) => { assert.equal(date, "2026-07-11"); return [row]; });
+  assert.equal(result.state, "ready");
+  assert.equal(result.matches[0], row);
+  assert.equal(result.featured?.lens?.headline, "Cached mock analysis");
+});
+
+test("archive selection excludes adjacent local dates including the upper boundary", async () => {
+  const rows = [fixture("before", "2026-07-11T06:59:59Z"), fixture("start", "2026-07-11T07:00:00Z"), fixture("last", "2026-07-12T06:59:59Z"), fixture("end", "2026-07-12T07:00:00Z")];
+  const result = await loadReplay(archive, async () => rows);
+  assert.deepEqual(result.matches.map(({ match }) => match.id), ["start", "last"]);
+});
+
+test("featured matchup is earliest kickoff with stable ID tie-breaking, not live status", async () => {
+  const later = fixture("later", "2026-07-11T21:00:00Z"); later.match.statusShort = "1H";
+  const a = fixture("a"); const b = fixture("b");
+  const result = await loadReplay(archive, async () => [later, b, a]);
+  assert.equal(result.featured?.match.id, "a");
+  assert.deepEqual(result.matches.map(({ match }) => match.id), ["a", "b", "later"]);
+});
+
+test("successful empty archive never falls back to existing seeds", async () => {
+  const result = await loadReplay({ mode: "archive", date: "2026-06-11" }, async () => []);
+  assert.deepEqual(result, { state: "empty", matches: [], featured: null });
+});
+
+test("provider failures have a distinct safe error state without seed fallback", async () => {
+  const result = await loadReplay({ mode: "archive", date: "2026-06-11" }, async () => { throw new Error("sensitive mock diagnostic"); });
+  assert.deepEqual(result, { state: "error", matches: [], featured: null });
+  assert.equal(JSON.stringify(result).includes("sensitive"), false);
+});
+
+test("illustrative mode selects real seed helpers by date and never queries archive", async () => {
+  const result = await loadReplay(illustrative, async () => { assert.fail("Archive called in illustrative mode"); });
+  assert.equal(result.state, "ready");
+  assert.deepEqual(result.matches.map(({ match }) => match.id), ["mexico-south-africa", "south-korea-czechia"]);
+  assert.equal(result.featured?.match.id, "mexico-south-africa");
+  assert.ok(result.featured?.lens);
+  const empty = await loadReplay({ mode: "illustrative", date: "2026-07-11" }, async () => { assert.fail("Archive called"); });
+  assert.equal(empty.state, "empty");
+});
+
+test("invalid selection cannot query the archive", async () => {
+  const result = await loadReplay({ mode: "archive", date: "2026-02-30" }, async () => { assert.fail("Reader called"); });
+  assert.equal(result.state, "error");
+});
+
+test("match URLs and back navigation preserve mode and selected calendar date", async () => {
+  for (const selection of [archive, illustrative]) {
+    const href = replayHref(selection, "id with space/?");
+    const url = new URL(href, "http://local");
+    assert.equal(url.pathname, "/matches/id%20with%20space%2F%3F");
+    assert.deepEqual(parseReplaySelection(Object.fromEntries(url.searchParams)), { ok: true, selection });
+    assert.equal(replayHref(selection), `/?mode=${selection.mode}&date=${selection.date}`);
+  }
+  const examples = await loadReplay(illustrative, async () => []);
+  const realArchive = await loadReplay({ mode: "archive", date: illustrative.date }, async () => [fixture("provider-only", "2026-06-11T18:00:00Z")]);
+  assert.ok(findReplayMatch(examples, "mexico-south-africa"));
+  assert.equal(findReplayMatch(realArchive, "mexico-south-africa"), null);
+  assert.equal(findReplayMatch(examples, "provider-only"), null);
+  assert.equal(findReplayMatch(await loadReplay({ mode: "illustrative", date: "2026-06-12" }, async () => []), "mexico-south-africa"), null);
+});
+
+test("cached questions follow dataset mode and query failures do not manufacture answers", async () => {
+  const examples = await loadReplayAnswers(illustrative, "mexico-south-africa", async () => { assert.fail("Archive QA called"); });
+  assert.ok(examples.answers.length);
+  const empty = await loadReplayAnswers(archive, "mexico-south-africa", async () => []);
+  assert.deepEqual(empty, { answers: [], failed: false });
+  const failed = await loadReplayAnswers(archive, "id", async () => { throw new Error("mock"); });
+  assert.deepEqual(failed, { answers: [], failed: true });
+});
+
+test("stale live statuses and partial scores are never presented as live or final", () => {
+  const match = fixture("id").match;
+  for (const statusShort of ["1H", "2H", "HT", "ET", "BT", "P", "LIVE", "NS", "TBD", null]) {
+    const stale: Match = { ...match, statusShort, statusLong: "In Progress", elapsed: 70, homeScore: 1, awayScore: 0 };
+    assert.equal(replayStatus(stale), "Final result unverified — stored status may be incomplete");
+    assert.equal(replayScore(stale), "Score unavailable");
+  }
+  assert.equal(replayScore({ ...match, statusShort: "FT", homeScore: 0, awayScore: 0 }), "0–0");
+  assert.equal(replayScore({ ...match, statusShort: "FT", homeScore: 1, awayScore: null }), "Score unavailable");
+  assert.equal(replayScore({ ...match, statusShort: "FT", homeScore: -1, awayScore: 0 }), "Score unavailable");
+  assert.match(replayStatus({ ...match, statusShort: "PEN" }), /shootout breakdown unavailable/);
+});
+
+test("stage labels do not turn knockout rounds into groups", () => {
+  assert.equal(stageLabel("A"), "Group A");
+  assert.equal(stageLabel("Quarter-finals"), "Quarter-finals");
+  assert.equal(stageLabel(""), "Stage unavailable");
+});
+
+
+test("replay deployment configuration schedules no recurring ingestion", () => {
+  const config = JSON.parse(readFileSync("vercel.json", "utf8"));
+  assert.equal((config.crons ?? []).length, 0);
+});
+
+
+test("malformed timestamps produce an error, never a misleading empty archive", async () => {
+  const result = await loadReplay(archive, async () => [fixture("broken", "invalid-date")]);
+  assert.equal(result.state, "error");
+});
+
+test("legacy malformed cached Lens and question payloads are rejected safely", async () => {
+  assert.equal(isCachedLens(fixture("valid", undefined, true).lens), true);
+  for (const value of [null, {}, { headline: "Old cache" }, { ...fixture("valid", undefined, true).lens, sources: null }]) {
+    assert.equal(isCachedLens(value), false);
+  }
+  assert.equal(isCachedAnswer({ key: "tactical-edge", question: "Why?", shortLabel: "Why", answer: "Mock answer", sources: [] }), true);
+  assert.equal(isCachedAnswer({ key: "tactical-edge", sources: null }), false);
+  for (const confidence of [["Low"], { toString: "bad" }]) {
+    assert.equal(isCachedLens({ ...fixture("valid", undefined, true).lens, confidence }), false);
+  }
+  for (const key of [["tactical-edge"], { toString: "bad" }]) {
+    assert.equal(isCachedAnswer({ key, question: "Mock?", shortLabel: "Mock", answer: "Mock", sources: [] }), false);
+  }
+  const result = await loadReplayAnswers(archive, "id", async () => [null as never]);
+  assert.deepEqual(result, { answers: [], failed: true });
+});
+
+test("font styling uses system fonts without a build-time Google fetch or CSS cycle", () => {
+  const layout = readFileSync("src/app/layout.tsx", "utf8");
+  const css = readFileSync("src/app/globals.css", "utf8");
+  assert.equal(layout.includes("next/font/google"), false);
+  assert.ok(css.includes("ui-sans-serif, system-ui"));
+  assert.equal(css.includes("--font-sans: var(--font-sans)"), false);
+});

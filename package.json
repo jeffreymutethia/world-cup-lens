@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node scripts/test.mjs",
+    "test:replay-http": "node scripts/verify-replay.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",

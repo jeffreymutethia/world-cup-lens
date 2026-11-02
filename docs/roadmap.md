@@ -1,16 +1,20 @@
 # Historical replay and portfolio roadmap
 
-Proposed work only; none of these runtime changes are implemented by the audit. Use one focused PR per slice, each with evidence, tests, documentation, and an explicit completion check. Keep external services mocked by default and leave production mutations/deployment behind explicit user instructions. Findings refer to [audit.md](audit.md).
+Status after the first replay implementation milestone (2026-11-02): public selection and presentation changes are implemented and locally validated, including independent review fixes; the original audit is committed separately. Delivery does not imply production archive availability. Later phases remain proposals. Use one focused PR per slice, each with evidence, tests, documentation, and an explicit completion check. Keep external services mocked by default and leave production mutations/deployment behind explicit user instructions. Findings refer to [audit.md](audit.md).
 
-## 1. Establish an honest replay surface (H1; highest priority)
+## 1. Establish an honest replay surface (H1; public surface implemented)
+
+**Implemented and locally verified:** explicit archive/illustrative modes, fixed URL dates, strict validation, Los Angeles calendar boundaries, shared list/detail selection, separate empty/error/loading states, cached-only analysis, retrospective labeling, stale-status suppression, preserved navigation, removed zero standings/inactive controls, removed the checked-in recurring cron schedule, validated legacy cached JSON, retained fixtures on Lens cache outages, and rejected malformed fixture timestamps. Builds now use system fonts without Google fetches. `npm test` covers selection, date/timezone logic, cached answers, navigation, and status/score presentation without external services.
+
+**Still required before closing every original acceptance criterion:** resolve the configured Supabase project host DNS failure and verify actual historical data availability/rights and backend policies, add mutation-route authorization tests, complete browser/keyboard/mobile verification, and verify the deployed scheduler is disabled through separately authorized deployment. Unit tests and the credential-free local HTTP harness do not establish those deployed integration guarantees. The harness does verify rendered archive/illustrative/empty/error/detail/invalid states with a mock Supabase adapter. Live ingestion/admin/database APIs remain unchanged in purpose. July 11 is the fixed requested landing date; empty/error data does not trigger a substitute dataset.
 
 Implement explicit dataset mode and replay date shared by list and detail; distinguish synthetic examples, historical data, empty dates, and service failures. Use a fixed documented demo default and timezone; remove real-clock dependence from replay. Do not recast existing seed content as verified history. Retire the daily cron from the demo configuration in a separate small change.
 
 **Acceptance:** With the system clock set to two different post-tournament dates, the same replay URL returns identical match selection. Every card opens a detail using the same dataset. Empty and failed loads have distinct states. Illustrative content has a visible label on list and detail. Demo requests make zero provider/OpenAI calls and cannot trigger ingestion; demo deployment configuration declares no recurring ingestion.
 
-**Tests:** Add a credential-free runner/script and focused list/detail selection tests for empty/error/seed/historical modes, replay boundaries and daylight-saving transitions; mocked route tests prove missing/wrong mutation credentials deny access without downstream calls. Test cron removal/configuration separately.
+**Tests (20 deterministic checks and eight local mock HTTP groups pass; mutation-route checks pending):** Add a credential-free runner/script and focused list/detail selection tests for empty/error/seed/historical modes, replay boundaries and daylight-saving transitions; mocked route tests prove missing/wrong mutation credentials deny access without downstream calls. Cron removal/configuration is covered by a deterministic test; protected-route authorization tests remain pending.
 
-**Docs:** Write the replay mode/date/timezone contract and update architecture; record synthetic seed limitations. This phase can use clearly labeled fixtures before historical data approval.
+**Docs (implemented):** Replay mode/date/timezone contract and synthetic seed limitations are recorded in architecture; remaining work stays explicit. This phase can use clearly labeled fixtures before historical data approval.
 
 ## 2. Define provenance and approved historical inputs (H2, M6)
 
@@ -71,3 +75,10 @@ Replace the starter README only after the preceding contracts are truthful. Pin 
 **Tests:** Perform a clean-install/build/demo smoke test in the pinned environment, link/route checks, responsive/keyboard checks, and credential-free CI. Run an approved scanner that reports locations/types without printing secret values; treat discovered credentials through a separate rotation process. Record actual results and remaining limitations.
 
 **Docs:** Rewrite README with purpose, replay scope, screenshots, quick start, architecture link, setup variables, commands, data provenance/rights, AI limitations, tests/evaluation evidence, deployment instructions, and roadmap. Include a concise engineering tradeoff narrative explaining retrieval, temporal correctness, caching, and cost decisions. Refresh architecture and audit status with evidence; do not describe planned work as completed.
+
+
+## Release gate after delivery review
+
+A clean production build is locally reproducible using system fonts; exact Geist rendering is intentionally traded for no font-network dependency or binary licensing additions. The real archive remains blocked before HTTP by DNS failure at the configured Supabase project host. Do not repair this with invented records or illustrative fallback. Verify/correct the existing project configuration through a separately authorized environment change, then re-run July 11 listing, cached Lens lookup, and list/detail navigation using publishable read access.
+
+No existing Vercel link or deployment credentials were identified locally. Identify the existing project and verify required environment-variable presence without exposing values; verify scheduler removal on deployment. Do not create a new paid project or deploy the default archive until it works. Database schema/RPC/RLS, provenance/rights, placeholder-strength methodology, durable ingestion, CI, README replacement, and visual/accessibility verification remain in later phases.

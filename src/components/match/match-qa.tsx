@@ -131,8 +131,8 @@ export function MatchQa({ answers }: MatchQaProps) {
           ))}
 
           <p className="pt-2 text-xs leading-5 text-slate-400">
-            These answers are cached demo content. Later, the same interface will
-            use retrieved source context and validated AI output.
+            These are stored, cached answers. Source timestamps and pre-kickoff
+            information cutoffs have not been verified.
           </p>
         </CardContent>
       </Card>

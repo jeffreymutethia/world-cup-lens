@@ -1,6 +1,6 @@
 # Working on World Cup Lens
 
-World Cup Lens is a Next.js 16.2.9 / React 19 / strict TypeScript football intelligence app using Supabase, OpenAI embeddings and Responses structured outputs, API-FOOTBALL, and Tailwind/Radix UI. The product target is a reproducible historical replay demo; current code still assumes live tournament operation.
+World Cup Lens is a Next.js 16.2.9 / React 19 / strict TypeScript football intelligence app using Supabase, OpenAI embeddings and Responses structured outputs, API-FOOTBALL, and Tailwind/Radix UI. The product target is a reproducible historical replay demo; public pages now use explicit archive/illustrative replay selection; ingestion and generation retain legacy live-operation APIs.
 
 <!-- BEGIN:nextjs-agent-rules -->
 ## This is NOT the Next.js you know
@@ -10,6 +10,8 @@ Read the relevant guide in `node_modules/next/dist/docs/` before writing code. A
 ## Navigate first
 - `src/app/page.tsx`, `src/app/matches/[id]/page.tsx`: public pages.
 - `src/components/`: layout, match presentation, and shared UI.
+- `src/lib/cached-analysis.ts`: read-time display validation for cached Lens/Q&A JSON.
+- `src/lib/replay.ts`: date validation, Los Angeles day boundaries, dataset selection, navigation, and truthful result presentation.
 - `src/lib/types.ts`: application types; `src/data/seed.ts` and `src/lib/lens.ts`: illustrative data/helpers.
 - `src/lib/supabase/{server,admin,repository}.ts`: publishable reads, privileged client, data mapping.
 - `src/lib/fixtures/`, `src/lib/documents/`, `src/lib/ai/`: fixture ingestion, document synthesis/embedding, retrieval/generation.
@@ -19,7 +21,7 @@ Read the relevant guide in `node_modules/next/dist/docs/` before writing code. A
 ## Work and verify
 Inspect git status and relevant files before editing; preserve unrelated changes. Make small changes with one reviewable purpose. Distinguish observed behavior, inference, and planned behavior; cite paths and symbols. Do not claim deployed behavior or database guarantees from TypeScript alone.
 
-Commands: `npm run dev` (development), `npm run lint`, `npm run build`, `npm start` (built server). No test script or test suite currently exists. Add focused tests with behavior changes; do not report missing tests as passing. Builds use Google fonts and may need network access. Update architecture and relevant docs when behavior, contracts, operations, or configuration change; record checks and limitations in the handoff.
+Commands: `npm run dev` (development), `npm run lint`, `npm run build`, `npm start` (built server). `npm test` compiles deterministic TypeScript tests into a temporary directory and runs Node’s test runner without external credentials or new dependencies. `npm run test:replay-http` optionally starts local Next/mock Supabase servers to check rendered pages with dummy credentials; it requires localhost socket access and no other running Next dev server for this checkout. Add focused tests with behavior changes; do not report missing tests as passing. Typography uses system font stacks; builds do not fetch Google fonts. A sandboxed Turbopack build may need local socket/process permission for CSS compilation. Update architecture and relevant docs when behavior, contracts, operations, or configuration change; record checks and limitations in the handoff.
 
 ## Security and side effects
 Never output secrets, environment file contents, credentials, authorization headers, or sensitive provider payloads in logs, docs, commands, or responses. Refer to environment variable names only. Keep privileged clients server-only. Do not expose Supabase secret keys to browsers. Use isolated mocks/local fixtures for tests; external API, ingestion, embedding, generation, and cron calls may incur cost or mutate data and require explicit task authorization.

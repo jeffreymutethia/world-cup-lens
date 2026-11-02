@@ -2,6 +2,19 @@
 
 Audit date: 2026-11-02. Scope: tracked files, dependency manifests/configuration, routes, types, clients/repository, ingestion, AI pipeline, caching, cron, presentation, tests/CI, and README. Initial `git status --short` was clean. No application code, dependencies, environment files, or migrations were changed. No Supabase queries, provider/paid API calls, admin routes, embedding routes, or cron routes were invoked. Findings describe static code unless explicitly marked as check results; live data and infrastructure were not inspected.
 
+## Replay milestone follow-up — 2026-11-02
+
+The findings below preserve the initial audit evidence. Current resolution status is scoped to demonstrated local implementation:
+
+- **H1 resolved in public selection code:** `src/lib/replay.ts:parseReplaySelection/loadReplay/findReplayMatch` and both public pages now use explicit modes and fixed dates, with no seed fallback. Tests cover empty/error states and cross-mode/date mismatches. Actual database availability is still unverified.
+- **H2 partially mitigated in presentation only:** `ReplayNotice` labels cached archive analysis retrospective and explicitly disclaims an authenticated pre-kickoff cutoff. Historical source filtering and immutable lineage are still missing.
+- **H4 scheduled trigger removed from checked-in configuration:** `vercel.json` no longer schedules the route. Full-corpus embedding and long request risks remain in the retained pipeline; no deployed scheduler was changed.
+- **H5 test foundation partially addressed:** `npm test`, `scripts/test.mjs`, `tsconfig.test.json`, and deterministic replay tests now exist. Database schema/RPC/RLS, CI, and real integration coverage remain absent.
+- **M1 presentation partially addressed:** public pages no longer show zero standings or prepend “Group” to knockout names. They use the date reader's stored score/status fields; intermediate statuses are never called live and partial scores are not turned into zero. Canonical ingestion status, group/stage schema, and shootout breakdown limitations remain.
+- **L1 public control/metadata issues addressed in code:** date/mode selection is a GET form; misleading inactive controls are removed and metadata identifies replay. Comprehensive visual/accessibility checks remain pending.
+
+H3, M2, M3, M4, M5, M6, M7, and the README/backend reproducibility parts of L2 remain open. The original local verification table below is the audit baseline, not a claim about the implementation checks; see the replay verification record appended below.
+
 Severity: High blocks a trustworthy public historical demo or reliable operation; Medium materially harms correctness, security posture, or maintainability; Low concerns presentation/documentation. No verified critical exploit is established by this review. File paths below are relative to repository root.
 
 ## High
@@ -132,3 +145,30 @@ Severity: High blocks a trustworthy public historical demo or reliable operation
 | `git diff --check` | Passed | Documentation whitespace check; rerun before handoff. |
 
 Build output reported `.env.local` was loaded by Next; contents were not read or printed. The build attempted Google font retrieval as part of the requested check; no application external/paid APIs were invoked. Installed Next documentation for `connection`, route handlers, and fonts was consulted. No dependency vulnerability audit, browser smoke test, deployed cron execution, database policy verification, or license-terms validation was performed. Lint success does not establish production readiness.
+
+
+## Replay implementation verification
+
+- `npm test`: deterministic TypeScript/Node tests cover strict dates, configured bounds, Los Angeles midnight/DST boundaries, fixed defaults, archive/illustrative selection, empty/error separation, no silent fallback, featured ordering, navigation and detail consistency, cached answers, stale statuses/partial scores, stage labels, and cron configuration.
+- `npm run test:replay-http`: local mocked HTTP rendering verifies July 11 landing/listing, cached archive detail, stale-status suppression, missing Lens fallback, distinct empty/query-error states, explicit illustrative list/detail/back links, wrong-date detail, and invalid/out-of-range input. Mock Supabase enforces provider/date filters; illustrative/invalid routes cause zero mock database reads. Dummy child-process credentials isolate the harness from remote data.
+- `npm run lint` and standalone `tsc --noEmit --incremental false` passed during implementation. Production `npm run build` failed specifically fetching Geist and Geist Mono from Google Fonts; it did not complete production build validation.
+- Local HTTP checks against the configured archive showed the safe error state for landing/July 11 and another date. The underlying cause and actual fixture availability were not established; no data was substituted. Illustrative detail and invalid-date rendering worked. In-app browser was unavailable and native Chrome control timed out, so no screenshots or visual/keyboard/mobile verification are claimed.
+- No paid API calls, environment-file changes, production mutations, push, or deployment occurred. Documentation and implementation checks do not establish historical accuracy, redistribution rights, backend policies, or production readiness.
+
+
+## Delivery review and verification follow-up
+
+Independent review examined the actual diff and identified three resilience defects, now fixed and regression-tested:
+
+1. Unchecked cached Lens/Q&A JSON could crash React rendering. `src/lib/cached-analysis.ts` now validates display compatibility and rejects malformed arrays, sources, enums, and edges. Invalid entries produce unavailable states. Enum membership requires actual strings, preventing array coercion and throwing `toString` objects.
+2. A Lens cache query failure hid valid fixtures. `getProviderMatchesForDate` now retains fixtures, marks `lensState`, and the home/detail UI shows unavailable analysis without seed substitution.
+3. Invalid kickoff timestamps could masquerade as a successful empty date. `loadReplay` now rejects them as a data error.
+
+The Google-font build blocker is resolved: `src/app/layout.tsx` no longer imports `next/font/google`; CSS uses system font stacks and removes the self-referential sans variable. A clean production build passes with local process/socket permission required by Turbopack. No font binaries were downloaded. Deterministic coverage is now 20 tests plus eight local mock HTTP check groups; lint, TypeScript, and whitespace checks pass. README/CI/backend-bootstrap portions of L2/H5 remain open; build reproducibility has improved without establishing production readiness.
+
+Archive diagnosis: URL/publishable-key configuration is present; a read-only July 11 query failed with `ENOTFOUND` at the configured Supabase project hostname outside the sandbox. The hostname has the expected Supabase form, while known Supabase/GitHub domains resolve. Therefore fixture availability, schema/RLS correctness, and real cached Lens retrieval cannot be verified; this is a DNS/connection blocker rather than evidence of an empty archive. The project might be unavailable or the configured hostname obsolete; neither root cause is asserted. No environment values were printed or changed.
+
+Deployment diagnosis: no local Vercel project link/CLI, project/org environment identifiers, or deployment token were available. No deployment URL appeared in the remote baseline commit statuses. This does not establish that no remote project exists. Production deployment and public production smoke tests were not performed because the existing deployment and real archive prerequisites could not be verified. No generation, embedding, provider sync, cron execution, paid API call, or database write was performed.
+
+
+Final local production-build smoke check (`next start`, public GET pages only): landing and explicit July 11 render the truthful archive-error state; illustrative list/detail render labeled seed content and cached analysis; an invalid calendar date renders validation feedback. All returned HTTP 200 with their explicit page state. This verifies built application rendering and graceful failure, not a successful real archive or a deployed production experience. The owned local server was stopped after verification.

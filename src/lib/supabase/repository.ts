@@ -6,7 +6,10 @@ import type {
   MatchQuestionAnswer,
   Team,
   Venue,
+  MatchViewModel,
 } from "@/lib/types";
+import { isCachedLens } from "@/lib/cached-analysis";
+import { dateBounds, localDateKey } from "@/lib/replay";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 type TeamRow = {
@@ -62,13 +65,7 @@ type QaAnswerRow = {
   answer_json: MatchQuestionAnswer;
 };
 
-export type MatchViewModel = {
-  match: Match;
-  homeTeam: Team;
-  awayTeam: Team;
-  venue: Venue;
-  lens: MatchLens | null;
-};
+export type { MatchViewModel } from "@/lib/types";
 
 function mapTeam(row: TeamRow): Team {
   return {
@@ -115,7 +112,7 @@ function mapMatch(row: MatchRow): Match {
 }
 
 function mapMatchLens(row: MatchLensRow) {
-  return row.lens_json;
+  return isCachedLens(row.lens_json) ? row.lens_json : null;
 }
 
 const LIVE_STATUSES = new Set([
@@ -142,66 +139,23 @@ function firstRelation<T>(relation: T | T[]) {
   return Array.isArray(relation) ? relation[0] : relation;
 }
 
-function localDateKey(date: Date, timeZone: string) {
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).formatToParts(date);
-
-  const part = (type: Intl.DateTimeFormatPartTypes) =>
-    parts.find((item) => item.type === type)?.value;
-
-  return `${part("year")}-${part("month")}-${part("day")}`;
-}
-
-function nextDateKey(dateKey: string) {
-  const [year, month, day] = dateKey.split("-").map(Number);
-  const next = new Date(Date.UTC(year, month - 1, day + 1));
-  return next.toISOString().slice(0, 10);
-}
-
-function localMidnightUtc(dateKey: string, timeZone: string) {
-  const [year, month, day] = dateKey.split("-").map(Number);
-  const desired = Date.UTC(year, month - 1, day);
-  let candidate = desired;
-  const formatter = new Intl.DateTimeFormat("en-US", {
-    timeZone,
-    hourCycle: "h23",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
-
-  for (let attempt = 0; attempt < 3; attempt += 1) {
-    const parts = formatter.formatToParts(new Date(candidate));
-    const value = (type: Intl.DateTimeFormatPartTypes) =>
-      Number(parts.find((item) => item.type === type)?.value);
-    const represented = Date.UTC(
-      value("year"),
-      value("month") - 1,
-      value("day"),
-      value("hour"),
-      value("minute"),
-      value("second"),
-    );
-    candidate += desired - represented;
-  }
-
-  return new Date(candidate).toISOString();
-}
-
 export async function getProviderMatchesForLocalDate(
   targetDate = new Date(),
   timeZone = "America/Los_Angeles",
 ): Promise<MatchViewModel[]> {
-  const dateKey = localDateKey(targetDate, timeZone);
-  const start = localMidnightUtc(dateKey, timeZone);
-  const end = localMidnightUtc(nextDateKey(dateKey), timeZone);
+  const matches = await getProviderMatchesForDate(localDateKey(targetDate, timeZone), timeZone);
+  return matches.sort((left, right) =>
+    statusBucket(left.match.statusShort) - statusBucket(right.match.statusShort) ||
+    left.match.kickoffAt.localeCompare(right.match.kickoffAt),
+  );
+}
+
+// Explicit calendar-date reader for replay. Legacy today callers retain their API above.
+export async function getProviderMatchesForDate(
+  dateKey: string,
+  timeZone = "America/Los_Angeles",
+): Promise<MatchViewModel[]> {
+  const { start, end } = dateBounds(dateKey, timeZone);
   const supabase = createServerSupabaseClient();
 
   const { data, error } = await supabase
@@ -237,7 +191,7 @@ export async function getProviderMatchesForLocalDate(
     .order("kickoff_at", { ascending: true });
 
   if (error) {
-    throw new Error(`Failed to fetch today's provider matches: ${error.message}`);
+    throw new Error(`Failed to fetch provider matches: ${error.message}`);
   }
 
   const providerRows = (data ?? []) as ProviderMatchRow[];
@@ -254,12 +208,6 @@ export async function getProviderMatchesForLocalDate(
       providerRows.map((row) => row.id),
     );
 
-  if (lensError) {
-    throw new Error(
-      `Failed to fetch today's cached Match Lenses: ${lensError.message}`,
-    );
-  }
-
   const lensesByMatchId = new Map(
     ((lensData ?? []) as MatchLensRow[]).map((row) => [
       row.match_id,
@@ -273,20 +221,24 @@ export async function getProviderMatchesForLocalDate(
       const awayTeam = firstRelation(row.away_team);
       const venue = firstRelation(row.venue);
 
-      if (!homeTeam || !awayTeam || !venue) return [];
+      if (!homeTeam || !awayTeam || !venue) {
+        throw new Error("Stored fixture relations are incomplete.");
+      }
 
       return [{
         match: mapMatch(row),
         homeTeam: mapTeam(homeTeam),
         awayTeam: mapTeam(awayTeam),
         venue: mapVenue(venue),
-        lens: lensesByMatchId.get(row.id) ?? null,
+        lens: lensError ? null : lensesByMatchId.get(row.id) ?? null,
+        lensState: lensError ? "unavailable" as const
+          : !lensesByMatchId.has(row.id) ? "missing" as const
+          : lensesByMatchId.get(row.id) ? "available" as const : "invalid" as const,
       }];
     })
     .sort((left, right) =>
-      statusBucket(left.match.statusShort) -
-        statusBucket(right.match.statusShort) ||
-      left.match.kickoffAt.localeCompare(right.match.kickoffAt),
+      Date.parse(left.match.kickoffAt) - Date.parse(right.match.kickoffAt) ||
+      left.match.id.localeCompare(right.match.id),
     );
 }
 

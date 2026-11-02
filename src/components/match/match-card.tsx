@@ -1,3 +1,4 @@
+import { replayHref, replayStatus, replayScore, stageLabel, type ReplaySelection } from "@/lib/replay";
 import Link from "next/link";
 import type { Match, MatchLens, Team, Venue } from "@/lib/types";
 import { formatKickoff } from "@/lib/lens";
@@ -11,6 +12,7 @@ type MatchCardProps = {
   awayTeam: Team;
   venue: Venue;
   lens: MatchLens | null;
+  selection: ReplaySelection;
 };
 
 export function MatchCard({
@@ -19,19 +21,15 @@ export function MatchCard({
   awayTeam,
   venue,
   lens,
+  selection,
 }: MatchCardProps) {
   return (
-    <Link href={`/matches/${match.id}`}>
+    <Link href={replayHref(selection, match.id)}>
       <Card className="h-full border-0 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
         <CardContent className="p-4">
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            <Badge variant="secondary">Group {match.group}</Badge>
-            {match.statusShort ? (
-              <Badge variant="outline">
-                {match.statusShort}
-                {match.elapsed != null ? ` · ${match.elapsed}′` : ""}
-              </Badge>
-            ) : null}
+            <Badge variant="secondary">{stageLabel(match.group)}</Badge>
+            <Badge variant="outline">{replayStatus(match)}</Badge>
             {match.signalTags.slice(0, 2).map((tag) => (
               <Badge key={tag} variant="outline">
                 {tag}
@@ -42,16 +40,13 @@ export function MatchCard({
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
             <TeamMini team={homeTeam} />
             <div className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
-              {match.homeScore != null || match.awayScore != null
-                ? `${match.homeScore ?? 0}–${match.awayScore ?? 0}`
-                : "VS"}
+              {replayScore(match)}
             </div>
             <TeamMini team={awayTeam} align="right" />
           </div>
 
           <div className="mt-4 space-y-2 text-xs text-slate-500">
             <p>{formatKickoff(match.kickoffAt)}</p>
-            {match.statusLong ? <p>{match.statusLong}</p> : null}
             <p className="flex items-center gap-1">
               <MapPin className="size-3.5" />
               {venue.name}, {venue.city}
@@ -68,7 +63,7 @@ export function MatchCard({
                 {lens.expectedGame}
               </p>
             </div>
-          ) : null}
+          ) : <p className="mt-4 text-sm text-slate-500">No cached analysis available.</p>}
         </CardContent>
       </Card>
     </Link>

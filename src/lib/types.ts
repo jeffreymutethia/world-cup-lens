@@ -76,3 +76,12 @@ export type MatchQuestionAnswer = {
     snippet: string;
   }[];
 };
+
+export type MatchViewModel = {
+  match: Match;
+  homeTeam: Team;
+  awayTeam: Team;
+  venue: Venue;
+  lens: MatchLens | null;
+  lensState?: "available" | "missing" | "invalid" | "unavailable";
+};

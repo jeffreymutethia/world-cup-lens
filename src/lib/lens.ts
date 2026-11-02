@@ -4,8 +4,8 @@ import {
   matches,
   teams,
   venues,
-} from "@/data/seed";
-import type { PresetQuestionKey } from "@/lib/types";
+} from "../data/seed";
+import type { PresetQuestionKey } from "./types";
 
 export function getTeamById(id: string) {
   return teams.find((team) => team.id === id);
