@@ -233,3 +233,8 @@ Real Chrome QA confirmed featured navigation, cached answer changes and visible 
 
 
 Responsive follow-up `a8150be` deployed automatically to Ready/Production and passed the public HTTP suite again. Native Chrome verification confirmed the corrected featured/list content and detail hero at 320px, a 390px landing, 1280px desktop layout, second-date keyboard navigation and about rendering. Genuine screenshots and their exact revisions/methods are in [deployment.md](deployment.md). No further release blocker was found. Hosted CI for that revision passed; final documentation-only delivery status is recorded separately in the handoff.
+
+
+## Independent FIFA curation review — publication HOLD
+
+Baseline26310e9. Official FIFA reports/results and federation cross-checks supported the five requested candidate-field checks. Conditional noncommercial editorial website permission exists; it must not be misstated as either a general prohibition or an open-data grant. The reviewed sources did not settle GitHub source/forking compatibility, portfolio-use classification and existing product/domain branding for this proposed release. The task's uncertainty gate therefore holds the curated module and historical default; [review evidence and unblocking criteria](curated-history-review.md) are recorded. Exact working notes were delivered outside Git; no provider payload, database row or third-party media was exported. The existing fictional demo and private pipeline remain unchanged. This is a scoped release assessment, not an assertion that facts are owned or the existing deployment is unlawful.

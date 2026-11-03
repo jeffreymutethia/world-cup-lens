@@ -11,6 +11,7 @@ Read the relevant guide in `node_modules/next/dist/docs/` before writing code. A
 - `src/app/page.tsx`, `src/app/matches/[id]/page.tsx`: public pages.
 - `src/components/`: layout, match presentation, and shared UI.
 - `src/lib/deployment-mode.ts`, `replay-access.ts`: fail-closed server policy and lazy archive boundary.
+- `docs/curated-history-review.md`: independently researched FIFA candidates are on HOLD for source-distribution/use/branding scope; no curated runtime dataset is approved.
 - `src/data/seed.ts`, `docs/demo-publication-review.md`: versioned, reviewed original fiction only; legacy UNKNOWN rights remain unknown.
 - `src/lib/analysis-presentation.ts`: retrospective/synthetic labels, withheld metrics policy, and distinct time metadata with explicit unknowns.
 - `src/lib/data-rights.ts`, `docs/data-{provenance,rights}.md`: source inventory and publication gates; UNKNOWN never implies permission.

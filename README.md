@@ -106,4 +106,6 @@ Historical provider/derived-source rights remain UNKNOWN. Public GitHub historic
 
 `npm run test:production-http` checks this public demo with bounded, unauthenticated requests, including disabled admin/cron responses; it never sends service secrets. Use `DEMO_URL=https://your-verified-demo.example npm run test:production-http` only for another authorized demo-only release. This is an explicit remote check, separate from credential-free local CI.
 
+The proposed real-match centerpiece is currently **on hold** after a [FIFA editorial/source-distribution and branding review](docs/curated-history-review.md). Conditional noncommercial website permission was found; compatibility with this public source release and existing branding remains unresolved. The fictional public demo is preserved.
+
 Next work: establish reproducible backend/source lineage and rights before historical publication, broaden browser/accessibility coverage and maintain deployment verification. See the [roadmap](docs/roadmap.md).

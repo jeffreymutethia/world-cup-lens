@@ -47,3 +47,8 @@ Release follow-up: `a8150be2593c88814b7ad7a637902cec5ecd335e`, deployment `3gdFF
 | [Keyboard focus](screenshots/production-keyboard-focus.jpg) | Initial `8299114`; native browser screenshot, 3024 × 1646 image | Visible focus ring after Tab from one question button to the next; Enter changed the displayed answer |
 
 Captures are genuine browser output, without personal browser chrome or credentials. They are not AI mockups. Screenshot publication is limited to the reviewed original demo/UI assets. Subsequent documentation-only revisions retain this runtime implementation; the delivery handoff records the final pushed/deployed SHA and latest checks rather than claiming that these earlier screenshots depict a later revision.
+
+
+## Subsequent curation review
+
+The [candidate historical review](curated-history-review.md) is on HOLD for the proposed public-source/branding scope. This follow-up adds documentation only; it does not replace the deployed original-fiction default or claim a real-match release. Existing demo-only environment and disabled cron policy continue to apply. The delivery handoff records the documentation revision's CI/deployment and smoke-test evidence separately from the historical feature's blocked status.

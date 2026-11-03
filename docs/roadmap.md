@@ -112,3 +112,14 @@ Real browser QA found a 320px featured-card clipping defect, now addressed in re
 
 
 **Release follow-up verified:** `a8150be` passed hosted CI, automatic production deployment and public smoke checks. The 320px clipping defect was fixed and checked on the actual public domain; genuine desktop/mobile/focus captures are tracked with revision metadata. The original-demo deployment gate is complete. Remaining QA is broader cross-browser, screen-reader, contrast/touch-target and physical-device coverage; historical publication remains separately blocked by rights/lineage/backend work.
+
+
+## Curated historical centerpiece — HOLD after source review
+
+The 2026-11-03 [candidate review](curated-history-review.md) verified the requested source fields but did not approve the exact public-source/branded portfolio release. FIFA's conditional noncommercial editorial website guidance is acknowledged; GitHub source-distribution compatibility, use context and existing name/domain remain scoped questions. This does not require an unrestricted licence to a provider database, and no such data was exported. The fictional public default and private archive remain intact.
+
+**Unblock:** establish a documented basis for the small source-distributed selection and intended use, plus an assessed branding decision or alternative. Record per-field/category scope, attribution and restrictions.
+
+**Then implement:** a separate versioned curated module, reviewed result/round/venue/AET fields, original retrospective commentary, supporting links and date/detail/back navigation. Make it the public default only after approval.
+
+**Acceptance/tests:** exact approved tuples and provenance; event-day versus publication-day/timezone cases; final/AET presentation; attribution/rights status; fictional/private-archive isolation; no service fetches; unchanged authoring/cron denials; local/hosted CI and production/browser checks. These new historical record/UI tests were not added or reported as passing while the module is withheld. Deliver source inventory, approval decision, updated diagrams and genuine screenshots of any later approved release.
