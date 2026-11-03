@@ -1,4 +1,6 @@
-import type { MatchLens, Team } from "@/lib/types";
+import { analysisPresentation } from "@/lib/analysis-presentation";
+import type { DatasetMode } from "@/lib/replay";
+import type { PublicMatchLens } from "@/lib/types";
 import {
   BookOpen,
   Eye,
@@ -17,16 +19,15 @@ import {
 } from "@/components/ui/card";
 
 type MatchLensCardsProps = {
-  lens: MatchLens;
-  homeTeam: Team;
-  awayTeam: Team;
+  lens: PublicMatchLens;
+  mode: DatasetMode;
 };
 
 export function MatchLensCards({
   lens,
-  homeTeam,
-  awayTeam,
+  mode,
 }: MatchLensCardsProps) {
+  const policy = analysisPresentation(mode);
   return (
     <div className="grid auto-rows-fr gap-4 lg:grid-cols-3">
       <InsightCard
@@ -41,11 +42,7 @@ export function MatchLensCards({
         body={lens.likelyGameScript}
       />
 
-      <TeamEdgesCard
-        lens={lens}
-        homeTeam={homeTeam}
-        awayTeam={awayTeam}
-      />
+      <InsightCard icon={Scale} title="Team comparison unavailable" body={policy.metricsMessage} />
 
       <ListCard
         icon={Eye}
@@ -65,7 +62,7 @@ export function MatchLensCards({
         items={lens.uncertainty}
       />
 
-      <SourcesCard lens={lens} />
+      <SourcesCard lens={lens} mode={mode} />
     </div>
   );
 }
@@ -133,85 +130,20 @@ function ListCard({
   );
 }
 
-type TeamEdgesCardProps = {
-  lens: MatchLens;
-  homeTeam: Team;
-  awayTeam: Team;
-};
-
-function TeamEdgesCard({
-  lens,
-  homeTeam,
-  awayTeam,
-}: TeamEdgesCardProps) {
-  return (
-    <Card className="h-full border-0 bg-white shadow-sm">
-      <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-base">
-          <Scale className="size-4 text-emerald-700" />
-          Team edges
-        </CardTitle>
-      </CardHeader>
-
-      <CardContent>
-        <div className="mb-5 flex justify-between text-xs font-semibold text-slate-500">
-          <span>{homeTeam.name}</span>
-          <span>{awayTeam.name}</span>
-        </div>
-
-        <div className="space-y-5">
-          {lens.teamEdges.map((edge) => (
-            <div key={edge.label}>
-              <p className="mb-2 text-center text-xs font-medium text-slate-500">
-                {edge.label}
-              </p>
-
-              <div className="grid grid-cols-[32px_1fr_32px_1fr_32px] items-center gap-2">
-                <span className="text-right text-xs font-bold text-emerald-700">
-                  {edge.homeValue}
-                </span>
-
-                <div className="flex h-2 justify-end overflow-hidden rounded-full bg-slate-100">
-                  <div
-                    className="h-full rounded-full bg-emerald-700"
-                    style={{ width: `${edge.homeValue}%` }}
-                  />
-                </div>
-
-                <span className="text-center text-[10px] font-semibold text-slate-300">
-                  VS
-                </span>
-
-                <div className="h-2 overflow-hidden rounded-full bg-slate-100">
-                  <div
-                    className="h-full rounded-full bg-amber-500"
-                    style={{ width: `${edge.awayValue}%` }}
-                  />
-                </div>
-
-                <span className="text-xs font-bold text-amber-700">
-                  {edge.awayValue}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
-function SourcesCard({ lens }: { lens: MatchLens }) {
+function SourcesCard({ lens, mode }: { lens: PublicMatchLens; mode: DatasetMode }) {
+  const policy = analysisPresentation(mode);
   return (
     <Card className="border-0 bg-white shadow-sm lg:col-span-3">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-base">
           <BookOpen className="size-4 text-emerald-700" />
-          Sources
+          {policy.contextLabel}
         </CardTitle>
       </CardHeader>
 
       <CardContent>
+        <p className="mb-4 text-sm text-slate-600">{policy.contextMessage}</p>
+        {lens.sources.length === 0 && <p className="text-sm text-slate-500">No stored context snippets are available.</p>}
         <div className="grid gap-3 md:grid-cols-3">
           {lens.sources.map((source) => (
             <div

@@ -9,7 +9,7 @@ World Cup Lens is a football intelligence application built during the 2026 Worl
 - Explicit `archive` and `illustrative` dataset modes; archive is the default and never silently falls back to demo fixtures.
 - Bookmarkable date selection, initially **July 11, 2026**, within June 11–July 19. Date boundaries and kickoff display use **America/Los_Angeles**, independently of the current date.
 - Featured matchup, fixture listing, and match-detail links that preserve dataset and selected date.
-- Cached Match Lens summaries, detailed analysis, source snippets, and selectable cached questions when present. Ordinary page rendering does not call OpenAI or API-FOOTBALL.
+- Clearly labeled stored AI commentary, qualitative Lens sections, non-citation context snippets, and selectable cached questions when present. Ordinary page rendering does not call OpenAI or API-FOOTBALL.
 - Separate loading, empty, query-error, missing-cache, and incompatible-cache states. Cache failures retain available fixture details.
 - Retrospective analysis labels and conservative score/status display: stored intermediate statuses are not described as currently live, and missing scores are not invented.
 
@@ -94,13 +94,19 @@ The pipeline currently re-embeds the corpus, lacks durable job/checkpoint contro
 
 Cached analysis is presented **retrospectively**. Source publication/capture times and pre-kickoff knowledge cutoffs are not established, so a cached Lens is not an authenticated pre-match forecast. Attached snippets are retrieved context, not proof that every generated claim is supported.
 
-Provider-synced strength values are placeholders; displayed comparisons are not validated measurements. Team aliases/flags, venues, group/stage modeling, and penalty-score breakdowns need further work. Data completeness, historical accuracy, and third-party storage/embedding/redistribution rights remain unverified. No raw provider export is bundled by this milestone, and no third-party licensing rights are granted by this README.
+Numerical Team Edges bars are withheld in both modes because no sourced measurement methodology is recorded. Missing/malformed legacy edge fields do not suppress otherwise readable qualitative copy. Stored confidence/volatility/edge labels remain explicitly uncalibrated opinions; null edge means “No edge stated”. Cached wording is unchanged and can still rely on placeholder inputs. Team aliases/flags, venues, group/stage modeling, and penalty-score breakdowns need further work. Data completeness, historical accuracy, and third-party storage/embedding/redistribution rights remain unverified. No raw provider export is bundled by this milestone, and no third-party licensing rights are granted by this README.
 
-**No verified public deployment URL is available.** No existing Vercel project is linked in the checkout, and deployment remains gated on a healthy real archive, verified configuration/permissions, and an identified existing project. Mock test success is not a deployment-readiness claim.
+**No verified public deployment URL is available.** No existing Vercel project is linked in the checkout, and deployment remains gated on sufficient publication-rights evidence, verified configuration/permissions, and an identified existing project. Mock test success is not a deployment-readiness claim.
 
+- [Source inventory and historical time contract](docs/data-provenance.md)
+- [Rights inventory and publication gates](docs/data-rights.md)
 - [Architecture and Mermaid diagrams](docs/architecture.md)
 - [Evidence-based audit and connectivity findings](docs/audit.md)
 - [Roadmap and acceptance criteria](docs/roadmap.md)
 - [Agent development and security workflow](AGENTS.md)
+
+A separate commentary-provenance card distinguishes recorded event time from cache last-write time. Source publication/capture, actual generation, historical knowledge cutoff, and dataset version remain Unknown; no selected date or cache timestamp authenticates a forecast.
+
+All inventoried publication rights remain UNKNOWN. No public historical dataset export is approved, and website-display rights need review. The source/rights documents link the actual API-FOOTBALL/API-SPORTS terms and publisher documentation; similarly named providers and model-output ownership do not establish clearance. No raw export was added.
 
 The next milestone is to make backend setup and historical source provenance reproducible, verify grants/RLS beyond observed reads, and identify/configure the existing deployment before publishing. Treat any return of DNS/HTTP 521 failures as an availability incident, never as an empty archive.

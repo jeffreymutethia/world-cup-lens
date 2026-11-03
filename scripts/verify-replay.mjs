@@ -13,10 +13,12 @@ const match = {
   home_team: team, away_team: { ...team, id: "mock-away", name: "Mock Away" },
   venue: { id: "mock-venue", name: "Mock Stadium", city: "Mock City", country: "Mock", summary: "Test venue" },
 };
-const lens = { headline: "Mock cached retrospective analysis", slightEdge: null, confidence: "Low", volatility: "Medium", expectedGame: "Mock cached expectation, not a verified forecast.", whyItMatters: "Mock significance.", likelyGameScript: "Mock script.", teamEdges: [], whatToWatch: [], casualFanGuide: "Mock guide.", uncertainty: [], sources: [] };
+const lens = { headline: "Mock cached retrospective analysis", slightEdge: null, confidence: "Low", volatility: "Medium", expectedGame: "Mock cached expectation, not a verified forecast.", whyItMatters: "Mock significance.", likelyGameScript: "Mock script.", teamEdges: [{ label: "Unsupported numeric edge sentinel", homeValue: 93, awayValue: 7 }], whatToWatch: [], casualFanGuide: "Mock guide.", uncertainty: [], sources: [{title:"Mock context",snippet:"Stored context is not proof of a generated claim."}] };
 let databaseReads = 0;
 let lensResponse = "valid";
 let qaResponse = "valid";
+let metricsResponse = "present";
+let cacheUpdatedAt = "2026-07-10T10:00:00Z";
 const mock = createServer((request, response) => {
   databaseReads++;
   const url = new URL(request.url, "http://local");
@@ -34,7 +36,10 @@ const mock = createServer((request, response) => {
   }
   if (url.pathname === "/rest/v1/match_lenses") {
     if (lensResponse === "error") return send({ message: "private-cache-diagnostic" }, 500);
-    return send([{ match_id: match.id, lens_json: lensResponse === "invalid" ? { headline: "Legacy malformed cache" } : lens }]);
+    return send([{ match_id: match.id, updated_at: cacheUpdatedAt, lens_json: lensResponse === "invalid" ? { headline: "Legacy malformed cache" }
+      : metricsResponse === "missing" ? { ...lens, teamEdges: undefined }
+      : metricsResponse === "malformed" ? { ...lens, teamEdges: { invalid: true } }
+      : lens }]);
   }
   if (url.pathname === "/rest/v1/qa_answers") return send(qaResponse === "invalid" ? [{ answer_json: { sources: null } }] : []);
   return send({ message: "Unexpected table" }, 400);
@@ -88,10 +93,32 @@ try {
   assert.ok(!html.includes("Mexico"));
   console.log("PASS archive landing / July 11 listing / cached summary / preserved navigation");
   html = await page("/matches/mock-archive-match?mode=archive&date=2026-07-11");
-  assert.ok(html.includes("Mock cached retrospective analysis") && html.includes("cutoff unverified"));
+  assert.ok(html.includes("Mock cached retrospective analysis") && html.includes("Historical knowledge cutoff"));
   assert.ok(html.includes("Score unavailable") && html.includes("Final result unverified"));
   assert.ok(!html.includes("First Half"));
   console.log("PASS archive detail / stale status suppressed / no invented final score");
+  assert.ok(!html.includes("Unsupported numeric edge sentinel"));
+  assert.ok(html.includes("Team comparison unavailable") && html.includes("No edge stated"));
+  assert.ok(html.includes("Uncalibrated commentary labels") && html.includes("Stored context snippets"));
+  assert.ok(html.includes("not claim-level citations or proof") && html.includes("Stored wording is preserved"));
+  assert.ok(html.includes("Analysis generation time") && html.includes("Dataset version"));
+  assert.ok(html.includes(cacheUpdatedAt) && html.includes("Cache last updated (not generation time)"));
+  assert.match(html, /Analysis generation time<\/dt><dd>Unknown<\/dd>/);
+  assert.match(html, /Historical knowledge cutoff<\/dt><dd>Unknown/);
+  cacheUpdatedAt = "invalid-cache-timestamp";
+  html = await page("/matches/mock-archive-match?mode=archive&date=2026-07-11");
+  assert.ok(!html.includes(cacheUpdatedAt));
+  assert.match(html, /Cache last updated \(not generation time\)<\/dt><dd>Unknown/);
+  cacheUpdatedAt = "2026-07-10T10:00:00Z";
+  assert.ok(!html.includes("Claim-level citations"));
+  for (const metrics of ["missing", "malformed"]) {
+    metricsResponse = metrics;
+    html = await page("/matches/mock-archive-match?mode=archive&date=2026-07-11");
+    assert.ok(html.includes("Mock cached retrospective analysis") && html.includes("Mock significance."));
+    assert.ok(html.includes("Team comparison unavailable") && !html.includes("Cached Match Lens unavailable"));
+  }
+  metricsResponse = "present";
+  console.log("PASS hidden/missing/malformed numerical metrics; qualitative copy and unknown provenance retained");
   html = await page("/?mode=archive&date=2026-07-12");
   assert.ok(html.includes("No archived matches for this date") && !html.includes("Mexico"));
   console.log("PASS successful empty archive date without seed fallback");
@@ -121,7 +148,9 @@ try {
   assert.ok(html.includes("Illustrative examples") && html.includes("Mexico"));
   assert.ok(html.includes("mexico-south-africa?mode=illustrative&amp;date=2026-06-11"));
   html = await page("/matches/mexico-south-africa?mode=illustrative&date=2026-06-11");
-  assert.ok(html.includes("Illustrative cached analysis") && html.includes("Mexico"));
+  assert.ok(html.includes("Synthetic illustrative commentary") && html.includes("Mexico"));
+  assert.ok(html.includes("Illustrative context examples") && html.includes("synthetic demo content"));
+  assert.ok(!html.includes("VS</span>"));
   assert.ok(html.includes('/?mode=illustrative&amp;date=2026-06-11'));
   console.log("PASS explicit illustrative list/detail and back navigation");
   html = await page("/matches/mexico-south-africa?mode=illustrative&date=2026-06-12");

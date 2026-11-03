@@ -16,9 +16,11 @@ Implement explicit dataset mode and replay date shared by list and detail; disti
 
 **Docs (implemented):** Replay mode/date/timezone contract and synthetic seed limitations are recorded in architecture; remaining work stays explicit. This phase can use clearly labeled fixtures before historical data approval.
 
-## 2. Define provenance and approved historical inputs (H2, M6)
+## 2. Define provenance and approved historical inputs (H2, M6; inventory/contract implemented)
 
-Create a source inventory and publication policy before committing real datasets. Distinguish publication, capture, event, and forecast-as-of timestamps. Decide which outputs can honestly be called contemporaneous forecasts and which are retrospective reconstructions. Curate a small permitted dataset rather than importing the entire provider archive.
+**Implemented 2026-11-03:** source/field inventory, actual publisher-terms review, UNKNOWN rights/export gates, separate temporal display metadata, and an additive immutable-lineage contract proposal in `docs/data-provenance.md` and `docs/data-rights.md`. No historical export is approved and no migration/backfill was performed.
+
+Remaining: resolve per-source/account/competition permissions and implement the reviewed provenance schema in a disposable backend before committing real datasets. Distinguish publication, capture, event, and forecast-as-of timestamps. Decide which outputs can honestly be called contemporaneous forecasts and which are retrospective reconstructions. Curate a small permitted dataset rather than importing the entire provider archive.
 
 **Acceptance:** Every published record has stable source identity, dataset version/hash, time semantics, and an explicit redistribution decision with attribution. No record with unknown rights is included in the public bundle. Include at least one group fixture and one knockout fixture once permitted; otherwise keep clearly synthetic records and document the limitation. Links/snippets carry traceable IDs and permitted provenance. Replay labels show the selected as-of time and reconstruction status.
 
@@ -26,9 +28,11 @@ Create a source inventory and publication policy before committing real datasets
 
 **Docs:** Deliver a data dictionary, source/rights manifest, attribution file, and short decision record for temporal semantics. Verify external terms when doing this phase; the audit did not settle rights.
 
-## 3. Repair competition and display semantics (H3, M1, M2, L1)
+## 3. Repair competition and display semantics (H3, M1, M2, L1; analytical display mitigated)
 
-Separate stable team identity/display code/flag, group membership, stage/round, venue country, match state, and extra-time/penalty results. Remove unsupported strength bars and zero standings before introducing any sourced replacements. Make only the navigation/date/filter controls needed for the chosen demo functional; remove or disable the rest. Keep Q&A labeled as cached when that is what it is.
+**Implemented 2026-11-03:** all numerical strength bars withheld; missing/malformed hidden metrics preserve qualitative copy; stored opinions are uncalibrated; null edge means no stated edge; Lens/Q&A context is not presented as claim-level proof; archive and synthetic commentary/time labels remain distinct.
+
+Remaining: separate stable team identity/display code/flag, group membership, stage/round, venue country, match state, and extra-time/penalty results. Remove unsupported strength bars and zero standings before introducing any sourced replacements. Make only the navigation/date/filter controls needed for the chosen demo functional; remove or disable the rest. Keep Q&A labeled as cached when that is what it is.
 
 **Acceptance:** Group and knockout fixtures have accurate distinct labels; a penalty result shows the winner and score breakdown. Unknown metrics render as unavailable, never measured 50/50 strengths. Venue country cannot inherit `World`; unknown locations are labeled. Known aliases resolve to canonical identities/flags. All visible active controls change route/state meaningfully, and no synthetic standings appear as actual results.
 
@@ -88,4 +92,4 @@ No existing Vercel link or deployment credentials were identified locally. Ident
 
 ## Next milestone after connectivity/CI documentation
 
-Prioritize reproducible backend contracts and historical source provenance: document the verified schema/RPC/grants from authorized evidence; define and test source/as-of time semantics; inventory rights; remove unsupported strength comparisons; expand publishable-read checks across stages/dates. July 11 availability alone does not establish those guarantees. Identify the existing Vercel project and verify its required configuration before considering deployment; no verified public URL is currently documented.
+Prioritize reproducible backend contracts and historical source provenance: document the verified schema/RPC/grants from authorized evidence; define and test source/as-of time semantics; inventory rights; remove placeholder strengths from upstream authoring inputs without rewriting history; expand publishable-read checks across stages/dates. July 11 availability alone does not establish those guarantees. Identify the existing Vercel project and verify its required configuration before considering deployment; no verified public URL is currently documented.

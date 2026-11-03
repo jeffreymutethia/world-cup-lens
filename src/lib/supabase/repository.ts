@@ -2,7 +2,7 @@ import "server-only";
 
 import type {
   Match,
-  MatchLens,
+  PublicMatchLens,
   MatchQuestionAnswer,
   Team,
   Venue,
@@ -56,7 +56,8 @@ type ProviderMatchRow = MatchRow & {
 
 type MatchLensRow = {
   match_id: string;
-  lens_json: MatchLens;
+  lens_json: unknown;
+  updated_at?: string | null;
 };
 
 type QaAnswerRow = {
@@ -202,7 +203,7 @@ export async function getProviderMatchesForDate(
 
   const { data: lensData, error: lensError } = await supabase
     .from("match_lenses")
-    .select("match_id, lens_json")
+    .select("match_id, lens_json, updated_at")
     .in(
       "match_id",
       providerRows.map((row) => row.id),
@@ -213,6 +214,10 @@ export async function getProviderMatchesForDate(
       row.match_id,
       mapMatchLens(row),
     ]),
+  );
+
+  const cacheTimesByMatchId = new Map(
+    ((lensData ?? []) as MatchLensRow[]).map((row) => [row.match_id, row.updated_at ?? null]),
   );
 
   return providerRows
@@ -231,6 +236,7 @@ export async function getProviderMatchesForDate(
         awayTeam: mapTeam(awayTeam),
         venue: mapVenue(venue),
         lens: lensError ? null : lensesByMatchId.get(row.id) ?? null,
+        lensCacheUpdatedAt: lensError ? null : cacheTimesByMatchId.get(row.id) ?? null,
         lensState: lensError ? "unavailable" as const
           : !lensesByMatchId.has(row.id) ? "missing" as const
           : lensesByMatchId.get(row.id) ? "available" as const : "invalid" as const,
@@ -312,12 +318,12 @@ export async function getMatches(): Promise<Match[]> {
 
 export async function getMatchLens(
   matchId: string,
-): Promise<MatchLens | null> {
+): Promise<PublicMatchLens | null> {
   const supabase = createServerSupabaseClient();
 
   const { data, error } = await supabase
     .from("match_lenses")
-    .select("match_id, lens_json")
+    .select("match_id, lens_json, updated_at")
     .eq("match_id", matchId)
     .maybeSingle();
 

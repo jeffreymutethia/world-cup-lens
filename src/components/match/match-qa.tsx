@@ -1,5 +1,7 @@
 "use client";
 
+import { analysisPresentation } from "@/lib/analysis-presentation";
+import type { DatasetMode } from "@/lib/replay";
 import { useState } from "react";
 import { BookOpen, MessageCircleQuestion, Sparkles } from "lucide-react";
 
@@ -17,9 +19,11 @@ import {
 
 type MatchQaProps = {
   answers: MatchQuestionAnswer[];
+  mode: DatasetMode;
 };
 
-export function MatchQa({ answers }: MatchQaProps) {
+export function MatchQa({ answers, mode }: MatchQaProps) {
+  const policy = analysisPresentation(mode);
   const initialAnswer = answers[0] ?? null;
 
   const [selectedKey, setSelectedKey] =
@@ -38,7 +42,7 @@ export function MatchQa({ answers }: MatchQaProps) {
         <CardHeader className="pb-4">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
             <Sparkles className="size-4" />
-            Ask World Cup Lens
+            Explore cached questions
           </div>
 
           <CardTitle className="text-xl">
@@ -110,11 +114,13 @@ export function MatchQa({ answers }: MatchQaProps) {
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-base">
             <BookOpen className="size-4 text-emerald-700" />
-            Answer sources
+            {policy.contextLabel}
           </CardTitle>
         </CardHeader>
 
         <CardContent className="space-y-3">
+          <p className="text-sm text-slate-600">{policy.contextMessage}</p>
+          {selectedAnswer.sources.length === 0 && <p className="text-sm text-slate-500">No stored context snippets are available.</p>}
           {selectedAnswer.sources.map((source) => (
             <div
               key={`${selectedAnswer.key}-${source.title}`}

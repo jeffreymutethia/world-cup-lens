@@ -1,3 +1,5 @@
+import { analysisPresentation, analysisProvenance, storedEdgeLabel } from "../src/lib/analysis-presentation";
+import { SOURCE_CATEGORIES, sourceRights } from "../src/lib/data-rights";
 import test from "node:test";
 import { isCachedLens, isCachedAnswer } from "../src/lib/cached-analysis";
 import { readFileSync } from "node:fs";
@@ -13,7 +15,7 @@ function fixture(id: string, kickoffAt = "2026-07-11T18:00:00Z", lens = false): 
     match: { id, homeTeamId: "home", awayTeamId: "away", venueId: "venue", group: "Quarter-finals", kickoffAt, signalTags: [] },
     homeTeam: team, awayTeam: { ...team, id: "other" },
     venue: { id: "venue", name: "Mock venue", city: "Mock city", country: "Mock country", summary: "Mock" },
-    lens: lens ? { headline: "Cached mock analysis", slightEdge: null, confidence: "Low", volatility: "Low", expectedGame: "Mock analysis.", whyItMatters: "Mock.", likelyGameScript: "Mock.", teamEdges: [], whatToWatch: [], casualFanGuide: "Mock.", uncertainty: [], sources: [] } : null,
+    lens: lens ? { headline: "Cached mock analysis", slightEdge: null, confidence: "Low", volatility: "Low", expectedGame: "Mock analysis.", whyItMatters: "Mock.", likelyGameScript: "Mock.", whatToWatch: [], casualFanGuide: "Mock.", uncertainty: [], sources: [] } : null,
   };
 }
 
@@ -173,4 +175,59 @@ test("font styling uses system fonts without a build-time Google fetch or CSS cy
   assert.equal(layout.includes("next/font/google"), false);
   assert.ok(css.includes("ui-sans-serif, system-ui"));
   assert.equal(css.includes("--font-sans: var(--font-sans)"), false);
+});
+
+
+test("unsupported metrics are hidden for archive and synthetic examples without inventing parity", () => {
+  for (const mode of ["archive", "illustrative"] as const) {
+    assert.equal(analysisPresentation(mode).showNumericalTeamEdges, false);
+    assert.match(analysisPresentation(mode).metricsMessage, /unavailable/);
+  }
+  assert.equal(storedEdgeLabel(null), "No edge stated");
+  assert.equal(storedEdgeLabel("Mock Home"), "Mock Home");
+});
+
+test("missing or malformed hidden metrics do not suppress readable qualitative commentary", () => {
+  const original = fixture("id", undefined, true).lens!;
+  for (const teamEdges of [undefined, null, [{ homeValue: "fabricated", awayValue: -100 }], { malformed: true }]) {
+    const value = { ...original, teamEdges };
+    assert.equal(isCachedLens(value), true);
+    assert.equal(value.expectedGame, original.expectedGame);
+    assert.equal(value.teamEdges, teamEdges); // Reading never rewrites cached content.
+  }
+  assert.equal(isCachedLens({ ...original, expectedGame: null }), false);
+});
+
+test("archive commentary and synthetic examples have distinct provenance and non-citation context labels", () => {
+  assert.match(analysisPresentation("archive").label, /Stored AI commentary.*retrospective/);
+  assert.match(analysisPresentation("illustrative").label, /Synthetic illustrative/);
+  assert.equal(analysisPresentation("archive").contextLabel, "Stored context snippets");
+  assert.equal(analysisPresentation("illustrative").contextLabel, "Illustrative context examples");
+  assert.match(analysisPresentation("archive").contextMessage, /not claim-level citations or proof/);
+});
+
+test("cache dates and replay selection can never create an authenticated pre-kickoff forecast", () => {
+  const input = { mode: "archive" as const, matchEventAt: "2026-07-11T18:00:00Z", cacheUpdatedAt: "2026-07-10T12:00:00Z", knowledgeCutoffAt: "2026-07-10T12:00:00Z", datasetVersion: "claimed-version" };
+  const value = analysisProvenance(input);
+  assert.equal(value.perspective, "retrospective");
+  assert.equal(value.cacheUpdatedAt, input.cacheUpdatedAt);
+  for (const field of ["analysisGeneratedAt", "sourcePublishedAt", "sourceCapturedAt", "knowledgeCutoffAt", "datasetVersion"] as const) assert.equal(value[field], null);
+  assert.equal(analysisProvenance({ ...input, mode: "illustrative" }).origin, "synthetic-editorial-example");
+});
+
+test("displayed temporal metadata rejects malformed, ambiguous, and fabricated timestamps", () => {
+  for (const value of [undefined, null, 123, "2026-07-11", "2026-02-30T18:00:00Z", "2026-07-11T18:00:00", "garbage"]) {
+    const metadata = analysisProvenance({ mode: "archive", matchEventAt: value, cacheUpdatedAt: value });
+    assert.equal(metadata.matchEventAt, null);
+    assert.equal(metadata.cacheUpdatedAt, null);
+  }
+});
+
+test("unknown rights never become approval because data is factual, synthetic, or cached", () => {
+  for (const category of [...SOURCE_CATEGORIES, "factual", "synthetic", "unlisted", "__proto__", null, { approved: true }]) {
+    const rights = sourceRights(category);
+    assert.equal(rights.publicationRights, "UNKNOWN");
+    assert.equal(rights.publicGitHubDataset, "NOT_APPROVED");
+    assert.equal(rights.publicWebDisplay, "REVIEW_REQUIRED");
+  }
 });

@@ -60,6 +60,9 @@ export type MatchLens = {
   }[];
 };
 
+// Public commentary deliberately excludes unsupported numerical comparisons.
+export type PublicMatchLens = Omit<MatchLens, "teamEdges">;
+
 export type PresetQuestionKey =
   | "explain-casually"
   | "tactical-edge"
@@ -82,6 +85,7 @@ export type MatchViewModel = {
   homeTeam: Team;
   awayTeam: Team;
   venue: Venue;
-  lens: MatchLens | null;
+  lens: PublicMatchLens | null;
+  lensCacheUpdatedAt?: string | null;
   lensState?: "available" | "missing" | "invalid" | "unavailable";
 };

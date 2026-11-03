@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowLeft, MapPin } from "lucide-react";
 import { AppShell } from "@/components/layout/app-shell";
+import { AnalysisProvenanceCard } from "@/components/match/analysis-provenance-card";
+import { analysisPresentation } from "@/lib/analysis-presentation";
 import { MatchForecastCard } from "@/components/match/match-forecast-card";
 import { MatchLensCards } from "@/components/match/match-lens-cards";
 import { MatchQa } from "@/components/match/match-qa";
@@ -32,6 +34,7 @@ export default async function MatchPage({ params, searchParams }: MatchPageProps
     </ReplayState></div></AppShell>;
   }
   const { match, homeTeam, awayTeam, venue, lens } = viewModel;
+  const policy = analysisPresentation(selection.mode);
   const cached = await loadReplayAnswers(selection, match.id, getCachedAnswersForMatch);
   return (
     <AppShell>
@@ -55,14 +58,15 @@ export default async function MatchPage({ params, searchParams }: MatchPageProps
           <p className="mt-4 text-center text-xs text-slate-500">Recorded data only. Unverified intermediate scores are not displayed as final results.</p>
         </section>
         {lens ? <>
-          <p className="text-sm font-semibold text-emerald-800">{selection.mode === "archive" ? "Cached retrospective analysis — historical forecast cutoff unverified" : "Illustrative cached analysis"}</p>
+          <p className="text-sm font-semibold text-emerald-800">{policy.label}</p>
+          <AnalysisProvenanceCard mode={selection.mode} match={match} cacheUpdatedAt={viewModel.lensCacheUpdatedAt} />
           <MatchForecastCard lens={lens} />
           <section><h2 className="mb-4 text-2xl font-semibold tracking-tight">{lens.headline}</h2>
-            <MatchLensCards lens={lens} homeTeam={homeTeam} awayTeam={awayTeam} />
+            <MatchLensCards lens={lens} mode={selection.mode} />
           </section>
         </> : <ReplayState title="Cached Match Lens unavailable">Stored fixture details are shown above. Cached analysis is missing, incompatible, or temporarily unavailable for this match; opening this page does not generate new content.</ReplayState>}
         {cached.failed ? <ReplayState title="Cached questions unavailable">The question cache could not be read. Fixture details and available analysis remain above.</ReplayState>
-          : cached.answers.length ? <MatchQa answers={cached.answers} /> : <p className="text-sm text-slate-500">No cached questions are available for this match.</p>}
+          : cached.answers.length ? <MatchQa answers={cached.answers} mode={selection.mode} /> : <p className="text-sm text-slate-500">No cached questions are available for this match.</p>}
       </div>
     </AppShell>
   );

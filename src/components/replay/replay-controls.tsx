@@ -34,10 +34,10 @@ export function ReplayControls({ selection }: { selection?: ReplaySelection }) {
 export function ReplayNotice({ selection }: { selection: ReplaySelection }) {
   return (
     <aside className={`rounded-2xl border p-4 text-sm leading-6 ${selection.mode === "illustrative" ? "border-amber-300 bg-amber-50 text-amber-950" : "border-emerald-200 bg-emerald-50 text-emerald-950"}`}>
-      <p className="font-semibold">{selection.mode === "illustrative" ? "Illustrative examples — not verified historical fixtures" : "Historical archive — stored API-FOOTBALL fixtures"} · {selection.date}</p>
+      <p className="font-semibold">{selection.mode === "illustrative" ? "Illustrative examples — synthetic, not verified historical fixtures" : "Historical archive — stored API-FOOTBALL fixtures"} · {selection.date}</p>
       <p>{selection.mode === "illustrative"
-        ? "Teams, venues, scores, and analysis in this mode are demo content and must not be treated as an authoritative historical record."
-        : "Cached AI analysis is presented retrospectively. Its generation time and pre-kickoff information cutoff are unverified; it is not an authenticated historical forecast. Stored results may be incomplete."}</p>
+        ? "Teams, venues, scores, and commentary in this mode are synthetic demo content and must not be treated as an authoritative historical record."
+        : "Fixture fields are stored provider records, not independently verified facts. Venue, stage, flags/codes, and results may be inconsistent. AI commentary is a separate, unverified retrospective interpretation. Its generation time and pre-kickoff information cutoff are unverified; it is not an authenticated historical forecast. Commentary may rely on placeholder metrics. Snippets are not claim-level proof. The selected date is a fixture day, not a historical knowledge cutoff."}</p>
     </aside>
   );
 }

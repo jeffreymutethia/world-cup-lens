@@ -10,6 +10,8 @@ Read the relevant guide in `node_modules/next/dist/docs/` before writing code. A
 ## Navigate first
 - `src/app/page.tsx`, `src/app/matches/[id]/page.tsx`: public pages.
 - `src/components/`: layout, match presentation, and shared UI.
+- `src/lib/analysis-presentation.ts`: retrospective/synthetic labels, withheld metrics policy, and distinct time metadata with explicit unknowns.
+- `src/lib/data-rights.ts`, `docs/data-{provenance,rights}.md`: source inventory and publication gates; UNKNOWN never implies permission.
 - `src/lib/cached-analysis.ts`: read-time display validation for cached Lens/Q&A JSON.
 - `src/lib/replay.ts`: date validation, Los Angeles day boundaries, dataset selection, navigation, and truthful result presentation.
 - `src/lib/types.ts`: application types; `src/data/seed.ts` and `src/lib/lens.ts`: illustrative data/helpers.
@@ -27,5 +29,7 @@ Commands: `npm run dev` (development), `npm run lint`, `npm run typecheck` (gene
 
 ## Security and side effects
 Never output secrets, environment file contents, credentials, authorization headers, or sensitive provider payloads in logs, docs, commands, or responses. Refer to environment variable names only. Keep privileged clients server-only. Do not expose Supabase secret keys to browsers. Use isolated mocks/local fixtures for tests; external API, ingestion, embedding, generation, and cron calls may incur cost or mutate data and require explicit task authorization.
+
+Never present placeholder strengths, uncalibrated labels, or retrieved snippets as verified measurements or claim-level proof. Preserve stored commentary wording; label it retrospective or synthetic. A kickoff, replay date, or cache update is not a historical information cutoff. Never export provider rows or derived snippets without source-specific rights approval; no public historical dataset is currently approved.
 
 Never auto-commit, push, deploy, or mutate production data without explicit instruction. Do not install dependencies, change environment files, or create migrations unless within the authorized task. Report security uncertainties without inventing deployed protections.

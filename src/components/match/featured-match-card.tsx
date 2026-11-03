@@ -1,6 +1,7 @@
+import { storedEdgeLabel } from "@/lib/analysis-presentation";
 import { replayHref, replayStatus, replayScore, stageLabel, type ReplaySelection } from "@/lib/replay";
 import Link from "next/link";
-import type { Match, MatchLens, Team, Venue } from "@/lib/types";
+import type { Match, PublicMatchLens, Team, Venue } from "@/lib/types";
 import { formatKickoff } from "@/lib/lens";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,7 +13,7 @@ type FeaturedMatchCardProps = {
   homeTeam: Team;
   awayTeam: Team;
   venue: Venue;
-  lens: MatchLens | null;
+  lens: PublicMatchLens | null;
   selection: ReplaySelection;
 };
 
@@ -29,7 +30,7 @@ export function FeaturedMatchCard({
       <div className="bg-emerald-800 px-5 py-3 text-white">
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]">
           <Flame className="size-4" />
-          Featured historical matchup
+          {selection.mode === "illustrative" ? "Featured illustrative matchup" : "Featured archived matchup"}
         </div>
       </div>
 
@@ -80,13 +81,14 @@ export function FeaturedMatchCard({
 
           <div className="space-y-3">
             <ForecastRow
-              label="Slight edge"
-              value={lens ? (lens.slightEdge ?? "Even") : "Unavailable"}
+              label="Stored edge opinion"
+              value={lens ? (storedEdgeLabel(lens.slightEdge)) : "Unavailable"}
             />
-            <ForecastRow label="Confidence" value={lens?.confidence ?? "Unavailable"} />
-            <ForecastRow label="Volatility" value={lens?.volatility ?? "Unavailable"} />
+            <ForecastRow label="Stored confidence label" value={lens?.confidence ?? "Unavailable"} />
+            <ForecastRow label="Stored volatility label" value={lens?.volatility ?? "Unavailable"} />
           </div>
 
+          <p className="mt-4 text-xs text-slate-600">Uncalibrated commentary labels, not measured performance or probabilities.</p>
           <p className="mt-5 text-sm leading-6 text-emerald-950">
             {lens?.expectedGame ?? "No cached analysis is available. Open the match to view its stored details."}
           </p>

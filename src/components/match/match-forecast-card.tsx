@@ -1,10 +1,11 @@
-import type { MatchLens } from "@/lib/types";
-import { Activity, ShieldCheck, TrendingUp } from "lucide-react";
+import { storedEdgeLabel } from "@/lib/analysis-presentation";
+import type { PublicMatchLens } from "@/lib/types";
+import { Activity, MessageSquare, TrendingUp } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 
 type MatchForecastCardProps = {
-  lens: MatchLens;
+  lens: PublicMatchLens;
 };
 
 export function MatchForecastCard({
@@ -16,16 +17,16 @@ export function MatchForecastCard({
         <div className="grid gap-4 md:grid-cols-3">
           <ForecastMetric
             icon={TrendingUp}
-            label="Slight edge"
-            value={lens.slightEdge ?? "Even"}
+            label="Stored edge opinion"
+            value={storedEdgeLabel(lens.slightEdge)}
             iconTone="text-emerald-700"
             valueTone="text-emerald-800"
             iconBackground="bg-emerald-100"
           />
 
           <ForecastMetric
-            icon={ShieldCheck}
-            label="Confidence"
+            icon={MessageSquare}
+            label="Stored confidence label"
             value={lens.confidence}
             iconTone="text-amber-700"
             valueTone="text-amber-800"
@@ -34,7 +35,7 @@ export function MatchForecastCard({
 
           <ForecastMetric
             icon={Activity}
-            label="Volatility"
+            label="Stored volatility label"
             value={lens.volatility}
             iconTone="text-rose-700"
             valueTone="text-rose-800"
@@ -42,9 +43,10 @@ export function MatchForecastCard({
           />
         </div>
 
+          <p className="mt-4 text-xs text-slate-600">Uncalibrated commentary labels, not measured performance or probabilities.</p>
         <div className="mt-6 border-t border-emerald-200 pt-5">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-800">
-            Expected game
+            Stored expectation
           </p>
 
           <p className="mt-2 text-[15px] leading-7 text-emerald-950">
