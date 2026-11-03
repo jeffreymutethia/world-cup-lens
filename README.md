@@ -1,112 +1,90 @@
 # World Cup Lens
 
-World Cup Lens is a football intelligence application built during the 2026 World Cup and now being adapted into a historical replay and engineering portfolio project. It pairs stored fixture records with cached AI match analysis, while keeping illustrative examples separate from the real archive.
+A football intelligence portfolio application with a **self-contained fictional match lab** and a separate historical-archive integration. It demonstrates date-based browsing, a featured matchup, cached commentary, preset Q&A, honest provenance labels, and a guarded authoring architecture.
 
-**Status (2026-11-03):** local replay browsing and credential-free tests work. Read-only checks against the existing Supabase project verified two July 11 fixtures with joined teams/venues and cached lenses; the real archive homepage and one detail rendered locally. The project recovered during investigation after DNS failures and HTTP 521 while its dashboard reported “Coming up…”. No configuration or data changes were made. This verifies current read availability, not historical accuracy or ongoing uptime. No public deployment has been verified. See the [connectivity investigation](docs/audit.md#connectivity-and-ci-follow-up--2026-11-03).
+**Default deployment: demo-only.** No database, Supabase key, OpenAI key, API-FOOTBALL key, or paid request is needed to browse it. The examples are newly authored fiction, not official World Cup fixtures or results. No public historical dataset export is approved.
 
-## What is implemented
+## Run the demo
 
-- Explicit `archive` and `illustrative` dataset modes; archive is the default and never silently falls back to demo fixtures.
-- Bookmarkable date selection, initially **July 11, 2026**, within June 11–July 19. Date boundaries and kickoff display use **America/Los_Angeles**, independently of the current date.
-- Featured matchup, fixture listing, and match-detail links that preserve dataset and selected date.
-- Clearly labeled stored AI commentary, qualitative Lens sections, non-citation context snippets, and selectable cached questions when present. Ordinary page rendering does not call OpenAI or API-FOOTBALL.
-- Separate loading, empty, query-error, missing-cache, and incompatible-cache states. Cache failures retain available fixture details.
-- Retrospective analysis labels and conservative score/status display: stored intermediate statuses are not described as currently live, and missing scores are not invented.
-
-There is no free-form live chat, verified historical forecast mode, functional standings calculation, or published offline historical dataset.
-
-## Try the illustrative demo
-
-Use Node.js **22.13.0 or newer within major 22** and npm. The major is pinned in [.nvmrc](.nvmrc); use a current security patch within that major. Node 22 remains on the [official LTS release schedule](https://nodejs.org/en/about/previous-releases).
+Use **Node 22.13.0 or newer within major 22** (`.nvmrc`) and npm:
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Open [the illustrative examples](http://localhost:3000/?mode=illustrative&date=2026-06-11). June 11 and June 12 contain local examples; the Mexico–South Africa example includes a cached Lens and questions. **No API credentials are required for illustrative mode.** These teams, venues, metrics, and editorial claims are demo content, not an authoritative historical record.
+Open [localhost:3000](http://localhost:3000). No environment file is required. Missing or unrecognized `WCL_DEPLOYMENT_MODE` values fail closed to `demo-only`. For an explicit public configuration:
 
-Opening `/` selects the real archive instead. Without working Supabase access, it intentionally shows an error. Use the explicit illustrative URL to explore the interface without a database.
+```bash
+WCL_DEPLOYMENT_MODE=demo-only npm run build
+WCL_DEPLOYMENT_MODE=demo-only npm start
+```
+
+June 11 shows Copper Vale–Tidal Workshop and Lantern Ridge–Mossfield Circuit; June 12 shows another fictional scenario. Open a match, read its stored sample story, and switch between cached questions. Date/card/back links preserve the selection. [How it works](http://localhost:3000/about) explains the architecture. Numerical strength comparisons are unavailable, and no real result is invented.
+
+The new `wcl-synthetic-v1` examples contain no provider exports, external excerpts, country flags, real-team claims, or sports logos. See the scoped [publication review](docs/demo-publication-review.md). Earlier UNKNOWN sources were not automatically approved; old examples remain in Git history and are not cleared by replacing the current files.
+
+## Two deployment boundaries
+
+| Server setting | Public behavior | Service/authoring behavior |
+| --- | --- | --- |
+| `WCL_DEPLOYMENT_MODE=demo-only` (also missing/invalid) | Reviewed illustrative module only; engaging June 11 default; no archive selector; explicit archive URLs show a disabled state | Archive readers are not called. All six admin POST handlers and cron GET/HEAD return 404 before auth/work, even if credentials exist. |
+| `WCL_DEPLOYMENT_MODE=archive-enabled` | Historical archive retains its original meaning/default July 11, plus explicit fictional examples | Requires separately configured Supabase reads. Existing secret gates protect retained authoring endpoints; enabling the mode does not authorize running them. Intended for local/private operation until historical rights and deployment gates are resolved. |
+
+The flag is server-side, not `NEXT_PUBLIC_`, not a URL switch, and not a browser setting. Set it consistently at build/start/deployment. The public application is decoupled from Supabase because an unavailable database, a paid API, or an uncleared dataset should not be a prerequisite for demonstrating UI and engineering decisions. Ordinary browsing never generates or embeds content in either mode.
+
+Explicit `?mode=archive` is rejected in demo-only mode; it is never silently changed into illustrative data. Valid empty dates, invalid input, missing matches, unavailable commentary, and query failures have separate messages. Fixture-day boundaries and kickoff display use **America/Los_Angeles** rather than the current date.
 
 ## Stack and architecture
 
-Next.js 16.2.9 App Router, React 19, strict TypeScript, Tailwind CSS, Radix UI, and Lucide provide the interface. Supabase Postgres stores fixtures and cached content. The retained authoring pipeline uses OpenAI embeddings, a vector-retrieval RPC intended for pgvector, and Responses structured outputs with Zod. API-FOOTBALL is the fixture ingestion provider. Database extension/index/RPC definitions and policies are not yet reproducible from tracked migrations.
+Next.js 16.2.9 App Router, React 19, strict TypeScript, Tailwind CSS, Radix UI, and Lucide. Typography uses system fonts. Dependency/icon notices are served at `/third-party-notices.txt`; the favicon is an original geometric SVG.
 
-Public reads flow from URL mode/date → replay selection → provider-linked Supabase fixtures or local illustrative data → cached Lens lookup → listing/detail. No generation occurs along that path. The [verified architecture](docs/architecture.md) includes Mermaid component and replay-flow diagrams, repository entry points, trust boundaries, and unresolved backend details.
+The retained historical backend uses Supabase Postgres, an intended pgvector retrieval RPC, OpenAI embeddings/Responses structured outputs with Zod, and API-FOOTBALL ingestion. Its separate path is fixtures → normalized rows → documents → chunks/embeddings → retrieval → structured generation → cache. These operator features are disabled in the public demo and are not needed to build/test it.
 
-Typography uses system font stacks; production builds do not download Google fonts.
+See [architecture and Mermaid diagrams](docs/architecture.md), [provenance/time contract](docs/data-provenance.md), [rights inventory](docs/data-rights.md), [audit](docs/audit.md), and [roadmap](docs/roadmap.md).
 
-## Configuration and the real archive
+## Archive setup — separately configured local/private use
 
-Illustrative development and CI need no environment file. To read an existing archive, configure only these names in an ignored `.env.local` or the deployment's secret configuration:
+```bash
+WCL_DEPLOYMENT_MODE=archive-enabled npm run dev
+```
 
-| Variable | Purpose |
-| --- | --- |
-| `NEXT_PUBLIC_SUPABASE_URL` | Canonical project API URL, verified against the existing Supabase dashboard. |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Publishable key for that same project; permissions are governed by database grants/RLS. |
-
-The archive reader expects provider-linked `matches`, related `teams` and `venues`, cached `match_lenses`, and optional `qa_answers`. Missing related entities are a data error. A missing or unreadable Lens/question cache has a useful fallback. July 11 is a fixed starting selection, not a guarantee that the database contains fixtures for that date.
-
-Schema bootstrap, the `match_document_chunks` SQL function, RLS policies, and data-loading instructions remain incomplete. A publishable key is not proof that rows are publicly readable or that RLS is correct. Do not substitute a privileged key to bypass a failed public-read check.
-
-The following server-only settings belong to the retained operator pipeline, **not the visitor demo or CI**:
+Only this explicit server setting enables archive access. Configure these names in an ignored `.env.local` or authorized private deployment configuration; never print or commit values:
 
 | Variable names | Purpose |
 | --- | --- |
-| `SUPABASE_SECRET_KEY` | Privileged Supabase access; never expose to browsers. |
-| `OPENAI_API_KEY` | Embedding and generation API access. |
-| `OPENAI_EMBEDDING_MODEL`, `OPENAI_MATCH_LENS_MODEL` | Optional model overrides. |
-| `API_FOOTBALL_KEY` | Fixture provider credential. |
-| `API_FOOTBALL_BASE_URL`, `API_FOOTBALL_WORLD_CUP_LEAGUE_ID`, `API_FOOTBALL_WORLD_CUP_SEASON` | Optional provider configuration. |
-| `ADMIN_GENERATION_SECRET`, `CRON_SECRET` | Existing protected operator-route gates. |
+| `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Matching existing project URL/key for archive SELECTs; grants/RLS determine readable rows. |
+| `SUPABASE_SECRET_KEY` | Server-only privileged operator access, not a public demo requirement. |
+| `OPENAI_API_KEY`, optional `OPENAI_EMBEDDING_MODEL`, `OPENAI_MATCH_LENS_MODEL` | Retained embedding/generation configuration; never called by ordinary browsing. |
+| `API_FOOTBALL_KEY`, optional `API_FOOTBALL_BASE_URL`, `API_FOOTBALL_WORLD_CUP_LEAGUE_ID`, `API_FOOTBALL_WORLD_CUP_SEASON` | Retained provider ingestion configuration. |
+| `ADMIN_GENERATION_SECRET`, `CRON_SECRET` | Existing operator endpoint gates, additionally disabled by demo-only mode. |
 
-Never commit environment files or print keys/authorization headers. Do not invoke ingestion, embedding, generation, or cron routes as a setup or smoke-test step: they can spend money and mutate data. The checked-in Vercel configuration schedules no cron; existing remote scheduler configuration has not been verified.
+Do not supply service keys to a public demo. Do not invoke ingestion, generation, embedding, or cron as a setup/smoke-test step. `vercel.json` declares no recurring cron. No migrations or database bootstrap are yet tracked. A publishable read does not verify full RLS, write restrictions, or historical correctness.
 
-## Commands and verification
+A prior read-only check of the existing project verified two July 11 fixtures/joins/lenses and local rendering after a DNS/HTTP 521 availability transition. This is limited evidence, not a public data license, guaranteed uptime, or an approved historical deployment. Archive errors remain truthful; no provider data is copied into the demo.
+
+## Verification
 
 ```bash
-npm test                   # deterministic TypeScript/Node tests
-npm run lint               # ESLint
-npm run typecheck          # Next route types, then TypeScript without emitting
-npm run build              # production compilation; system fonts, no paid credentials
-npm run test:replay-http    # local Next + mock Supabase HTTP checks
-npm start                  # serve the completed production build
+npm test                   # deterministic TypeScript/Node cases
+npm run lint
+npm run typecheck          # Next typegen + TypeScript
+npm run build
+npm run test:replay-http    # archive-enabled, local mock Supabase only
+npm run test:demo-http      # unset policy, empty service credentials, fetch-denial tripwire
+DEMO_TEST_DEPLOYMENT_VALUE=invalid-value npm run test:demo-http
 ```
 
-The HTTP checks require free localhost sockets and no other Next dev server for this checkout. They use synthetic records and dummy credentials, exercise archive/illustrative listing and detail, date/query boundaries, empty/error states, stale statuses, and malformed/missing caches. They impose request and overall deadlines and stop their local servers afterward. They do not validate a real database, browser interactivity, historical accuracy, or deployed RLS.
+HTTP suites require localhost sockets and no other Next dev server in this checkout. They enforce request/run deadlines and clean up owned process groups. The demo suite exercises default/date/detail/Q&A/about/empty/invalid/missing states, rejects archive requests, and proves all authoring handlers are blocked with matching dummy secrets. The active tripwire rejects service fetches before network access; no real API credentials or production database are used. `DEMO_TEST_PRODUCTION=1 npm run test:demo-http` checks a completed production build.
 
-[GitHub Actions](.github/workflows/ci.yml) runs on push and pull requests using Node 22, `npm ci`, tests, lint, typechecking, a production build, mock HTTP checks, and whitespace validation. Actions are pinned to commit SHAs, permissions are read-only, and no repository secrets or real database credentials are supplied. Each job/step has an explicit timeout. See [workflow runs](https://github.com/jeffreymutethia/world-cup-lens/actions) for the actual hosted result; local success alone does not establish a hosted CI pass.
+[GitHub Actions](.github/workflows/ci.yml) runs push/PR checks on Node 22 with `npm ci`, unit tests, lint, typecheck, build, both HTTP suites, production-server demo checks, invalid-flag isolation, and committed/generated whitespace checks. Official actions are pinned, permissions are read-only, no secrets are supplied, and steps/job have deadlines. [Hosted workflow results](https://github.com/jeffreymutethia/world-cup-lens/actions) are distinct from local evidence.
 
-## How the retained RAG pipeline works
+## Interpretation and remaining limits
 
-This is implemented operator code, separate from ordinary replay rendering:
+Public sample commentary is authored fiction, not a model response or scouting report. Its fixture times are navigation examples and its dataset version is explicitly `wcl-synthetic-v1`. In archive mode, cached AI text stays retrospective: publication/capture/generation times, historical knowledge cutoff, and database dataset version are unknown. A cache update is never converted into a pre-match forecast. Context snippets are not claim-level citations, and hidden placeholder metrics can still have influenced old commentary.
 
-1. Fixture ingestion fetches API-FOOTBALL records and upserts normalized teams, venues, and matches.
-2. Document synchronization synthesizes team/venue profiles from stored rows. This is not an article crawler.
-3. Document bodies are chunked and embedded; chunks and metadata are written to Supabase.
-4. Retrieval embeds a matchup query and calls `match_document_chunks` with entity filters.
-5. Generation uses retrieved context and Responses structured outputs, followed by proofreading, normalization, source-snippet attachment, and validation.
-6. Results are saved by match ID and later read by the public replay pages.
+Historical provider/derived-source rights remain UNKNOWN. Public GitHub historical exports remain NOT_APPROVED; historical web display requires review. The separate original-demo decision is limited to the newly authored content and reviewed assets, not all repository history or third-party marks. The user's project name is not a claim of official tournament affiliation.
 
-The pipeline currently re-embeds the corpus, lacks durable job/checkpoint controls, and does not preserve immutable generation lineage. Its legacy today-based operator functions are retained; public replay uses an explicit calendar date. No paid provider, embedding, or generation requests are needed to build or test the repository.
+**Deployment:** no verified public URL is documented yet. An existing authorized Vercel target must be identified/connected before deployment; do not create paid resources. Minimum public configuration is demo-only, with no service keys or cron. The actual delivery handoff records deployment/browser evidence; this README does not invent it.
 
-## Limitations and deployment
-
-Cached analysis is presented **retrospectively**. Source publication/capture times and pre-kickoff knowledge cutoffs are not established, so a cached Lens is not an authenticated pre-match forecast. Attached snippets are retrieved context, not proof that every generated claim is supported.
-
-Numerical Team Edges bars are withheld in both modes because no sourced measurement methodology is recorded. Missing/malformed legacy edge fields do not suppress otherwise readable qualitative copy. Stored confidence/volatility/edge labels remain explicitly uncalibrated opinions; null edge means “No edge stated”. Cached wording is unchanged and can still rely on placeholder inputs. Team aliases/flags, venues, group/stage modeling, and penalty-score breakdowns need further work. Data completeness, historical accuracy, and third-party storage/embedding/redistribution rights remain unverified. No raw provider export is bundled by this milestone, and no third-party licensing rights are granted by this README.
-
-**No verified public deployment URL is available.** No existing Vercel project is linked in the checkout, and deployment remains gated on sufficient publication-rights evidence, verified configuration/permissions, and an identified existing project. Mock test success is not a deployment-readiness claim.
-
-- [Source inventory and historical time contract](docs/data-provenance.md)
-- [Rights inventory and publication gates](docs/data-rights.md)
-- [Architecture and Mermaid diagrams](docs/architecture.md)
-- [Evidence-based audit and connectivity findings](docs/audit.md)
-- [Roadmap and acceptance criteria](docs/roadmap.md)
-- [Agent development and security workflow](AGENTS.md)
-
-A separate commentary-provenance card distinguishes recorded event time from cache last-write time. Source publication/capture, actual generation, historical knowledge cutoff, and dataset version remain Unknown; no selected date or cache timestamp authenticates a forecast.
-
-All inventoried publication rights remain UNKNOWN. No public historical dataset export is approved, and website-display rights need review. The source/rights documents link the actual API-FOOTBALL/API-SPORTS terms and publisher documentation; similarly named providers and model-output ownership do not establish clearance. No raw export was added.
-
-The next milestone is to make backend setup and historical source provenance reproducible, verify grants/RLS beyond observed reads, and identify/configure the existing deployment before publishing. Treat any return of DNS/HTTP 521 failures as an availability incident, never as an empty archive.
+Next work: establish reproducible backend/source lineage and rights before historical publication, broaden browser/accessibility coverage, and verify an existing deployment connection. See the [roadmap](docs/roadmap.md).

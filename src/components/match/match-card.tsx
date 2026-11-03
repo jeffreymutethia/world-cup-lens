@@ -30,7 +30,7 @@ export function MatchCard({
         <CardContent className="p-4">
           <div className="mb-3 flex flex-wrap items-center gap-2">
             <Badge variant="secondary">{stageLabel(match.group)}</Badge>
-            <Badge variant="outline">{replayStatus(match)}</Badge>
+            <Badge variant="outline">{replayStatus(match, selection.mode)}</Badge>
             {match.signalTags.slice(0, 2).map((tag) => (
               <Badge key={tag} variant="outline">
                 {tag}
@@ -41,7 +41,7 @@ export function MatchCard({
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
             <TeamMini team={homeTeam} />
             <div className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
-              {replayScore(match)}
+              {replayScore(match, selection.mode)}
             </div>
             <TeamMini team={awayTeam} align="right" />
           </div>

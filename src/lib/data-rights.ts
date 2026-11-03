@@ -6,6 +6,13 @@ export const SOURCE_CATEGORIES = [
 export type SourceCategory = typeof SOURCE_CATEGORIES[number];
 
 export function sourceRights(category: unknown) {
+  // New original demo content is a separate review, never an upgrade of UNKNOWN inputs.
+  if (category === "reviewed-synthetic-demo-v1") return {
+    category,
+    publicationRights: "REVIEWED_ORIGINAL_CONTENT" as const,
+    publicGitHubDataset: "APPROVED_ORIGINAL_DEMO_ONLY" as const,
+    publicWebDisplay: "APPROVED_ORIGINAL_DEMO_ONLY" as const,
+  };
   return {
     category: typeof category === "string" && SOURCE_CATEGORIES.some((item) => item === category)
       ? category as SourceCategory : "unidentified" as const,

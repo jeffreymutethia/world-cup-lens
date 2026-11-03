@@ -1,8 +1,8 @@
 export type TeamStrengths = {
-  attack: number;
-  midfield: number;
-  defense: number;
-  transitions: number;
+  attack: number | null;
+  midfield: number | null;
+  defense: number | null;
+  transitions: number | null;
 };
 
 export type Team = {

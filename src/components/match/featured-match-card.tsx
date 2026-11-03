@@ -38,7 +38,7 @@ export function FeaturedMatchCard({
         <div>
           <div className="mb-4 flex flex-wrap items-center gap-2">
             <Badge variant="secondary">{stageLabel(match.group)}</Badge>
-            <Badge variant="outline">{replayStatus(match)}</Badge>
+            <Badge variant="outline">{replayStatus(match, selection.mode)}</Badge>
             {match.signalTags.map((tag) => (
               <Badge key={tag} variant="outline">
                 {tag}
@@ -54,7 +54,7 @@ export function FeaturedMatchCard({
             </div>
 
             <div className="rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-600">
-              {replayScore(match)}
+              {replayScore(match, selection.mode)}
             </div>
 
             <div className="text-right">

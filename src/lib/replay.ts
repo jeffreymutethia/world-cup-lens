@@ -1,4 +1,6 @@
-import { isCachedAnswer } from "./cached-analysis";
+import { DEMO_PUBLICATION, DEMO_DATASET_VERSION } from "../data/seed";
+import type { DeploymentMode } from "./deployment-mode";
+import { isCachedLens, isCachedAnswer } from "./cached-analysis";
 import type { Match, MatchQuestionAnswer, MatchViewModel } from "./types";
 import { getAllMatchViewModels, getCachedAnswersForMatch } from "./lens";
 
@@ -12,7 +14,7 @@ export type ReplaySelection = { mode: DatasetMode; date: string };
 export type ReplaySearchParams = Record<string, string | string[] | undefined>;
 export type SelectionResult =
   | { ok: true; selection: ReplaySelection }
-  | { ok: false; message: string };
+  | { ok: false; message: string; reason?: "disabled" };
 
 export function isDateKey(value: string): boolean {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
@@ -20,8 +22,9 @@ export function isDateKey(value: string): boolean {
   return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value;
 }
 
-export function parseReplaySelection(params: ReplaySearchParams): SelectionResult {
-  const mode = params.mode ?? "archive";
+export function parseReplaySelection(params: ReplaySearchParams, deployment: DeploymentMode = "demo-only"): SelectionResult {
+  const mode = params.mode ?? (deployment === "demo-only" ? "illustrative" : "archive");
+  if (mode === "archive" && deployment === "demo-only") return { ok: false, reason: "disabled", message: "Archive access is disabled in this public demo. Only reviewed fictional examples are available." };
   if (mode !== "archive" && mode !== "illustrative") {
     return { ok: false, message: "Choose archive or illustrative as the dataset mode." };
   }
@@ -82,10 +85,13 @@ export type ReplayResult =
 
 export type ArchiveReader = (date: string) => Promise<MatchViewModel[]>;
 
-export async function loadReplay(selection: ReplaySelection, readArchive: ArchiveReader): Promise<ReplayResult> {
+export async function loadReplay(selection: ReplaySelection, readArchive: ArchiveReader, deployment: DeploymentMode = "demo-only"): Promise<ReplayResult> {
   // Validate at the service boundary too, so callers cannot accidentally query a real-clock day.
-  if (!parseReplaySelection(selection).ok) return { state: "error", matches: [], featured: null };
+  if (!parseReplaySelection(selection, deployment).ok) return { state: "error", matches: [], featured: null };
   try {
+    if (selection.mode === "illustrative" && (DEMO_PUBLICATION.decision !== "APPROVED_FOR_ORIGINAL_DEMO" || DEMO_PUBLICATION.datasetVersion !== DEMO_DATASET_VERSION)) {
+      throw new Error("Demo publication review is missing.");
+    }
     const candidates = selection.mode === "archive"
       ? await readArchive(selection.date)
       : getAllMatchViewModels();
@@ -93,7 +99,8 @@ export async function loadReplay(selection: ReplaySelection, readArchive: Archiv
       throw new Error("Stored fixture timestamp is invalid.");
     }
     const { start, end } = dateBounds(selection.date);
-    const matches = candidates.filter(({ match }) => new Date(match.kickoffAt).getTime() >= Date.parse(start) &&
+    const validated = candidates.map((item) => isCachedLens(item.lens) ? item : { ...item, lens: null });
+    const matches = validated.filter(({ match }) => new Date(match.kickoffAt).getTime() >= Date.parse(start) &&
       new Date(match.kickoffAt).getTime() < Date.parse(end))
       .sort((a, b) => Date.parse(a.match.kickoffAt) - Date.parse(b.match.kickoffAt) || a.match.id.localeCompare(b.match.id));
     return matches[0]
@@ -113,7 +120,9 @@ export async function loadReplayAnswers(
   selection: ReplaySelection,
   matchId: string,
   readArchive: (id: string) => Promise<MatchQuestionAnswer[]>,
+  deployment: DeploymentMode = "demo-only",
 ) {
+  if (selection.mode === "archive" && deployment === "demo-only") return { answers: [], failed: true };
   try {
     const answers = selection.mode === "illustrative"
       ? getCachedAnswersForMatch(matchId)
@@ -129,7 +138,8 @@ export function stageLabel(group: string) {
   return /^[A-L]$/.test(group) ? `Group ${group}` : group || "Stage unavailable";
 }
 
-export function replayStatus(match: Match) {
+export function replayStatus(match: Match, mode: DatasetMode = "archive") {
+  if (mode === "illustrative") return "Fictional scenario";
   switch (match.statusShort) {
     case "FT": return "Recorded full time";
     case "AET": return "Recorded after extra time";
@@ -140,7 +150,8 @@ export function replayStatus(match: Match) {
   }
 }
 
-export function replayScore(match: Match) {
+export function replayScore(match: Match, mode: DatasetMode = "archive") {
+  if (mode === "illustrative") return "No real result";
   const final = ["FT", "AET", "PEN"].includes(match.statusShort ?? "");
   return final && Number.isInteger(match.homeScore) && Number.isInteger(match.awayScore) && (match.homeScore ?? -1) >= 0 && (match.awayScore ?? -1) >= 0
     ? `${match.homeScore}–${match.awayScore}`

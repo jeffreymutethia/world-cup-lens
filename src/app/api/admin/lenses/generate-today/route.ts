@@ -1,11 +1,8 @@
+import { authoringDisabled } from "@/lib/deployment-mode";
 import {
   NextRequest,
   NextResponse,
 } from "next/server";
-
-import {
-  generateTodayMatchLenses,
-} from "@/lib/ai/generate-today-match-lenses";
 
 function isAuthorized(request: NextRequest) {
   const expected = process.env.ADMIN_GENERATION_SECRET;
@@ -15,6 +12,7 @@ function isAuthorized(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  if (authoringDisabled()) return NextResponse.json({ error: "Authoring is disabled in public demo mode." }, { status: 404 });
   try {
     if (!isAuthorized(request)) {
       return NextResponse.json(
@@ -22,6 +20,8 @@ export async function POST(request: NextRequest) {
         { status: 401 },
       );
     }
+
+    const { generateTodayMatchLenses } = await import("@/lib/ai/generate-today-match-lenses");
 
     const refresh =
       request.nextUrl.searchParams.get("refresh") === "true";

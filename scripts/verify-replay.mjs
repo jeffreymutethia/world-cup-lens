@@ -50,7 +50,7 @@ await new Promise((resolve) => probe.listen(0, "127.0.0.1", resolve));
 const port = probe.address().port;
 await new Promise((resolve) => probe.close(resolve));
 const app = spawn(process.execPath, ["node_modules/next/dist/bin/next", "dev", "--hostname", "127.0.0.1", "--port", String(port)], {
-  env: { ...process.env, NEXT_PUBLIC_SUPABASE_URL: `http://127.0.0.1:${mock.address().port}`, NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "local-test-publishable", SUPABASE_SECRET_KEY: "local-test-secret", OPENAI_API_KEY: "local-test-unused", API_FOOTBALL_KEY: "local-test-unused", NEXT_TELEMETRY_DISABLED: "1" },
+  env: { ...process.env, WCL_DEPLOYMENT_MODE: "archive-enabled", NEXT_PUBLIC_SUPABASE_URL: `http://127.0.0.1:${mock.address().port}`, NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "local-test-publishable", SUPABASE_SECRET_KEY: "local-test-secret", OPENAI_API_KEY: "local-test-unused", API_FOOTBALL_KEY: "local-test-unused", NEXT_TELEMETRY_DISABLED: "1" },
   stdio: ["ignore", "pipe", "pipe"],
   detached: process.platform !== "win32",
 });
@@ -90,7 +90,7 @@ try {
   assert.ok(html.includes("Archived matches") && html.includes("Mock Home"));
   assert.ok(html.includes("mode=archive&amp;date=2026-07-11"));
   assert.ok(html.includes("mock-archive-match?mode=archive&amp;date=2026-07-11"));
-  assert.ok(!html.includes("Mexico"));
+  assert.ok(!html.includes("Copper Vale"));
   console.log("PASS archive landing / July 11 listing / cached summary / preserved navigation");
   html = await page("/matches/mock-archive-match?mode=archive&date=2026-07-11");
   assert.ok(html.includes("Mock cached retrospective analysis") && html.includes("Historical knowledge cutoff"));
@@ -120,10 +120,10 @@ try {
   metricsResponse = "present";
   console.log("PASS hidden/missing/malformed numerical metrics; qualitative copy and unknown provenance retained");
   html = await page("/?mode=archive&date=2026-07-12");
-  assert.ok(html.includes("No archived matches for this date") && !html.includes("Mexico"));
+  assert.ok(html.includes("No archived matches for this date") && !html.includes("Copper Vale"));
   console.log("PASS successful empty archive date without seed fallback");
   html = await page("/?mode=archive&date=2026-07-13");
-  assert.ok(html.includes("Archive could not be loaded") && !html.includes("mock-private-diagnostic") && !html.includes("Mexico"));
+  assert.ok(html.includes("Archive could not be loaded") && !html.includes("mock-private-diagnostic") && !html.includes("Copper Vale"));
   console.log("PASS query error state / redacted diagnostics / no seed fallback");
   html = await page("/matches/mock-without-lens?mode=archive&date=2026-07-14");
   assert.ok(html.includes("Cached Match Lens unavailable") && html.includes("Mock Home"));
@@ -145,15 +145,15 @@ try {
   console.log("PASS malformed Lens/QA and cache query failures preserve fixture rendering");
   const reads = databaseReads;
   html = await page("/?mode=illustrative&date=2026-06-11");
-  assert.ok(html.includes("Illustrative examples") && html.includes("Mexico"));
-  assert.ok(html.includes("mexico-south-africa?mode=illustrative&amp;date=2026-06-11"));
-  html = await page("/matches/mexico-south-africa?mode=illustrative&date=2026-06-11");
-  assert.ok(html.includes("Synthetic illustrative commentary") && html.includes("Mexico"));
-  assert.ok(html.includes("Illustrative context examples") && html.includes("synthetic demo content"));
+  assert.ok(html.includes("Illustrative examples") && html.includes("Copper Vale"));
+  assert.ok(html.includes("copper-tidal?mode=illustrative&amp;date=2026-06-11"));
+  html = await page("/matches/copper-tidal?mode=illustrative&date=2026-06-11");
+  assert.ok(html.includes("Synthetic illustrative commentary") && html.includes("Copper Vale"));
+  assert.ok(html.includes("Illustrative context examples") && html.includes("newly authored fiction"));
   assert.ok(!html.includes("VS</span>"));
   assert.ok(html.includes('/?mode=illustrative&amp;date=2026-06-11'));
   console.log("PASS explicit illustrative list/detail and back navigation");
-  html = await page("/matches/mexico-south-africa?mode=illustrative&date=2026-06-12");
+  html = await page("/matches/copper-tidal?mode=illustrative&date=2026-06-12");
   assert.ok(html.includes("Match not found in this selection"));
   for (const date of ["2026-02-30", "2026-07-20"]) {
     html = await page(`/?mode=archive&date=${date}`);

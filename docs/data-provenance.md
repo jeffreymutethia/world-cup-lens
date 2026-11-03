@@ -1,12 +1,12 @@
 # Data provenance and historical time semantics
 
-Inspected 2026-11-03 against baseline `25d414e`. This documents implemented transformations and explicit unknowns; it is not a verified historical source archive. Read [data rights](data-rights.md) before publication. The inventory includes existing illustrative examples but does not export provider records.
+Historical evidence inspected 2026-11-03 against baselines `25d414e`/`5dff6a3`; the later original-demo replacement is distinguished below. This documents implemented transformations and explicit unknowns; it is not a verified historical source archive. Read [data rights](data-rights.md) before publication. The inventory includes existing illustrative examples but does not export provider records.
 
 ## Evidence from the application and cache
 
 | Finding | Repository evidence | Consequence / presentation policy |
 | --- | --- | --- |
-| Fabricated strength defaults | `src/lib/fixtures/normalize.ts:normalizeApiFootballFixture`, `sync-fixtures.ts:syncWorldCupFixtures`: every strength is 50; `src/data/seed.ts:teams/cachedLenses` has authored values such as 56/44 | No measured methodology or per-field source exists. All numerical Team Edges bars are removed from public presentation in both modes; unavailable is not zero/equality. Legacy stored fields remain unchanged. |
+| Fabricated strength defaults | `src/lib/fixtures/normalize.ts:normalizeApiFootballFixture`, `sync-fixtures.ts:syncWorldCupFixtures`: every strength is 50; `5dff6a3:src/data/seed.ts:teams/cachedLenses` had values such as 56/44; that legacy module is now replaced | No measured methodology or per-field source exists. All numerical Team Edges bars are removed from public presentation in both modes; unavailable is not zero/equality. Legacy stored fields remain unchanged. |
 | Defaults become apparent evidence | `sync-provider-documents.ts:teamDocumentBody` embeds scores in a “Provider-derived” tactical profile with a caveat; `ai/prompts.ts:buildMatchLensPrompt` instructs exact edge values | Existing commentary may reason from placeholders. Keep prose unchanged, label it unverified stored commentary, and do not claim hiding bars repairs its factual grounding. |
 | Non-calibrated opinions | `MatchLens.confidence/volatility/slightEdge` and `MatchForecastCard`, featured/list cards | Labels are now explicitly stored, uncalibrated opinions. Null edge means “No edge stated”, not “Even”. No probability or measured edge is inferred. |
 | Context is not citations | `ai/source-snippets.ts:hydrateLensSources` attaches every distinct retrieved title, truncates content, drops IDs/URLs, and does not map claims to excerpts | UI says stored context snippets (illustrative context examples in synthetic mode), with a non-citation caveat and empty-context state. |
@@ -26,9 +26,9 @@ Read-only sample: two provider-linked July 11 fixtures and two cached Lens rows 
 | Editorial or curated snippets | `src/data/seed.ts`; otherwise bodies already in Supabase `documents` | Synthetic editorial examples, templated profile excerpts, or UNKNOWN origin | No tracked article importer or Q&A writer. A title such as “Tournament format” is not proof a publisher document exists. No external source identity can be invented from it. |
 | Cached AI Lens | OpenAI Responses + supplied team/venue/context in `ai/generate-match-lens.ts` | Model-generated interpretation with deterministic snippets; confidence/volatility are editorial labels | `generateAndSaveMatchLens` persists JSON/model/update per match; no immutable input/source/prompt lineage is saved. Proofreading is another model call. None were executed for this milestone. |
 | Cached Q&A | Seed examples, or Supabase `qa_answers` | Editorial/cached text; model-generated origin for arbitrary DB answers UNKNOWN | Public code only reads/validates answers. It does not generate them. |
-| Illustrative fixtures and examples | `src/data/seed.ts` | Synthetic fixture/venue/tactical examples; real team names and emoji characters | Existing tracked demo content, not an authoritative historical dataset or source license. |
+| Current illustrative fixtures/examples | Replacement `src/data/seed.ts`, version `wcl-synthetic-v1` | Newly authored fictional teams, locations, styles and Q&A, alphabetic initials, null strengths, no real outcomes | Scoped new original-demo publication review; not the old UNKNOWN illustrative corpus in Git history. |
 
-Rights/attribution and separate GitHub-versus-web decisions for these categories are in [data-rights.md](data-rights.md). The runtime review registry `src/lib/data-rights.ts` keeps every category's publication rights UNKNOWN, dataset export NOT_APPROVED, and public display REVIEW_REQUIRED. It is not an exporter or a rights-enforcement service.
+Rights/attribution and separate GitHub-versus-web decisions for these categories are in [data-rights.md](data-rights.md). The runtime review registry `src/lib/data-rights.ts` keeps the eight legacy/provider categories UNKNOWN/NOT_APPROVED/REVIEW_REQUIRED. Only the new reviewed-synthetic-demo-v1 category has scoped original-demo approval; see the separate review. It is not an exporter or a rights-enforcement service.
 
 ## Implemented temporal representation
 
@@ -41,10 +41,10 @@ Rights/attribution and separate GitHub-versus-web decisions for these categories
 | Source capture time | `sourceCapturedAt: null` | UNKNOWN. A document/cache update is not evidence of acquisition time. |
 | Analysis generation time | `analysisGeneratedAt: null` | UNKNOWN. Model name and cache `updated_at` do not prove request completion time. |
 | Historical knowledge cutoff | `knowledgeCutoffAt: null` | UNKNOWN; existing archive commentary is always retrospective, never promoted into an authenticated pre-kickoff forecast. |
-| Dataset version | `datasetVersion: null` | UNKNOWN. A Git commit or selected date does not identify the database snapshot. |
+| Dataset version | Archive: `datasetVersion: null`; new illustrative module: `wcl-synthetic-v1` | The authored module has an explicit version. A Git commit or selected date does not identify an archive database snapshot. |
 | Cache last-write time | `cacheUpdatedAt` from `match_lenses.updated_at`, if valid | Separate, labeled cache modification time only. It may be missing/invalid; that does not fabricate a timestamp. |
 
-The UI shows these distinct fields on Lens detail. Timestamp parsing requires a full ISO timestamp with offset and a valid calendar date. Illustrative metadata is labeled synthetic; its fixture time does not become real event provenance. Inputs that claim a cutoff/version are not promoted by this legacy display adapter. Source URLs/IDs/timestamps are absent from cached title/snippet references and remain unresolved.
+The UI shows these distinct fields on Lens detail. Timestamp parsing requires a full ISO timestamp with offset and a valid calendar date. New illustrative metadata is labeled synthetic and distinguishes authored copy from model generation; its fixture time does not become real event provenance. Inputs that claim a cutoff/version are not promoted by this legacy display adapter. Source URLs/IDs/timestamps are absent from cached title/snippet references and remain unresolved.
 
 ## Actual pipeline and missing lineage
 
@@ -81,3 +81,10 @@ Design a reviewed, immutable contract before making authenticated historical for
 - **Claim support:** optional explicit claim IDs tied to excerpt/span evidence and review status. Being retrieved does not count as support; absence stays unverified.
 
 Migration proposal: inspect/export schema definitions through authorized evidence first; review additive version/source/run/rights tables, constraints, foreign keys, RLS and query/index design in a disposable database. Backfill only facts established by existing evidence. Legacy rows retain null publication/capture/generation/cutoff/version fields; `updated_at` may populate only cache-write metadata. Do not regenerate Lenses to manufacture history. Add eligibility tests excluding material not demonstrably available by an authenticated cutoff before enabling any forecast label. Production migration/backfill and any dataset export require separate explicit authorization and rights review.
+
+
+## Public demo boundary and source replacement
+
+The baseline seed's real-team/profile-like copy could not be cleared, so it was replaced instead of automatically approved. The new authored module uses no provider records or third-party excerpts; [demo-publication-review.md](demo-publication-review.md) records exact scope and evidence. Commentary in this version is stored sample copy, not a paid generated Lens. Scenario times are navigation values, unknown strengths remain null, and no official outcome is represented. Original design notes are not publisher citations.
+
+`WCL_DEPLOYMENT_MODE` defaults/fails closed to demo-only. That branch selects only reviewed fiction, rejects explicit archive URLs, and guards all authoring endpoints before auth/work. Archive-enabled is an explicit separate server configuration; its source/time/rights limitations above remain unchanged. Backend connectivity and permission to publish historical material are not prerequisites for demonstrating this original UI dataset. No source acquisition, migration, production write, or historical export was performed for the replacement.

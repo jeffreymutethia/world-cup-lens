@@ -1,337 +1,69 @@
-import type {
-  Match,
-  MatchLens,
-  MatchQuestionAnswer,
-  PresetQuestionKey,
-  Team,
-  Venue,
-} from "@/lib/types";
+import type { Match, PublicMatchLens, MatchQuestionAnswer, PresetQuestionKey, Team, Venue } from "../lib/types";
+import { isCachedLens } from "../lib/cached-analysis";
 
+// Newly authored fictional material, scoped by docs/demo-publication-review.md.
+// No provider records, quotations, logos, flags, or real team profiles are inputs.
+export const DEMO_DATASET_VERSION = "wcl-synthetic-v1";
+export const DEMO_PUBLICATION = {
+  datasetVersion: DEMO_DATASET_VERSION,
+  decision: "APPROVED_FOR_ORIGINAL_DEMO",
+  evidence: "docs/demo-publication-review.md",
+  thirdPartyInputs: false,
+} as const;
 export const teams: Team[] = [
-  {
-    id: "mexico",
-    name: "Mexico",
-    code: "MEX",
-    flag: "🇲🇽",
-    group: "A",
-    summary:
-      "Host-region side with technical midfield quality, strong support, and a possession-oriented profile.",
-    strengths: {
-      attack: 56,
-      midfield: 61,
-      defense: 52,
-      transitions: 45,
-    },
-  },
-  {
-    id: "south-africa",
-    name: "South Africa",
-    code: "RSA",
-    flag: "🇿🇦",
-    group: "A",
-    summary:
-      "Athletic side with counterattacking pace, wide threat, and a compact defensive profile.",
-    strengths: {
-      attack: 44,
-      midfield: 39,
-      defense: 48,
-      transitions: 55,
-    },
-  },
-  {
-    id: "south-korea",
-    name: "South Korea",
-    code: "KOR",
-    flag: "🇰🇷",
-    group: "A",
-    summary:
-      "Organized, high-work-rate side with pressing intensity and quick attacking combinations.",
-    strengths: {
-      attack: 53,
-      midfield: 57,
-      defense: 55,
-      transitions: 58,
-    },
-  },
-  {
-    id: "czechia",
-    name: "Czechia",
-    code: "CZE",
-    flag: "🇨🇿",
-    group: "A",
-    summary:
-      "Structured European side with physicality, set-piece threat, and disciplined defensive shape.",
-    strengths: {
-      attack: 50,
-      midfield: 54,
-      defense: 58,
-      transitions: 46,
-    },
-  },
-  {
-    id: "canada",
-    name: "Canada",
-    code: "CAN",
-    flag: "🇨🇦",
-    group: "B",
-    summary:
-      "Host nation with pace, athleticism, and strong transition potential in wide areas.",
-    strengths: {
-      attack: 55,
-      midfield: 50,
-      defense: 49,
-      transitions: 60,
-    },
-  },
-  {
-    id: "bosnia-herzegovina",
-    name: "Bosnia & Herzegovina",
-    code: "BIH",
-    flag: "🇧🇦",
-    group: "B",
-    summary:
-      "Technically capable side with central quality and a measured possession profile.",
-    strengths: {
-      attack: 52,
-      midfield: 56,
-      defense: 48,
-      transitions: 47,
-    },
-  },
-  {
-    id: "usa",
-    name: "USA",
-    code: "USA",
-    flag: "🇺🇸",
-    group: "D",
-    summary:
-      "Host nation with athletic midfielders, pressing potential, and strong home-region support.",
-    strengths: {
-      attack: 57,
-      midfield: 58,
-      defense: 53,
-      transitions: 59,
-    },
-  },
-  {
-    id: "paraguay",
-    name: "Paraguay",
-    code: "PAR",
-    flag: "🇵🇾",
-    group: "D",
-    summary:
-      "Combative South American side with defensive resilience and direct attacking phases.",
-    strengths: {
-      attack: 48,
-      midfield: 49,
-      defense: 56,
-      transitions: 52,
-    },
-  },
+  { id: "copper-vale", name: "Copper Vale", code: "CVL", flag: "CV", group: "Exhibition", summary: "A fictional side built around patient passing in this scenario.", strengths: { attack: null, midfield: null, defense: null, transitions: null } },
+  { id: "tidal-workshop", name: "Tidal Workshop", code: "TDW", flag: "TW", group: "Exhibition", summary: "A fictional side designed to counter quickly in this scenario.", strengths: { attack: null, midfield: null, defense: null, transitions: null } },
+  { id: "lantern-ridge", name: "Lantern Ridge", code: "LNR", flag: "LR", group: "Exhibition", summary: "A fictional side that uses wide spaces in this scenario.", strengths: { attack: null, midfield: null, defense: null, transitions: null } },
+  { id: "mossfield-circuit", name: "Mossfield Circuit", code: "MSC", flag: "MC", group: "Exhibition", summary: "A fictional side designed to defend narrow spaces in this scenario.", strengths: { attack: null, midfield: null, defense: null, transitions: null } },
 ];
-
 export const venues: Venue[] = [
-  {
-    id: "riverside-arena",
-    name: "Riverside Arena",
-    city: "Los Angeles",
-    country: "USA",
-    summary:
-      "Large West Coast venue expected to create a loud, mixed crowd and energetic opening-match atmosphere.",
-  },
-  {
-    id: "harbor-stadium",
-    name: "Harbor Stadium",
-    city: "San Diego",
-    country: "USA",
-    summary:
-      "Coastal venue with a compact matchday feel and conditions that could suit high-tempo play.",
-  },
-  {
-    id: "maple-leaf-field",
-    name: "Maple Leaf Field",
-    city: "Toronto",
-    country: "Canada",
-    summary:
-      "Canadian host venue likely to provide strong support for Canada and a tournament-stage atmosphere.",
-  },
-  {
-    id: "bayview-stadium",
-    name: "Bayview Stadium",
-    city: "Houston",
-    country: "USA",
-    summary:
-      "Warm-weather venue where tempo management and substitutions may matter late in matches.",
-  },
+  { id: "practice-grid", name: "North Practice Grid", city: "Example Quarter", country: "Fictional setting", summary: "An invented training ground used only for this demonstration." },
+  { id: "training-loop", name: "West Training Loop", city: "Simulation City", country: "Fictional setting", summary: "An invented exhibition ground, unrelated to an official venue." },
 ];
-
 export const matches: Match[] = [
-  {
-    id: "mexico-south-africa",
-    homeTeamId: "mexico",
-    awayTeamId: "south-africa",
-    venueId: "riverside-arena",
-    group: "A",
-    kickoffAt: "2026-06-11T12:00:00-07:00",
-    signalTags: ["Opener", "High volatility", "Watch transitions"],
-  },
-  {
-    id: "south-korea-czechia",
-    homeTeamId: "south-korea",
-    awayTeamId: "czechia",
-    venueId: "harbor-stadium",
-    group: "A",
-    kickoffAt: "2026-06-11T19:00:00-07:00",
-    signalTags: ["High variance", "Press vs structure"],
-  },
-  {
-    id: "canada-bosnia-herzegovina",
-    homeTeamId: "canada",
-    awayTeamId: "bosnia-herzegovina",
-    venueId: "maple-leaf-field",
-    group: "B",
-    kickoffAt: "2026-06-12T12:00:00-04:00",
-    signalTags: ["Host watch", "Midfield test"],
-  },
-  {
-    id: "usa-paraguay",
-    homeTeamId: "usa",
-    awayTeamId: "paraguay",
-    venueId: "bayview-stadium",
-    group: "D",
-    kickoffAt: "2026-06-12T18:00:00-05:00",
-    signalTags: ["Host watch", "Physical matchup"],
-  },
+  { id: "copper-tidal", homeTeamId: "copper-vale", awayTeamId: "tidal-workshop", venueId: "practice-grid", group: "Passing vs counterplay", kickoffAt: "2026-06-11T18:00:00Z", signalTags: ["Fictional scenario", "Patient build-up"] },
+  { id: "lantern-mossfield", homeTeamId: "lantern-ridge", awayTeamId: "mossfield-circuit", venueId: "training-loop", group: "Width vs compactness", kickoffAt: "2026-06-11T23:00:00Z", signalTags: ["Fictional scenario", "Wide spaces"] },
+  { id: "copper-lantern", homeTeamId: "copper-vale", awayTeamId: "lantern-ridge", venueId: "practice-grid", group: "Changing the rhythm", kickoffAt: "2026-06-12T19:00:00Z", signalTags: ["Fictional scenario", "Explore another date"] },
 ];
-
-export const cachedLenses: Record<string, MatchLens> = {
-  "mexico-south-africa": {
-    headline: "Mexico slight edge, but South Africa can make it chaotic.",
-    slightEdge: "Mexico",
-    confidence: "Medium",
-    volatility: "High",
-    expectedGame: "Mexico possession, South Africa transition threat.",
-    whyItMatters:
-      "A strong opening result can define Group A. Mexico will want control early, while South Africa can punish mistakes if the match becomes stretched.",
-    likelyGameScript:
-      "Mexico should have more of the ball and look to build through midfield. South Africa will likely defend compactly and attack quickly into wide spaces.",
-    teamEdges: [
-      { label: "Attack", homeValue: 56, awayValue: 44 },
-      { label: "Midfield Control", homeValue: 61, awayValue: 39 },
-      { label: "Defense", homeValue: 52, awayValue: 48 },
-      { label: "Transitions", homeValue: 45, awayValue: 55 },
-    ],
-    whatToWatch: [
-      "South Africa counters down the wings",
-      "Mexico set pieces and second balls",
-      "Midfield pressure versus composure",
-      "Whether an early goal opens the match",
-    ],
-    casualFanGuide:
-      "Mexico will likely look more organized in possession. South Africa may be most dangerous when they win the ball and attack quickly before Mexico resets.",
-    uncertainty: [
-      "Opening matches can be cautious or chaotic.",
-      "Lineups and fitness may change the tactical balance.",
-      "An early goal or red card would heavily distort the expected game script.",
-    ],
-    sources: [
-      {
-        title: "Team profile: Mexico",
-        snippet:
-          "Host-region advantage, technical midfield, possession-oriented setup.",
-      },
-      {
-        title: "Team profile: South Africa",
-        snippet: "Transition threat, wide pace, and compact defensive approach.",
-      },
-      {
-        title: "Tournament format",
-        snippet:
-          "Group-stage results shape qualification and tiebreak scenarios.",
-      },
-    ],
+export const cachedLenses: Record<string, PublicMatchLens> = {
+  "copper-tidal": {
+    headline: "A patient passing plan meets a quick escape route.", slightEdge: null, confidence: "Low", volatility: "Medium",
+    expectedGame: "In this invented matchup, Copper Vale circulates the ball while Tidal Workshop waits for a loose pass.",
+    whyItMatters: "This scenario shows how two simple tactical assumptions can produce a useful match story without pretending to predict a real event.",
+    likelyGameScript: "Copper Vale starts with short passes. Tidal Workshop stays close together and tries to move forward as soon as possession changes.",
+    whatToWatch: ["The space behind Copper Vale's passing line.", "Tidal Workshop's first pass after a recovery.", "Whether patience becomes hesitation."],
+    casualFanGuide: "Imagine one side carefully arranging a puzzle while the other looks for a chance to turn the table. Both descriptions are invented for this demo.",
+    uncertainty: ["No player, fitness, or event data exists for these fictional teams.", "Changing either invented style would change this story."],
+    sources: [{ title: "Original scenario design note", snippet: "Copper Vale is assigned patient passing; Tidal Workshop is assigned quick counterplay. These are authored assumptions, not observations." }],
+  },
+  "lantern-mossfield": {
+    headline: "Can a wide passing lane open a narrow defensive shape?", slightEdge: null, confidence: "Low", volatility: "Medium",
+    expectedGame: "Lantern Ridge explores the sides of an imaginary pitch while Mossfield Circuit protects the middle.",
+    whyItMatters: "The contrast makes a second walkthrough possible: the interface can explain space without assigning invented performance scores.",
+    likelyGameScript: "The opening moves travel across the pitch. Mossfield Circuit shifts together, and Lantern Ridge looks for a pass back into the centre.",
+    whatToWatch: ["How quickly the narrow shape shifts.", "The return pass from a wide position.", "Space left on the opposite side."],
+    casualFanGuide: "One imaginary side stretches a blanket; the other tries to keep it folded. The story illustrates a tradeoff, not a real team's ability.",
+    uncertainty: ["The styles are deliberate fiction, not scouting findings.", "There is no measured advantage or verified result."],
+    sources: [{ title: "Original width scenario note", snippet: "The demonstration assigns wide passing to Lantern Ridge and a narrow shape to Mossfield Circuit. No third-party report is quoted." }],
+  },
+  "copper-lantern": {
+    headline: "Two passing ideas create a different rhythm.", slightEdge: null, confidence: "Low", volatility: "Medium",
+    expectedGame: "This second-day example contrasts Copper Vale's short exchanges with Lantern Ridge's wider routes.",
+    whyItMatters: "A new date demonstrates that selection and navigation stay consistent while the sample commentary changes with the chosen scenario.",
+    likelyGameScript: "The fictional sides alternate between central combinations and wide resets. Neither is assigned a numerical superiority.",
+    whatToWatch: ["The timing of a wide reset.", "How the central passing route changes.", "The next choice after a blocked route."],
+    casualFanGuide: "Think of two routes through the same garden: one winds through the centre and one follows the edge. This is an original teaching analogy.",
+    uncertainty: ["This is not a replay of an official match.", "No historical outcome or information cutoff is asserted."],
+    sources: [],
   },
 };
 
-export const cachedAnswers: Record<
-  string,
-  Partial<Record<PresetQuestionKey, MatchQuestionAnswer>>
-> = {
-  "mexico-south-africa": {
-    "explain-casually": {
-      key: "explain-casually",
-      question: "Explain this match casually",
-      shortLabel: "Explain casually",
-      answer:
-        "Mexico will probably have more of the ball and try to control the match through midfield. South Africa may be most dangerous when they recover possession and attack quickly before Mexico can reset.",
-      bullets: [
-        "Mexico should see more possession.",
-        "South Africa's best moments may come on quick breaks.",
-        "An early goal could make the match far more open.",
-      ],
-      sources: [
-        {
-          title: "Team profile: Mexico",
-          snippet:
-            "Possession-oriented profile with stronger midfield control.",
-        },
-        {
-          title: "Team profile: South Africa",
-          snippet:
-            "Transition threat, wide pace, and compact defensive shape.",
-        },
-      ],
-    },
-
-    "tactical-edge": {
-      key: "tactical-edge",
-      question: "Who has the tactical edge?",
-      shortLabel: "Tactical edge",
-      answer:
-        "Mexico has the clearer tactical edge if it can control central midfield and sustain possession without exposing space behind its fullbacks. South Africa's counterattacking pace is the main reason that edge is not decisive.",
-      bullets: [
-        "Mexico's advantage is midfield control.",
-        "South Africa's advantage is transition speed.",
-        "The key battle is possession security versus counterattacking space.",
-      ],
-      sources: [
-        {
-          title: "Team profile: Mexico",
-          snippet:
-            "Technical midfield quality and a possession-oriented setup.",
-        },
-        {
-          title: "Team profile: South Africa",
-          snippet:
-            "Athletic transition play and wide counterattacking threat.",
-        },
-      ],
-    },
-
-    "what-could-go-wrong": {
-      key: "what-could-go-wrong",
-      question: "What could make the forecast wrong?",
-      shortLabel: "What could go wrong?",
-      answer:
-        "The forecast assumes Mexico can establish control. An early South Africa goal, a red card, unexpected lineups, or poor possession security could overturn that script quickly.",
-      bullets: [
-        "An early goal could force Mexico into a riskier shape.",
-        "A red card would make the forecast mostly irrelevant.",
-        "Unexpected lineups may change the midfield balance.",
-        "Set pieces can override broader tactical advantages.",
-      ],
-      sources: [
-        {
-          title: "Tournament context",
-          snippet:
-            "Opening group-stage matches can become cautious or unusually volatile.",
-        },
-        {
-          title: "Match Lens uncertainty notes",
-          snippet:
-            "Lineups, fitness, cards, and early goals may materially alter the game.",
-        },
-      ],
-    },
-  },
-};
+export function buildIllustrativeAnswers(lens: unknown): Partial<Record<PresetQuestionKey, MatchQuestionAnswer>> {
+  if (!isCachedLens(lens)) return {};
+  return {
+    "explain-casually": { key: "explain-casually", question: "What is the idea behind this scenario?", shortLabel: "The simple version", answer: lens.casualFanGuide, sources: lens.sources },
+    "tactical-edge": { key: "tactical-edge", question: "Is either side a measured favourite?", shortLabel: "What is measured?", answer: "Neither side has a measured advantage. The story compares authored styles; no probabilities, rankings, or strength scores are supplied.", sources: [] },
+    "what-could-go-wrong": { key: "what-could-go-wrong", question: "What would change the story?", shortLabel: "Question the assumptions", answer: "Changing an assigned style changes the scenario. A useful explanation should make that dependency visible instead of presenting the assumptions as facts.", bullets: ["Treat the styles as design inputs.", "Keep missing evidence marked unknown.", "Do not mistake a clear story for a tested prediction."], sources: [] },
+  };
+}
+export const cachedAnswers: Record<string, Partial<Record<PresetQuestionKey, MatchQuestionAnswer>>> = Object.fromEntries(matches.map(({ id }) => [id, buildIllustrativeAnswers(cachedLenses[id])]));

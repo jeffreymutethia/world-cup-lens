@@ -1,3 +1,4 @@
+import { DEMO_DATASET_VERSION } from "../data/seed";
 import type { DatasetMode } from "./replay";
 
 export function analysisPresentation(mode: DatasetMode) {
@@ -31,7 +32,7 @@ export type AnalysisProvenance = {
   sourceCapturedAt: null;
   analysisGeneratedAt: null;
   knowledgeCutoffAt: null;
-  datasetVersion: null;
+  datasetVersion: string | null;
 };
 
 // Current caches establish none of the null fields. An update timestamp is not
@@ -50,6 +51,6 @@ export function analysisProvenance(input: {
     sourceCapturedAt: null,
     analysisGeneratedAt: null,
     knowledgeCutoffAt: null,
-    datasetVersion: null,
+    datasetVersion: input.mode === "illustrative" ? DEMO_DATASET_VERSION : null,
   };
 }

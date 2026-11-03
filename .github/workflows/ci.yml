@@ -15,6 +15,7 @@ jobs:
     timeout-minutes: 15
     env:
       NEXT_TELEMETRY_DISABLED: "1"
+      WCL_DEPLOYMENT_MODE: demo-only
       # Deliberately unusable local settings; no repository/environment secrets.
       NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:9
       NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ci-dummy-publishable
@@ -51,8 +52,21 @@ jobs:
       - name: Production build
         run: npm run build
         timeout-minutes: 3
+      - name: Production demo isolation checks
+        run: npm run test:demo-http
+        env:
+          DEMO_TEST_PRODUCTION: "1"
+        timeout-minutes: 3
       - name: Mock HTTP replay checks
         run: npm run test:replay-http
+        timeout-minutes: 3
+      - name: Public demo isolation checks
+        run: npm run test:demo-http
+        timeout-minutes: 3
+      - name: Invalid deployment flag fails closed
+        run: npm run test:demo-http
+        env:
+          DEMO_TEST_DEPLOYMENT_VALUE: invalid-value
         timeout-minutes: 3
       - name: Check committed and generated whitespace
         timeout-minutes: 1

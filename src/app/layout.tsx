@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "World Cup Lens | Historical Replay",
-  description: "Explore archived World Cup fixtures and cached retrospective match analysis.",
+  title: "World Cup Lens | Football Intelligence Lab",
+  description: "Explore clearly fictional football scenarios and learn how a cached intelligence application works.",
 };
 
 export default function RootLayout({

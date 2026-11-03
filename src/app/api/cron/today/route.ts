@@ -1,11 +1,8 @@
+import { authoringDisabled } from "@/lib/deployment-mode";
 import {
   NextRequest,
   NextResponse,
 } from "next/server";
-
-import {
-  runTodayPipeline,
-} from "@/lib/pipeline/run-today-pipeline";
 
 function isAuthorized(request: NextRequest) {
   const secret = process.env.CRON_SECRET;
@@ -15,12 +12,15 @@ function isAuthorized(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+  if (authoringDisabled()) return NextResponse.json({ error: "Authoring is disabled in public demo mode." }, { status: 404 });
   if (!isAuthorized(request)) {
     return NextResponse.json(
       { error: "Unauthorized" },
       { status: 401 },
     );
   }
+
+  const { runTodayPipeline } = await import("@/lib/pipeline/run-today-pipeline");
 
   const result = await runTodayPipeline({ refresh: false });
 

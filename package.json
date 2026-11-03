@@ -9,7 +9,8 @@
     "lint": "eslint",
     "test": "node scripts/test.mjs",
     "test:replay-http": "node scripts/verify-replay.mjs",
-    "typecheck": "next typegen && tsc --noEmit --incremental false"
+    "typecheck": "next typegen && tsc --noEmit --incremental false",
+    "test:demo-http": "node scripts/verify-demo.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",

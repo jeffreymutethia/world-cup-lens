@@ -1,11 +1,19 @@
+import { buildIllustrativeViewModel } from "../src/lib/lens";
+import { deploymentMode, type DeploymentMode } from "../src/lib/deployment-mode";
+import { buildIllustrativeAnswers, DEMO_PUBLICATION, DEMO_DATASET_VERSION, teams, venues, matches as demoMatches, cachedLenses } from "../src/data/seed";
 import { analysisPresentation, analysisProvenance, storedEdgeLabel } from "../src/lib/analysis-presentation";
 import { SOURCE_CATEGORIES, sourceRights } from "../src/lib/data-rights";
 import test from "node:test";
 import { isCachedLens, isCachedAnswer } from "../src/lib/cached-analysis";
 import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
-import { dateBounds, DEFAULT_ARCHIVE_DATE, findReplayMatch, isDateKey, loadReplay, loadReplayAnswers, localDateKey, parseReplaySelection, replayHref, replayScore, replayStatus, stageLabel, type ReplaySelection } from "../src/lib/replay";
+import { dateBounds, DEFAULT_ARCHIVE_DATE, findReplayMatch, isDateKey, loadReplay as loadReplayCore, loadReplayAnswers as loadReplayAnswersCore, localDateKey, parseReplaySelection as parseReplaySelectionCore, replayHref, replayScore, replayStatus, stageLabel, type ReplaySelection } from "../src/lib/replay";
 import type { Match, MatchViewModel } from "../src/lib/types";
+
+// Historical regression fixtures explicitly opt into archive-enabled behavior.
+const parseReplaySelection = (params: Parameters<typeof parseReplaySelectionCore>[0], deployment: DeploymentMode = "archive-enabled") => parseReplaySelectionCore(params, deployment);
+const loadReplay = (selection: ReplaySelection, reader: Parameters<typeof loadReplayCore>[1], deployment: DeploymentMode = "archive-enabled") => loadReplayCore(selection, reader, deployment);
+const loadReplayAnswers = (selection: ReplaySelection, id: string, reader: Parameters<typeof loadReplayAnswersCore>[2], deployment: DeploymentMode = "archive-enabled") => loadReplayAnswersCore(selection, id, reader, deployment);
 
 const archive: ReplaySelection = { mode: "archive", date: DEFAULT_ARCHIVE_DATE };
 const illustrative: ReplaySelection = { mode: "illustrative", date: "2026-06-11" };
@@ -84,8 +92,8 @@ test("provider failures have a distinct safe error state without seed fallback",
 test("illustrative mode selects real seed helpers by date and never queries archive", async () => {
   const result = await loadReplay(illustrative, async () => { assert.fail("Archive called in illustrative mode"); });
   assert.equal(result.state, "ready");
-  assert.deepEqual(result.matches.map(({ match }) => match.id), ["mexico-south-africa", "south-korea-czechia"]);
-  assert.equal(result.featured?.match.id, "mexico-south-africa");
+  assert.deepEqual(result.matches.map(({ match }) => match.id), ["copper-tidal", "lantern-mossfield"]);
+  assert.equal(result.featured?.match.id, "copper-tidal");
   assert.ok(result.featured?.lens);
   const empty = await loadReplay({ mode: "illustrative", date: "2026-07-11" }, async () => { assert.fail("Archive called"); });
   assert.equal(empty.state, "empty");
@@ -106,16 +114,16 @@ test("match URLs and back navigation preserve mode and selected calendar date", 
   }
   const examples = await loadReplay(illustrative, async () => []);
   const realArchive = await loadReplay({ mode: "archive", date: illustrative.date }, async () => [fixture("provider-only", "2026-06-11T18:00:00Z")]);
-  assert.ok(findReplayMatch(examples, "mexico-south-africa"));
-  assert.equal(findReplayMatch(realArchive, "mexico-south-africa"), null);
+  assert.ok(findReplayMatch(examples, "copper-tidal"));
+  assert.equal(findReplayMatch(realArchive, "copper-tidal"), null);
   assert.equal(findReplayMatch(examples, "provider-only"), null);
-  assert.equal(findReplayMatch(await loadReplay({ mode: "illustrative", date: "2026-06-12" }, async () => []), "mexico-south-africa"), null);
+  assert.equal(findReplayMatch(await loadReplay({ mode: "illustrative", date: "2026-06-12" }, async () => []), "copper-tidal"), null);
 });
 
 test("cached questions follow dataset mode and query failures do not manufacture answers", async () => {
-  const examples = await loadReplayAnswers(illustrative, "mexico-south-africa", async () => { assert.fail("Archive QA called"); });
+  const examples = await loadReplayAnswers(illustrative, "copper-tidal", async () => { assert.fail("Archive QA called"); });
   assert.ok(examples.answers.length);
-  const empty = await loadReplayAnswers(archive, "mexico-south-africa", async () => []);
+  const empty = await loadReplayAnswers(archive, "copper-tidal", async () => []);
   assert.deepEqual(empty, { answers: [], failed: false });
   const failed = await loadReplayAnswers(archive, "id", async () => { throw new Error("mock"); });
   assert.deepEqual(failed, { answers: [], failed: true });
@@ -230,4 +238,66 @@ test("unknown rights never become approval because data is factual, synthetic, o
     assert.equal(rights.publicGitHubDataset, "NOT_APPROVED");
     assert.equal(rights.publicWebDisplay, "REVIEW_REQUIRED");
   }
+});
+
+
+test("deployment defaults fail closed and archive requires an exact server opt-in", () => {
+  for (const value of ["", "demo-only", "archive", "ARCHIVE-ENABLED", "typo"]) assert.equal(deploymentMode(value), "demo-only");
+  assert.equal(deploymentMode("archive-enabled"), "archive-enabled");
+  assert.deepEqual(parseReplaySelection({}, "demo-only"), { ok: true, selection: illustrative });
+  const blocked = parseReplaySelection({ mode: "archive" }, "demo-only");
+  assert.equal(blocked.ok, false);
+  if (!blocked.ok) assert.equal(blocked.reason, "disabled");
+  assert.deepEqual(parseReplaySelection({}, "archive-enabled"), { ok: true, selection: archive });
+});
+
+test("demo selection and answers cannot reach an archive reader", async () => {
+  const forbidden = async () => { assert.fail("Archive must not run"); return []; };
+  assert.equal((await loadReplay(archive, forbidden, "demo-only")).state, "error");
+  assert.deepEqual(await loadReplayAnswers(archive, "id", forbidden, "demo-only"), { answers: [], failed: true });
+  const demo = await loadReplay(illustrative, forbidden, "demo-only");
+  assert.equal(demo.state, "ready");
+  assert.equal(demo.featured?.match.id, "copper-tidal");
+  assert.ok((await loadReplayAnswers(illustrative, "copper-tidal", forbidden, "demo-only")).answers.length);
+});
+
+test("new demo review is scoped to original versioned fiction and does not approve old unknown sources", () => {
+  assert.equal(DEMO_PUBLICATION.thirdPartyInputs, false);
+  assert.equal(DEMO_PUBLICATION.datasetVersion, DEMO_DATASET_VERSION);
+  assert.equal(DEMO_PUBLICATION.decision, "APPROVED_FOR_ORIGINAL_DEMO");
+  assert.equal(sourceRights("reviewed-synthetic-demo-v1").publicWebDisplay, "APPROVED_ORIGINAL_DEMO_ONLY");
+  assert.equal(sourceRights("illustrative-examples").publicationRights, "UNKNOWN");
+  assert.equal(sourceRights("api-football-fixtures").publicationRights, "UNKNOWN");
+  assert.ok(teams.every(team => Object.values(team.strengths).every(value => value === null)));
+  assert.ok(Object.values(cachedLenses).every(isCachedLens));
+  assert.equal(analysisProvenance({ mode: "illustrative", matchEventAt: null }).datasetVersion, DEMO_DATASET_VERSION);
+});
+
+test("fictional scenarios never acquire real-world result labels", () => {
+  const match = { ...fixture("fictional").match, statusShort: "FT", homeScore: 2, awayScore: 1 };
+  assert.equal(replayStatus(match, "illustrative"), "Fictional scenario");
+  assert.equal(replayScore(match, "illustrative"), "No real result");
+});
+
+
+test("missing sample relations and malformed sample commentary are handled without invented data", () => {
+  const match = demoMatches[0];
+  assert.equal(buildIllustrativeViewModel(match, [], venues, cachedLenses[match.id]), null);
+  assert.equal(buildIllustrativeViewModel(match, teams, [], cachedLenses[match.id]), null);
+  for (const cache of [undefined, null, { headline: "incomplete sample" }, { sources: null }]) {
+    assert.deepEqual(buildIllustrativeAnswers(cache), {});
+    const value = buildIllustrativeViewModel(match, teams, venues, cache);
+    assert.ok(value);
+    assert.equal(value.lens, null);
+    assert.equal(value.homeTeam.name, "Copper Vale");
+  }
+  assert.equal(Object.values(buildIllustrativeAnswers(cachedLenses[match.id])).length, 3);
+});
+
+
+test("omitted lower-level policy also fails closed", async () => {
+  assert.deepEqual(parseReplaySelectionCore({}), { ok: true, selection: illustrative });
+  const reader = async () => { assert.fail("Default policy must not access the archive"); return []; };
+  assert.equal((await loadReplayCore(archive, reader)).state, "error");
+  assert.deepEqual(await loadReplayAnswersCore(archive, "id", reader), { answers: [], failed: true });
 });

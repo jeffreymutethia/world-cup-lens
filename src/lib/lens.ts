@@ -5,7 +5,8 @@ import {
   teams,
   venues,
 } from "../data/seed";
-import type { PresetQuestionKey } from "./types";
+import { isCachedLens } from "./cached-analysis";
+import type { Match, Team, Venue, MatchViewModel, PresetQuestionKey } from "./types";
 
 export function getTeamById(id: string) {
   return teams.find((team) => team.id === id);
@@ -23,33 +24,26 @@ export function getMatchLensByMatchId(matchId: string) {
   return cachedLenses[matchId] ?? null;
 }
 
+export function buildIllustrativeViewModel(
+  match: Match,
+  teamRows: Team[],
+  venueRows: Venue[],
+  cachedLens: unknown,
+): MatchViewModel | null {
+  const homeTeam = teamRows.find((team) => team.id === match.homeTeamId);
+  const awayTeam = teamRows.find((team) => team.id === match.awayTeamId);
+  const venue = venueRows.find((row) => row.id === match.venueId);
+  if (!homeTeam || !awayTeam || !venue) return null;
+  return { match, homeTeam, awayTeam, venue, lens: isCachedLens(cachedLens) ? cachedLens : null };
+}
+
 export function getMatchViewModel(matchId: string) {
   const match = getMatchById(matchId);
-
-  if (!match) {
-    return null;
-  }
-
-  const homeTeam = getTeamById(match.homeTeamId);
-  const awayTeam = getTeamById(match.awayTeamId);
-  const venue = getVenueById(match.venueId);
-  const lens = getMatchLensByMatchId(match.id);
-
-  if (!homeTeam || !awayTeam || !venue) {
-    return null;
-  }
-
-  return {
-    match,
-    homeTeam,
-    awayTeam,
-    venue,
-    lens,
-  };
+  return match ? buildIllustrativeViewModel(match, teams, venues, getMatchLensByMatchId(match.id)) : null;
 }
 
 export function getFeaturedMatchViewModel() {
-  return getMatchViewModel(matches[0].id);
+  return matches[0] ? getMatchViewModel(matches[0].id) : null;
 }
 
 export function getAllMatchViewModels() {

@@ -1,15 +1,9 @@
+import { authoringDisabled } from "@/lib/deployment-mode";
 import OpenAI from "openai";
 import {
   NextRequest,
   NextResponse,
 } from "next/server";
-
-import {
-  generateAndSaveMatchLens,
-} from "@/lib/ai/generate-and-save-match-lens";
-import {
-  getMatchViewModel,
-} from "@/lib/supabase/repository";
 
 type RouteContext = {
   params: Promise<{
@@ -39,6 +33,7 @@ export async function POST(
   request: NextRequest,
   context: RouteContext,
 ) {
+  if (authoringDisabled()) return NextResponse.json({ error: "Authoring is disabled in public demo mode." }, { status: 404 });
   try {
     if (!isAuthorized(request)) {
       return NextResponse.json(
@@ -50,6 +45,9 @@ export async function POST(
         },
       );
     }
+
+    const { generateAndSaveMatchLens } = await import("@/lib/ai/generate-and-save-match-lens");
+    const { getMatchViewModel } = await import("@/lib/supabase/repository");
 
     const { id } = await context.params;
 

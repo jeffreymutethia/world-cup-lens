@@ -1,6 +1,6 @@
 # Historical replay and portfolio roadmap
 
-Status after the first replay implementation milestone (2026-11-02): public selection and presentation changes are implemented and locally validated, including independent review fixes; the original audit is committed separately. Delivery does not imply production archive availability. Later phases remain proposals. Use one focused PR per slice, each with evidence, tests, documentation, and an explicit completion check. Keep external services mocked by default and leave production mutations/deployment behind explicit user instructions. Findings refer to [audit.md](audit.md).
+Status after the first replay implementation milestone (2026-11-02): public selection and presentation changes are implemented and locally validated, including independent review fixes; the original audit is committed separately. Delivery does not imply production archive availability. The current public default is the separate fictional-demo branch documented at the end of this roadmap. Later phases remain proposals. Use one focused PR per slice, each with evidence, tests, documentation, and an explicit completion check. Keep external services mocked by default and leave production mutations/deployment behind explicit user instructions. Findings refer to [audit.md](audit.md).
 
 ## 1. Establish an honest replay surface (H1; public surface implemented)
 
@@ -93,3 +93,12 @@ No existing Vercel link or deployment credentials were identified locally. Ident
 ## Next milestone after connectivity/CI documentation
 
 Prioritize reproducible backend contracts and historical source provenance: document the verified schema/RPC/grants from authorized evidence; define and test source/as-of time semantics; inventory rights; remove placeholder strengths from upstream authoring inputs without rewriting history; expand publishable-read checks across stages/dates. July 11 availability alone does not establish those guarantees. Identify the existing Vercel project and verify its required configuration before considering deployment; no verified public URL is currently documented.
+
+
+## Public demonstration branch — implemented
+
+The public default is now a reviewed, self-contained fictional lab, not an uncleared historical export or database-dependent landing page. New original examples replace the legacy real-team seed; source approval is version/scenario scoped and leaves all old UNKNOWN categories untouched. WCL_DEPLOYMENT_MODE defaults/fails closed to demo-only, explicit archive requests are rejected, archive controls disappear, and all authoring/cron methods are disabled before work. Archive-enabled remains available as a separate local/private server opt-in.
+
+Implemented acceptance: featured/list/detail, two-date exploration, stored sample Lens/Q&A, functional links, architecture walkthrough, original icon, license notices, and version/fiction labels. Tests cover missing/invalid configuration and credentials, disabled routes even with valid dummy secrets, an active zero-service-fetch tripwire, and missing/malformed examples. CI runs archive mocks and public demo checks separately. See the source/provenance/rights documents for boundaries.
+
+Release gate for this original demo: identify/connect an existing authorized Vercel target, verify demo-only configuration without service keys/cron, build/review, and perform public GET smoke tests. Do not create paid resources or infer deployment from local success. Next historical work remains source rights/lineage, reproducible schema/RLS and upstream placeholder removal. Broader visual/accessibility testing and repository-history/license review remain separate work.
