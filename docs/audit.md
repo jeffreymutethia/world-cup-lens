@@ -235,6 +235,18 @@ Real Chrome QA confirmed featured navigation, cached answer changes and visible 
 Responsive follow-up `a8150be` deployed automatically to Ready/Production and passed the public HTTP suite again. Native Chrome verification confirmed the corrected featured/list content and detail hero at 320px, a 390px landing, 1280px desktop layout, second-date keyboard navigation and about rendering. Genuine screenshots and their exact revisions/methods are in [deployment.md](deployment.md). No further release blocker was found. Hosted CI for that revision passed; final documentation-only delivery status is recorded separately in the handoff.
 
 
-## Independent FIFA curation review — publication HOLD
+## Earlier independent FIFA curation review — internal HOLD (superseded below)
 
 Baseline26310e9. Official FIFA reports/results and federation cross-checks supported the five requested candidate-field checks. Conditional noncommercial editorial website permission exists; it must not be misstated as either a general prohibition or an open-data grant. The reviewed sources did not settle GitHub source/forking compatibility, portfolio-use classification and existing product/domain branding for this proposed release. The task's uncertainty gate therefore holds the curated module and historical default; [review evidence and unblocking criteria](curated-history-review.md) are recorded. Exact working notes were delivered outside Git; no provider payload, database row or third-party media was exported. The existing fictional demo and private pipeline remain unchanged. This is a scoped release assessment, not an assertion that facts are owned or the existing deployment is unlawful.
+
+
+## Owner-directed curated release — 2026-11-03
+
+Baseline `5fc076d`. The owner explicitly supersedes the prior conservative internal HOLD and directs narrow editorial source/web release of all five independently verified records. This is not blanket FIFA permission, an open-data licence or trademark clearance; broader use/branding uncertainty remains in [rights](data-rights.md) and [source review](curated-history-review.md).
+
+- Public live/fiction-first limitation addressed: demo-only now defaults to curated July 11; four event days and five real results are local, versioned and attributed. Fictional and private provider datasets remain isolated. No production DB/export or provider API is an input.
+- Fabricated clock precision avoided: separate `CuratedMatch` uses date-only event facts, explicit unknowns, source publication/access/review metadata and AET markers. FIFA/UEFA Argentina date discrepancy is disclosed. No guessed timestamps, stats, events or regulation score.
+- Analysis provenance separated: original editorial context is not labeled as Match Lens/OpenAI pipeline output or a forecast. The copy was written during agent-assisted implementation, grounded in reviewed facts; no app model call was made. Legacy cached prose, missing lineage and placeholder-input debt remain unresolved.
+- Independent review caught enum coercion that accepted array/object stage/access values; strict string checks and malformed-value regressions now fail closed. It also corrected overly broad authorship/default wording. No admin/cron guard regression was found.
+
+Local/CI/public verification and genuine browser evidence are recorded for the delivered revision in [deployment.md](deployment.md). Source-body access limitations, name/domain rights uncertainty, upstream strengths/geography/stage/flags, no tracked database/RPC/RLS contracts, mutable cache lineage and full-corpus embedding remain prioritized debt. This milestone does not resolve those backend findings or claim production-readiness.

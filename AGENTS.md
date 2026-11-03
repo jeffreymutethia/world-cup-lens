@@ -1,6 +1,6 @@
 # Working on World Cup Lens
 
-World Cup Lens is a Next.js 16.2.9 / React 19 / strict TypeScript football intelligence app using Supabase, OpenAI embeddings and Responses structured outputs, API-FOOTBALL, and Tailwind/Radix UI. The product target is a reproducible historical replay demo; public deployment defaults to a credential-free fictional demo; archive requires exact server opt-in; ingestion and generation retain legacy live-operation APIs.
+World Cup Lens is a Next.js 16.2.9 / React 19 / strict TypeScript football intelligence app using Supabase, OpenAI embeddings and Responses structured outputs, API-FOOTBALL, and Tailwind/Radix UI. The product target is a reproducible historical replay demo; public deployment defaults to credential-free curated history with a separate fictional lab; archive requires exact server opt-in; ingestion and generation retain legacy live-operation APIs.
 
 <!-- BEGIN:nextjs-agent-rules -->
 ## This is NOT the Next.js you know
@@ -11,7 +11,7 @@ Read the relevant guide in `node_modules/next/dist/docs/` before writing code. A
 - `src/app/page.tsx`, `src/app/matches/[id]/page.tsx`: public pages.
 - `src/components/`: layout, match presentation, and shared UI.
 - `src/lib/deployment-mode.ts`, `replay-access.ts`: fail-closed server policy and lazy archive boundary.
-- `docs/curated-history-review.md`: independently researched FIFA candidates are on HOLD for source-distribution/use/branding scope; no curated runtime dataset is approved.
+- `src/data/curated-history.ts`, `src/lib/curated-history.ts`, `calendar-date.ts`: five owner-directed editorial records, date-only facts, validation and original retrospective context. See `docs/curated-history-review.md` for exact scope and remaining rights/branding uncertainty.
 - `src/data/seed.ts`, `docs/demo-publication-review.md`: versioned, reviewed original fiction only; legacy UNKNOWN rights remain unknown.
 - `src/lib/analysis-presentation.ts`: retrospective/synthetic labels, withheld metrics policy, and distinct time metadata with explicit unknowns.
 - `src/lib/data-rights.ts`, `docs/data-{provenance,rights}.md`: source inventory and publication gates; UNKNOWN never implies permission.
@@ -33,8 +33,8 @@ Commands: `npm run dev` (development), `npm run lint`, `npm run typecheck` (gene
 ## Security and side effects
 Never output secrets, environment file contents, credentials, authorization headers, or sensitive provider payloads in logs, docs, commands, or responses. Refer to environment variable names only. Keep privileged clients server-only. Do not expose Supabase secret keys to browsers. Use isolated mocks/local fixtures for tests; external API, ingestion, embedding, generation, and cron calls may incur cost or mutate data and require explicit task authorization.
 
-Never present placeholder strengths, uncalibrated labels, or retrieved snippets as verified measurements or claim-level proof. Preserve stored commentary wording; label it retrospective or synthetic. A kickoff, replay date, or cache update is not a historical information cutoff. Never export provider rows or derived snippets without source-specific rights approval; no public historical dataset is currently approved. Only the new wcl-synthetic-v1 original demo has scoped publication approval; do not upgrade old UNKNOWN sources or claim history clearance.
+Never present placeholder strengths, uncalibrated labels, or retrieved snippets as verified measurements or claim-level proof. Preserve stored commentary wording; label it retrospective or synthetic. A kickoff, replay date, or cache update is not a historical information cutoff. Never export provider rows or derived snippets without source-specific rights approval; only the five wcl-curated-2026-v1 records and new wcl-synthetic-v1 original demo have scoped publication decisions. Do not upgrade old UNKNOWN sources or claim blanket permission, an open-data licence or trademark clearance. Curated editorial copy is separate from Match Lens pipeline output; date-only facts must not acquire fabricated kickoff timestamps.
 
-WCL_DEPLOYMENT_MODE must fail closed to demo-only when absent/invalid. Exact archive-enabled is for separately configured local/private use. Keep archive and all authoring/cron guards server-side, before auth/work; never add a URL/client override. Public demos must need no service credentials.
+WCL_DEPLOYMENT_MODE must fail closed to demo-only when absent/invalid. Exact archive-enabled is for separately configured local/private use. Keep archive and all authoring/cron guards server-side, before auth/work; never add a URL/client override. Public demos must need no service credentials. Curated, illustrative and private archive datasets must remain separate; never silently substitute among them.
 
 Never auto-commit, push, deploy, or mutate production data without explicit instruction. Do not install dependencies, change environment files, or create migrations unless within the authorized task. Report security uncertainties without inventing deployed protections.

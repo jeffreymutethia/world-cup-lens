@@ -1,3 +1,4 @@
+import { checkCuratedPages } from "./check-curated-pages.mjs";
 import assert from "node:assert/strict";
 
 // Explicit public destination only. No service credentials or auth headers are used.
@@ -10,18 +11,11 @@ async function page(path, method = "GET") {
   return { status: response.status, html: await response.text() };
 }
 try {
-  let result = await page("/");
-  assert.equal(result.status, 200);
-  assert.ok(result.html.includes("Copper Vale") && result.html.includes("Lantern Ridge") && result.html.includes("Featured illustrative matchup"));
-  assert.ok(result.html.includes("newly authored fiction") && !result.html.includes('value="archive"'));
-  const detailHref = result.html.match(/href="(\/matches\/[^\"]+)"/)?.[1]?.replaceAll("&amp;", "&");
-  assert.ok(detailHref?.includes("mode=illustrative&date=2026-06-11"));
-  console.log("PASS public homepage, June 11 fiction and featured detail link");
-
-  result = await page(detailHref);
+  await checkCuratedPages(page);
+  let result = await page("/matches/copper-tidal?mode=illustrative&date=2026-06-11");
   assert.equal(result.status, 200);
   assert.ok(result.html.includes("patient passing plan") && result.html.includes("Explore cached questions") && result.html.includes("wcl-synthetic-v1") && result.html.includes("No real result"));
-  console.log("PASS featured detail, stored sample Lens and Q&A content");
+  console.log("PASS separate fictional lab retains sample Lens and Q&A");
 
   for (const [path, expected] of [
     ["/?mode=illustrative&date=2026-06-12", "second-day example"],

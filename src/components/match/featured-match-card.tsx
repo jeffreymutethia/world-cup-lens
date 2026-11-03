@@ -1,5 +1,5 @@
 import { storedEdgeLabel } from "@/lib/analysis-presentation";
-import { replayHref, replayStatus, replayScore, stageLabel, type ReplaySelection } from "@/lib/replay";
+import { replayHref, replayStatus, replayScore, stageLabel, type LegacyReplaySelection } from "@/lib/replay";
 import Link from "next/link";
 import type { Match, PublicMatchLens, Team, Venue } from "@/lib/types";
 import { formatKickoff } from "@/lib/lens";
@@ -14,7 +14,7 @@ type FeaturedMatchCardProps = {
   awayTeam: Team;
   venue: Venue;
   lens: PublicMatchLens | null;
-  selection: ReplaySelection;
+  selection: LegacyReplaySelection;
 };
 
 export function FeaturedMatchCard({

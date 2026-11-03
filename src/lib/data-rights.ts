@@ -6,6 +6,12 @@ export const SOURCE_CATEGORIES = [
 export type SourceCategory = typeof SOURCE_CATEGORIES[number];
 
 export function sourceRights(category: unknown) {
+  if (category === "curated-history-2026-v1") return {
+    category,
+    publicationRights: "OWNER_DIRECTED_EDITORIAL_SCOPE" as const,
+    publicGitHubDataset: "FIVE_CURATED_RECORDS_ONLY" as const,
+    publicWebDisplay: "FIVE_CURATED_RECORDS_ONLY" as const,
+  };
   // New original demo content is a separate review, never an upgrade of UNKNOWN inputs.
   if (category === "reviewed-synthetic-demo-v1") return {
     category,

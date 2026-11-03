@@ -13,6 +13,8 @@ import { formatKickoff } from "@/lib/lens";
 import { findReplayMatch, parseReplaySelection, replayHref, replayScore, replayStatus, stageLabel, type ReplaySearchParams } from "@/lib/replay";
 import { loadSelectedReplay, loadSelectedAnswers } from "@/lib/replay-access";
 import { deploymentMode } from "@/lib/deployment-mode";
+import { loadCuratedHistory } from "@/lib/curated-history";
+import { CuratedMatchDetail } from "@/components/match/curated-match";
 
 type MatchPageProps = {
   params: Promise<{ id: string }>;
@@ -27,6 +29,15 @@ export default async function MatchPage({ params, searchParams }: MatchPageProps
     return <AppShell><div className="mx-auto max-w-7xl space-y-6"><ReplayControls demoOnly={deployment === "demo-only"} /><ReplayState title={parsed.reason === "disabled" ? "Archive disabled in public demo" : "Invalid replay selection"}>{parsed.message}</ReplayState></div></AppShell>;
   }
   const { selection } = parsed;
+  if (selection.mode === "curated") {
+    const curated = loadCuratedHistory(selection.date);
+    const match = curated.matches.find(match => match.id === id);
+    return <AppShell><div className="mx-auto max-w-7xl space-y-6">
+      <Button asChild variant="ghost"><Link href={replayHref(selection)}><ArrowLeft className="mr-2 size-4" />Back to selected matches</Link></Button>
+      <ReplayNotice selection={selection} />
+      {match ? <CuratedMatchDetail match={match} /> : <ReplayState title={curated.state === "error" ? "Curated history unavailable" : "Match not found in this selection"}>{curated.state === "error" ? "The local historical dataset could not be validated. No other dataset has been substituted." : "This identifier does not belong to the selected curated date. Return to the listing to select a historical match or explicitly open the fictional lab."}</ReplayState>}
+    </div></AppShell>;
+  }
   const result = await loadSelectedReplay(selection);
   const viewModel = findReplayMatch(result, id);
   const back = <Button asChild variant="ghost"><Link href={replayHref(selection)}><ArrowLeft className="mr-2 size-4" />Back to selected matches</Link></Button>;

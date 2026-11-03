@@ -28,7 +28,7 @@ Read-only sample: two provider-linked July 11 fixtures and two cached Lens rows 
 | Cached Q&A | Seed examples, or Supabase `qa_answers` | Editorial/cached text; model-generated origin for arbitrary DB answers UNKNOWN | Public code only reads/validates answers. It does not generate them. |
 | Current illustrative fixtures/examples | Replacement `src/data/seed.ts`, version `wcl-synthetic-v1` | Newly authored fictional teams, locations, styles and Q&A, alphabetic initials, null strengths, no real outcomes | Scoped new original-demo publication review; not the old UNKNOWN illustrative corpus in Git history. |
 
-Rights/attribution and separate GitHub-versus-web decisions for these categories are in [data-rights.md](data-rights.md). The runtime review registry `src/lib/data-rights.ts` keeps the eight legacy/provider categories UNKNOWN/NOT_APPROVED/REVIEW_REQUIRED. Only the new reviewed-synthetic-demo-v1 category has scoped original-demo approval; see the separate review. It is not an exporter or a rights-enforcement service.
+Rights/attribution and separate GitHub-versus-web decisions for these categories are in [data-rights.md](data-rights.md). The runtime review registry `src/lib/data-rights.ts` keeps the eight legacy/provider categories UNKNOWN/NOT_APPROVED/REVIEW_REQUIRED. The reviewed-synthetic-demo-v1 category has original-demo approval; curated-history-2026-v1 has a separate owner-directed five-record editorial decision, not blanket licensing. It is not an exporter or a rights-enforcement service.
 
 ## Implemented temporal representation
 
@@ -87,11 +87,24 @@ Migration proposal: inspect/export schema definitions through authorized evidenc
 
 The baseline seed's real-team/profile-like copy could not be cleared, so it was replaced instead of automatically approved. The new authored module uses no provider records or third-party excerpts; [demo-publication-review.md](demo-publication-review.md) records exact scope and evidence. Commentary in this version is stored sample copy, not a paid generated Lens. Scenario times are navigation values, unknown strengths remain null, and no official outcome is represented. Original design notes are not publisher citations.
 
-`WCL_DEPLOYMENT_MODE` defaults/fails closed to demo-only. That branch selects only reviewed fiction, rejects explicit archive URLs, and guards all authoring endpoints before auth/work. Archive-enabled is an explicit separate server configuration; its source/time/rights limitations above remain unchanged. Backend connectivity and permission to publish historical material are not prerequisites for demonstrating this original UI dataset. No source acquisition, migration, production write, or historical export was performed for the replacement.
+`WCL_DEPLOYMENT_MODE` defaults/fails closed to demo-only. That branch now defaults to the five curated historical records, with reviewed fiction explicitly selectable, rejects explicit archive URLs, and guards all authoring endpoints before auth/work. Archive-enabled is an explicit separate server configuration; its source/time/rights limitations above remain unchanged. Backend connectivity and permission to publish historical material are not prerequisites for demonstrating this original UI dataset. No source acquisition, migration, production write, or historical export was performed for the replacement.
 
 
-## Candidate independent historical curation — researched, not implemented
+## Independently curated history — implemented date-only contract
 
-[Curated-history review](curated-history-review.md) records official-source URLs, 2026-11-03 access dates, verification methods, field categories and a HOLD decision. Sources were public FIFA reports/results with independent federation checks, not API-FOOTBALL or production Supabase. Some FIFA article evidence was index-accessible while direct readable bodies were unavailable; that limit is explicit. A report publication day and local match day can differ, and another publisher may use a different date convention. No exact capture instant, implicit timezone conversion or pre-match knowledge cutoff was invented.
+[Curated review](curated-history-review.md) records the owner's narrow editorial release decision, exact five tuples, primary URLs, federation cross-checks, 2026-11-03 review/access days and remaining rights/branding uncertainty. These facts were independently selected from published official evidence; no API-FOOTBALL or production Supabase records were inputs. Newly written agent-assisted editorial copy is separate from Match Lens pipeline output, does not reproduce publisher wording and makes no unsupported tactical or predictive claim.
 
-The exact factual working notes were delivered locally outside Git, not published as a workaround for the failed source-distribution gate. No approved/versioned historical runtime dataset exists. Public reads still use wcl-synthetic-v1; private provider-cache provenance remains unchanged. Future authored historical commentary must identify its own authorship and reviewed facts, rather than acquire an AI-generated or forecast label.
+| Concept | Curated representation | Meaning |
+| --- | --- | --- |
+| Event day | `eventDate`, `datePrecision: day`, `dateBasis: source-local-event-day` | Reviewed source's event day, not a UTC instant or inferred kickoff. No Los Angeles conversion is applied to a date-only fact. |
+| Clock time/events/statistics | `unknowns.kickoffAt`, `lineups`, `goalMinutes`, `formations`, `possession`, `playerStatistics`, `regulationScore`: null | Outside this independently curated selection; no inferred values. |
+| Publication day | `source.publicationDate`, day or null | Known article day, separate from event day; no precise publication instant claimed. |
+| Evidence access/review | `source.accessedOn`, `reviewedOn`, `accessMethod` | Human/agent review calendar days, not a source capture timestamp. PDF read directly versus indexed official article evidence is explicit. |
+| Source capture | `unknowns.sourceCapturedAt: null` | No retained source snapshot/hash or exact capture instant. URLs may change. |
+| Analysis generation | `unknowns.analysisGeneratedAt: null`; `commentaryOrigin: authored-retrospective-editorial` | Repository-authored context; no Match Lens model run to timestamp. |
+| Historical cutoff | `unknowns.historicalKnowledgeCutoff: null` | No genuine as-of forecast claim. |
+| Dataset version | `wcl-curated-2026-v1` and scoped `CURATED_PUBLICATION` | Exact five-record module, not a complete tournament/provider database or general rights approval. |
+
+Source links identify evidence for the limited match facts, not claim-level authentication of every editorial inference. FIFA explicitly identifies Argentina–Switzerland's July 11 local event day; its article publication is July 12 and UEFA lists July 12. Both metadata and discrepancy are preserved without inventing a kickoff/timezone explanation. Two group fixtures have no extra time; three knockout results include AET. Regulation and shootout breakdowns are not inferred.
+
+The separate type and fail-closed validator are in `src/lib/curated-history.ts`; reviewed records are in `src/data/curated-history.ts`. Public list/detail loaders never combine curated and fictional/provider rows. The [worked match example](architecture.md#curated-history-contract-and-worked-example) follows a record into the UI. Future private archive lineage/schema proposals above are unchanged and unimplemented; this local module does not backfill the database.

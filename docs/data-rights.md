@@ -1,6 +1,6 @@
 # Source rights and redistribution review
 
-Reviewed 2026-11-03. This is an evidence inventory and conservative repository publication policy, not a finding that every use is lawful or unlawful. **No public historical dataset export is approved.** Database access, factual subject matter, an API subscription, embedding, or model generation does not establish publication permission. No raw provider export, logo asset, or new historical dataset was added by this milestone.
+Reviewed 2026-11-03. This is an evidence inventory and conservative repository publication policy, not a finding that every use is lawful or unlawful. **No provider/bulk historical export is approved. Exactly five independently selected factual records have a separate owner-directed editorial release decision below.** Database access, factual subject matter, an API subscription, embedding, or model generation does not establish publication permission. No raw provider export, official logo/media asset or source article copy is included.
 
 ## Provider identity and primary evidence
 
@@ -46,9 +46,21 @@ This milestone preserves the existing local replay for review, with stronger tru
 
 The new `reviewed-synthetic-demo-v1` category refers only to the replacement `wcl-synthetic-v1` module and new original icon documented in [demo-publication-review.md](demo-publication-review.md). Its publication status is REVIEWED_ORIGINAL_CONTENT, with APPROVED_ORIGINAL_DEMO_ONLY for source inclusion and web demonstration. This is a scoped repository decision supported by newly authored fictional material with no third-party inputs; it is not a general content license, a sports-data approval, or a rights guarantee about accidental name collisions. Legacy examples, provider rows, excerpts, logos, and cached AI corpus remain UNKNOWN/NOT_APPROVED/REVIEW_REQUIRED as above.
 
-No raw historical export is part of this milestone. The public deployment branch can use only reviewed original examples and licensed code/icon dependencies; it cannot access the archive or invoke authoring. Existing software/icon notices are kept separately at `public/third-party-notices.txt`. Historical sources must still pass the original publication gate before public historical use; approval of new fiction is not permission for another category.
+No raw historical export is part of this milestone. The public deployment branch can use the separately scoped curated selection, reviewed original examples and licensed code/icon dependencies; it cannot access the archive or invoke authoring. Existing software/icon notices are kept separately at `public/third-party-notices.txt`. Historical sources must still pass the original publication gate before public historical use; approval of new fiction is not permission for another category.
 
 
-## FIFA-curated selection review — HOLD
+## Five curated records — owner-directed narrow editorial release
 
-The [2026-11-03 review](curated-history-review.md) found affirmative conditional support for credited noncommercial editorial website display. That is distinct from API-FOOTBALL rights. It does not establish an open-data licence, this GitHub source/forking scope, the portfolio's purely editorial classification, or clearance for the existing name/domain. These are unresolved questions, not blanket prohibitions on factual reporting. The requested curated public release is therefore NOT_APPROVED pending that scoped decision. No historical module, copied article/media, result tuple export or new historical UI was published. Existing original-fiction approval and eight legacy/provider UNKNOWN decisions remain unchanged.
+The [updated source/publication review](curated-history-review.md) supersedes the earlier conservative internal HOLD. The owner explicitly directs publication of five independently verified results, descriptive team/stage/venue labels, date-only facts, AET markers, source metadata and newly authored retrospective context in this public repository and noncommercial portfolio demo. No API-FOOTBALL payload, production database export, article prose, PDF, logo, crest, official font, photograph or video is included.
+
+FIFA's published terms/branding guidance provide conditional support for attributed noncommercial editorial website use, with source linkbacks and no implied endorsement. They do not establish blanket permission, an open-data licence, definitive trademark clearance, unrestricted downstream GitHub/commercial reuse or contractual rights to any provider corpus. The existing name/domain, portfolio-use classification and source/forking scope retain uncertainty. The owner accepts the narrow editorial release decision; no legal guarantee is claimed. Reassess before monetisation, sponsorship, branding changes, bulk expansion or reuse beyond this scope.
+
+| Field/category | Current project publication decision | Limits |
+| --- | --- | --- |
+| Five selected factual tuples: team names, day, stage, venue, final score, AET | OWNER_DIRECTED_EDITORIAL_SCOPE; FIVE_CURATED_RECORDS_ONLY for source/web | Descriptive facts with linkbacks; not provider data or an unrestricted dataset licence |
+| Source URLs/identity and evidence access/review metadata | Same scoped release | References acknowledge evidence; linked content is not relicensed |
+| Original retrospective editorial context | Same scoped release | Newly written during agent-assisted implementation; separate from actual cached AI pipeline; no publisher text copied |
+| Protected official imagery/marks/media | NOT_APPROVED; excluded | No no-logo argument is treated as definitive name/domain clearance |
+| Eight unrelated legacy/provider categories | UNKNOWN / NOT_APPROVED / REVIEW_REQUIRED | No rights upgrade from this decision or the original-fiction decision |
+
+`sourceRights("curated-history-2026-v1")` exposes this scoped decision, while `CURATED_PUBLICATION.openDataLicense` stays false and trademark clearance stays UNRESOLVED. These are evidence registries, not legal validators or exporters. Attribution and non-affiliation notices are present in the UI; remaining uncertainty stays documented. No enquiry was sent to any rights holder.

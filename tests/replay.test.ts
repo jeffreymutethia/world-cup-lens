@@ -1,3 +1,6 @@
+import { curatedMatches } from "../src/data/curated-history";
+import { loadCuratedHistory, isCuratedMatch, curatedScore, curatedResultLabel, CURATED_DATES, CURATED_PUBLICATION, NON_AFFILIATION_NOTICE } from "../src/lib/curated-history";
+import { formatEventDate } from "../src/lib/calendar-date";
 import { buildIllustrativeViewModel } from "../src/lib/lens";
 import { deploymentMode, type DeploymentMode } from "../src/lib/deployment-mode";
 import { buildIllustrativeAnswers, DEMO_PUBLICATION, DEMO_DATASET_VERSION, teams, venues, matches as demoMatches, cachedLenses } from "../src/data/seed";
@@ -244,7 +247,7 @@ test("unknown rights never become approval because data is factual, synthetic, o
 test("deployment defaults fail closed and archive requires an exact server opt-in", () => {
   for (const value of ["", "demo-only", "archive", "ARCHIVE-ENABLED", "typo"]) assert.equal(deploymentMode(value), "demo-only");
   assert.equal(deploymentMode("archive-enabled"), "archive-enabled");
-  assert.deepEqual(parseReplaySelection({}, "demo-only"), { ok: true, selection: illustrative });
+  assert.deepEqual(parseReplaySelection({}, "demo-only"), { ok: true, selection: { mode: "curated", date: "2026-07-11" } });
   const blocked = parseReplaySelection({ mode: "archive" }, "demo-only");
   assert.equal(blocked.ok, false);
   if (!blocked.ok) assert.equal(blocked.reason, "disabled");
@@ -296,8 +299,112 @@ test("missing sample relations and malformed sample commentary are handled witho
 
 
 test("omitted lower-level policy also fails closed", async () => {
-  assert.deepEqual(parseReplaySelectionCore({}), { ok: true, selection: illustrative });
+  assert.deepEqual(parseReplaySelectionCore({}), { ok: true, selection: { mode: "curated", date: "2026-07-11" } });
   const reader = async () => { assert.fail("Default policy must not access the archive"); return []; };
   assert.equal((await loadReplayCore(archive, reader)).state, "error");
   assert.deepEqual(await loadReplayAnswersCore(archive, "id", reader), { answers: [], failed: true });
+});
+
+
+test("the independently curated selection contains exactly the five reviewed results", () => {
+  assert.deepEqual(curatedMatches.map(m => [m.homeTeam, m.awayTeam, m.eventDate, m.stage, m.venue, curatedScore(m), m.afterExtraTime]), [
+    ["Mexico", "South Africa", "2026-06-11", "Group A", "Mexico City Stadium", "2–0", false],
+    ["USA", "Paraguay", "2026-06-12", "Group D", "Los Angeles Stadium", "4–1", false],
+    ["Norway", "England", "2026-07-11", "Quarter-final", "Miami Stadium", "1–2", true],
+    ["Argentina", "Switzerland", "2026-07-11", "Quarter-final", "Kansas City Stadium", "3–1", true],
+    ["Spain", "Argentina", "2026-07-19", "Final", "New York New Jersey Stadium", "1–0", true],
+  ]);
+  assert.ok(curatedMatches.every(isCuratedMatch));
+});
+
+test("curated date-only facts never acquire a fake kickoff or analysis cutoff", () => {
+  for (const match of curatedMatches) {
+    assert.equal(match.datePrecision, "day");
+    assert.equal(match.dateBasis, "source-local-event-day");
+    assert.ok(!("kickoffAt" in match));
+    assert.ok(Object.values(match.unknowns).every(value => value === null));
+    assert.equal(match.commentaryOrigin, "authored-retrospective-editorial");
+  }
+  assert.equal(formatEventDate("2026-07-11"), "July 11, 2026");
+  assert.equal(formatEventDate("2026-02-30"), "Date unavailable");
+  const argentina = curatedMatches[3];
+  assert.equal(argentina.eventDate, "2026-07-11");
+  assert.equal(argentina.source.publicationDate, "2026-07-12");
+  assert.match(argentina.evidenceNote!, /UEFA lists July 12/);
+});
+
+test("four curated dates navigate independently of fictional and provider fixtures", () => {
+  assert.deepEqual(CURATED_DATES, ["2026-06-11", "2026-06-12", "2026-07-11", "2026-07-19"]);
+  assert.deepEqual(CURATED_DATES.map(date => loadCuratedHistory(date).matches.length), [1, 1, 2, 1]);
+  for (const match of curatedMatches) {
+    const href = replayHref({ mode: "curated", date: match.eventDate }, match.id);
+    const url = new URL(href, "https://local.invalid");
+    assert.deepEqual(parseReplaySelectionCore(Object.fromEntries(url.searchParams)), { ok: true, selection: { mode: "curated", date: match.eventDate } });
+    assert.equal(url.pathname, `/matches/${match.id}`);
+  }
+});
+
+test("curated featured selection is documented editorial order, not invented kickoff order", () => {
+  const result = loadCuratedHistory("2026-07-11");
+  assert.equal(result.state, "ready");
+  assert.equal(result.featured?.id, "norway-england-2026-07-11");
+  assert.deepEqual(result.matches.map(m => m.homeTeam), ["Norway", "Argentina"]);
+});
+
+test("group and knockout labels preserve normal-time versus extra-time results", () => {
+  for (const match of curatedMatches) assert.match(curatedResultLabel(match), match.afterExtraTime ? /AET \(after extra time\)/ : /normal time/);
+  assert.equal(isCuratedMatch({ ...curatedMatches[0], afterExtraTime: true }), false);
+});
+
+test("curated records retain primary attribution, evidence dates and a narrowly scoped publication decision", () => {
+  for (const match of curatedMatches) {
+    assert.match(match.source.url, /^https:\/\//);
+    assert.ok(match.source.identity.startsWith("FIFA"));
+    assert.equal(match.source.reviewedOn, "2026-11-03");
+    assert.equal(match.source.accessedOn, "2026-11-03");
+    assert.equal(match.datasetVersion, "wcl-curated-2026-v1");
+  }
+  assert.equal(CURATED_PUBLICATION.openDataLicense, false);
+  assert.equal(CURATED_PUBLICATION.trademarkClearance, "UNRESOLVED");
+  assert.equal(sourceRights("curated-history-2026-v1").publicationRights, "OWNER_DIRECTED_EDITORIAL_SCOPE");
+  assert.equal(sourceRights("api-football-fixtures").publicationRights, "UNKNOWN");
+});
+
+test("unofficial presentation is shared by all public page shells", () => {
+  assert.match(NON_AFFILIATION_NOTICE, /unofficial/);
+  assert.match(NON_AFFILIATION_NOTICE, /Not affiliated with, sponsored by or endorsed by FIFA/);
+  assert.match(readFileSync("src/components/layout/app-shell.tsx", "utf8"), /<footer[^>]*>\{NON_AFFILIATION_NOTICE\}/);
+});
+
+test("curated empty dates and invalid records do not produce fictional replacements", () => {
+  assert.deepEqual(loadCuratedHistory("2026-06-13"), { state: "empty", matches: [], featured: null });
+  assert.equal(loadCuratedHistory("2026-02-30").state, "error");
+  assert.equal(loadCuratedHistory("2026-07-20").state, "error");
+  assert.equal(loadCuratedHistory("2026-07-11", []).state, "empty");
+  for (const records of [null, {}, [null], [{ id: "missing" }], [...curatedMatches, curatedMatches[0]]]) assert.equal(loadCuratedHistory("2026-07-11", records).state, "error");
+});
+
+test("malformed curated facts, source metadata and invented unknowns fail validation", () => {
+  const original = curatedMatches[2];
+  for (const patch of [
+    { eventDate: "2026-02-30" }, { datePrecision: "second" }, { stage: "Group Quarter-final" }, { stage: ["Quarter-final"] }, { stage: { toString: () => "Quarter-final" } },
+    { finalScore: { home: -1, away: 2 } }, { finalScore: { home: "1", away: 2 } }, { afterExtraTime: "AET" },
+    { source: { ...original.source, url: "javascript:alert(1)" } },
+    { source: { ...original.source, url: "https://www.fifa.com.evil.invalid/" } },
+    { source: { ...original.source, reviewedOn: "yesterday" } },
+    { source: { ...original.source, accessMethod: ["indexed-official-page"] } },
+    { commentaryOrigin: "OpenAI" }, { editorial: { headline: "Missing text", paragraphs: [] } },
+    { unknowns: { ...original.unknowns, kickoffAt: "2026-07-11T00:00:00Z" } },
+    { publicationDecision: "BLANKET_PERMISSION" }, { datasetVersion: "unreviewed" },
+  ]) assert.equal(isCuratedMatch({ ...original, ...patch }), false);
+});
+
+test("curated browsing cannot enter legacy Lens or archive readers", async () => {
+  const selection = { mode: "curated" as const, date: "2026-07-11" };
+  const forbidden = async () => { assert.fail("No service or synthetic reader allowed"); return []; };
+  assert.equal((await loadReplayCore(selection, forbidden, "archive-enabled")).state, "error");
+  assert.deepEqual(await loadReplayAnswersCore(selection, "id", forbidden, "archive-enabled"), { answers: [], failed: true });
+  const fictional = await loadReplayCore(illustrative, forbidden);
+  assert.ok(fictional.matches.every(m => !curatedMatches.some(c => c.id === m.match.id)));
+  assert.equal(loadCuratedHistory("2026-06-11").matches.some(m => m.id === "copper-tidal"), false);
 });

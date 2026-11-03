@@ -1,6 +1,6 @@
 # Public demo release evidence
 
-Verified 2026-11-03. Public URL: **https://world-cup-lens-one.vercel.app**. This is the reviewed fictional match lab, not a public historical dataset.
+Verified 2026-11-03. Public URL: **https://world-cup-lens-one.vercel.app**. The earlier releases below were the fictional match lab. The current curated release section distinguishes the new five-match editorial selection.
 
 ## Existing project configuration
 
@@ -49,6 +49,15 @@ Release follow-up: `a8150be2593c88814b7ad7a637902cec5ecd335e`, deployment `3gdFF
 Captures are genuine browser output, without personal browser chrome or credentials. They are not AI mockups. Screenshot publication is limited to the reviewed original demo/UI assets. Subsequent documentation-only revisions retain this runtime implementation; the delivery handoff records the final pushed/deployed SHA and latest checks rather than claiming that these earlier screenshots depict a later revision.
 
 
-## Subsequent curation review
+## Earlier curation review (superseded by owner decision)
 
-The [candidate historical review](curated-history-review.md) is on HOLD for the proposed public-source/branding scope. This follow-up adds documentation only; it does not replace the deployed original-fiction default or claim a real-match release. Existing demo-only environment and disabled cron policy continue to apply. The delivery handoff records the documentation revision's CI/deployment and smoke-test evidence separately from the historical feature's blocked status.
+The [candidate historical review](curated-history-review.md) was on internal HOLD for the proposed public-source/branding scope. This follow-up adds documentation only; it does not replace the deployed original-fiction default or claim a real-match release. Existing demo-only environment and disabled cron policy continue to apply. The delivery handoff records the documentation revision's CI/deployment and smoke-test evidence separately from the historical feature's blocked status.
+
+
+## Curated editorial release — verification in progress
+
+Baseline `5fc076d`; owner-directed narrow publication of `wcl-curated-2026-v1` supersedes the earlier internal HOLD. Public demo-only now defaults to July 11 curated history, with five results on four source-local event days, original editorial context, source linkbacks and a shared unofficial/non-affiliation notice. Fictional Lens/Q&A remain secondary and private Supabase/authoring behavior remains guarded. Existing server policy, credentials, cron setting, billing and databases are unchanged.
+
+Local deterministic and shared HTTP expectations cover all five result/stage/venue/AET tuples, date-only precision, attribution, detail/back navigation, empty/invalid selections, fictional isolation and all disabled methods. The app service-fetch tripwire is active; no provider/model/embedding request is permitted. Remote HTTP behavior cannot prove infrastructure-wide egress.
+
+Pre-push local validation passed: 42 deterministic tests, nine private archive mock HTTP groups, eight demo HTTP groups in unset and production-server configurations, lint, typecheck, production build with empty service credentials, documentation relative links, whitespace and changed-file credential pattern checks. Independent review found and resolved strict-enum validation and provenance/default-wording issues; final code/security/diagram review found no blocker. Invalid-flag checks are repeated before delivery. Hosted CI and production/browser evidence are added only after the committed revision is pushed and observed. The existing screenshots above depict earlier fictional releases and do not establish the curated UI's appearance.

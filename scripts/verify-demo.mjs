@@ -1,3 +1,4 @@
+import { checkCuratedPages } from "./check-curated-pages.mjs";
 import assert from "node:assert/strict";
 import { createServer } from "node:net";
 import { spawn } from "node:child_process";
@@ -31,18 +32,18 @@ watchdog.unref();
 const base = `http://127.0.0.1:${port}`;
 async function page(path, options) {
   const response = await fetch(base + path, { ...options, signal: AbortSignal.timeout(15_000) });
-  return { response, html: await response.text() };
+  return { response, status: response.status, html: await response.text() };
 }
 try {
   for (let i = 0; !ready && i < 100; i++) { assert.equal(app.exitCode, null); await delay(200); }
   assert.ok(ready);
-  let { html, response } = await page("/");
+  await checkCuratedPages(page);
+  let { html, response } = await page("/?mode=illustrative&date=2026-06-11");
   assert.equal(response.status, 200);
   assert.ok(html.includes("Copper Vale") && html.includes("Featured illustrative matchup"));
-  assert.ok(!html.includes('<select name="mode"') && !html.includes('value="archive"'));
-  assert.ok(!html.includes("July 11 archive"));
   assert.ok(html.includes("newly authored fiction") && html.includes("mode=illustrative&amp;date=2026-06-11"));
-  console.log("PASS credential-free demo landing and publication labels; no archive selector");
+  assert.ok(!html.includes("Mexico City Stadium") && !html.includes("Featured historical match"));
+  console.log("PASS explicit fictional lab stays synthetic and separate from curated history");
   ({ html } = await page("/matches/copper-tidal?mode=illustrative&date=2026-06-11"));
   assert.ok(html.includes("patient passing plan") && html.includes("Explore cached questions"));
   assert.ok(html.includes("wcl-synthetic-v1") && html.includes("No real result"));

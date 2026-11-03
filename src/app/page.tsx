@@ -5,6 +5,8 @@ import { ReplayControls, ReplayNotice, ReplayState } from "@/components/replay/r
 import { parseReplaySelection, type ReplaySearchParams } from "@/lib/replay";
 import { loadSelectedReplay } from "@/lib/replay-access";
 import { deploymentMode } from "@/lib/deployment-mode";
+import { loadCuratedHistory } from "@/lib/curated-history";
+import { CuratedMatchCard } from "@/components/match/curated-match";
 
 export default async function Home({ searchParams }: { searchParams: Promise<ReplaySearchParams> }) {
   const deployment = deploymentMode();
@@ -14,6 +16,18 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rep
     return <AppShell><div className="mx-auto max-w-7xl space-y-6"><ReplayControls demoOnly={demoOnly} /><ReplayState title={parsed.reason === "disabled" ? "Archive disabled in public demo" : "Invalid replay selection"}>{parsed.message}</ReplayState></div></AppShell>;
   }
   const { selection } = parsed;
+  if (selection.mode === "curated") {
+    const curated = loadCuratedHistory(selection.date);
+    return <AppShell><div className="mx-auto max-w-7xl space-y-6">
+      <ReplayControls selection={selection} demoOnly={demoOnly} /><ReplayNotice selection={selection} />
+      {curated.state === "ready" ? <>
+        <CuratedMatchCard match={curated.featured} featured />
+        <section aria-label="Curated historical matches"><h2 className="mb-4 text-lg font-semibold">Historical matches · {selection.date}</h2>
+          <div className="grid gap-4 xl:grid-cols-2">{curated.matches.map(match => <CuratedMatchCard key={match.id} match={match} />)}</div>
+        </section>
+      </> : <ReplayState title={curated.state === "error" ? "Curated history unavailable" : "No curated matches for this date"}>{curated.state === "error" ? "The local historical selection could not be validated. No fictional or provider records have been substituted." : "This is a five-match selection, not a complete tournament archive. Choose one of the four curated dates above or explicitly explore the fictional lab."}</ReplayState>}
+    </div></AppShell>;
+  }
   const result = await loadSelectedReplay(selection);
   return (
     <AppShell>

@@ -1,3 +1,6 @@
+import { isDateKey } from "./calendar-date";
+export { isDateKey } from "./calendar-date";
+import { DEFAULT_CURATED_DATE } from "./curated-history";
 import { DEMO_PUBLICATION, DEMO_DATASET_VERSION } from "../data/seed";
 import type { DeploymentMode } from "./deployment-mode";
 import { isCachedLens, isCachedAnswer } from "./cached-analysis";
@@ -10,25 +13,20 @@ export const DEFAULT_ILLUSTRATIVE_DATE = "2026-06-11";
 export const REPLAY_MIN_DATE = "2026-06-11";
 export const REPLAY_MAX_DATE = "2026-07-19";
 export type DatasetMode = "archive" | "illustrative";
-export type ReplaySelection = { mode: DatasetMode; date: string };
+export type LegacyReplaySelection = { mode: DatasetMode; date: string };
+export type ReplaySelection = LegacyReplaySelection | { mode: "curated"; date: string };
 export type ReplaySearchParams = Record<string, string | string[] | undefined>;
 export type SelectionResult =
   | { ok: true; selection: ReplaySelection }
   | { ok: false; message: string; reason?: "disabled" };
 
-export function isDateKey(value: string): boolean {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-  const date = new Date(`${value}T00:00:00Z`);
-  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value;
-}
-
 export function parseReplaySelection(params: ReplaySearchParams, deployment: DeploymentMode = "demo-only"): SelectionResult {
-  const mode = params.mode ?? (deployment === "demo-only" ? "illustrative" : "archive");
-  if (mode === "archive" && deployment === "demo-only") return { ok: false, reason: "disabled", message: "Archive access is disabled in this public demo. Only reviewed fictional examples are available." };
-  if (mode !== "archive" && mode !== "illustrative") {
-    return { ok: false, message: "Choose archive or illustrative as the dataset mode." };
+  const mode = params.mode ?? (deployment === "demo-only" ? "curated" : "archive");
+  if (mode === "archive" && deployment === "demo-only") return { ok: false, reason: "disabled", message: "Archive access is disabled in this public demo. Curated history and the fictional lab remain available." };
+  if (mode !== "archive" && mode !== "illustrative" && mode !== "curated") {
+    return { ok: false, message: "Choose curated, illustrative or archive as the dataset mode." };
   }
-  const date = params.date ?? (mode === "archive" ? DEFAULT_ARCHIVE_DATE : DEFAULT_ILLUSTRATIVE_DATE);
+  const date = params.date ?? (mode === "archive" ? DEFAULT_ARCHIVE_DATE : mode === "curated" ? DEFAULT_CURATED_DATE : DEFAULT_ILLUSTRATIVE_DATE);
   if (typeof date !== "string" || !isDateKey(date)) {
     return { ok: false, message: "Enter a valid date in YYYY-MM-DD format." };
   }
@@ -87,7 +85,7 @@ export type ArchiveReader = (date: string) => Promise<MatchViewModel[]>;
 
 export async function loadReplay(selection: ReplaySelection, readArchive: ArchiveReader, deployment: DeploymentMode = "demo-only"): Promise<ReplayResult> {
   // Validate at the service boundary too, so callers cannot accidentally query a real-clock day.
-  if (!parseReplaySelection(selection, deployment).ok) return { state: "error", matches: [], featured: null };
+  if (selection.mode === "curated" || !parseReplaySelection(selection, deployment).ok) return { state: "error", matches: [], featured: null };
   try {
     if (selection.mode === "illustrative" && (DEMO_PUBLICATION.decision !== "APPROVED_FOR_ORIGINAL_DEMO" || DEMO_PUBLICATION.datasetVersion !== DEMO_DATASET_VERSION)) {
       throw new Error("Demo publication review is missing.");
@@ -122,7 +120,7 @@ export async function loadReplayAnswers(
   readArchive: (id: string) => Promise<MatchQuestionAnswer[]>,
   deployment: DeploymentMode = "demo-only",
 ) {
-  if (selection.mode === "archive" && deployment === "demo-only") return { answers: [], failed: true };
+  if (selection.mode === "curated" || !parseReplaySelection(selection, deployment).ok) return { answers: [], failed: true };
   try {
     const answers = selection.mode === "illustrative"
       ? getCachedAnswersForMatch(matchId)

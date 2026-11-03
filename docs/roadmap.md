@@ -1,6 +1,6 @@
 # Historical replay and portfolio roadmap
 
-Status after the first replay implementation milestone (2026-11-02): public selection and presentation changes are implemented and locally validated, including independent review fixes; the original audit is committed separately. Delivery does not imply production archive availability. The current public default is the separate fictional-demo branch documented at the end of this roadmap. Later phases remain proposals. Use one focused PR per slice, each with evidence, tests, documentation, and an explicit completion check. Keep external services mocked by default and leave production mutations/deployment behind explicit user instructions. Findings refer to [audit.md](audit.md).
+Status after the first replay implementation milestone (2026-11-02): public selection and presentation changes are implemented and locally validated, including independent review fixes; the original audit is committed separately. Delivery does not imply production archive availability. The current public default is the five-record curated historical branch; the fictional lab and private archive remain distinct. Later phases remain proposals. Use one focused PR per slice, each with evidence, tests, documentation, and an explicit completion check. Keep external services mocked by default and leave production mutations/deployment behind explicit user instructions. Findings refer to [audit.md](audit.md).
 
 ## 1. Establish an honest replay surface (H1; public surface implemented)
 
@@ -114,7 +114,7 @@ Real browser QA found a 320px featured-card clipping defect, now addressed in re
 **Release follow-up verified:** `a8150be` passed hosted CI, automatic production deployment and public smoke checks. The 320px clipping defect was fixed and checked on the actual public domain; genuine desktop/mobile/focus captures are tracked with revision metadata. The original-demo deployment gate is complete. Remaining QA is broader cross-browser, screen-reader, contrast/touch-target and physical-device coverage; historical publication remains separately blocked by rights/lineage/backend work.
 
 
-## Curated historical centerpiece — HOLD after source review
+## Earlier curated historical review — internal HOLD (superseded below)
 
 The 2026-11-03 [candidate review](curated-history-review.md) verified the requested source fields but did not approve the exact public-source/branded portfolio release. FIFA's conditional noncommercial editorial website guidance is acknowledged; GitHub source-distribution compatibility, use context and existing name/domain remain scoped questions. This does not require an unrestricted licence to a provider database, and no such data was exported. The fictional public default and private archive remain intact.
 
@@ -123,3 +123,19 @@ The 2026-11-03 [candidate review](curated-history-review.md) verified the reques
 **Then implement:** a separate versioned curated module, reviewed result/round/venue/AET fields, original retrospective commentary, supporting links and date/detail/back navigation. Make it the public default only after approval.
 
 **Acceptance/tests:** exact approved tuples and provenance; event-day versus publication-day/timezone cases; final/AET presentation; attribution/rights status; fictional/private-archive isolation; no service fetches; unchanged authoring/cron denials; local/hosted CI and production/browser checks. These new historical record/UI tests were not added or reported as passing while the module is withheld. Deliver source inventory, approval decision, updated diagrams and genuine screenshots of any later approved release.
+
+
+## Owner-directed curated historical centerpiece — implemented 2026-11-03
+
+Supersedes the earlier internal HOLD for exactly five independently selected facts/records and original editorial context, version `wcl-curated-2026-v1`. It does not clear provider data, protected media, trademark use or unrestricted downstream redistribution. [Source/publication review](curated-history-review.md) records the owner decision, primary sources, access limits and remaining uncertainty.
+
+**Implemented acceptance:** public demo defaults to curated July 11; four working event-day links; five exact final results/stages/venues/AET labels; date-only storage with explicit unknowns; featured/list/detail/back navigation; original retrospective editorial context separate from Match Lens; primary attribution/review metadata; unofficial shared footer; separate explicit fictional lab and unchanged private Supabase archive/authoring guards. No external service is required for public browsing. The [worked example](architecture.md#curated-history-contract-and-worked-example) traces Norway–England.
+
+**Tests:** deterministic exact tuple, precision, AET, metadata, malformed-record/enum, empty/error, featured and isolation cases; shared local/remote HTTP expectations for all five details/four dates, attribution and guards; active local fetch-denial instrumentation; private archive mock regressions. CI/deployment/browser evidence remains revision-specific in [deployment.md](deployment.md).
+
+**Next independent phases:**
+
+1. Broader accessibility and responsive verification: keyboard-only form/links/Q&A at 320/390/1280px, screen-reader labels and focus/contrast checks. Add focused regression evidence and genuine captures; document browser/assistive-tool limits.
+2. Evidence maintenance: recheck source availability and date discrepancies; establish a reviewed source-revision/hash contract without redistributing protected documents. Acceptance: source changes cannot silently revise stored facts; tests and provenance review accompany any version change.
+3. Private archive contracts and honesty: track disposable schema/RPC/RLS; remove upstream 50/50 inputs and derived geography/code mistakes; add immutable source/capture/generation/cutoff lineage. Acceptance/tests/docs remain those in earlier phases; no automatic production migration or regeneration.
+4. Rights before expansion: independently assess branding, monetisation and broader dataset/source-distribution use. Acceptance: source/category decisions stay explicit; UNKNOWN inputs cannot inherit this five-record release decision. No bulk/provider export without its own approval.
