@@ -81,6 +81,21 @@ HTTP suites require localhost sockets and no other Next dev server in this check
 
 [GitHub Actions](.github/workflows/ci.yml) runs push/PR checks on Node 22 with `npm ci`, unit tests, lint, typecheck, build, both HTTP suites, production-server demo checks, invalid-flag isolation, and committed/generated whitespace checks. Official actions are pinned, permissions are read-only, no secrets are supplied, and steps/job have deadlines. [Hosted workflow results](https://github.com/jeffreymutethia/world-cup-lens/actions) are distinct from local evidence.
 
+## Production screenshots
+
+Captured from the public domain in Chrome on 2026-11-03; desktop/mobile captures show the responsive fix in `a8150be`. These show fictional examples only. [QA evidence and scope](docs/deployment.md).
+
+<details>
+<summary>Desktop and mobile captures</summary>
+
+<img src="docs/screenshots/production-desktop.png" alt="Production desktop match lab with featured scenario and match listing" width="800">
+
+<img src="docs/screenshots/production-mobile.png" alt="Production match lab at a 390-pixel mobile viewport" width="300">
+
+[320-pixel featured-card capture](docs/screenshots/production-mobile-320.png) · [Visible keyboard focus on cached questions](docs/screenshots/production-keyboard-focus.jpg)
+
+</details>
+
 ## Interpretation and remaining limits
 
 Public sample commentary is authored fiction, not a model response or scouting report. Its fixture times are navigation examples and its dataset version is explicitly `wcl-synthetic-v1`. In archive mode, cached AI text stays retrospective: publication/capture/generation times, historical knowledge cutoff, and database dataset version are unknown. A cache update is never converted into a pre-match forecast. Context snippets are not claim-level citations, and hidden placeholder metrics can still have influenced old commentary.
