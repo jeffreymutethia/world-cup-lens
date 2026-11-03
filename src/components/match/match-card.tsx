@@ -38,9 +38,9 @@ export function MatchCard({
             ))}
           </div>
 
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 sm:gap-3">
             <TeamMini team={homeTeam} />
-            <div className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+            <div className="max-w-16 rounded-full bg-slate-100 px-2 py-1 text-center text-xs font-bold text-slate-600 sm:max-w-none sm:px-3">
               {replayScore(match, selection.mode)}
             </div>
             <TeamMini team={awayTeam} align="right" />
@@ -48,9 +48,9 @@ export function MatchCard({
 
           <div className="mt-4 space-y-2 text-xs text-slate-500">
             <p>{formatKickoff(match.kickoffAt)}</p>
-            <p className="flex items-center gap-1">
-              <MapPin className="size-3.5" />
-              {venue.name}, {venue.city}
+            <p className="flex min-w-0 items-center gap-1">
+              <MapPin className="size-3.5 shrink-0" />
+              <span className="min-w-0 break-words">{venue.name}, {venue.city}</span>
             </p>
           </div>
 
@@ -74,7 +74,7 @@ export function MatchCard({
 
 function TeamMini({ team, align = "left" }: { team: Team; align?: "left" | "right" }) {
   return (
-    <div className={align === "right" ? "text-right" : ""}>
+    <div className={`min-w-0 break-words ${align === "right" ? "text-right" : ""}`}>
       <div className="text-3xl">{team.flag}</div>
       <p className="mt-1 text-sm font-semibold text-slate-950">{team.name}</p>
       <p className="text-xs text-slate-500">{team.code}</p>

@@ -48,9 +48,9 @@ export default async function MatchPage({ params, searchParams }: MatchPageProps
             <Badge variant="secondary">{stageLabel(match.group)}</Badge>
             <Badge variant="outline">{replayStatus(match, selection.mode)}</Badge>
           </div>
-          <div className="mx-auto grid w-full max-w-4xl grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-8">
+          <div className="mx-auto grid w-full max-w-4xl grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 sm:gap-8">
             <TeamHero flag={homeTeam.flag} name={homeTeam.name} code={homeTeam.code} />
-            <div className="rounded-2xl bg-slate-100 px-3 py-3 text-center text-xs font-bold text-slate-600 sm:text-sm">{replayScore(match, selection.mode)}</div>
+            <div className="max-w-16 rounded-2xl bg-slate-100 px-3 py-3 text-center text-xs font-bold text-slate-600 sm:max-w-none sm:text-sm">{replayScore(match, selection.mode)}</div>
             <TeamHero flag={awayTeam.flag} name={awayTeam.name} code={awayTeam.code} align="right" />
           </div>
           <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm text-slate-500">
@@ -75,5 +75,5 @@ export default async function MatchPage({ params, searchParams }: MatchPageProps
 }
 
 function TeamHero({ flag, name, code, align = "left" }: { flag: string; name: string; code: string; align?: "left" | "right" }) {
-  return <div className={align === "right" ? "text-right" : ""}><div className="text-5xl sm:text-7xl">{flag}</div><h1 className="mt-3 text-lg font-bold tracking-tight sm:text-3xl">{name}</h1><p className="mt-1 text-sm font-medium tracking-wide text-slate-500">{code}</p></div>;
+  return <div className={`min-w-0 break-words ${align === "right" ? "text-right" : ""}`}><div className="text-4xl sm:text-7xl">{flag}</div><h1 className="mt-3 text-base font-bold tracking-tight sm:text-3xl">{name}</h1><p className="mt-1 text-sm font-medium tracking-wide text-slate-500">{code}</p></div>;
 }

@@ -34,8 +34,8 @@ export function FeaturedMatchCard({
         </div>
       </div>
 
-      <CardContent className="grid gap-6 p-5 lg:grid-cols-[1.4fr_0.9fr]">
-        <div>
+      <CardContent className="grid min-w-0 grid-cols-1 gap-6 p-5 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,0.9fr)]">
+        <div className="min-w-0">
           <div className="mb-4 flex flex-wrap items-center gap-2">
             <Badge variant="secondary">{stageLabel(match.group)}</Badge>
             <Badge variant="outline">{replayStatus(match, selection.mode)}</Badge>
@@ -46,20 +46,20 @@ export function FeaturedMatchCard({
             ))}
           </div>
 
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4">
-            <div>
-              <div className="text-5xl">{homeTeam.flag}</div>
-              <h2 className="mt-2 text-2xl font-bold tracking-tight">{homeTeam.name}</h2>
+          <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 sm:gap-4">
+            <div className="min-w-0 break-words">
+              <div className="text-4xl sm:text-5xl">{homeTeam.flag}</div>
+              <h2 className="mt-2 text-base font-bold tracking-tight sm:text-2xl">{homeTeam.name}</h2>
               <p className="text-sm text-slate-500">{homeTeam.code}</p>
             </div>
 
-            <div className="rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-600">
+            <div className="max-w-16 rounded-full bg-slate-100 px-2 py-2 text-center text-xs font-bold text-slate-600 sm:max-w-none sm:px-4 sm:text-sm">
               {replayScore(match, selection.mode)}
             </div>
 
-            <div className="text-right">
-              <div className="text-5xl">{awayTeam.flag}</div>
-              <h2 className="mt-2 text-2xl font-bold tracking-tight">{awayTeam.name}</h2>
+            <div className="min-w-0 break-words text-right">
+              <div className="text-4xl sm:text-5xl">{awayTeam.flag}</div>
+              <h2 className="mt-2 text-base font-bold tracking-tight sm:text-2xl">{awayTeam.name}</h2>
               <p className="text-sm text-slate-500">{awayTeam.code}</p>
             </div>
           </div>
@@ -67,14 +67,14 @@ export function FeaturedMatchCard({
           <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-slate-600">
             <span>{formatKickoff(match.kickoffAt)}</span>
             <span className="hidden text-slate-300 sm:inline">•</span>
-            <span className="flex items-center gap-1">
-              <MapPin className="size-4" />
-              {venue.name}, {venue.city}
+            <span className="flex min-w-0 items-center gap-1">
+              <MapPin className="size-4 shrink-0" />
+              <span className="min-w-0 break-words">{venue.name}, {venue.city}</span>
             </span>
           </div>
         </div>
 
-        <div className="rounded-3xl bg-emerald-50 p-5">
+        <div className="min-w-0 rounded-3xl bg-emerald-50 p-5">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-800">
             Cached match analysis
           </p>
@@ -107,9 +107,9 @@ export function FeaturedMatchCard({
 
 function ForecastRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between rounded-2xl bg-white px-3 py-2 text-sm">
+    <div className="flex min-w-0 flex-col gap-1 rounded-2xl bg-white px-3 py-2 text-sm sm:flex-row sm:items-center sm:justify-between sm:gap-3">
       <span className="text-slate-500">{label}</span>
-      <span className="font-semibold text-slate-950">{value}</span>
+      <span className="min-w-0 break-words font-semibold text-slate-950">{value}</span>
     </div>
   );
 }

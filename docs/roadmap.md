@@ -102,3 +102,10 @@ The public default is now a reviewed, self-contained fictional lab, not an uncle
 Implemented acceptance: featured/list/detail, two-date exploration, stored sample Lens/Q&A, functional links, architecture walkthrough, original icon, license notices, and version/fiction labels. Tests cover missing/invalid configuration and credentials, disabled routes even with valid dummy secrets, an active zero-service-fetch tripwire, and missing/malformed examples. CI runs archive mocks and public demo checks separately. See the source/provenance/rights documents for boundaries.
 
 Release gate for this original demo: identify/connect an existing authorized Vercel target, verify demo-only configuration without service keys/cron, build/review, and perform public GET smoke tests. Do not create paid resources or infer deployment from local success. Next historical work remains source rights/lineage, reproducible schema/RLS and upstream placeholder removal. Broader visual/accessibility testing and repository-history/license review remain separate work.
+
+
+## Public deployment — first release verified
+
+On 2026-11-03 the existing `jt254/world-cup-lens` project deployed reviewed commit `8299114` to https://world-cup-lens-one.vercel.app. Dashboard evidence confirmed production `main`, Next.js/root, no service credentials, demo-only production flag and disabled platform cron. Public smoke tests passed; an explicit bounded production HTTP command was added. No empty trigger commit or duplicate project was needed.
+
+Real browser QA found a 320px featured-card clipping defect, now addressed in release follow-up sizing. Maintain genuine screenshots and final revision evidence in [deployment.md](deployment.md). Next: broaden browser/device, screen-reader and accessibility automation; complete historical rights/lineage and reproducible backend contracts before any historical publication. Public availability does not clear those source rights or authenticate old forecasts.

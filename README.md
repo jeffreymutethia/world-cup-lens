@@ -2,6 +2,8 @@
 
 A football intelligence portfolio application with a **self-contained fictional match lab** and a separate historical-archive integration. It demonstrates date-based browsing, a featured matchup, cached commentary, preset Q&A, honest provenance labels, and a guarded authoring architecture.
 
+**[Open the public demo](https://world-cup-lens-one.vercel.app)** · [How it works](https://world-cup-lens-one.vercel.app/about)
+
 **Default deployment: demo-only.** No database, Supabase key, OpenAI key, API-FOOTBALL key, or paid request is needed to browse it. The examples are newly authored fiction, not official World Cup fixtures or results. No public historical dataset export is approved.
 
 ## Run the demo
@@ -85,6 +87,8 @@ Public sample commentary is authored fiction, not a model response or scouting r
 
 Historical provider/derived-source rights remain UNKNOWN. Public GitHub historical exports remain NOT_APPROVED; historical web display requires review. The separate original-demo decision is limited to the newly authored content and reviewed assets, not all repository history or third-party marks. The user's project name is not a claim of official tournament affiliation.
 
-**Deployment:** no verified public URL is documented yet. An existing authorized Vercel target must be identified/connected before deployment; do not create paid resources. Minimum public configuration is demo-only, with no service keys or cron. The actual delivery handoff records deployment/browser evidence; this README does not invent it.
+**Deployment:** the existing `jt254/world-cup-lens` Vercel project serves [world-cup-lens-one.vercel.app](https://world-cup-lens-one.vercel.app). The first production release of `8299114` was verified on 2026-11-03. Production tracks `main`, uses Next.js at the repository root, Node 22 and `WCL_DEPLOYMENT_MODE=demo-only`, and needs no service credentials. Project cron execution is disabled and no schedule is declared. See [deployment and QA evidence](docs/deployment.md) for commit-specific verification and limits.
 
-Next work: establish reproducible backend/source lineage and rights before historical publication, broaden browser/accessibility coverage, and verify an existing deployment connection. See the [roadmap](docs/roadmap.md).
+`npm run test:production-http` checks this public demo with bounded, unauthenticated requests, including disabled admin/cron responses; it never sends service secrets. Use `DEMO_URL=https://your-verified-demo.example npm run test:production-http` only for another authorized demo-only release. This is an explicit remote check, separate from credential-free local CI.
+
+Next work: establish reproducible backend/source lineage and rights before historical publication, broaden browser/accessibility coverage and maintain deployment verification. See the [roadmap](docs/roadmap.md).
