@@ -102,6 +102,8 @@ HTTP suites run sequentially with localhost access, request/run deadlines and bo
 
 Existing Vercel project `jt254/world-cup-lens` tracks `main`, Next.js at repository root, Node 22 and only non-secret `WCL_DEPLOYMENT_MODE=demo-only`; no service credentials or recurring cron are needed. [Deployment evidence](docs/deployment.md) separates revision-specific CI/deployment, public HTTP and browser QA from implementation claims.
 
+Curated runtime `104f984` was automatically deployed and passed hosted CI plus seven public HTTP check groups. Current browser automation could not maintain a stable tab (browser host unavailable; native Chrome timed out), so no new historical screenshot or desktop/mobile visual-QA pass is claimed. See the revision-specific evidence above.
+
 Earlier [desktop](docs/screenshots/production-desktop.png) and [mobile](docs/screenshots/production-mobile.png) captures depict fictional revision `a8150be`, not the new historical homepage. They remain genuine prior-release evidence; current screenshots are linked only after capture and inspection.
 
 Remaining work: broaden accessibility/browser checks, maintain source evidence/review versions, assess rights before broader reuse, track reproducible database contracts/RLS, and repair upstream placeholder inputs and immutable historical lineage. No production-readiness or legal-clearance claim is made.

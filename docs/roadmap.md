@@ -131,7 +131,7 @@ Supersedes the earlier internal HOLD for exactly five independently selected fac
 
 **Implemented acceptance:** public demo defaults to curated July 11; four working event-day links; five exact final results/stages/venues/AET labels; date-only storage with explicit unknowns; featured/list/detail/back navigation; original retrospective editorial context separate from Match Lens; primary attribution/review metadata; unofficial shared footer; separate explicit fictional lab and unchanged private Supabase archive/authoring guards. No external service is required for public browsing. The [worked example](architecture.md#curated-history-contract-and-worked-example) traces Norway–England.
 
-**Tests:** deterministic exact tuple, precision, AET, metadata, malformed-record/enum, empty/error, featured and isolation cases; shared local/remote HTTP expectations for all five details/four dates, attribution and guards; active local fetch-denial instrumentation; private archive mock regressions. CI/deployment/browser evidence remains revision-specific in [deployment.md](deployment.md).
+**Tests:** deterministic exact tuple, precision, AET, metadata, malformed-record/enum, empty/error, featured and isolation cases; shared local/remote HTTP expectations for all five details/four dates, attribution and guards; active local fetch-denial instrumentation; private archive mock regressions. Runtime `104f984` passed hosted CI, automatic Vercel deployment and seven production HTTP groups. Current interactive/browser QA remains blocked by automation availability; earlier fictional screenshots are not historical UI evidence. Details are revision-specific in [deployment.md](deployment.md).
 
 **Next independent phases:**
 
