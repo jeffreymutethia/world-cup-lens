@@ -1,0 +1,68 @@
+name: CI
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      # Deliberately unusable local settings; no repository/environment secrets.
+      NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:9
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ci-dummy-publishable
+      SUPABASE_SECRET_KEY: ""
+      OPENAI_API_KEY: ""
+      API_FOOTBALL_KEY: ""
+      ADMIN_GENERATION_SECRET: ""
+      CRON_SECRET: ""
+    steps:
+      - name: Check out source
+        timeout-minutes: 1
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Set up Node.js 22
+        timeout-minutes: 2
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+        timeout-minutes: 5
+      - name: Deterministic tests
+        run: npm test
+        timeout-minutes: 2
+      - name: Lint
+        run: npm run lint
+        timeout-minutes: 2
+      - name: Typecheck
+        run: npm run typecheck
+        timeout-minutes: 2
+      - name: Production build
+        run: npm run build
+        timeout-minutes: 3
+      - name: Mock HTTP replay checks
+        run: npm run test:replay-http
+        timeout-minutes: 3
+      - name: Check committed and generated whitespace
+        timeout-minutes: 1
+        env:
+          CI_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [[ -z "$CI_BASE_SHA" || "$CI_BASE_SHA" =~ ^0+$ ]]; then
+            git show --format= --check HEAD
+          else
+            [[ "$CI_BASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+            git diff --check "$CI_BASE_SHA" HEAD --
+          fi
+          git diff --check

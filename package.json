@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node scripts/test.mjs",
-    "test:replay-http": "node scripts/verify-replay.mjs"
+    "test:replay-http": "node scripts/verify-replay.mjs",
+    "typecheck": "next typegen && tsc --noEmit --incremental false"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",
@@ -35,5 +36,8 @@
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22.13.0 <23"
   }
 }

@@ -47,13 +47,31 @@ await new Promise((resolve) => probe.close(resolve));
 const app = spawn(process.execPath, ["node_modules/next/dist/bin/next", "dev", "--hostname", "127.0.0.1", "--port", String(port)], {
   env: { ...process.env, NEXT_PUBLIC_SUPABASE_URL: `http://127.0.0.1:${mock.address().port}`, NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "local-test-publishable", SUPABASE_SECRET_KEY: "local-test-secret", OPENAI_API_KEY: "local-test-unused", API_FOOTBALL_KEY: "local-test-unused", NEXT_TELEMETRY_DISABLED: "1" },
   stdio: ["ignore", "pipe", "pipe"],
+  detached: process.platform !== "win32",
 });
+function signalApp(signal) {
+  try {
+    if (process.platform === "win32") app.kill(signal);
+    else process.kill(-app.pid, signal); // Include Next's development-server child.
+  } catch (error) {
+    if (error.code !== "ESRCH") throw error;
+  }
+}
 let ready = false;
+const appExited = new Promise((resolve) => app.once("exit", resolve));
+const watchdog = setTimeout(() => {
+  console.error("Replay HTTP checks exceeded the 120 second deadline");
+  signalApp("SIGKILL");
+  mock.closeAllConnections();
+  mock.close();
+  process.exit(1);
+}, 120_000);
+watchdog.unref();
 app.stdout.on("data", (data) => { if (data.toString().includes("Ready")) ready = true; });
 app.stderr.on("data", () => {}); // Do not dump environment/provider diagnostics.
 const base = `http://127.0.0.1:${port}`;
 async function page(path) {
-  const response = await fetch(base + path);
+  const response = await fetch(base + path, { signal: AbortSignal.timeout(15_000) });
   assert.equal(response.status, 200, path);
   return response.text();
 }
@@ -115,7 +133,12 @@ try {
   assert.equal(databaseReads, reads, "Illustrative and invalid selections must not query Supabase");
   console.log("PASS wrong-date detail / invalid and out-of-range inputs / zero archive reads in illustrative mode");
 } finally {
-  app.kill("SIGTERM");
-  await new Promise((resolve) => { if (app.exitCode !== null) resolve(); else app.once("exit", resolve); });
+  clearTimeout(watchdog);
+  signalApp("SIGTERM");
+  const forceStop = setTimeout(() => signalApp("SIGKILL"), 5_000);
+  await Promise.race([appExited, delay(6_000)]);
+  signalApp("SIGKILL");
+  clearTimeout(forceStop);
+  mock.closeAllConnections();
   await new Promise((resolve) => mock.close(resolve));
 }
