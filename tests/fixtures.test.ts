@@ -42,4 +42,3 @@ test('removing the unused CLI preserves its exact licensed CSS body',async()=>{
   assert.ok(readFileSync('src/app/globals.css','utf8').includes('@import "./shadcn-base.css"'));
   assert.equal(Object.hasOwn(JSON.parse(readFileSync('package.json','utf8')).dependencies,'shadcn'),false);
 });
-
