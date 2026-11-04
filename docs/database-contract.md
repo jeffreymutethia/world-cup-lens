@@ -41,7 +41,8 @@ The five readable presentation tables also have `data_origin` (default unknown) 
 
 ```mermaid
 erDiagram
-  teams ||--o{ matches : opponents
+  teams ||--o{ matches : home_team
+  teams ||--o{ matches : away_team
   venues ||--o{ matches : venue
   teams o|--o{ documents : scope
   venues o|--o{ documents : scope
