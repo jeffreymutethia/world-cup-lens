@@ -14,12 +14,12 @@ try {
   await checkCuratedPages(page);
   let result = await page("/matches/copper-tidal?mode=illustrative&date=2026-06-11");
   assert.equal(result.status, 200);
-  assert.ok(result.html.includes("patient passing plan") && result.html.includes("Explore cached questions") && result.html.includes("wcl-synthetic-v1") && result.html.includes("No real result"));
+  assert.ok(result.html.includes("Patient passing against counterplay") && result.html.includes("Stored questions") && result.html.includes("wcl-synthetic-v2") && result.html.includes("No real result"));
   console.log("PASS separate fictional lab retains sample Lens and Q&A");
 
   for (const [path, expected] of [
     ["/?mode=illustrative&date=2026-06-12", "second-day example"],
-    ["/about", "Public demo"],
+    ["/about", "How it works"],
     ["/?date=2026-02-30", "Invalid replay selection"],
     ["/?mode=illustrative&date=2026-06-13", "No illustrative examples for this date"],
   ]) {
@@ -33,7 +33,7 @@ try {
   for (const path of ["/?mode=archive", "/matches/provider-id?mode=archive&date=2026-07-11"]) {
     result = await page(path);
     assert.equal(result.status, 200);
-    assert.ok(result.html.includes("Archive disabled in public demo") && !result.html.includes("A patient passing plan"));
+    assert.ok(result.html.includes("Archive disabled in public demo") && !result.html.includes("A Patient passing against counterplay"));
   }
   console.log("PASS explicit archive access denied without sample substitution");
   for (const path of ["documents/embed", "documents/sync-provider", "fixtures/sync", "lenses/generate-today", "matches/disabled-check/generate-lens", "pipeline/today"]) {

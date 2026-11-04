@@ -38,7 +38,7 @@ export function MatchLensCards({
 
       <InsightCard
         icon={Route}
-        title="Likely game script"
+        title="Expected pattern"
         body={lens.likelyGameScript}
       />
 
@@ -46,13 +46,13 @@ export function MatchLensCards({
 
       <ListCard
         icon={Eye}
-        title="What to watch"
+        title="Points to consider"
         items={lens.whatToWatch}
       />
 
       <InsightCard
         icon={Users}
-        title="Casual fan guide"
+        title="The simple version"
         body={lens.casualFanGuide}
       />
 

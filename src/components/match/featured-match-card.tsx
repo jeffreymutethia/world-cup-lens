@@ -6,7 +6,7 @@ import { formatKickoff } from "@/lib/lens";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Flame, MapPin } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 
 type FeaturedMatchCardProps = {
   match: Match;
@@ -29,8 +29,7 @@ export function FeaturedMatchCard({
     <Card className="overflow-hidden border-0 bg-white shadow-sm">
       <div className="bg-emerald-800 px-5 py-3 text-white">
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]">
-          <Flame className="size-4" />
-          {selection.mode === "illustrative" ? "Featured illustrative matchup" : "Featured archived matchup"}
+          {selection.mode === "illustrative" ? "Featured fictional scenario" : "Featured archived match"}
         </div>
       </div>
 
@@ -76,26 +75,26 @@ export function FeaturedMatchCard({
 
         <div className="min-w-0 rounded-3xl bg-emerald-50 p-5">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-800">
-            Cached match analysis
+            {selection.mode === "illustrative" ? "Sample commentary" : "Stored commentary"}
           </p>
 
-          <div className="space-y-3">
+          {selection.mode === "archive" && <><div className="space-y-3">
             <ForecastRow
-              label="Stored edge opinion"
+              label="Edge opinion"
               value={lens ? (storedEdgeLabel(lens.slightEdge)) : "Unavailable"}
             />
-            <ForecastRow label="Stored confidence label" value={lens?.confidence ?? "Unavailable"} />
-            <ForecastRow label="Stored volatility label" value={lens?.volatility ?? "Unavailable"} />
+            <ForecastRow label="Confidence label" value={lens?.confidence ?? "Unavailable"} />
+            <ForecastRow label="Volatility label" value={lens?.volatility ?? "Unavailable"} />
           </div>
 
-          <p className="mt-4 text-xs text-slate-600">Uncalibrated commentary labels, not measured performance or probabilities.</p>
+          <p className="mt-4 text-xs text-slate-600">Opinion labels, not measurements or probabilities.</p></>}
           <p className="mt-5 text-sm leading-6 text-emerald-950">
             {lens?.expectedGame ?? "No cached analysis is available. Open the match to view its stored details."}
           </p>
 
           <Button asChild className="mt-5 w-full bg-emerald-700 hover:bg-emerald-800">
             <Link href={replayHref(selection, match.id)}>
-              View Lens
+              {selection.mode === "illustrative" ? "View scenario" : "View match"}
               <ArrowRight className="ml-2 size-4" />
             </Link>
           </Button>

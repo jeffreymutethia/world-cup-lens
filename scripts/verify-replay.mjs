@@ -87,7 +87,7 @@ try {
   }
   assert.ok(ready, "Local Next server readiness timed out");
   let html = await page("/");
-  assert.ok(html.includes("Archived matches") && html.includes("Mock Home"));
+  assert.ok(html.includes("Provider archive") && html.includes("Mock Home"));
   assert.ok(html.includes("mode=archive&amp;date=2026-07-11"));
   assert.ok(html.includes("mock-archive-match?mode=archive&amp;date=2026-07-11"));
   assert.ok(!html.includes("Copper Vale"));
@@ -98,9 +98,9 @@ try {
   assert.ok(!html.includes("First Half"));
   console.log("PASS archive detail / stale status suppressed / no invented final score");
   assert.ok(!html.includes("Unsupported numeric edge sentinel"));
-  assert.ok(html.includes("Team comparison unavailable") && html.includes("No edge stated"));
-  assert.ok(html.includes("Uncalibrated commentary labels") && html.includes("Stored context snippets"));
-  assert.ok(html.includes("not claim-level citations or proof") && html.includes("Stored wording is preserved"));
+  assert.ok(html.includes("Team comparison is unavailable") && html.includes("No edge stated"));
+  assert.ok(html.includes("Opinion labels") && html.includes("Stored context snippets"));
+  assert.ok(html.includes("not proof of each claim") && html.includes("Stored wording is preserved"));
   assert.ok(html.includes("Analysis generation time") && html.includes("Dataset version"));
   assert.ok(html.includes(cacheUpdatedAt) && html.includes("Cache last updated (not generation time)"));
   assert.match(html, /Analysis generation time<\/dt><dd>Unknown<\/dd>/);
@@ -115,7 +115,7 @@ try {
     metricsResponse = metrics;
     html = await page("/matches/mock-archive-match?mode=archive&date=2026-07-11");
     assert.ok(html.includes("Mock cached retrospective analysis") && html.includes("Mock significance."));
-    assert.ok(html.includes("Team comparison unavailable") && !html.includes("Cached Match Lens unavailable"));
+    assert.ok(html.includes("Team comparison is unavailable") && !html.includes("Cached Match Lens unavailable"));
   }
   metricsResponse = "present";
   console.log("PASS hidden/missing/malformed numerical metrics; qualitative copy and unknown provenance retained");
@@ -145,11 +145,11 @@ try {
   console.log("PASS malformed Lens/QA and cache query failures preserve fixture rendering");
   const reads = databaseReads;
   html = await page("/?mode=illustrative&date=2026-06-11");
-  assert.ok(html.includes("Illustrative examples") && html.includes("Copper Vale"));
+  assert.ok(html.includes("Fictional examples") && html.includes("Copper Vale"));
   assert.ok(html.includes("copper-tidal?mode=illustrative&amp;date=2026-06-11"));
   html = await page("/matches/copper-tidal?mode=illustrative&date=2026-06-11");
-  assert.ok(html.includes("Synthetic illustrative commentary") && html.includes("Copper Vale"));
-  assert.ok(html.includes("Illustrative context examples") && html.includes("newly authored fiction"));
+  assert.ok(html.includes("Fictional sample commentary") && html.includes("Copper Vale"));
+  assert.ok(html.includes("Scenario notes") && html.includes("Invented teams"));
   assert.ok(!html.includes("VS</span>"));
   assert.ok(html.includes('/?mode=illustrative&amp;date=2026-06-11'));
   console.log("PASS explicit illustrative list/detail and back navigation");

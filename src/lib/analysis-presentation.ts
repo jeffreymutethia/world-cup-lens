@@ -3,12 +3,12 @@ import type { DatasetMode } from "./replay";
 
 export function analysisPresentation(mode: DatasetMode) {
   return {
-    label: mode === "illustrative" ? "Synthetic illustrative commentary" : "Stored AI commentary — retrospective",
-    contextLabel: mode === "illustrative" ? "Illustrative context examples" : "Stored context snippets",
+    label: mode === "illustrative" ? "Fictional sample commentary" : "Stored AI commentary — retrospective",
+    contextLabel: mode === "illustrative" ? "Scenario notes" : "Stored context snippets",
     // No current dataset has a documented per-metric methodology or source lineage.
     showNumericalTeamEdges: false as const,
-    metricsMessage: "Team comparison unavailable: no sourced measurement methodology is recorded.",
-    contextMessage: "These snippets are stored context, not claim-level citations or proof. Source identity, dates, and rights may be incomplete.",
+    metricsMessage: "Team comparison is unavailable: comparable measurements are not supplied.",
+    contextMessage: mode === "illustrative" ? "Original notes describe the assigned fictional styles. They are not external sources." : "These notes provide context, not proof of each claim. Their sources, dates and publication rights may be incomplete.",
   };
 }
 

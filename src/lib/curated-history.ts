@@ -4,7 +4,7 @@ import { isDateKey } from "./calendar-date";
 export { CURATED_DATASET_VERSION, CURATED_PUBLICATION };
 export const DEFAULT_CURATED_DATE = "2026-07-11";
 export const CURATED_DATES = ["2026-06-11", "2026-06-12", "2026-07-11", "2026-07-19"] as const;
-export const NON_AFFILIATION_NOTICE = "Independent, unofficial portfolio project. Not affiliated with, sponsored by or endorsed by FIFA or any national association.";
+export const NON_AFFILIATION_NOTICE = "Independent portfolio project. Not affiliated with FIFA or any national association.";
 
 export type CuratedMatch = {
   id: string; homeTeam: string; awayTeam: string; eventDate: string;
@@ -68,3 +68,19 @@ export function curatedResultLabel(match: CuratedMatch) {
   return match.afterExtraTime ? "Final result · AET (after extra time)" : "Final result · normal time";
 }
 export function curatedScore(match: CuratedMatch) { return `${match.finalScore.home}–${match.finalScore.away}`; }
+
+
+export function secondaryCuratedMatches(matches: readonly CuratedMatch[], featuredId: string) {
+  return matches.filter(match => match.id !== featuredId);
+}
+
+export function sourceLabel(match: CuratedMatch) {
+  return match.source.url.includes("match-schedule-fixtures") ? "FIFA schedule and results" :
+    match.source.identity === "FIFA Training Centre" ? "FIFA Training Centre match report" : "FIFA match report";
+}
+
+// Original typographic abbreviations, not association logos or provider identifiers.
+export function teamMonogram(name: string) {
+  const labels: Record<string, string> = { Mexico: "MEX", "South Africa": "RSA", USA: "USA", Paraguay: "PAR", Norway: "NOR", England: "ENG", Argentina: "ARG", Switzerland: "SUI", Spain: "ESP" };
+  return labels[name] ?? name.slice(0, 3).toUpperCase();
+}

@@ -24,7 +24,7 @@ export function parseReplaySelection(params: ReplaySearchParams, deployment: Dep
   const mode = params.mode ?? (deployment === "demo-only" ? "curated" : "archive");
   if (mode === "archive" && deployment === "demo-only") return { ok: false, reason: "disabled", message: "Archive access is disabled in this public demo. Curated history and the fictional lab remain available." };
   if (mode !== "archive" && mode !== "illustrative" && mode !== "curated") {
-    return { ok: false, message: "Choose curated, illustrative or archive as the dataset mode." };
+    return { ok: false, message: "Choose World Cup matches, the fictional lab or an enabled private archive." };
   }
   const date = params.date ?? (mode === "archive" ? DEFAULT_ARCHIVE_DATE : mode === "curated" ? DEFAULT_CURATED_DATE : DEFAULT_ILLUSTRATIVE_DATE);
   if (typeof date !== "string" || !isDateKey(date)) {

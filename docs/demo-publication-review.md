@@ -26,8 +26,15 @@ No exhaustive search for incidental fictional-name collisions was conducted. Nam
 
 ## Publication and security gate
 
-Only the reviewed module is reachable as public illustrative content. `WCL_DEPLOYMENT_MODE` defaults/fails closed to `demo-only`; that mode defaults to illustrative June 11, hides archive controls, rejects explicit archive requests, and denies every supported admin/cron method before auth/work. Archive readers and authoring work are imported lazily after the relevant checks. Missing production credentials are supported, not silently repaired with provider data.
+Only the reviewed module is reachable as public illustrative content. `WCL_DEPLOYMENT_MODE` defaults/fails closed to `demo-only`; the original release defaulted to illustrative June 11; current public defaults select the separately reviewed curated history and hide private archive controls, rejects explicit archive requests, and denies every supported admin/cron method before auth/work. Archive readers and authoring work are imported lazily after the relevant checks. Missing production credentials are supported, not silently repaired with provider data.
 
 The demo HTTP harness runs with empty service credentials and an active fetch-denial tripwire, exercises browsing plus blocked local routes using matching dummy secrets, and asserts zero service fetches. These are local mock/security checks, not permission to run production authoring. No scheduled cron is declared. Runtime policy does not retroactively change dataset rights.
 
 Publication approval for these new examples is distinct from actual deployment. A deployment requires an identified existing authorized Vercel target and must use demo-only configuration without service keys. No new paid account/project, billing, cron, historical export, or production data write is authorized by this document. See the audit/final handoff for actual connection and deployment results.
+
+
+## v2 editorial cleanup and interface review
+
+`wcl-synthetic-v2` preserves the four fictional teams, two settings and three scenarios, with rewritten original sample copy/Q&A. Puzzle, blanket and garden metaphors were removed in favor of direct descriptions of assigned styles. No real-world evidence, outside excerpts, statistics, logo or photo was introduced. The same scoped original-demo/source/web decision applies to this independently authored revision through the explicit `reviewed-synthetic-demo-v2` registry entry; unrelated UNKNOWN categories do not inherit approval.
+
+The redesigned header uses an original generic circular pitch/crosshair drawing and plain typographic abbreviations. Decorative shapes are not official badges or logos and are hidden from assistive technology. Existing Lucide icons remain covered by their software notices; system fonts require no binary redistribution. The source reference package remains reference material, not an app asset or a production screenshot. Actual release/visual evidence belongs in [deployment.md](deployment.md) and [design.md](design.md).

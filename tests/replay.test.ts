@@ -1,6 +1,6 @@
 import { curatedMatches } from "../src/data/curated-history";
-import { loadCuratedHistory, isCuratedMatch, curatedScore, curatedResultLabel, CURATED_DATES, CURATED_PUBLICATION, NON_AFFILIATION_NOTICE } from "../src/lib/curated-history";
-import { formatEventDate } from "../src/lib/calendar-date";
+import { loadCuratedHistory, isCuratedMatch, curatedScore, curatedResultLabel, CURATED_DATES, CURATED_PUBLICATION, NON_AFFILIATION_NOTICE, secondaryCuratedMatches, sourceLabel, teamMonogram } from "../src/lib/curated-history";
+import { formatEventDate, formatMatchDay } from "../src/lib/calendar-date";
 import { buildIllustrativeViewModel } from "../src/lib/lens";
 import { deploymentMode, type DeploymentMode } from "../src/lib/deployment-mode";
 import { buildIllustrativeAnswers, DEMO_PUBLICATION, DEMO_DATASET_VERSION, teams, venues, matches as demoMatches, cachedLenses } from "../src/data/seed";
@@ -211,10 +211,10 @@ test("missing or malformed hidden metrics do not suppress readable qualitative c
 
 test("archive commentary and synthetic examples have distinct provenance and non-citation context labels", () => {
   assert.match(analysisPresentation("archive").label, /Stored AI commentary.*retrospective/);
-  assert.match(analysisPresentation("illustrative").label, /Synthetic illustrative/);
+  assert.match(analysisPresentation("illustrative").label, /Fictional sample/);
   assert.equal(analysisPresentation("archive").contextLabel, "Stored context snippets");
-  assert.equal(analysisPresentation("illustrative").contextLabel, "Illustrative context examples");
-  assert.match(analysisPresentation("archive").contextMessage, /not claim-level citations or proof/);
+  assert.equal(analysisPresentation("illustrative").contextLabel, "Scenario notes");
+  assert.match(analysisPresentation("archive").contextMessage, /not proof of each claim/);
 });
 
 test("cache dates and replay selection can never create an authenticated pre-kickoff forecast", () => {
@@ -362,7 +362,7 @@ test("curated records retain primary attribution, evidence dates and a narrowly 
     assert.ok(match.source.identity.startsWith("FIFA"));
     assert.equal(match.source.reviewedOn, "2026-11-03");
     assert.equal(match.source.accessedOn, "2026-11-03");
-    assert.equal(match.datasetVersion, "wcl-curated-2026-v1");
+    assert.equal(match.datasetVersion, "wcl-curated-2026-v2");
   }
   assert.equal(CURATED_PUBLICATION.openDataLicense, false);
   assert.equal(CURATED_PUBLICATION.trademarkClearance, "UNRESOLVED");
@@ -371,9 +371,9 @@ test("curated records retain primary attribution, evidence dates and a narrowly 
 });
 
 test("unofficial presentation is shared by all public page shells", () => {
-  assert.match(NON_AFFILIATION_NOTICE, /unofficial/);
-  assert.match(NON_AFFILIATION_NOTICE, /Not affiliated with, sponsored by or endorsed by FIFA/);
-  assert.match(readFileSync("src/components/layout/app-shell.tsx", "utf8"), /<footer[^>]*>\{NON_AFFILIATION_NOTICE\}/);
+  assert.match(NON_AFFILIATION_NOTICE, /Independent portfolio project/);
+  assert.match(NON_AFFILIATION_NOTICE, /Not affiliated with FIFA or any national association/);
+  assert.match(readFileSync("src/components/layout/app-shell.tsx", "utf8"), /<p>\{NON_AFFILIATION_NOTICE\}<\/p>/);
 });
 
 test("curated empty dates and invalid records do not produce fictional replacements", () => {
@@ -407,4 +407,49 @@ test("curated browsing cannot enter legacy Lens or archive readers", async () =>
   const fictional = await loadReplayCore(illustrative, forbidden);
   assert.ok(fictional.matches.every(m => !curatedMatches.some(c => c.id === m.match.id)));
   assert.equal(loadCuratedHistory("2026-06-11").matches.some(m => m.id === "copper-tidal"), false);
+});
+
+
+test("secondary fixtures never repeat the featured match on any selected date", () => {
+  for (const date of CURATED_DATES) {
+    const result = loadCuratedHistory(date);
+    assert.equal(result.state, "ready");
+    const others = secondaryCuratedMatches(result.matches, result.featured!.id);
+    assert.ok(others.every(match => match.id !== result.featured!.id));
+    assert.equal(others.length, date === "2026-07-11" ? 1 : 0);
+  }
+});
+
+test("source labels distinguish the results schedule from match reports", () => {
+  assert.equal(sourceLabel(curatedMatches[2]), "FIFA schedule and results");
+  assert.equal(sourceLabel(curatedMatches[1]), "FIFA Training Centre match report");
+  assert.equal(sourceLabel(curatedMatches[4]), "FIFA match report");
+});
+
+test("matchday labels remain calendar-only and monograms are plain typography", () => {
+  assert.equal(formatMatchDay("2026-07-11"), "11 July 2026");
+  assert.equal(formatMatchDay("2026-06-12", true), "12 Jun");
+  assert.equal(formatMatchDay("2026-02-30"), "Date unavailable");
+  for (const match of curatedMatches) for (const team of [match.homeTeam, match.awayTeam]) assert.match(teamMonogram(team), /^[A-Z]{3}$/);
+});
+
+test("edited editorial and fictional copy removes metaphors without adding measurements", () => {
+  assert.equal(CURATED_PUBLICATION.datasetVersion, "wcl-curated-2026-v2");
+  assert.equal(DEMO_DATASET_VERSION, "wcl-synthetic-v2");
+  const copy = JSON.stringify([...curatedMatches.map(match => match.editorial), ...Object.values(cachedLenses)]);
+  for (const phrase of ["arranging a puzzle", "stretches a blanket", "through the same garden", "a sharper way", "different lens"]) assert.ok(!copy.includes(phrase));
+  assert.match(curatedMatches[2].editorial.paragraphs[0], /reaching the semi-finals/);
+  assert.equal(sourceRights("curated-history-2026-v2").publicWebDisplay, "FIVE_CURATED_RECORDS_ONLY");
+  assert.equal(sourceRights("reviewed-synthetic-demo-v2").publicWebDisplay, "APPROVED_ORIGINAL_DEMO_ONLY");
+});
+
+test("archive palette meets normal-text AA contrast on its stated surfaces", () => {
+  function luminance(hex: string) {
+    const rgb = hex.match(/[0-9a-f]{2}/gi)!.map(value => parseInt(value, 16) / 255).map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4);
+    return rgb[0] * .2126 + rgb[1] * .7152 + rgb[2] * .0722;
+  }
+  for (const [text, background] of [["596b61", "f4f6f0"], ["596b61", "ffffff"], ["ffffff", "155845"], ["c3e3d6", "155845"], ["143a29", "d9f47e"], ["50664f", "e9efe5"]]) {
+    const a = luminance(text), b = luminance(background);
+    assert.ok((Math.max(a, b) + .05) / (Math.min(a, b) + .05) >= 4.5, `${text} on ${background}`);
+  }
 });

@@ -26,7 +26,7 @@ Read-only sample: two provider-linked July 11 fixtures and two cached Lens rows 
 | Editorial or curated snippets | `src/data/seed.ts`; otherwise bodies already in Supabase `documents` | Synthetic editorial examples, templated profile excerpts, or UNKNOWN origin | No tracked article importer or Q&A writer. A title such as “Tournament format” is not proof a publisher document exists. No external source identity can be invented from it. |
 | Cached AI Lens | OpenAI Responses + supplied team/venue/context in `ai/generate-match-lens.ts` | Model-generated interpretation with deterministic snippets; confidence/volatility are editorial labels | `generateAndSaveMatchLens` persists JSON/model/update per match; no immutable input/source/prompt lineage is saved. Proofreading is another model call. None were executed for this milestone. |
 | Cached Q&A | Seed examples, or Supabase `qa_answers` | Editorial/cached text; model-generated origin for arbitrary DB answers UNKNOWN | Public code only reads/validates answers. It does not generate them. |
-| Current illustrative fixtures/examples | Replacement `src/data/seed.ts`, version `wcl-synthetic-v1` | Newly authored fictional teams, locations, styles and Q&A, alphabetic initials, null strengths, no real outcomes | Scoped new original-demo publication review; not the old UNKNOWN illustrative corpus in Git history. |
+| Current illustrative fixtures/examples | Replacement `src/data/seed.ts`, version `wcl-synthetic-v2` | Newly authored fictional teams, locations, styles and Q&A, alphabetic initials, null strengths, no real outcomes | Scoped new original-demo publication review; not the old UNKNOWN illustrative corpus in Git history. |
 
 Rights/attribution and separate GitHub-versus-web decisions for these categories are in [data-rights.md](data-rights.md). The runtime review registry `src/lib/data-rights.ts` keeps the eight legacy/provider categories UNKNOWN/NOT_APPROVED/REVIEW_REQUIRED. The reviewed-synthetic-demo-v1 category has original-demo approval; curated-history-2026-v1 has a separate owner-directed five-record editorial decision, not blanket licensing. It is not an exporter or a rights-enforcement service.
 
@@ -41,7 +41,7 @@ Rights/attribution and separate GitHub-versus-web decisions for these categories
 | Source capture time | `sourceCapturedAt: null` | UNKNOWN. A document/cache update is not evidence of acquisition time. |
 | Analysis generation time | `analysisGeneratedAt: null` | UNKNOWN. Model name and cache `updated_at` do not prove request completion time. |
 | Historical knowledge cutoff | `knowledgeCutoffAt: null` | UNKNOWN; existing archive commentary is always retrospective, never promoted into an authenticated pre-kickoff forecast. |
-| Dataset version | Archive: `datasetVersion: null`; new illustrative module: `wcl-synthetic-v1` | The authored module has an explicit version. A Git commit or selected date does not identify an archive database snapshot. |
+| Dataset version | Archive: `datasetVersion: null`; new illustrative module: `wcl-synthetic-v2` | The authored module has an explicit version. A Git commit or selected date does not identify an archive database snapshot. |
 | Cache last-write time | `cacheUpdatedAt` from `match_lenses.updated_at`, if valid | Separate, labeled cache modification time only. It may be missing/invalid; that does not fabricate a timestamp. |
 
 The UI shows these distinct fields on Lens detail. Timestamp parsing requires a full ISO timestamp with offset and a valid calendar date. New illustrative metadata is labeled synthetic and distinguishes authored copy from model generation; its fixture time does not become real event provenance. Inputs that claim a cutoff/version are not promoted by this legacy display adapter. Source URLs/IDs/timestamps are absent from cached title/snippet references and remain unresolved.
@@ -103,8 +103,13 @@ The baseline seed's real-team/profile-like copy could not be cleared, so it was 
 | Source capture | `unknowns.sourceCapturedAt: null` | No retained source snapshot/hash or exact capture instant. URLs may change. |
 | Analysis generation | `unknowns.analysisGeneratedAt: null`; `commentaryOrigin: authored-retrospective-editorial` | Repository-authored context; no Match Lens model run to timestamp. |
 | Historical cutoff | `unknowns.historicalKnowledgeCutoff: null` | No genuine as-of forecast claim. |
-| Dataset version | `wcl-curated-2026-v1` and scoped `CURATED_PUBLICATION` | Exact five-record module, not a complete tournament/provider database or general rights approval. |
+| Dataset version | `wcl-curated-2026-v2` and scoped `CURATED_PUBLICATION` | Exact five-record module, not a complete tournament/provider database or general rights approval. |
 
 Source links identify evidence for the limited match facts, not claim-level authentication of every editorial inference. FIFA explicitly identifies Argentina–Switzerland's July 11 local event day; its article publication is July 12 and UEFA lists July 12. Both metadata and discrepancy are preserved without inventing a kickoff/timezone explanation. Two group fixtures have no extra time; three knockout results include AET. Regulation and shootout breakdowns are not inferred.
 
 The separate type and fail-closed validator are in `src/lib/curated-history.ts`; reviewed records are in `src/data/curated-history.ts`. Public list/detail loaders never combine curated and fictional/provider rows. The [worked match example](architecture.md#curated-history-contract-and-worked-example) follows a record into the UI. Future private archive lineage/schema proposals above are unchanged and unimplemented; this local module does not backfill the database.
+
+
+## Editorial copy revision v2
+
+The redesign increments the curated and fictional module versions because displayed authored copy changed. All five curated factual tuples, stable IDs, source evidence dates and unknowns are unchanged. Short recaps replace repetitive methodology prose; source/evidence limitations move into match disclosures and About. Fictional descriptions replace analogies with assigned-style descriptions. Existing Supabase Lens/Q&A wording is preserved, and no generation, ingestion, embedding or database operation is part of this revision. See [design decisions](design.md).

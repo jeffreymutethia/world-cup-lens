@@ -11,7 +11,8 @@
     "test:replay-http": "node scripts/verify-replay.mjs",
     "typecheck": "next typegen && tsc --noEmit --incremental false",
     "test:demo-http": "node scripts/verify-demo.mjs",
-    "test:production-http": "node scripts/verify-production.mjs"
+    "test:production-http": "node scripts/verify-production.mjs",
+    "test:design": "node scripts/verify-design.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",

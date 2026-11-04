@@ -3,7 +3,7 @@
 import { analysisPresentation } from "@/lib/analysis-presentation";
 import type { DatasetMode } from "@/lib/replay";
 import { useState } from "react";
-import { BookOpen, MessageCircleQuestion, Sparkles } from "lucide-react";
+import { BookOpen, MessageCircleQuestion } from "lucide-react";
 
 import type {
   MatchQuestionAnswer,
@@ -41,12 +41,11 @@ export function MatchQa({ answers, mode }: MatchQaProps) {
       <Card className="border-0 bg-white shadow-sm">
         <CardHeader className="pb-4">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
-            <Sparkles className="size-4" />
-            Explore cached questions
+            Stored questions
           </div>
 
           <CardTitle className="text-xl">
-            Explore the match from another angle
+            Questions and answers
           </CardTitle>
         </CardHeader>
 
@@ -65,6 +64,7 @@ export function MatchQa({ answers, mode }: MatchQaProps) {
                       ? "bg-emerald-700 hover:bg-emerald-800"
                       : ""
                   }
+                  aria-pressed={isSelected}
                   onClick={() => setSelectedKey(answer.key)}
                 >
                   {answer.shortLabel}
@@ -73,7 +73,7 @@ export function MatchQa({ answers, mode }: MatchQaProps) {
             })}
           </div>
 
-          <div className="mt-6 rounded-3xl bg-emerald-50 p-5">
+          <div className="mt-6 rounded-3xl bg-emerald-50 p-5" aria-live="polite" aria-atomic="true">
             <div className="mb-3 flex items-start gap-3">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white">
                 <MessageCircleQuestion className="size-5 text-emerald-700" />
@@ -136,10 +136,7 @@ export function MatchQa({ answers, mode }: MatchQaProps) {
             </div>
           ))}
 
-          <p className="pt-2 text-xs leading-5 text-slate-400">
-            These are stored, cached answers. Source timestamps and pre-kickoff
-            information cutoffs have not been verified.
-          </p>
+          <p className="pt-2 text-xs leading-5 text-slate-500">{mode === "illustrative" ? "Authored sample answers for fictional teams. No model request is made." : "Stored answers. Source timestamps and historical information cutoffs are unverified."}</p>
         </CardContent>
       </Card>
     </section>

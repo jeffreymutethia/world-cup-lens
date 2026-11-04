@@ -3,57 +3,45 @@ import type { ReplaySelection } from "@/lib/replay";
 import { DEFAULT_ARCHIVE_DATE, DEFAULT_ILLUSTRATIVE_DATE, REPLAY_MIN_DATE, REPLAY_MAX_DATE, replayHref } from "@/lib/replay";
 import { Button } from "@/components/ui/button";
 import { CURATED_DATES, DEFAULT_CURATED_DATE } from "@/lib/curated-history";
-import { formatEventDate } from "@/lib/calendar-date";
+import { formatMatchDay } from "@/lib/calendar-date";
 
-export function ReplayControls({ selection, demoOnly = false }: { selection?: ReplaySelection; demoOnly?: boolean }) {
-  return (
-    <section className="rounded-3xl bg-white p-5 shadow-sm" aria-label="Replay selection">
-      <h2 className="text-lg font-semibold">Explore history & the fictional lab</h2>
-      <p className="mt-1 text-sm text-slate-600">Curated dates preserve the source’s local event day; kickoff times are not supplied. Archive and fictional timestamps use America/Los_Angeles. This is not a live feed.</p>
-      <form key={`${selection?.mode}-${selection?.date}`} action="/" method="get" className="mt-4 flex flex-wrap items-end gap-4">
-        <label className="grid min-w-0 max-w-full gap-1 text-sm font-medium">
-          Dataset
-          <select name="mode" defaultValue={selection?.mode ?? (demoOnly ? "curated" : "archive")} className="min-w-0 max-w-full rounded-lg border bg-white px-3 py-2">
-            <option value="curated">Curated — five historical matches</option>
-            <option value="illustrative">Illustrative — fictional AI lab</option>
-            {!demoOnly && <option value="archive">Archive — provider records</option>}
-          </select>
-        </label>
-        <label className="grid min-w-0 max-w-full gap-1 text-sm font-medium">
-          Replay date
-          <input type="date" name="date" required min={REPLAY_MIN_DATE} max={REPLAY_MAX_DATE}
-            defaultValue={selection?.date ?? (demoOnly ? DEFAULT_CURATED_DATE : DEFAULT_ARCHIVE_DATE)} className="rounded-lg border px-3 py-2" />
-        </label>
-        <Button type="submit" className="bg-emerald-700">Browse matches</Button>
-      </form>
-      <nav aria-label="Curated historical dates" className="mt-4 flex flex-wrap gap-3 text-sm text-emerald-800 underline">
-        {CURATED_DATES.map(date => <Link key={date} href={replayHref({ mode: "curated", date })} aria-current={selection?.mode === "curated" && selection.date === date ? "date" : undefined}>{formatEventDate(date)}</Link>)}
-      </nav>
-      <div className="mt-4 flex flex-wrap gap-4 text-sm text-emerald-800 underline">
-        {!demoOnly && <Link href={replayHref({ mode: "archive", date: DEFAULT_ARCHIVE_DATE })}>July 11 archive</Link>}
-        <Link href={replayHref({ mode: "illustrative", date: "2026-06-12" })}>Second demo date</Link>
-        <Link href="/about">How this works</Link>
-        <Link href={replayHref({ mode: "illustrative", date: DEFAULT_ILLUSTRATIVE_DATE })}>Fictional AI lab · first demo date</Link>
-      </div>
-    </section>
-  );
+const dateNotes = ["Group A", "Group D", "Quarter-finals", "Final"];
+export function MatchdayTabs({ date }: { date?: string }) {
+  return <section className="matchday-section" aria-labelledby="matchdays-heading">
+    <div className="section-bar"><h2 id="matchdays-heading">Browse by date</h2><span>Four selected dates</span></div>
+    <nav className="matchday-tabs" aria-label="Matchdays">
+      {CURATED_DATES.map((day, index) => <Link key={day} href={replayHref({ mode: "curated", date: day })} aria-label={`${formatMatchDay(day)}, ${dateNotes[index]}`} aria-current={day === date ? "date" : undefined}><strong>{formatMatchDay(day, true)}</strong><span>{dateNotes[index]}</span></Link>)}
+    </nav>
+  </section>;
+}
+
+// The open date form belongs to the fictional/private datasets, never the curated landing.
+export function ReplayControls({ selection, demoOnly = true }: { selection?: ReplaySelection; demoOnly?: boolean }) {
+  if (selection?.mode === "curated" || (!selection && demoOnly)) return <MatchdayTabs date={selection?.date} />;
+  return <section className="selection-panel" aria-label="Replay selection">
+    <form key={`${selection?.mode}-${selection?.date}`} action="/" method="get" className="selection-form">
+      <label>Collection<select name="mode" defaultValue={selection?.mode ?? "archive"}>
+        <option value="curated">World Cup matches</option><option value="illustrative">Fictional lab</option>{!demoOnly && <option value="archive">Private provider archive</option>}
+      </select></label>
+      <label>Date<input type="date" name="date" required min={REPLAY_MIN_DATE} max={REPLAY_MAX_DATE} defaultValue={selection?.date ?? (demoOnly ? DEFAULT_CURATED_DATE : DEFAULT_ARCHIVE_DATE)} /></label>
+      <Button type="submit" className="bg-emerald-800">Show matches</Button>
+    </form>
+    <nav aria-label="More dates" className="selection-links">
+      {selection?.mode === "illustrative" ? <><Link href={replayHref({ mode: "illustrative", date: DEFAULT_ILLUSTRATIVE_DATE })}>11 June</Link><Link href={replayHref({ mode: "illustrative", date: "2026-06-12" })}>12 June</Link></> : <Link href={replayHref({ mode: "archive", date: DEFAULT_ARCHIVE_DATE })}>11 July archive</Link>}
+      <Link href="/">World Cup matches</Link>
+    </nav>
+  </section>;
 }
 
 export function ReplayNotice({ selection }: { selection: ReplaySelection }) {
-  if (selection.mode === "curated") return <aside className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm leading-6 text-emerald-950">
-    <p className="font-semibold">Curated World Cup history · {formatEventDate(selection.date)}</p>
-    <p>Five independently selected results, attributed to primary sources. Commentary is original retrospective editorial context, not an output of the Match Lens pipeline or a pre-match forecast. This selection is not a complete tournament archive or an open-data release.</p>
+  if (selection.mode === "curated") return null;
+  return <aside className={`collection-notice ${selection.mode === "illustrative" ? "fictional-notice" : ""}`}>
+    <p><strong>{selection.mode === "illustrative" ? "Fictional examples" : "Private provider archive"}</strong> · {formatMatchDay(selection.date)}</p>
+    <p>{selection.mode === "illustrative" ? "Invented teams, venues and sample commentary. No real match or result is represented." : "Stored API-FOOTBALL records and cached AI commentary. Match fields and source cutoffs are unverified; commentary is retrospective, not an authenticated forecast."} <Link href="/about">Source and methodology notes</Link></p>
   </aside>;
-  return (
-    <aside className={`rounded-2xl border p-4 text-sm leading-6 ${selection.mode === "illustrative" ? "border-amber-300 bg-amber-50 text-amber-950" : "border-emerald-200 bg-emerald-50 text-emerald-950"}`}>
-      <p className="font-semibold">{selection.mode === "illustrative" ? "Illustrative examples — synthetic, not verified historical fixtures" : "Historical archive — stored API-FOOTBALL fixtures"} · {selection.date}</p>
-      <p>{selection.mode === "illustrative"
-        ? "All teams, locations, styles, and commentary shown here are newly authored fiction. No official World Cup fixture, result, national flag, or provider record is represented."
-        : "Fixture fields are stored provider records, not independently verified facts. Venue, stage, flags/codes, and results may be inconsistent. AI commentary is a separate, unverified retrospective interpretation. Its generation time and pre-kickoff information cutoff are unverified; it is not an authenticated historical forecast. Commentary may rely on placeholder metrics. Snippets are not claim-level proof. The selected date is a fixture day, not a historical knowledge cutoff."}</p>
-    </aside>
-  );
 }
 
-export function ReplayState({ title, children }: { title: string; children: React.ReactNode }) {
-  return <section role="status" className="rounded-3xl border bg-white p-6 shadow-sm"><h2 className="text-xl font-semibold">{title}</h2><div className="mt-2 text-sm leading-6 text-slate-600">{children}</div></section>;
+export function ReplayState({ title, children, level = 2 }: { title: string; children: React.ReactNode; level?: 1 | 2 }) {
+  const Heading = level === 1 ? "h1" : "h2";
+  return <section role="status" className="state-panel"><Heading>{title}</Heading><div>{children}</div></section>;
 }

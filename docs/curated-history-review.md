@@ -1,6 +1,6 @@
 # Curated historical selection: publication review
 
-Review ID: `wcl-curated-2026-v1`. Evidence access/review date: **2026-11-03**. Implementation baseline: `5fc076d`. Decision: **OWNER_DIRECTED_EDITORIAL_RELEASE of exactly five independently selected records and original retrospective commentary**, in the public source repository and noncommercial portfolio demonstration. The owner explicitly superseded the previous internal HOLD. That HOLD was a conservative release decision, not a legal determination that factual reporting is prohibited.
+Review ID: `wcl-curated-2026-v2`. Evidence access/review date: **2026-11-03**. Implementation baseline: `5fc076d`. Decision: **OWNER_DIRECTED_EDITORIAL_RELEASE of exactly five independently selected records and original retrospective commentary**, in the public source repository and noncommercial portfolio demonstration. The owner explicitly superseded the previous internal HOLD. That HOLD was a conservative release decision, not a legal determination that factual reporting is prohibited.
 
 This is a narrow editorial decision, not blanket FIFA permission, an open-data licence, definitive trademark clearance, or permission to redistribute a provider database. Remaining questions are recorded below; they have not been transformed into legal certainty.
 
@@ -69,3 +69,8 @@ flowchart TD
 Readable official PDFs were rechecked directly. FIFA article/results evidence was rechecked in publicly indexed text where direct article bodies remained unavailable. This is weaker than a retained full source snapshot; no source capture timestamp or content hash is claimed. England Football, UEFA, CAF and Concacaf supplied independent primary cross-checks. Source access is not a rights grant.
 
 Deterministic record/validation tests and rendered HTTP checks verify the release's implementation against these reviewed tuples. They do not independently authenticate publisher content, promise permanent source availability or certify legal clearance. Review/CI/deployment evidence for the delivered revision belongs in [deployment.md](deployment.md) and the delivery handoff.
+
+
+## Editorial redesign revision
+
+The v2 module changes only original editorial wording and presentation. The five stable IDs, factual tuples, primary URLs, evidence dates and explicit unknowns are preserved from v1. Recaps now state the result/progression plainly; they add no player, event, tactical or clock-time claims. Owner-directed publication remains limited to the same five factual records and original commentary, not a wider dataset or new rights grant. Review/access dates refer to the factual review, not a fresh publisher snapshot. The design adds only original geometric decoration and typographic abbreviations; no official imagery or association mark is an input.

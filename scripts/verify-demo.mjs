@@ -40,17 +40,18 @@ try {
   await checkCuratedPages(page);
   let { html, response } = await page("/?mode=illustrative&date=2026-06-11");
   assert.equal(response.status, 200);
-  assert.ok(html.includes("Copper Vale") && html.includes("Featured illustrative matchup"));
-  assert.ok(html.includes("newly authored fiction") && html.includes("mode=illustrative&amp;date=2026-06-11"));
-  assert.ok(!html.includes("Mexico City Stadium") && !html.includes("Featured historical match"));
+  assert.ok(html.includes("Copper Vale") && html.includes("Featured fictional scenario"));
+  assert.ok(html.includes("Invented teams") && html.includes("mode=illustrative&amp;date=2026-06-11"));
+  assert.ok(!html.includes("Mexico City Stadium") && !html.includes("Featured match"));
   console.log("PASS explicit fictional lab stays synthetic and separate from curated history");
   ({ html } = await page("/matches/copper-tidal?mode=illustrative&date=2026-06-11"));
-  assert.ok(html.includes("patient passing plan") && html.includes("Explore cached questions"));
-  assert.ok(html.includes("wcl-synthetic-v1") && html.includes("No real result"));
-  assert.ok(html.includes("Question the assumptions") && html.includes("Back to selected matches"));
+  assert.ok(html.includes("Patient passing against counterplay") && html.includes("Stored questions"));
+  assert.ok(html.includes("wcl-synthetic-v2") && html.includes("No real result"));
+  assert.ok(html.includes("Question the assumptions") && html.includes("Back to matches"));
+  assert.ok(!html.includes("Confidence label") && !html.includes("Volatility label"));
   console.log("PASS sample Lens, Q&A, version and mode/date navigation");
   ({ html } = await page("/?mode=illustrative&date=2026-06-12"));
-  assert.ok(html.includes("second-day example") && !html.includes("A patient passing plan"));
+  assert.ok(html.includes("second-day example") && !html.includes("A Patient passing against counterplay"));
   ({ html } = await page("/?mode=illustrative&date=2026-06-13"));
   assert.ok(html.includes("No illustrative examples for this date"));
   ({ html } = await page("/?date=2026-02-30"));
@@ -60,7 +61,7 @@ try {
   console.log("PASS date exploration, invalid/empty selection and missing sample handling");
   for (const path of ["/?mode=archive", "/matches/provider-id?mode=archive&date=2026-07-11"]) {
     ({ html } = await page(path));
-    assert.ok(html.includes("Archive disabled in public demo") && !html.includes("A patient passing plan"));
+    assert.ok(html.includes("Archive disabled in public demo") && !html.includes("A Patient passing against counterplay"));
   }
   console.log("PASS explicit archive access rejected without silent substitution");
   const admin = ["documents/embed", "documents/sync-provider", "fixtures/sync", "lenses/generate-today", "matches/mock/generate-lens", "pipeline/today"];
@@ -75,7 +76,7 @@ try {
   }
   console.log("PASS all authoring/admin/cron handlers disabled even with matching dummy secrets");
   ({ html } = await page("/about"));
-  assert.ok(html.includes("Public demo") && html.includes("Local TypeScript records"));
+  assert.ok(html.includes("How it works") && html.includes("authoring routes are disabled") && html.includes("The authoring pipeline"));
   assert.ok(preloadInstances >= (production ? 1 : 2), "Tripwire must be active in the app process");
   assert.equal(serviceFetches, 0, "Demo must make no service fetches");
   console.log("PASS architecture walkthrough and zero service fetches during browsing/blocked requests");

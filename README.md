@@ -16,11 +16,11 @@ Unofficial portfolio project. Not affiliated with, sponsored by or endorsed by F
 | July 11, 2026 | Argentina–Switzerland | Quarter-final | 3–1 AET |
 | July 19, 2026 | Spain–Argentina | Final | 1–0 AET |
 
-The initial public replay date is July 11. Four date links, featured/list cards and selection-preserving detail/back navigation work without credentials or a database connection. Details separate verified facts, original retrospective editorial context, source identity/link, evidence review/access date and explicit unknowns. AET means the final score includes extra time. No kickoff clock times, lineups, goal minutes, regulation-time breakdowns, player statistics, predictive ratings or tactical measurements are invented.
+The initial public replay date is July 11. Four matchday tabs, a featured scoreboard and secondary fixtures and selection-preserving detail/back navigation work without credentials or a database connection. Details separate verified facts, original retrospective editorial context, source identity/link, evidence review/access date and explicit unknowns. AET means the final score includes extra time. No kickoff clock times, lineups, goal minutes, regulation-time breakdowns, player statistics, predictive ratings or tactical measurements are invented.
 
 Sources and verification methods are in the [curated review](docs/curated-history-review.md). Two official PDFs were directly readable; three FIFA article/results entries were rechecked through indexed official evidence and federation cross-checks. Argentina–Switzerland preserves FIFA's explicit July 11 local event day separately from its July 12 article date and UEFA's differing July 12 entry.
 
-Publication is an **owner-directed, narrowly scoped editorial release** of `wcl-curated-2026-v1`, not blanket FIFA permission, an open-data licence, definitive trademark clearance or permission to redistribute a provider database. Broader source/forking/branding and commercial-use questions remain unresolved. See [data rights](docs/data-rights.md). Unrelated historical/provider sources and cached AI corpus retain UNKNOWN rights.
+Publication is an **owner-directed, narrowly scoped editorial release** of `wcl-curated-2026-v2`, not blanket FIFA permission, an open-data licence, definitive trademark clearance or permission to redistribute a provider database. Broader source/forking/branding and commercial-use questions remain unresolved. See [data rights](docs/data-rights.md). Unrelated historical/provider sources and cached AI corpus retain UNKNOWN rights.
 
 ## Run locally
 
@@ -96,14 +96,22 @@ HTTP suites run sequentially with localhost access, request/run deadlines and bo
 
 [GitHub Actions](.github/workflows/ci.yml) uses pinned official actions, Node 22, `npm ci`, read-only permissions, no real credentials and explicit deadlines for tests/lint/typecheck/build/HTTP/whitespace checks. [Hosted results](https://github.com/jeffreymutethia/world-cup-lens/actions) are verified separately from local checks.
 
+Optional real-browser QA uses an existing Chromium installation, a temporary profile and no additional dependencies. Start a demo-only production build on localhost port 3107, then run `npm run test:design`. `CHROMIUM_PATH` selects an already installed binary; `DESIGN_CAPTURE_DIR` selects the capture directory. The script does not install a browser or attach to your profile. It is separate from hosted CI.
+
 `npm run test:production-http` explicitly checks the authorized public URL with bounded unauthenticated requests. It verifies demo policy before disabled admin/cron method checks; it never sends real secrets or executes authoring. Do not point this command at an archive-enabled/private deployment.
 
 ## Deployment and screenshots
 
 Existing Vercel project `jt254/world-cup-lens` tracks `main`, Next.js at repository root, Node 22 and only non-secret `WCL_DEPLOYMENT_MODE=demo-only`; no service credentials or recurring cron are needed. [Deployment evidence](docs/deployment.md) separates revision-specific CI/deployment, public HTTP and browser QA from implementation claims.
 
-Curated runtime `104f984` was automatically deployed and passed hosted CI plus seven public HTTP check groups. Current browser automation could not maintain a stable tab (browser host unavailable; native Chrome timed out), so no new historical screenshot or desktop/mobile visual-QA pass is claimed. See the revision-specific evidence above.
+The editorial redesign follows the supplied desktop/mobile direction: one responsive header, a forest-green scoreboard, four matchday tabs, short recaps and source notes. The featured match is never repeated in the secondary listing. The fictional lab stays separate. See [design decisions and visual evidence](docs/design.md).
 
-Earlier [desktop](docs/screenshots/production-desktop.png) and [mobile](docs/screenshots/production-mobile.png) captures depict fictional revision `a8150be`, not the new historical homepage. They remain genuine prior-release evidence; current screenshots are linked only after capture and inspection.
+Local production-build captures from 2026-11-04, using isolated headless Chromium. These are genuine application screenshots, not the supplied mockups. [Full five-width matrix, interaction checks and limits](docs/design.md).
+
+<img src="docs/screenshots/redesign-local/home-1440.png" alt="Redesigned desktop archive with a forest-green Norway–England scoreboard, matchday tabs and Argentina–Switzerland card" width="800">
+
+<img src="docs/screenshots/redesign-local/home-390.png" alt="Redesigned archive at a 390-pixel mobile viewport" width="300">
+
+[Desktop match detail](docs/screenshots/redesign-local/detail-1280.png) · [320-pixel detail](docs/screenshots/redesign-local/detail-320.png) · [Visible keyboard focus](docs/screenshots/redesign-local/home-390-keyboard-focus.png)
 
 Remaining work: broaden accessibility/browser checks, maintain source evidence/review versions, assess rights before broader reuse, track reproducible database contracts/RLS, and repair upstream placeholder inputs and immutable historical lineage. No production-readiness or legal-clearance claim is made.

@@ -44,7 +44,7 @@ This milestone preserves the existing local replay for review, with stronger tru
 
 ## Separate original-demo review
 
-The new `reviewed-synthetic-demo-v1` category refers only to the replacement `wcl-synthetic-v1` module and new original icon documented in [demo-publication-review.md](demo-publication-review.md). Its publication status is REVIEWED_ORIGINAL_CONTENT, with APPROVED_ORIGINAL_DEMO_ONLY for source inclusion and web demonstration. This is a scoped repository decision supported by newly authored fictional material with no third-party inputs; it is not a general content license, a sports-data approval, or a rights guarantee about accidental name collisions. Legacy examples, provider rows, excerpts, logos, and cached AI corpus remain UNKNOWN/NOT_APPROVED/REVIEW_REQUIRED as above.
+The new `reviewed-synthetic-demo-v1` category refers only to the replacement `wcl-synthetic-v2` module and new original icon documented in [demo-publication-review.md](demo-publication-review.md). Its publication status is REVIEWED_ORIGINAL_CONTENT, with APPROVED_ORIGINAL_DEMO_ONLY for source inclusion and web demonstration. This is a scoped repository decision supported by newly authored fictional material with no third-party inputs; it is not a general content license, a sports-data approval, or a rights guarantee about accidental name collisions. Legacy examples, provider rows, excerpts, logos, and cached AI corpus remain UNKNOWN/NOT_APPROVED/REVIEW_REQUIRED as above.
 
 No raw historical export is part of this milestone. The public deployment branch can use the separately scoped curated selection, reviewed original examples and licensed code/icon dependencies; it cannot access the archive or invoke authoring. Existing software/icon notices are kept separately at `public/third-party-notices.txt`. Historical sources must still pass the original publication gate before public historical use; approval of new fiction is not permission for another category.
 
@@ -64,3 +64,8 @@ FIFA's published terms/branding guidance provide conditional support for attribu
 | Eight unrelated legacy/provider categories | UNKNOWN / NOT_APPROVED / REVIEW_REQUIRED | No rights upgrade from this decision or the original-fiction decision |
 
 `sourceRights("curated-history-2026-v1")` exposes this scoped decision, while `CURATED_PUBLICATION.openDataLicense` stays false and trademark clearance stays UNRESOLVED. These are evidence registries, not legal validators or exporters. Attribution and non-affiliation notices are present in the UI; remaining uncertainty stays documented. No enquiry was sent to any rights holder.
+
+
+## v2 wording and design scope
+
+The v2 curated module retains exactly the same five independently selected factual records; only original retrospective copy is edited. `curated-history-2026-v2` is an explicit continuation of the owner's narrow editorial source/web decision, not approval of new records or blanket reuse. The v2 fictional module's new original copy has its own explicit registry entry and [publication review](demo-publication-review.md). Official source content/media and the private provider/cached corpus remain outside both decisions. No official assets, downloaded fonts or provider payloads are added by the redesign.

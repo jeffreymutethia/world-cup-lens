@@ -11,3 +11,12 @@ export function formatEventDate(value: string) {
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   return `${months[Number(month) - 1]} ${Number(day)}, ${year}`;
 }
+
+
+export function formatMatchDay(value: string, short = false) {
+  if (!isDateKey(value)) return "Date unavailable";
+  const [year, month, day] = value.split("-");
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const name = months[Number(month) - 1];
+  return short ? `${Number(day)} ${name.slice(0, 3)}` : `${Number(day)} ${name} ${year}`;
+}

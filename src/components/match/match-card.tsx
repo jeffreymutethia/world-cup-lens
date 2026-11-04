@@ -56,11 +56,11 @@ export function MatchCard({
 
           {lens ? (
             <div className="mt-4 rounded-2xl bg-emerald-50 p-3 text-xs text-emerald-950">
-              <p className="mb-1 font-semibold">Stored commentary · uncalibrated labels</p>
-              <p className="font-semibold">
+              <p className="mb-1 font-semibold">{selection.mode === "archive" ? "Stored opinion labels" : "Sample commentary"}</p>
+              {selection.mode === "archive" && <p className="font-semibold">
                 {storedEdgeLabel(lens.slightEdge)} · {lens.confidence} confidence label ·{" "}
                 {lens.volatility} volatility label
-              </p>
+              </p>}
               <p className="mt-1 line-clamp-2 leading-5">
                 {lens.expectedGame}
               </p>
