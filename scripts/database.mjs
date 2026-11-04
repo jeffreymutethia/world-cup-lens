@@ -32,8 +32,10 @@ try {
   } else {
     container = `wcl-test-${randomUUID()}`;
     run('docker',['run','-d','--name',container,'--network','none','-e','POSTGRES_HOST_AUTH_METHOD=trust','pgvector/pgvector:0.8.2-pg17'],undefined,true);
+    // Docker entrypoint briefly starts a temporary initialization server.
+    // Wait until PID 1 has exec-ed the final postgres process, then probe readiness.
     for (let i=0;i<60;i++) {
-      if (spawnSync('docker',['exec',container,'pg_isready','-U','postgres'],{env,stdio:'ignore',timeout:5000}).status===0) break;
+      if (spawnSync('docker',['exec',container,'sh','-c','[ "$(cat /proc/1/comm)" = postgres ] && pg_isready -U postgres'],{env,stdio:'ignore',timeout:5000}).status===0) break;
       await new Promise(r=>setTimeout(r,500));
       if(i===59) throw new Error('Disposable PostgreSQL did not become ready');
     }
