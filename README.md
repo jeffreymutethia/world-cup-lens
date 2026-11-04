@@ -18,11 +18,11 @@ npm test
 
 Open [localhost:3000](http://localhost:3000). No environment file is required for the public demo.
 
-<img src="docs/screenshots/redesign-production/home-1440.png" alt="World Cup Lens desktop archive: Norway–England scoreboard, four matchdays and the other July 11 fixture" width="720">
+<img src="docs/screenshots/freeze-production/home-1440.png" alt="World Cup Lens desktop archive: Norway–England scoreboard, four matchdays and the other July 11 fixture" width="720">
 
-[Mobile screenshot](docs/screenshots/redesign-production/home-390.png) · [Match detail](docs/screenshots/redesign-production/detail-1280.png) · [Keyboard focus](docs/screenshots/redesign-production/home-390-keyboard-focus.png) · [Full visual evidence and limits](docs/design.md)
+[Mobile screenshot](docs/screenshots/freeze-production/home-390.png) · [Match detail](docs/screenshots/freeze-production/detail-1280.png) · [Browser interaction report](docs/screenshots/freeze-production/qa-report.json) · [Full visual evidence and limits](docs/design.md)
 
-These genuine production screenshots were captured on 2026-11-04 at visual revision `1bf320c`. The final audit rechecked the unchanged interface with real Chromium at five viewport widths; revision-specific evidence is in [deployment](docs/deployment.md). They are not supplied design mockups.
+These genuine production screenshots were captured on 2026-11-04 at deployed revision `1472416`, after security maintenance. Real Chromium checks passed at five viewport widths; [deployment evidence](docs/deployment.md) and [the browser report](docs/screenshots/freeze-production/qa-report.json) retain scope and limits. They are not supplied design mockups.
 
 ## What runs where
 
@@ -101,4 +101,4 @@ The final dependency snapshot reports zero production advisories and no high/cri
 
 ## MVP freeze
 
-The freeze covers the public demonstration and tested backend contracts, with the limits above. It is not a production forecasting-service certification. Only verified substantive defects justify maintenance changes; optional product expansion needs a new owner-approved scope. [Current findings and checks](docs/audit.md#portfolio-freeze-audit) and [remaining work by category](docs/roadmap.md#portfolio-freeze-and-remaining-work) distinguish true defects, deferred engineering, external rights/licence questions and optional features.
+**Recommendation: READY FOR PORTFOLIO FREEZE.** The freeze covers the public demonstration and tested backend contracts, with the limits above. It is not a production forecasting-service certification. Only verified substantive defects justify maintenance changes; optional product expansion needs a new owner-approved scope. [Current findings and checks](docs/audit.md#portfolio-freeze-audit) and [remaining work by category](docs/roadmap.md#portfolio-freeze-and-remaining-work) distinguish true defects, deferred engineering, external rights/licence questions and optional features.

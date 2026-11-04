@@ -57,3 +57,12 @@ Runtime **`1bf320c26720479fd84f8152a5ebc1cb54489a25`** was observed deployed at 
 | 1440 | [Capture](screenshots/redesign-production/home-1440.png) | [Capture](screenshots/redesign-production/detail-1440.png) |
 
 Production details: [keyboard focus](screenshots/redesign-production/home-390-keyboard-focus.png), [menu](screenshots/redesign-production/home-390-menu-open.png), [source notes](screenshots/redesign-production/detail-390-source-open.png), [long team name](screenshots/redesign-production/detail-argentina-320.png), [44px fictional Q&A](screenshots/redesign-production/lab-390-questions.png). The headless/emulation, inline-link target and broader accessibility limits above still apply. The documentation-only follow-up does not change this runtime; its latest delivery status is verified separately.
+
+
+## Portfolio freeze browser recheck — 2026-11-04
+
+Deployed revision `14724168431a18412957adc6a70f1372323e7e9e` includes Next 16.4.5 security maintenance and the same licensed CSS body after removal of the unused CLI tree. The production isolated Chromium suite again passed all five widths (320/390/768/1280/1440), overflow, one h1/main, 44px primary controls, menu/Escape/focus, keyboard date/detail/back, source disclosure, stored fictional Q&A, all five heroes at 320px and reduced motion. Zero browser console errors or external page requests were observed. This does not instrument production server egress or certify full WCAG/physical-device/screen-reader/cross-browser coverage.
+
+[Fresh production machine report](screenshots/freeze-production/qa-report.json) and [local candidate report](screenshots/freeze-local/qa-report.json) retain actual metrics. All 15 settled new production PNGs matched the updated local captures byte-for-byte. Nine also matched the earlier production images; six desktop images have a 15px wider canvas/client width, with no document overflow or visual regression found in direct inspection. No redesign or historical fact change was introduced.
+
+Three current genuine examples are retained: [desktop homepage](screenshots/freeze-production/home-1440.png), [mobile homepage](screenshots/freeze-production/home-390.png) and [desktop detail](screenshots/freeze-production/detail-1280.png). README now uses these current captures. Older images/reports above keep their original revision labels; they are not overwritten or described as the new deployment. The remaining new captures were inspected/tested in temporary output rather than duplicated into the repository.
