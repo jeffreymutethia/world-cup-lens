@@ -1,6 +1,6 @@
 # Technical walkthrough
 
-Scope: the frozen portfolio MVP, audited from baseline `cbd9b90` on 2026-11-04. Read this alongside the [current audit](audit.md#portfolio-freeze-audit), [database contract](database-contract.md), and [interview guide](interview-guide.md). “Implemented” describes code; “tested” identifies the layer actually exercised. Neither means that the full AI backend is deployed or factually evaluated.
+Scope: the frozen portfolio MVP at baseline `4c88da8`, verified on 2026-11-04. Read this alongside the [current audit](audit.md#portfolio-freeze-audit), [database contract](database-contract.md), and [interview guide](interview-guide.md). “Implemented” describes code; “tested” identifies the layer actually exercised. Neither means that the full AI backend is deployed or factually evaluated.
 
 ## A. Product architecture
 
@@ -115,7 +115,7 @@ sequenceDiagram
 5. `supabase/tests/integration.sql:test_payload/test_lens`: exercises real commit, cutoff/attestation, changed-source invalidation, rollback and concurrent retry contracts. Source snapshots, input snapshot and outputs survive new versions.
 6. SQL anonymous cache reads work only after explicit synthetic-public marking. `repository.ts` can map compatible legacy Lens JSON, but its provider-filtered page query intentionally cannot expose this synthetic test match. Production's fictional Q&A comes from a different reviewed local module. There is no hidden bridge or provider-label substitution.
 
-For presentation: show the public UI, then the [SQL ER diagram](database-contract.md), engine/tests and one test run. Do not describe the public sample text as output of this synthetic SQL exercise or an actual model run.
+For a technical demonstration, follow the public replay with the [SQL ER diagram](database-contract.md), engine tests and a disposable database run. The SQL corpus and public fictional module are separate datasets.
 
 
 Code navigation for the worked trace: [original SQL corpus](../supabase/seed.sql), [revision/retrieval/commit functions](../supabase/migrations/20261104000200_versioned_retrieval.sql), [generation core](../src/lib/rag/engine.ts), [mocked core tests](../tests/rag.test.ts), [real SQL assertions](../supabase/tests/integration.sql), and [legacy replay mapping](../src/lib/supabase/repository.ts).

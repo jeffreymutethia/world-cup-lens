@@ -1,6 +1,6 @@
 # Engineering decisions
 
-Status: accepted MVP boundaries, with costs and reversal conditions. These are concise decision records reconstructed from code, owner requirements and milestone evidence. Alternatives below are **retrospective comparisons** unless a documented experiment is cited; no database/vendor/performance bake-off occurred. See [audit](audit.md#portfolio-freeze-audit) for unresolved work.
+Status: accepted MVP boundaries, with costs and reversal conditions. These records describe the current implementation and its supporting tests. Alternatives below are **retrospective comparisons** unless a documented experiment is cited; no database/vendor/performance bake-off occurred. See [audit](audit.md#portfolio-freeze-audit) for unresolved work.
 
 ## ADR 1 — Postgres and pgvector
 
@@ -66,21 +66,21 @@ Status: accepted MVP boundaries, with costs and reversal conditions. These are c
 
 - **Context:** The original live application depended on service availability and publication-sensitive data after the event ended.
 - **Alternatives:** Keep live/today defaults, silently fall back to seed fixtures, or expose the private corpus publicly.
-- **Decision:** Curated date-only local history is primary; original fiction is explicit and secondary; archive reads require exact server opt-in and database grants/RLS; authoring additionally requires a shared secret. The five-match release is owner-directed narrow editorial use, with no media/provider export.
+- **Decision:** Curated date-only local history is primary; original fiction is explicit and secondary; archive reads require exact server opt-in and database grants/RLS; authoring additionally requires a shared secret. The five-match release is scoped editorial use, with no media/provider export.
 - **Reason:** Demonstrate the product with honest data boundaries and no service credentials. Local inputs are static; Next renders request-aware pages.
 - **Cost/limit:** Only five selected matches, no live features and no deployed end-to-end AI demonstration. Rights/branding and downstream reuse remain uncertain; no blanket FIFA permission is claimed.
 - **Evidence:** `deploymentMode`, `curated-history.ts`, publication reviews, public HTTP/browser tests and schedule-free `vercel.json`.
 - **Revisit:** Explicit owner authorization backed by source rights, security, operational and cost evidence; not just a working API key.
 
-## ADR 8 — Agent-driven work with inspectable verification
+## ADR 8 — Layered verification and release gates
 
-- **Context:** Significant Codex assistance accelerated implementation and documentation but can also produce confident errors or unsupported claims.
-- **Alternatives:** Trust generated code/claims without checks; claim entirely manual authorship; expand scope until every theoretical feature exists.
-- **Decision:** Owner-directed scope, repository instructions, small reviewable changes, deterministic/real SQL tests, independent agent review, actual HTTP/browser checks and hosted release verification. Freeze the MVP after substantive defects are addressed.
-- **Reason:** Evidence and explicit limitations make the project explainable and reviewable; AI assistance must remain visible.
-- **Cost/limit:** Agent review is not an external audit; test completeness, human understanding and rights decisions still matter. Human personal review depth cannot be inferred from an agent's successful run.
-- **Evidence:** `AGENTS.md`, Git history, Docker readiness fix and deployment/visual defect records.
-- **Revisit:** A verified security/correctness defect, new external obligations or an explicit owner-approved milestone. Optional features alone do not unfreeze the MVP.
+- **Context:** The system spans rendering, model adapters, database permissions and deployment. A single test layer cannot establish all of those contracts.
+- **Alternatives:** Mock-only tests; a production-connected integration suite; manual smoke checks alone.
+- **Decision:** Combine deterministic TypeScript tests, disposable PostgreSQL/pgvector assertions, archive HTTP mocks, public service-isolation checks, browser regressions and committed-revision CI/deployment checks.
+- **Rationale:** Unit tests isolate validation and failure behavior; real SQL tests exercise constraints, grants, RLS and vector semantics; HTTP/browser checks verify rendering and interaction. Synthetic fixtures keep routine tests reproducible and free of production credentials or paid API calls.
+- **Tradeoffs and limits:** More setup and multiple test commands; native PostgreSQL and Docker can expose different startup failures. Mocked generation does not measure model quality, and direct SQL does not cover the full Supabase gateway/Auth stack. Browser emulation is not full accessibility or physical-device coverage.
+- **Evidence:** `scripts/test.mjs`, `scripts/database.mjs`, `scripts/verify-{demo,replay,production,design}.mjs`, `.github/workflows/ci.yml`, and [release evidence](deployment.md). The Docker readiness and narrow-screen defects demonstrate why the layers are complementary.
+- **Revisit:** Extend coverage when a new integration or verified defect requires it. Add grounding/load evaluation only with a defined workload and explicit execution budget; do not substitute passing contract tests for those measurements.
 
 ## Code licence decision remains with the owner
 
@@ -107,7 +107,7 @@ The app used `shadcn` only through its CSS import, not CLI JavaScript. Rather th
 Registry audit counts are a time-specific known-advisory snapshot. A clean result would not prove absence of vulnerabilities or applicability of every reported issue; no production exploit testing is performed. The full local/hosted build, SQL, HTTP and browser gates must be repeated after dependency changes.
 
 
-Post-repair snapshot on 2026-11-04: zero production audit entries and zero high/critical entries overall; 16 moderate development-only entries remain in the minimatch/lint dependency chain. ESLint 9.39.5 is deprecated, but the current React/accessibility plugins declare peers through major 9, excluding ESLint 10. No incompatible major override, forced downgrade or suppression was applied. Coordinated lint-toolchain maintenance remains explicit debt; the CI high/critical gate includes dev dependencies.
+Refreshed registry snapshot on 2026-11-04: zero production audit entries and zero high/critical entries overall; 8 moderate development-only entries remain in the minimatch/lint dependency chain. ESLint 9.39.5 is deprecated, but the current React/accessibility plugins declare peers through major 9, excluding ESLint 10. No incompatible major override, forced downgrade or suppression was applied. Coordinated lint-toolchain maintenance remains explicit debt; the CI high/critical gate includes dev dependencies.
 
 
 The upgraded Next dev server attempted a registry advisory reminder fetch, detected and blocked by the unchanged strict demo tripwire. After reading the installed `agentUpgrade` guide, `next.config.ts` explicitly disables only these experimental reminders (`agentUpgrade: false`). Security monitoring remains an explicit CI `check:security` step. No URL allowlist or framework fetch exception was added to the tripwire; production/application service fetches remain denied. This does not disable framework security fixes or represent an automatic-upgrade system.

@@ -1,143 +1,71 @@
-# Public demo release evidence
+# Deployment and release verification
 
-Verified 2026-11-03. Public URL: **https://world-cup-lens-one.vercel.app**. The earlier releases below were the fictional match lab. The current curated release section distinguishes the new five-match editorial selection.
+Public demo: **https://world-cup-lens-one.vercel.app**. Git-connected Vercel project: `jt254/world-cup-lens`. The public site uses reviewed local curated records and a separate fictional lab; private database and authoring services remain disabled.
 
 ## Existing project configuration
 
-Inspected through the authorized Vercel dashboard, without printing credentials:
+The following configuration was inspected in the authorized Vercel dashboard on **2026-11-03**. Later deployment statuses and HTTP checks verify delivery and public behavior, not a fresh environment or production database inventory.
 
-| Setting | Observed / applied |
+| Setting | Observed configuration |
 | --- | --- |
-| Account/project | Existing `jt254/world-cup-lens`; no duplicate project created |
-| Connected repository | `jeffreymutethia/world-cup-lens` |
-| Production branch | `main`, automatic production domain assignment |
-| Framework/root | Next.js; blank root field means repository root; default build/output/install commands |
-| Node | First build used 22 via repository engines; project default corrected from 26 to 22 for subsequent builds |
-| Production variables | Only non-secret `WCL_DEPLOYMENT_MODE=demo-only` added; no Supabase/OpenAI/provider/admin keys supplied; Shared tab confirms no linked variables |
-| Cron | No jobs listed; project execution switch explicitly disabled; `vercel.json` declares no schedule |
-| Resources | Existing Hobby project; no paid plan, billing, additional resources or database changes |
+| Repository / production branch | `jeffreymutethia/world-cup-lens` / `main` |
+| Framework / root | Next.js / repository root; default build, output and install commands |
+| Node | Major 22, matching repository engines and `.nvmrc` |
+| Production variables | `WCL_DEPLOYMENT_MODE=demo-only`; no Supabase, OpenAI, provider or admin credentials; no linked shared variables |
+| Cron | No jobs; project execution disabled; `vercel.json` has no schedule |
+| Resources | Existing Hobby project; no additional paid resources or database changes |
 
-The Vercel connector/CLI was unavailable, but the existing signed-in dashboard provided inspection and **Create Deployment → main → Deploy to Production**. No empty trigger commit was needed. Future `main` pushes use the existing Git connection; verify the resulting deployment rather than assuming delivery from a successful push.
-
-## Revision evidence
-
-First release: `8299114f73daeb3808ad3fdf80cb4f676acaca79`, deployment `TZppCqdvwVJGhdk68SzPEDzbv8KP`, Ready/Production after a 35-second build. The production domain was explicitly shown in deployment details. Initial build warnings included the Node project-setting override and a transitive `node-domexception` deprecation; compilation succeeded.
-
-The first release passed six groups in `npm run test:production-http`: homepage/June 11/featured link; detail/sample Lens/Q&A; June 12/about/invalid/empty states; explicit archive rejection; all six admin POST and cron GET/HEAD denials; icon/notices. No auth headers or real secrets were sent. Authoring requests returned the demo guard's 404 and did not execute the pipeline.
-
-## Browser QA and limits
-
-Real Chrome on macOS confirmed featured detail navigation with preserved mode/date, cached answer switching, Tab movement and Enter activation with a visible focus ring. Console inspection after the homepage reload showed zero messages. The observed browser network list contained same-origin page/assets/prefetch requests plus an inline SVG; this is browser evidence, not inspection of server egress.
-
-Responsive toolbar checks at 390 × 844 and 320 × 844 exposed a 320px featured-card clipping defect. The follow-up uses shrinkable grid tracks, bounded result labels, smaller narrow-screen headings, wrapped team/location text and stacked commentary labels. The fix was then deployed and independently rechecked in Chrome on the public domain: featured/list content and the match hero fit at 320px, and the June 12/about links worked with preserved selection. Wrapping was visually inspected; no numeric DOM scroll-width measurement or automated accessibility certification is claimed.
-
-The local suite's active fetch tripwire, reviewed demo-only branches, deployed revision and absence of service credentials support the integration isolation claim. Neither HTTP responses nor browser traffic prove zero outbound requests across all Vercel infrastructure. No paid/provider/generation/embedding request, protected pipeline run, production database write or migration was performed.
-
-This is limited Chrome/viewport/keyboard QA, not certification of WCAG conformance, physical mobile devices, all browsers, screen readers, contrast ratios or long-term uptime. Historical source rights, lineage and forecasting limitations remain in the audit/provenance/rights documents.
-
-## Responsive release and captured evidence
-
-Release follow-up: `a8150be2593c88814b7ad7a637902cec5ecd335e`, deployment `3gdFFDtSpsANfDt2h9n9G8K58yVq`, Ready/Production after a 35-second build. The Git-connected `main` push deployed automatically and the dashboard assigned the same public domain. All six public HTTP groups passed again. [Hosted GitHub CI passed](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/41696782078), including production demo isolation, archive mocks and invalid-flag checks. Local 32-test suite, demo HTTP checks, lint, typecheck, build and whitespace checks passed; affected compilation checks were repeated after the final narrow-screen sizing adjustment. Independent code/config/script review found no blocker and recommended keeping production egress claims appropriately limited.
-
-| Capture | Revision and method | Evidence |
-| --- | --- | --- |
-| [Desktop](screenshots/production-desktop.png) | `a8150be`; Chrome responsive 1280 × 800; native DevTools full-page capture, 2560 × 3066 image | Original demo, complete featured card and both June 11 match cards; readable wrapping |
-| [Mobile landing](screenshots/production-mobile.png) | `a8150be`; 390 × 844; DevTools viewport capture, 780 × 1687 image (browser rounding) | Responsive navigation, date controls and explicit fictional-content notice |
-| [Narrow featured card](screenshots/production-mobile-320.png) | `a8150be`; 320 × 844, scrolled; DevTools viewport capture, 640 × 1688 image | Both team names, location and analysis rows fit after the clipping fix |
-| [Keyboard focus](screenshots/production-keyboard-focus.jpg) | Initial `8299114`; native browser screenshot, 3024 × 1646 image | Visible focus ring after Tab from one question button to the next; Enter changed the displayed answer |
-
-Captures are genuine browser output, without personal browser chrome or credentials. They are not AI mockups. Screenshot publication is limited to the reviewed original demo/UI assets. Subsequent documentation-only revisions retain this runtime implementation; the delivery handoff records the final pushed/deployed SHA and latest checks rather than claiming that these earlier screenshots depict a later revision.
-
-
-## Earlier curation review (superseded by owner decision)
-
-The [candidate historical review](curated-history-review.md) was on internal HOLD for the proposed public-source/branding scope. This follow-up adds documentation only; it does not replace the deployed original-fiction default or claim a real-match release. Existing demo-only environment and disabled cron policy continue to apply. The delivery handoff records the documentation revision's CI/deployment and smoke-test evidence separately from the historical feature's blocked status.
-
-
-## Curated editorial release — production verified 2026-11-03
-
-Baseline `5fc076d`; owner-directed narrow publication of `wcl-curated-2026-v1` supersedes the earlier internal HOLD. Public demo-only now defaults to July 11 curated history, with five results on four source-local event days, original editorial context, source linkbacks and a shared unofficial/non-affiliation notice. Fictional Lens/Q&A remain secondary and private Supabase/authoring behavior remains guarded. Existing server policy, credentials, cron setting, billing and databases are unchanged.
-
-Local deterministic and shared HTTP expectations cover all five result/stage/venue/AET tuples, date-only precision, attribution, detail/back navigation, empty/invalid selections, fictional isolation and all disabled methods. The app service-fetch tripwire is active; no provider/model/embedding request is permitted. Remote HTTP behavior cannot prove infrastructure-wide egress.
-
-Pre-push local validation passed: 42 deterministic tests, nine private archive mock HTTP groups, eight demo HTTP groups in unset and production-server configurations, lint, typecheck, production build with empty service credentials, documentation relative links, whitespace and changed-file credential pattern checks. Independent review found and resolved strict-enum validation and provenance/default-wording issues; final code/security/diagram review found no blocker. Invalid-flag checks also passed all eight groups. The existing screenshots above depict earlier fictional releases and do not establish the curated UI's appearance.
-
-
-Runtime commit **`104f984aa9eade8cf63545fddd5226bd7b764a2c`** was pushed to `origin/main` and the remote SHA independently matched. [Hosted CI passed](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/41724947057). The Vercel commit check reported “Deployment has completed” for [deployment 6XXzQLATmE3rtgz5KbfwKCviHt6S](https://vercel.com/jt254/world-cup-lens/6XXzQLATmE3rtgz5KbfwKCviHt6S). The existing automatic main connection delivered the new historical experience to **https://world-cup-lens-one.vercel.app**; no configuration, credential, billing, cron or database change was made.
-
-Seven production HTTP groups passed on that public domain: all five exact result/stage/venue/AET records and four date/detail/back paths; curated empty/invalid states and fictional isolation; preserved fictional sample Lens/Q&A; about and second fictional day; archive rejection; all six unauthenticated admin POST and cron GET/HEAD 404 denials; icon/notices. No real secrets were sent or protected pipeline work executed. The production response is evidence of public behavior, not source accuracy certification or complete Vercel egress monitoring.
-
-**Current browser limitation:** the browser inventory returned no browsers and “browser access host is unavailable.” Native Chrome attempts encountered stale/invalid accessibility IDs, concurrent active-tab changes and a timeout/kernel reset while selecting the portfolio tab. A new historical tab title was observable, but stable desktop/mobile interaction, viewport inspection, overflow measurement and screenshots could not be completed reliably. No current visual QA or new screenshot is claimed; previous fictional captures remain explicitly revision-labeled. Follow up with an isolated connected browser session for responsive, keyboard/focus and screenshot evidence.
-
-This evidence describes the runtime release above; the following documentation-only delivery revision retains that runtime. The final handoff separately records its pushed SHA and observed CI/deployment status.
-
-
-## Editorial redesign — local verification 2026-11-04
-
-Baseline `8cd2323`. Public UI now uses the supplied editorial direction: one responsive header, forest scoreboard, four curated date links, no featured duplication, concise recaps and source disclosures. Copy is versioned `wcl-curated-2026-v2` / `wcl-synthetic-v2`; historical fact tuples and private archive/authoring boundaries are unchanged. No new dependency, font/media download, service credential, cron, billing change or production database action is involved.
-
-Local real-browser QA used explicitly authorized isolated headless Chromium after native controls failed. All five viewport widths, homepage/detail captures, 320px long-name checks, keyboard/menu/date/back/source/Q&A behavior, primary target heights, reduced motion, zero console errors and zero external page requests passed. [Design evidence and screenshots](design.md) include exact metrics and independent visual review findings/fixes. The server used empty service credentials with an active fetch-denial preloader. These are local browser results; production delivery is not inferred from them.
-
-Local builds initially encountered recurring ignored numbered type directories (`estree 2`/`estree 3` and peers), also observed in earlier milestones. Locked dependency restoration and deletion of only invalid numbered duplicate type artifacts restored passing compilation without changing versions, excluding types or altering application contracts. The artifact's external cause is not established; it is not reported as an application compilation defect or a reason to weaken type checking.
-
-Final local validation passed: 47 deterministic tests; eight demo HTTP groups for unset, invalid and production-server configurations; nine private archive mock HTTP groups; lint; generated Next/TypeScript checking; production build; documentation links; whitespace and changed-file credential-pattern checks. Independent code, accessibility, copy and visual reviews found no remaining blocker after the documented fixes. API handlers, deployment policy, `vercel.json`, environment files, dependency versions and database contracts were unchanged. Commit, hosted CI, Vercel and public smoke/browser evidence are recorded after the reviewed revision is pushed and observed.
-
-
-## Editorial redesign — production verified 2026-11-04
-
-Released runtime **`1bf320c26720479fd84f8152a5ebc1cb54489a25`** on `main` (redesign plus question-touch/capture follow-up). Remote SHA matched after push. [Hosted CI passed](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/41829456592), including deterministic tests, lint, typecheck, build, public production-server/unset/invalid policy isolation, archive mocks and whitespace. The Vercel commit check reported “Deployment has completed” for [SMhGhPWJpSh47oDXJ3x19vzHqfSv](https://vercel.com/jt254/world-cup-lens/SMhGhPWJpSh47oDXJ3x19vzHqfSv); the existing main connection served the new UI at **https://world-cup-lens-one.vercel.app**. No project, environment variable, credential, cron, paid plan or database was changed.
-
-Seven explicit production HTTP groups passed: all five historical tuples/four dates/detail/back/source labels; empty/invalid/isolation states; fictional sample Lens/Q&A; about; archive rejection; all six unauthenticated admin POST plus cron GET/HEAD denials; original icon/notices. No real auth secrets were sent and no authoring/cron work executed.
-
-The full real-browser suite also passed on the public domain at 320/390/768/1280/1440px. Genuine production homepage/detail/menu/focus/source/Q&A captures and the measured report are in [design.md](design.md#production-recheck--passed-2026-11-04). All 15 PNGs matched the reviewed local captures byte-for-byte. It checked document overflow, readable/single-word team-name fit, primary and question touch heights, mobile disclosure/Escape/focus return, skip and date keyboard behavior, selected-date/detail/back consistency, source disclosure, Q&A switching, About and reduced motion. Console-error and external-page-request counts were zero. These are scoped Chromium/emulation observations, not physical-device, full screen-reader/cross-browser or infrastructure-wide egress certification.
-
-The small final delivery commit adds production evidence/screenshots and updates README links only. The final handoff records its pushed SHA, hosted CI and observed Vercel status separately; the captured runtime remains the one identified above.
-
-## Backend foundation release — 2026-11-04
-
-Scope: disposable database contracts, synthetic integration tests and private authoring foundation only. Public UI datasets, reviewed historical facts, deployment policy and schedule-free `vercel.json` remain unchanged. Production must stay demo-only, with no service keys or backend activation. **No production Supabase migration is part of this release.** Private authoring now fails preflight against a backend without contract v1 and an explicit authoring dataset version; deploying this code does not install that schema.
-
-Release verification and revision-specific hosted CI/Vercel/public HTTP evidence are recorded below after delivery. Prior screenshot/browser evidence above belongs to the earlier visual revision; no fresh visual QA is implied by backend HTTP regression checks.
-
-Local release gate: **66/66 unit tests**, **78 real PostgreSQL/pgvector assertions** (native PostgreSQL 14.17 / pgvector 0.8.2, fresh owned cluster), development and production demo HTTP suites, archive mock HTTP suite, lint, typecheck, production build, whitespace, documentation-link and credential-pattern checks passed. Independent review found and prompted fixes for input attestation, retry races, source snapshot completeness, canonical profile scope and response/cache consistency; no blocking finding remained. PostgreSQL 17 Docker execution is delegated to the hosted database CI job; the complete Supabase gateway/Auth stack has not been executed locally.
-
-The first hosted database attempt for `472d72c` exposed Docker entrypoint's temporary-server restart: role creation succeeded, then the next socket connection failed. This was a runner readiness defect, not a schema/fixture failure. The follow-up waits for PID 1 to become the final postgres process before accepting `pg_isready`. Native tests did not cover this Docker-specific behavior; hosted rerun evidence is required below.
-
-### Backend release verification
-
-- Backend implementation: `472d72ce43f9fc7c29d0774ffa05d68a09511fd9`; Docker readiness correction: `3733d685415bfd17462092373becfb0b1da62eb6`, both pushed and remote-verified on main.
-- [Hosted CI for corrected release](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/41860038371): **success**, both verify and database jobs. The real isolated PostgreSQL 17 / pgvector 0.8.2 job logged all **78** successful assertions; verify retained 66 unit tests, lint/typecheck/build, credential guard and all demo/archive/invalid-configuration HTTP checks. The first run's verify job also passed; its database failure is explained above rather than hidden.
-- Vercel reported successful deployment for `3733d68` to the existing project: [deployment record](https://vercel.com/jt254/world-cup-lens/Go1e79YgQs3LuMRYLQ6CndKo1zkw). Public URL remains [world-cup-lens-one.vercel.app](https://world-cup-lens-one.vercel.app).
-- `npm run test:production-http` passed all seven groups after deployment: five exact results/four dates/AET/source link and detail/back assertions, curated/fictional isolation, sample Lens/Q&A, About/invalid/empty states, archive denial, all six admin POST denials, cron GET/HEAD denials, icon/notices. No credentials were sent; guarded requests returned before authoring/cron work. This is public HTTP evidence, not server egress monitoring or new browser/visual QA.
-- Production still behaves demo-only. No production schema, source corpus, service credentials, paid configuration or scheduler was changed. Deployment evidence comes from the Git-connected Vercel commit status and public HTTP checks; no fresh dashboard environment inventory or production database policy verification is claimed.
-
-This evidence-only follow-up changes no runtime behavior. Subsequent documentation revisions can be checked through the same hosted CI and Git-connected deployment statuses.
-
-## Final portfolio freeze candidate — 2026-11-04
-
-Baseline `cbd9b90`; final scope is documentation/portfolio preparation and verified maintenance, not another product milestone. Created technical walkthrough, twenty-question interview guide, engineering decisions and portfolio summary. README now leads with the demo, evidence, screenshots, code map and run/test commands. Current audit/roadmap summaries supersede historical blockers without erasing the evidence.
-
-Bounded fixes: canonical provider status is no longer always scheduled; unsupported/ambiguous states fail before writes, and absent venue country is Unknown rather than league country. Public curated facts/components remain unchanged. No provider request or existing database cleanup was performed.
-
-A registry dependency scan blocked freeze: the original production tree reported 24 affected-package entries, including critical Next and high Zod/tooling findings. Next and matching lint config are pinned at 16.4.5, Zod at 4.6.6; compatible transitive fixes applied. The unused shadcn CLI tree was removed while its exact installed CSS body was preserved with full MIT notice/hash. The new Next development advisory-reminder probe was detected/blocked by the original strict tripwire; documented `agentUpgrade: false` disables those reminders, while explicit CI advisory checks remain enabled. No fetch exception was added.
-
-Post-repair snapshot: **zero production audit entries; zero high/critical overall; 16 moderate development-only minimatch/lint-chain entries remain**. ESLint 9.39.5 is deprecated; current React/a11y plugin peers exclude ESLint 10. No forced downgrade/major override or audit suppression was used. These are disclosed maintenance limits, not a zero-vulnerability/security-certification claim.
-
-Final local gates after clean locked installation: **70/70 unit tests**, **78 real native PostgreSQL 14.17/pgvector 0.8.2 assertions**, archive mock HTTP, dev and built-server demo HTTP, lint, typecheck, production build, local documentation/heading/image/npm-command checks, credential patterns, high/critical advisory gate and whitespace passed. Pattern scanning also examined **369 reachable historical text blobs**, finding no matching credential patterns or committed environment files; this is not exhaustive secret detection. No raw values were printed.
-
-Actual updated-build Chromium QA passed 320/390/768/1280/1440px, menu/Escape/focus, keyboard date/detail/back, source disclosure, fictional answer switching, reduced motion and all five heroes at 320px. Zero console errors and external browser requests; server fetch-denial preload remained active. [Candidate machine report](screenshots/freeze-local/qa-report.json) is local, not deployed-revision evidence. Nine settled PNGs matched older production captures byte-for-byte; six desktop captures have a 15px wider canvas/client width, with no overflow. Fresh mobile/home and desktop/detail images were visually inspected; no design changes or new visual defect was found. Existing production screenshots remain labeled with their original revision pending the release recheck.
-
-Independent Codex review found no remaining blocker after fixes and corrected archive-authentication, attestation-time and authorship wording. This is a separate agent context, not an external human security/legal audit. Hosted CI/Vercel/public smoke and fresh production browser evidence must be verified for the pushed revision below. No production database migration, paid model/provider call, cron execution, billing change or new source-rights grant is part of the release.
-
+Pushes to `main` use the existing Git connection. A successful push alone does not establish deployment: inspect the commit's Vercel status, production-domain assignment and public response. Do not create a duplicate project or enable private services to release documentation changes.
 
 ## Portfolio freeze — verified release
 
-Runtime/reviewed maintenance: `50ec6935dd86ce56577d00e539760fa7eeebf350`; final whitespace correction: **`14724168431a18412957adc6a70f1372323e7e9e`**, pushed and remote-verified on main. [Hosted CI](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/41868791141) succeeded for both jobs, including 70 unit tests, real PostgreSQL 17/pgvector integration, lint/typecheck/build, document/credential/high-critical advisory checks, all public/archive-mock/invalid-policy HTTP checks and whitespace. The earlier run was superseded/cancelled by the correction; no failed gate is represented as passing.
+The freeze runtime is **`14724168431a18412957adc6a70f1372323e7e9e`**. [Hosted CI passed](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/41868791141), and [Vercel completed deployment](https://vercel.com/jt254/world-cup-lens/3DTKrQiV9xhTy1JDLhUnsiWC8gNA). The subsequent evidence-only baseline **`4c88da8399c8cdc3de8d96a2ee380f635f11fa98`** also has [successful CI](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/41869982910) and a [successful deployment](https://vercel.com/jt254/world-cup-lens/DwkcnDHU6ZhpcmkUu7SaA8EuyKxh).
 
-Vercel reports successful deployment of `1472416` to the existing project: [deployment record](https://vercel.com/jt254/world-cup-lens/3DTKrQiV9xhTy1JDLhUnsiWC8gNA). Actual public URL remains https://world-cup-lens-one.vercel.app. All seven production HTTP groups passed after deployment: five results/four dates/detail/back/source metadata, fictional isolation and stored Q&A, About, invalid/empty states, explicit archive rejection, all six admin POST denials and cron GET/HEAD denials. Denial requests carried no real secrets and returned before authoring work; no cron was executed.
+The freeze release passed **70 unit tests**, **78 real PostgreSQL/pgvector assertions**, archive mock HTTP, development and built-server demo HTTP, lint, typecheck, build, documentation links, credential patterns, advisory and whitespace checks. Native SQL testing used PostgreSQL 14.17 / pgvector 0.8.2; hosted CI used PostgreSQL 17 / pgvector 0.8.2.
 
-Fresh production Chromium/CDP checks passed 320/390/768/1280/1440px, keyboard/menu/source/Q&A interactions and reduced motion, with zero console errors/external browser requests. All 15 settled production captures matched the updated local captures. [Current report](screenshots/freeze-production/qa-report.json) and three retained genuine screenshots are linked from [design evidence](design.md#portfolio-freeze-browser-recheck--2026-11-04) and README. No reference image or local screenshot is presented as new production output. Headless/emulated browser limits remain.
+Seven production HTTP groups passed after deployment: all five results on four dates; detail/back navigation and source metadata; fictional isolation and stored Q&A; About and invalid/empty states; archive rejection; six admin POST denials and cron GET/HEAD denials; icon/notices. Denial checks sent no real secrets and returned before protected work. No cron or authoring pipeline was executed.
 
-**Recommendation: READY FOR PORTFOLIO FREEZE**, scoped to the demonstrable public product and explainable tested backend contracts. The 16 moderate dev-tool advisory entries/deprecated ESLint peer limit, remaining private ingestion defects, incomplete gateway/Auth and durable recovery, unmeasured grounding, unknown production schema/policies and external rights/code-licence questions remain explicit. No paid service, backend activation, production DB migration/write, new cron or publication-rights expansion occurred. A substantive verified defect can reopen maintenance; optional features require a new owner scope.
+Production Chromium checks covered 320/390/768/1280/1440px, keyboard navigation, menu/Escape/focus, date/detail/back links, source disclosure, fictional Q&A, reduced motion and all five match heroes at 320px. Zero console errors and external browser requests were observed. All 15 settled production captures matched the updated local captures. The [machine report](screenshots/freeze-production/qa-report.json), [desktop homepage](screenshots/freeze-production/home-1440.png), [mobile homepage](screenshots/freeze-production/home-390.png) and [desktop detail](screenshots/freeze-production/detail-1280.png) document that runtime. See [design evidence](design.md#portfolio-freeze-browser-recheck--2026-11-04).
 
-This evidence/screenshot follow-up changes no runtime behavior; its own GitHub/Vercel statuses are verified in the delivery handoff. Production behavior is observed through public HTTP/browser checks and Git-connected commit status, not a fresh dashboard environment inventory or production database policy audit.
+These checks support a portfolio freeze of the public product and tested backend contracts. They do not establish real-model quality, production schema parity, complete Supabase gateway/Auth coverage, durable recovery, full accessibility, infrastructure-wide egress monitoring or broader publication rights. Current findings are tracked in the [audit](audit.md#current-findings).
+
+## Verification commands
+
+Use Node 22 and locked dependencies. Routine checks need no service credentials:
+
+```sh
+npm ci
+npm test
+npm run db:test
+npm run test:replay-http
+npm run test:demo-http
+npm run lint
+npm run typecheck
+npm run build
+DEMO_TEST_PRODUCTION=1 npm run test:demo-http
+npm run check:docs
+npm run check:credentials
+npm run check:security
+git diff --check
+```
+
+Run HTTP suites sequentially; each owns its local server processes. `db:test` owns a disposable native or Docker database and accepts no remote database URL. The registry advisory check uses network access; model/provider calls are not part of these tests. [CI](../.github/workflows/ci.yml) runs credential-free verification and a separate disposable PostgreSQL job with bounded timeouts.
+
+Optional checks are distinct from routine CI:
+
+- `npm run test:production-http`: read-only/denial smoke checks of the authorized public demo, with optional `DEMO_URL`. The script confirms demo policy before checking disabled methods; never supply real authoring credentials or run it against an active private backend.
+- `npm run test:design`: isolated installed Chromium against an already running demo on localhost:3107; no browser download or personal profile. See [browser setup and scope](design.md#local-browser-evidence--passed-2026-11-04). `DESIGN_URL` selects the authorized localhost or production origin; `CHROMIUM_PATH` selects an installed browser. Set `DESIGN_CAPTURE_DIR` to a fresh output directory (for example `/tmp/wcl-browser-qa`) to preserve revision-labeled captures. These optional checks are not CI jobs.
+
+A release that changes runtime dependencies requires the full affected regression suite. Documentation-only releases verify links, technical claims, existing checks and committed-revision delivery; they do not create new behavioral evidence or replace revision-labeled screenshots.
+
+## Release history
+
+| Runtime / correction | Evidence and scope |
+| --- | --- |
+| `8299114` → `a8150be` | First fictional demo, then narrow-screen clipping correction; [CI](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/41696782078). Original [desktop](screenshots/production-desktop.png), [mobile](screenshots/production-mobile.png), [320px](screenshots/production-mobile-320.png) and [keyboard](screenshots/production-keyboard-focus.jpg) captures depict those earlier releases. |
+| `104f984` | Five-match curated release; [CI](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/41724947057) and [Vercel](https://vercel.com/jt254/world-cup-lens/6XXzQLATmE3rtgz5KbfwKCviHt6S). The scoped publication decision superseded the earlier internal HOLD; [review](curated-history-review.md). |
+| `1bf320c` | Editorial redesign and question-target correction; [CI](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/41829456592), [Vercel](https://vercel.com/jt254/world-cup-lens/SMhGhPWJpSh47oDXJ3x19vzHqfSv), [browser evidence](design.md#production-recheck--passed-2026-11-04). |
+| `472d72c` → `3733d68` | Backend foundation, then Docker startup-readiness correction; [CI](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/41860038371) and [Vercel](https://vercel.com/jt254/world-cup-lens/Go1e79YgQs3LuMRYLQ6CndKo1zkw). Hosted SQL testing exposed the temporary initialization server's restart; the runner now waits for the final PostgreSQL process before readiness. No production migration. |
+| `1472416` → `4c88da8` | Dependency/status/country maintenance and freeze evidence, verified above. Historical result tuples and public design unchanged. |
+
+The November 4 dependency snapshot has zero production advisory entries and zero high/critical entries overall, with 8 moderate development-only lint/glob entries and deprecated ESLint peer constraints remaining. It is a dated registry result, not a security certification. [Maintenance rationale](engineering-decisions.md#final-security-maintenance--bounded-dependency-changes).

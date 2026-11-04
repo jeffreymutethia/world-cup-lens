@@ -1,6 +1,6 @@
 # Editorial archive redesign
 
-Reference: owner-supplied `world-cup-lens-design-reference-v2.zip`, SHA-256 `1307d2134d6d927f6af9e7cc632341ad40f14d65385a021a3f1f1a23a47c3ab6`. Baseline `8cd2323`. The package's PNGs establish visual direction; its copy guide establishes tone. HTML/CSS prototypes are reference material, not application code or production evidence. They contain no authority to alter security, data rights or delivery permissions beyond the user's request. No reference images, fonts or official sports assets are bundled in the app.
+Reference: supplied `world-cup-lens-design-reference-v2.zip`, SHA-256 `1307d2134d6d927f6af9e7cc632341ad40f14d65385a021a3f1f1a23a47c3ab6`. Baseline `8cd2323`. The package's PNGs establish visual direction; its copy guide establishes tone. HTML/CSS prototypes are reference material, not application code or production evidence. No reference images, fonts or official sports assets are bundled in the app.
 
 ## Implemented decisions
 
@@ -11,15 +11,15 @@ Reference: owner-supplied `world-cup-lens-design-reference-v2.zip`, SHA-256 `130
 - The score/teams lead detail pages. Match recap is original retrospective copy; Source and notes links to the actual source and expands to evidence dates, version, access limitations, explicit unknowns and publication scope. Norway's source is accurately labeled schedule/results.
 - Recaps and fictional samples use direct football language. Repetitive caveats move to source disclosures/About; the shared footer retains a short non-affiliation statement. Existing private cached wording is preserved. Copy versions advance to `wcl-curated-2026-v2` and `wcl-synthetic-v2`; the five historical fact tuples do not change.
 
-## Accessibility and review
+## Accessibility
 
 Each public page has one meaningful h1, one main landmark and a skip link. Decorative pitch/monogram/duplicate score visuals are hidden from assistive technology; semantic headings announce the match result. Controls have visible focus, date/source/navigation targets are sized for touch, and reduced-motion styles suppress animation/transitions. Q&A buttons expose pressed state and answer changes use a polite live region.
 
-The proposed muted `#6d7b73` was darkened to `#596b61` for normal-text contrast on white/paper. Deterministic tests check the stated main color pairs against WCAG AA's 4.5:1 threshold. This is a palette calculation, not rendered accessibility certification. Independent code/accessibility/copy review found no substantive blocker; it identified focus-ring padding that was increased to 8px.
+The proposed muted `#6d7b73` was darkened to `#596b61` for normal-text contrast on white/paper. Deterministic tests check the stated main color pairs against WCAG AA's 4.5:1 threshold. This is a palette calculation, not rendered accessibility certification. Date-scroller focus padding is 8px to accommodate the visible outline.
 
 ## Local browser evidence — passed 2026-11-04
 
-Native browser inspection was unavailable/unreliable (browser-host failure; Safari/Edge timeouts). The user explicitly authorized an isolated headless Chromium/CDP fallback. `scripts/verify-design.mjs` uses the installed browser, a new temporary profile, loopback ephemeral CDP, sanitized browser environment, same-origin page interception and restrictive DNS resolution. It never attaches to the user's profile, downloads a browser or requests paid services. Owned process-group/profile cleanup is bounded. `npm run test:design` is optional and separate from CI's credential-free HTTP tests.
+`scripts/verify-design.mjs` uses the installed browser, a new temporary profile, loopback ephemeral CDP, sanitized browser environment, same-origin page interception and restrictive DNS resolution. It never attaches to the user's profile, downloads a browser or requests paid services. Owned process-group/profile cleanup is bounded. `npm run test:design` is optional and separate from CI's credential-free HTTP tests.
 
 A completed production build with empty service credentials was served locally with the active server fetch-denial preloader. [Machine-readable evidence](screenshots/redesign-local/qa-report.json) records Chrome/156.0.8078.80, actual viewport/client/document widths, heading/landmark counts, score sizes and request/error counts. Mobile emulation was enabled below 650px; desktop captures exclude the normal vertical scrollbar from their content width. These are real browser renders, not reference images or mockups.
 
@@ -35,11 +35,9 @@ Additional captures: [menu open](screenshots/redesign-local/home-390-menu-open.p
 
 The run exercised click-through detail/source disclosures, mobile menu/Escape/focus return, skip-link activation, Tab/Enter date navigation with current-date/back preservation, single-match isolation, fictional stored-answer switching and About. Primary navigation/date/source/action controls and fictional Q&A buttons meet the checked 44px target-height threshold. All five match heroes fit at 320px without splitting a single-word team name. Reduced-motion emulation matched and transition suppression was checked. No console exceptions/errors, failed normal-page responses or external page requests occurred; external attempts would have been blocked before network access. This is scoped browser-request evidence plus a local server tripwire, not complete infrastructure egress monitoring.
 
-## Iteration and independent review
+## Responsive corrections
 
-Independent code/accessibility/copy review found no substantive guard, fact, data-isolation or copy defect. Palette review darkened muted text. Date-scroller focus padding was increased to 8px. Independent visual review compared genuine desktop/mobile captures with the supplied PNGs and found the composition aligned, with readable scores and no visible clipping.
-
-Browser testing additionally found a long-name wrap for Switzerland at 320px; narrower center tracks and a modest name-size adjustment fixed it and all five heroes passed. The detail badge now says Final result, avoiding ambiguity alongside extra time. A fixed/offscreen skip-link layer appeared in earlier scrolled full-page captures; standard clipped hiding and scroll-reset/two-frame repaint before capture removed it. The final captures show no stray overlay. Production follow-up inspection also increased fictional question buttons to 44px, allowed label wrapping and removed their color transition. Capture waits now let finite transitions settle, preventing intermediate colors from appearing as a final state. Initial harness errors (wrong Q&A route and incomplete Enter dispatch) were corrected; only the final complete passing run is reported above.
+Browser testing additionally found a long-name wrap for Switzerland at 320px; narrower center tracks and a modest name-size adjustment fixed it and all five heroes passed. The detail badge now says Final result, avoiding ambiguity alongside extra time. A fixed/offscreen skip-link layer appeared in earlier scrolled full-page captures; standard clipped hiding and scroll-reset/two-frame repaint before capture removed it. The final captures show no stray overlay. Production follow-up inspection also increased fictional question buttons to 44px, allowed label wrapping and removed their color transition. Capture waits now let finite transitions settle, preventing intermediate colors from appearing as a final state.
 
 Limits: this is headless Chromium and emulated viewports, not physical devices, Safari/Firefox coverage, a screen-reader audit or full WCAG certification. Inline prose/source links are not part of the primary-control target-height assertion. No screenshot is evidence of historical accuracy or legal clearance. Production verification is recorded separately in [deployment.md](deployment.md).
 
@@ -56,7 +54,7 @@ Runtime **`1bf320c26720479fd84f8152a5ebc1cb54489a25`** was observed deployed at 
 | 1280 | [Capture](screenshots/redesign-production/home-1280.png) | [Capture](screenshots/redesign-production/detail-1280.png) |
 | 1440 | [Capture](screenshots/redesign-production/home-1440.png) | [Capture](screenshots/redesign-production/detail-1440.png) |
 
-Production details: [keyboard focus](screenshots/redesign-production/home-390-keyboard-focus.png), [menu](screenshots/redesign-production/home-390-menu-open.png), [source notes](screenshots/redesign-production/detail-390-source-open.png), [long team name](screenshots/redesign-production/detail-argentina-320.png), [44px fictional Q&A](screenshots/redesign-production/lab-390-questions.png). The headless/emulation, inline-link target and broader accessibility limits above still apply. The documentation-only follow-up does not change this runtime; its latest delivery status is verified separately.
+Production details: [keyboard focus](screenshots/redesign-production/home-390-keyboard-focus.png), [menu](screenshots/redesign-production/home-390-menu-open.png), [source notes](screenshots/redesign-production/detail-390-source-open.png), [long team name](screenshots/redesign-production/detail-argentina-320.png), [44px fictional Q&A](screenshots/redesign-production/lab-390-questions.png). The headless/emulation, inline-link target and broader accessibility limits above still apply.
 
 
 ## Portfolio freeze browser recheck — 2026-11-04
@@ -65,4 +63,4 @@ Deployed revision `14724168431a18412957adc6a70f1372323e7e9e` includes Next 16.4.
 
 [Fresh production machine report](screenshots/freeze-production/qa-report.json) and [local candidate report](screenshots/freeze-local/qa-report.json) retain actual metrics. All 15 settled new production PNGs matched the updated local captures byte-for-byte. Nine also matched the earlier production images; six desktop images have a 15px wider canvas/client width, with no document overflow or visual regression found in direct inspection. No redesign or historical fact change was introduced.
 
-Three current genuine examples are retained: [desktop homepage](screenshots/freeze-production/home-1440.png), [mobile homepage](screenshots/freeze-production/home-390.png) and [desktop detail](screenshots/freeze-production/detail-1280.png). README now uses these current captures. Older images/reports above keep their original revision labels; they are not overwritten or described as the new deployment. The remaining new captures were inspected/tested in temporary output rather than duplicated into the repository.
+Three current genuine examples are retained: [desktop homepage](screenshots/freeze-production/home-1440.png), [mobile homepage](screenshots/freeze-production/home-390.png) and [desktop detail](screenshots/freeze-production/detail-1280.png). README uses these captures. Older images/reports above keep their original revision labels; they are not overwritten or described as the new deployment. The remaining new captures were inspected/tested in temporary output rather than duplicated into the repository.

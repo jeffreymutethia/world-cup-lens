@@ -2,7 +2,7 @@
 
 ## Implemented path
 
-`generateAndSaveMatchLens` is the server adapter; `rag/engine.ts:runVersionedLens` is the dependency-injected core. Public pages import neither generator. Every public authoring route still denies demo-only before authentication or work. This milestone uses **mock model/embedding responses only**; no real embedding/generation or provider API was invoked.
+`generateAndSaveMatchLens` is the server adapter; `rag/engine.ts:runVersionedLens` is the dependency-injected core. Public pages import neither generator. Every public authoring route still denies demo-only before authentication or work. The generation core is verified with mocked model/embedding responses; SQL behavior is tested separately against disposable PostgreSQL. Complete vendor/gateway execution and real-model quality evaluation remain open.
 
 ```mermaid
 sequenceDiagram
@@ -35,7 +35,7 @@ sequenceDiagram
   end
 ```
 
-The query names teams, stage and venue without Group-prefix assumptions. Prompt input is explicitly allowlisted. Retrieved text is untrusted data and cannot supply instructions. This reduces prompt-injection exposure; it is not a proof of resistance or factual grounding. Numeric edges are always empty for new output. Ingestion stores unknown strengths as null, source synthesis omits legacy placeholder measurements, and prompts do not receive raw team summaries/ratings.
+The query names teams, stage and venue without Group-prefix assumptions. Prompt input is explicitly allowlisted. The prompt marks retrieved text as untrusted data rather than instructions. Prompt-injection resistance and factual grounding have not been evaluated. Numeric edges are always empty for new output. Ingestion stores unknown strengths as null, source synthesis omits legacy placeholder measurements, and prompts do not receive raw team summaries/ratings.
 
 Structured Responses and proofreading are still potentially paid adapters, available only for separately authorized private operation. Final validation runs **after** proofreading, source hydration and whitespace normalization. It rejects unknown keys/enums, invalid lengths/arrays, unsupported metric entries and opponent-name mismatches. SQL independently checks complete final Lens shape and identities before persistence. Generated source entries are replaced with at most five document-deduplicated excerpts, each <=180 characters; full ordered chunk metadata is retained privately. This proves shape and traceability, not the truth of every sentence. Historical corpora/legacy outputs may still contain unsupported claims and retain UNKNOWN publication rights.
 

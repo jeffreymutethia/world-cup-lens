@@ -1,151 +1,158 @@
-# Interview guide
+# Technical interview guide
 
-Use these as evidence-based talking points, not a script claiming work or results you cannot explain. The project used significant Codex implementation/documentation assistance and owner direction/review. A separate agent review is another context, not an external human security audit. [Walkthrough](technical-walkthrough.md) traces actual code; [freeze audit](audit.md#portfolio-freeze-audit) bounds readiness.
+Use the [walkthrough](technical-walkthrough.md) for the code-to-SQL trace and [engineering decisions](engineering-decisions.md) for tradeoffs. Answers distinguish four evidence levels:
 
-Labels: **Public** = deployed behavior checked through HTTP/browser evidence. **Tested** = deterministic TypeScript or real disposable PostgreSQL coverage. **Adapter** = implemented external-service integration, not exercised with paid calls in the final milestones. **Proposed** = not implemented. No throughput, accuracy, token-cost, user-count or business-impact benchmark is claimed.
+- **Deployed:** public replay and fictional lab, verified through HTTP/browser checks.
+- **Tested:** deterministic TypeScript behavior or real disposable PostgreSQL execution.
+- **Integration:** external-service adapters exist, but the reconstructed pipeline has not been exercised end-to-end through Supabase and paid model APIs.
+- **Proposed:** improvements not yet implemented.
 
-## 1. Give me a two-minute project walkthrough
+## 1. Give a two-minute system walkthrough
 
-**Public + Tested; speech draft:** “World Cup Lens is a football archive portfolio with five source-linked 2026 results and a separate fictional lab. I separated the public experience from the paid backend: visitors can browse dates, scores, recaps and stored sample questions without database or model credentials. The recaps are authored editorial text, not live AI output.
+World Cup Lens provides a small historical archive and a separate fictional analysis lab. The public pages show five source-linked results, date navigation and retrospective editorial context. The fictional lab demonstrates stored commentary and Q&A. Neither public path needs a database connection or model request.
 
-“The private foundation uses Supabase/Postgres, pgvector and structured generation adapters. Sources are versioned; entity and time eligibility constrain semantic retrieval. The core validates transformed output and stores immutable input/source lineage with a versioned cache. Tests use synthetic vectors and mocked generation, while actual PostgreSQL tests cover permissions, filtering, rollback and retry behavior.
+The private backend uses Supabase/PostgreSQL for fixtures, versioned documents, vector chunks and cached output. Retrieval combines pgvector cosine similarity with entity, version and optional temporal eligibility. On a cache miss with context, the generation core requests structured output, proofreads it, attaches excerpts and validates the final result. Atomic SQL preserves input/source lineage and selects a successful cache winner.
 
-“The key limitation is evidence: shape validation is not factual grounding, old cache rows are retrospective, and the reconstructed schema is not proven production parity. The project was built with substantial Codex assistance and explicit review/verification gates. I can show the public product, the code-to-SQL trace and reproducible tests without claiming a full deployed AI service.”
+Tests exercise the generation core with injected responses and SQL contracts against disposable PostgreSQL. CI also checks public isolation and archive rendering with HTTP mocks. This establishes reproducible behavior at those layers; grounding quality, complete gateway integration and production-load behavior remain unmeasured.
 
-**Evidence:** `src/lib/deployment-mode.ts`, `src/lib/rag/engine.ts`, `supabase/tests/integration.sql`.
-**Follow-up:** Show the boundary that prevents a public request from reaching a paid adapter. What did you verify yourself?
+**References:** `src/app/page.tsx`, `src/lib/rag/engine.ts`, `supabase/tests/integration.sql`.
+**Follow-up:** Trace the exact point where a public request is prevented from reaching an external-service adapter.
 
-## 2. Why Next.js?
+## 2. Why Next.js, and what belongs on the server versus the client?
 
-**Implemented; retrospective rationale:** The existing React/TypeScript app benefits from server components for URL-selected data and server-only adapters, with small client components for the menu and stored Q&A. App Router keeps page rendering and guarded HTTP handlers in one repository. This is a justification for retaining the stack, not evidence that alternatives were benchmarked. Pages are request-aware server renders; static local data does not mean static HTML export.
+Server components select URL-driven data and render match pages. The menu and stored-answer selector use client state. Server-only modules contain privileged Supabase and model adapters. This keeps data selection and credentials out of browser code while retaining small interactive components. It is a rationale for the current design, not a claim of a framework benchmark. Local datasets are static inputs; the application is not a static HTML export.
 
-**Evidence:** `src/app/page.tsx`, `matches/[id]/page.tsx`, `about/page.tsx`, `components/layout/top-nav.tsx`, `components/match/match-qa.tsx`.
-**Follow-up:** Why does About call `connection()`? What code ships to the browser?
+**References:** `src/app/{page.tsx,about/page.tsx,matches/[id]/page.tsx}`, `src/components/layout/top-nav.tsx`, `src/components/match/match-qa.tsx`.
+**Follow-up:** Why does About call `connection()`? What would break if a privileged module entered the client import graph?
 
-## 3. Why Supabase/Postgres?
+## 3. Why PostgreSQL and Supabase?
 
-**Implemented + Tested:** Relational fixtures, source lineage and caches need FKs, constraints, transactions and role boundaries. Postgres keeps these in one consistency model; Supabase is the retained client/gateway integration. The disposable reconstruction proves SQL behavior; it does not prove production RLS parity or complete Supabase Auth/gateway behavior.
+**Tested SQL; integration boundary:** Fixtures, source versions and cached outputs have relational identities and consistency requirements. PostgreSQL supplies FKs, constraints, transactions and permissions; Supabase provides the existing client/gateway integration. The disposable SQL contract is reconstructed from application requirements and limited column/type discovery. Its behavior is tested, but production schema parity and complete Supabase Auth/PostgREST behavior are not established.
 
-**Evidence:** `supabase/migrations/`, `src/lib/supabase/{server,admin,authoring}.ts`, [contract](database-contract.md).
-**Follow-up:** Which checks ran through PostgREST? Why will the new provider archive be empty with publishable credentials?
+**References:** `supabase/migrations/`, `src/lib/supabase/{server,admin,authoring}.ts`, [database contract](database-contract.md).
+**Follow-up:** Which behavior was tested directly in PostgreSQL, which through HTTP mocks, and which through a real Supabase gateway?
 
-## 4. Why pgvector instead of Pinecone or another vector database?
+## 4. Why pgvector rather than a separate vector database?
 
-**Implemented; retrospective comparison:** The corpus is small and eligibility depends on relational team/match/time metadata. pgvector lets filtering, vector ranking and history share SQL, transactions and grants. A separate vector service would add synchronization and authorization boundaries without a measured requirement here. There was no Pinecone benchmark or vendor bake-off. Current retrieval is exact cosine scan, with no approximate index.
+**Implemented; architectural comparison:** Entity scope and source availability are relational filters. pgvector keeps vectors, metadata, history and permissions in one database. A separate vector service would require synchronization and another authorization boundary. Current retrieval uses an exact scan; no Pinecone comparison, filtered-recall benchmark or ANN performance result is available.
 
-**Evidence:** `match_document_chunks`, `docs/retrieval-design.md`.
-**Follow-up:** What workload would justify HNSW or a standalone service? How would you measure filtered recall?
+**References:** SQL `match_document_chunks`, [retrieval design](retrieval-design.md).
+**Follow-up:** What measured workload would justify HNSW or another service? How would filtered recall be evaluated?
 
 ## 5. How does the RAG pipeline work?
 
-**Tested core + Adapter:** Documents become immutable versions and chunks. The embedding adapter validates vectors; a matchup query retrieves eligible chunks. The engine checks versioned cache identity, then on a miss with context requests structured output, proofreads, hydrates excerpts, normalizes and revalidates. Commit atomically retains the run and source identities. Public pages only read local/cached content. Synthetic core and SQL tests cover complementary layers; no full paid end-to-end generation was executed for this foundation.
+**Tested core + external adapters:** Document revisioning stores immutable chunks and embedding metadata. A matchup query retrieves eligible context, then the engine builds a cache identity. A hit returns validated cached text. A miss with evidence runs structured generation, proofreading, excerpt hydration, normalization and final validation before atomic persistence. Public pages do not run this workflow.
 
-**Evidence:** `documents/embed-documents.ts`, `rag/engine.ts:runVersionedLens`, `ai/generate-and-save-match-lens.ts`.
-**Follow-up:** Which step can incur cost even on a cache hit? What happens with empty context?
+**References:** `src/lib/documents/embed-documents.ts`, `src/lib/rag/engine.ts:runVersionedLens`, `src/lib/ai/generate-and-save-match-lens.ts`.
+**Follow-up:** Which operation still occurs on a private cache hit? Why are generation and page rendering separate?
 
-## 6. How do you choose relevant documents?
+## 6. How are documents ranked?
 
-**Tested:** Eligibility restricts current unchanged versions to compatible embedding labels and requested entities; optional historical availability is another gate. Cosine similarity then ranks qualifying chunks. The app requests eight at threshold .15, with stable UUID tie-breaking. That threshold is a design setting, not a calibrated relevance score. No retrieval-quality dataset or measured recall is available.
+**Tested:** Eligible current-version chunks are scored by cosine similarity. The application requests eight results at an inclusive .15 threshold; SQL orders similarity descending and chunk UUID ascending for deterministic ties. Embedding labels must agree between query, version and chunk. The threshold is a selection parameter, not a calibrated confidence measure.
 
-**Evidence:** `ai/retrieve-context.ts:retrieveVersionedContext`, SQL `match_document_chunks`.
-**Follow-up:** How would you choose a threshold using reviewed queries? Why exclude versionless legacy chunks?
+**References:** `src/lib/ai/retrieve-context.ts:retrieveVersionedContext`, SQL `match_document_chunks`.
+**Follow-up:** How would a reviewed query set help choose the threshold? What is lost by excluding versionless legacy chunks?
 
-## 7. How do entity filters affect retrieval?
+## 7. How do entity filters constrain semantic retrieval?
 
-**Tested:** Every scope tag on a source must agree. A Maple source tagged to a different match is excluded even if its vector ranks highly. Team, venue and match conditions combine with AND; untagged material requires explicit global status. Null requested filters do not open all tagged documents. This sacrifices some recall to avoid unrelated evidence.
+Every nonnull scope tag must match. A source tagged to Maple Eleven and a different match is excluded even if its vector ranks highly. Team, venue and match constraints combine with AND. Untagged material requires explicit global status; null requested filters do not open all tagged sources. Similarity ranks candidates only after eligibility is satisfied.
 
-**Evidence:** `supabase/tests/integration.sql`, including “entity filters exclude another match despite shared team”.
-**Follow-up:** How would you model genuinely cross-match evidence? Why is a broad OR unsafe?
+**References:** `match_document_chunks`, the SQL assertion “entity filters exclude another match despite shared team”.
+**Follow-up:** How would cross-match evidence be represented deliberately? Why would broad OR filtering admit unrelated context?
 
-## 8. How do you prevent historical leakage?
+## 8. What does the historical cutoff guarantee?
 
-**Tested boundary, limited claim:** As-of retrieval requires established publication and capture times before cutoff. Source edits revoke availability review. The engine also requires an immutable attestation bound to the exact match/team/venue input fingerprint, with cutoff before kickoff. Prompt input excludes final scores and current summaries/status. This enforces recorded operator assertions; it cannot authenticate external clocks, remove pretrained model knowledge or prove model compliance. The HTTP adapter remains retrospective and legacy outputs are never promoted into forecasts.
+**Tested input boundary:** Source publication and capture must be established at or before cutoff. Content/provenance edits revoke availability review. As-of experiments also require an attestation bound to the exact match/team/venue fingerprint, with asserted availability at/before cutoff and cutoff before kickoff. Recording that attestation can happen later. Prompt input excludes scores, mutable summaries, strengths and current status.
 
-**Evidence:** `rag/contract.ts:safeMatchInput`, `fingerprint_document`, `authoring_input_attestations`, `commit_lens_generation`.
-**Follow-up:** What if an operator lies about capture time? Can an old version be retrieved after the current head changes?
+These checks enforce recorded assertions; they do not authenticate publisher clocks, remove later knowledge from model weights or prove compliance. The HTTP adapter remains retrospective, as do legacy cached outputs.
 
-## 9. How do you validate structured outputs?
+**References:** `src/lib/rag/contract.ts:safeMatchInput`, `fingerprint_document`, `authoring_input_attestations`, `commit_lens_generation`.
+**Follow-up:** What if availability evidence is false? Can a previously valid version be selected after its current head changes?
 
-**Tested + Adapter:** Responses uses the Zod schema, but that is only the first gate. The engine re-parses after proofreading, source hydration and normalization, validates team names and rejects unsupported edges. SQL independently checks final shape. Malformed cache entries fail closed. These checks enforce a contract, not football truth; a plausible unsupported sentence can still be schema-valid.
+## 9. Why validate after structured generation?
 
-**Evidence:** `ai/schemas.ts:MatchLensSchema`, `rag/engine.ts:validateFinalLens`, SQL `valid_lens_json`, `tests/rag.test.ts`.
-**Follow-up:** Why validate after normalization? What can proofreading change that schemas cannot detect?
+Proofreading, excerpt hydration and normalization can alter otherwise valid output. The engine therefore re-parses after transformations, validates opponent names and rejects unsupported numerical edges. SQL separately checks final shape. A schema-valid sentence can still be factually unsupported; contract validation and grounding evaluation are different concerns.
 
-## 10. How do you evaluate factual grounding?
+**References:** `src/lib/ai/schemas.ts:MatchLensSchema`, `src/lib/rag/engine.ts:validateFinalLens`, SQL `valid_lens_json`.
+**Follow-up:** Give an example of a postprocessing failure. What semantic changes could pass the schema?
 
-**Not yet measured:** There is no real-model grounding evaluation score. Current tests cover eligibility, traceability, shape and honest labels; retrieved excerpts are context, not claim-level citations. The next credible evaluation would use a reviewed synthetic claim-support corpus, counterexamples and explicit supported/unsupported/uncertain decisions. A separately authorized model run would be needed to measure generation quality. Do not call existing tests “hallucination prevention”.
+## 10. How is factual grounding evaluated?
 
-**Evidence:** `docs/rag-pipeline.md`, `docs/roadmap.md`.
-**Follow-up:** What counts as support for a claim? How would you detect unsupported claims that copy fluent source wording?
+**Proposed evaluation:** No real-model grounding score has been measured. Existing tests cover eligible evidence, traceability, output shape and presentation labels. A grounding evaluation would need reviewed claims, supporting spans, unsupported counterexamples and explicit uncertainty criteria. Retrieved excerpts alone do not establish claim support.
 
-## 11. What is the cache key based on?
+**References:** [RAG limits](rag-pipeline.md), [remaining work](roadmap.md#portfolio-freeze-and-remaining-work).
+**Follow-up:** How would support be labeled and disagreements resolved? How would a fluent unsupported claim be detected?
 
-**Tested:** SHA256 of canonical JSON covering dataset and input fingerprint, allowlisted input, perspective/cutoff/attestation, model/generator kind, prompt/schema/embedding versions, query/vector/threshold/count and ordered source metadata. Clocks and run UUID are excluded. Changed source/input/configuration creates a new identity. Logical versions do not pin vendor weights; alias drift remains a limitation.
+## 11. What determines cache identity?
 
-**Evidence:** `rag/contract.ts:canonicalJson/cacheKey`, `rag/engine.ts`, cache-invalidation tests.
-**Follow-up:** Why include the query vector? Why does an unchanged query still need an embedding today?
+**Tested:** SHA256 of canonical JSON covers input/dataset fingerprints, allowlisted match input, perspective/cutoff/attestation, model/generator kind, prompt/schema/embedding versions, query/vector/parameters and ordered source metadata. Execution clocks and run IDs are excluded. Changed evidence or configuration produces a new key. Logical model labels do not pin vendor weights.
 
-## 12. How do you handle model and database failures?
+**References:** `src/lib/rag/contract.ts:canonicalJson/cacheKey`, `runVersionedLens`, cache-invalidation tests.
+**Follow-up:** Why include the query vector? What would query-embedding memoization need to preserve?
 
-**Tested:** Embedding/retrieval/cache-read failures stop before generation; empty evidence produces a failed record with no generation clocks. Model/validation failures append a bounded failure code if the database accepts it. Atomic SQL leaves old chunks/cache intact on partial failure. Routes withhold upstream errors and source bodies. There is no global transaction across ingestion, external calls and persistence.
+## 12. How are failures handled?
 
-**Evidence:** engine failure tests, SQL injected-cache-fault rollback test, `src/app/api/admin/`.
-**Follow-up:** Which failures produce no generation record? Can a partially completed fixture pipeline be safely rerun?
+Embedding, retrieval and cache-read failures stop before generation. Empty context records failure without model calls or generation clocks. Model/validation failures persist bounded error codes if the database accepts the record. Atomic revision/cache writes leave previous successful state intact on failure. Error responses withhold upstream payloads; there is no transaction spanning the entire pipeline and external services.
 
-## 13. What if generation succeeds but saving fails?
+**References:** `tests/rag.test.ts`, injected persistence-fault assertions in `supabase/tests/integration.sql`, `src/app/api/admin/`.
+**Follow-up:** Which failures create no generation record? What earlier ingestion work remains committed after a later step fails?
 
-**Tested primitive, incomplete operations:** The core throws `PersistenceFailure` with a private envelope. Retrying the identical envelope/run ID is idempotent in SQL and avoids another model call. The current HTTP handler returns a sanitized failure and does not durably retain or expose that checkpoint; a process restart may lose it. A durable job/outbox is proposed, not implemented.
+## 13. What if generation succeeds but persistence fails?
 
-**Evidence:** `PersistenceFailure`, concurrent retry and rollback SQL assertions.
-**Follow-up:** How would you recover after process loss? What if saving committed but the response was lost?
+**Tested recovery primitive:** `PersistenceFailure` carries the private envelope. Retrying its identical run ID/submission is idempotent, including when the first commit succeeded but its response was lost. The HTTP handler does not durably store or return the checkpoint. Process loss can therefore require repeated work. Durable job/checkpoint storage is proposed.
 
-## 14. How does RLS protect data?
+**References:** `PersistenceFailure`, `commit_lens_generation`, concurrent retry and rollback tests.
+**Follow-up:** Where would a durable checkpoint be stored? When must a stale envelope be discarded rather than retried?
 
-**Tested SQL:** Anonymous/authenticated users can SELECT only explicitly synthetic-public presentation rows with visible relations. Source documents, vectors, lineage and RPCs are privileged. Table grants and fixed-search-path invoker functions complement RLS. The service role is trusted, and real Supabase may bypass RLS; this is not protection from a compromised service key or a deliberate superuser. Production policy parity is unknown.
+## 14. How do RLS and route authorization differ?
 
-**Evidence:** migration grants/policies, real role tests with a NOBYPASSRLS service role.
-**Follow-up:** Why do both grants and policies matter? How would you implement authenticated operator reads without broadening public provider access?
+The deployment guard disables archive reads and authoring in demo-only mode. In private mode, archive pages use publishable reads subject to database grants/RLS; they have no application-level user login. Authoring additionally requires an operator secret and privileged server client. The reconstructed schema allows anonymous/authenticated SELECT only for explicitly synthetic-public presentation rows; source/vector/history/RPC access stays privileged.
 
-## 15. How do you test without paid APIs?
+The service role is trusted and can bypass RLS in real Supabase. This is not protection against a compromised service key or deliberate administrator changes.
 
-**Tested:** Node runs compiled TypeScript tests with dependency-injected embeddings/models. Original synthetic vectors exercise actual pgvector in an owned disposable database. HTTP suites use a local archive mock and an active service-fetch denial tripwire for public routes. CI supplies no real service credentials. Browser and public HTTP checks are additional evidence, not substitutes for SQL tests. Full Supabase gateway/Auth and paid vendor adapters are not covered end-to-end.
+**References:** `src/lib/deployment-mode.ts`, `src/app/api/admin/`, migration grants/policies and real NOBYPASSRLS role tests.
+**Follow-up:** Why are grants and policies both necessary? How should authenticated operator archive reads work without widening public provider access?
 
-**Evidence:** `scripts/test.mjs`, `scripts/database.mjs`, `scripts/verify-{demo,replay,production,design}.mjs`, `.github/workflows/ci.yml`.
-**Follow-up:** Which regression did HTTP miss? How did the Docker temporary-server race differ from native testing?
+## 15. How is the system tested without paid calls?
 
-## 16. How would you scale it?
+Injected embeddings and model responses exercise the TypeScript core. Original synthetic vectors exercise actual PostgreSQL/pgvector constraints, ranking and permissions. HTTP suites mock the archive gateway and deny app service fetches on demo paths. Browser checks verify interactions separately. These layers are complementary, not a complete Supabase/OpenAI end-to-end session.
 
-**Proposed:** Start with measured query plans and a reviewed relevance workload. Add durable bounded jobs and persistence recovery, then query-embedding memoization; benchmark exact retrieval before introducing filtered ANN. Stronger corpus snapshot semantics would need a coordinated revision/locking protocol. Consider a separate vector service only after measured storage/latency/operations constraints justify the extra boundary. No capacity or latency estimate is claimed.
+**References:** `scripts/test.mjs`, `scripts/database.mjs`, `scripts/verify-{demo,replay,production,design}.mjs`, `.github/workflows/ci.yml`.
+**Follow-up:** What did the Docker startup race expose that native tests missed? Which UI defect would an HTTP assertion fail to catch?
 
-**Evidence:** existing pending-document limit 50; [deferred work](roadmap.md#portfolio-freeze-and-remaining-work).
-**Follow-up:** How would you preserve entity/cutoff filtering with ANN? What is the first production metric you would instrument?
+## 16. How would the system scale?
 
-## 17. What would you change if starting again?
+**Proposed:** Measure query plans, filtered recall and authoring workloads first. Add durable bounded jobs, persistence recovery and query-embedding memoization. Benchmark exact retrieval before adding ANN. A stronger corpus snapshot needs a coordinated revision/locking protocol. Another vector service is justified only by measured requirements; no capacity or latency estimate is established here.
 
-**Retrospective judgment:** Start with explicit dataset/publication modes, a reproducible SQL contract, null unknown metrics and distinct event/source/generation clocks. Separate public reading from authoring immediately. This repository's history shows why live defaults, placeholder strengths and mutable cache rows made a historical demo misleading. Keep the same small public scope rather than restoring live features. This is reflection, not proof those alternatives were originally tested.
+**References:** pending-document limit 50, [retrieval consistency](retrieval-design.md#consistency-and-tests), [roadmap](roadmap.md).
+**Follow-up:** How would an ANN index interact with selective entity filters? What operational metric should be collected first?
 
-**Evidence:** chronological `docs/audit.md`, current deployment/replay/RAG boundaries.
-**Follow-up:** Which simplification would you keep? What did you deliberately choose not to build?
+## 17. Which architectural tradeoffs matter most?
 
-## 18. What is the biggest limitation?
+Public local content trades tournament coverage and live generation for reliable credential-free browsing. PostgreSQL consolidates consistency and permission boundaries but exact retrieval has scale limits. Immutable versions improve traceability while increasing storage. Default-deny policies protect publication-sensitive data but leave the legacy publishable provider reader incompatible with the new private defaults.
 
-**Current:** The private AI foundation is contract-tested, not an authenticated, factually evaluated historical forecasting service. Complete Supabase gateway integration, durable recovery and production schema parity are missing. Provider and broader source rights remain unresolved. The public demo is useful precisely because it does not depend on those unfinished paths; it demonstrates product behavior and engineering boundaries, not live model quality.
+**References:** [engineering decisions](engineering-decisions.md).
+**Follow-up:** Which constraint would justify reversing a decision? Which comparison is conceptual rather than benchmarked?
 
-**Evidence:** [audit](audit.md#portfolio-freeze-audit), [rights](data-rights.md).
-**Follow-up:** What can you honestly demonstrate now? What evidence would change that limitation?
+## 18. What is the largest current limitation?
 
-## 19. What did Codex/AI agents change about development?
+The private backend is contract-tested, not a factually evaluated historical forecasting service. Complete gateway/Auth testing, durable recovery, production schema parity and authenticated source evidence remain open. The public product demonstrates replay and stored-sample behavior independently of those unfinished integrations.
 
-**Recorded workflow:** Codex performed substantial implementation, testing, documentation and delivery, guided by owner requirements. The useful discipline was making claims inspectable: repository evidence, deterministic tests, an independent agent pass, real SQL/HTTP/browser checks and verified CI/deployment. Agent output still needed scrutiny; actual examples include permissive defaults, a small-screen clipping defect and Docker readiness failures. Do not imply all code was handwritten or independent agent review was an external audit.
+**References:** [current findings](audit.md#current-findings), [data rights](data-rights.md).
+**Follow-up:** What can be demonstrated directly today? What evidence would justify a stronger production claim?
 
-**Evidence:** `AGENTS.md`, commit history and milestone records in `docs/deployment.md`.
-**Follow-up:** Explain one generated function without assistance. Show a case where a passing check gave insufficient evidence.
+## 19. Where are the transaction and concurrency boundaries?
 
-## 20. What did you personally review and approve?
+`store_document_revision` locks a document, rejects changed inputs and inserts its version/chunks/head atomically. `commit_lens_generation` locks the match and selected inputs, rechecks retrieval, and writes run references, cache winner and retrospective adapter in one transaction. Concurrent identical envelopes are retryable; distinct successful attempts can remain in history while the first identical-key cache winner is retained.
 
-**Owner direction is evidenced; personal review depth must be stated honestly.** Recorded owner decisions include the five-match narrow editorial release, credential-free public/private separation, no paid calls or production migrations during these milestones, transparent AI/source labels and the freeze scope. Implementation/testing was substantially agent-driven. Say “I directed and approved these constraints” where supported; claim personal line-by-line SQL or security review only if you actually performed it. This repository cannot establish a human's unrecorded review activity.
+Fixture/team/venue upserts are separate statements. Selected-row checks do not prevent every new corpus candidate from appearing concurrently, and external generation cannot join a database transaction.
 
-A defensible answer is: “I directed the product scope and publication boundaries, and used Codex to implement and verify them. I can explain the dataset separation, filtering, cache and security decisions using the code and tests. I distinguish those decisions from implementation details that still need specialist or production validation.”
+**References:** `supabase/migrations/20261104000200_versioned_retrieval.sql`, concurrency/fault tests.
+**Follow-up:** Why use a no-key-update match lock? What stronger guarantee would a corpus revision provide?
 
-**Evidence:** owner-directed release in `docs/curated-history-review.md`, `AGENTS.md`, documented review limitations.
-**Follow-up:** Which tradeoff would you defend without the agent? Who has reviewed publisher rights or production policies?
+## 20. What evidence is required before a release?
+
+A change should have targeted deterministic checks, real SQL tests when database behavior changes, type/lint/build verification and relevant HTTP/browser regression coverage. CI verifies the committed revision; Vercel status and public checks establish deployment separately from a successful push. Each result should state its layer: an HTTP mock does not prove live RLS, a screenshot does not prove accessibility certification, and a schema check does not measure model quality.
+
+**References:** `.github/workflows/ci.yml`, [verification strategy](engineering-decisions.md#adr-8--layered-verification-and-release-gates), [deployment evidence](deployment.md).
+**Follow-up:** How would an intermittent or unavailable gate be reported? Which verification is necessary for a documentation-only change?

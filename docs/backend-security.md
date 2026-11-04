@@ -1,6 +1,6 @@
 # Backend security boundaries
 
-The public demo stays `demo-only`: local curated history and original fiction only. No database credentials are required, no backend route is enabled, and no scheduled cron exists. This milestone adds a **disposable/private** contract, not public provider access or a production migration.
+The public demo stays `demo-only`: local curated history and original fiction only. No database credentials are required, no backend route is enabled, and no scheduled cron exists. The tracked SQL defines a disposable/private contract; it has not been applied to production.
 
 ```mermaid
 flowchart TD
@@ -30,7 +30,7 @@ Every application RPC is explicitly revoked from PUBLIC/anon/authenticated and g
 
 The existing private archive reader in `src/lib/supabase/repository.ts` uses publishable access and filters API-FOOTBALL records. Under this reconstruction it will see **no provider rows**, even in archive-enabled mode. This is an intentional default-deny publication boundary, not a claim that the live project's policies match. Private authoring now uses `supabase/authoring.ts` and `get_authoring_input`, rather than depending on public RLS. Do not relabel synthetic rows as API-FOOTBALL to make archive screens populated. A future separately reviewed authenticated/operator read design is needed for a useful private provider archive on this schema; public demo is unchanged.
 
-Authoring preflight requires backend contract 1 and `WCL_AUTHORING_DATASET_VERSION` before ingestion/embedding/generation. Existing production schema has not been upgraded and its authoring adapters will fail closed until an explicitly reviewed migration is applied elsewhere. This task does not authorize that migration or paid work. Configuring a secret is not permission to run it.
+Authoring preflight requires backend contract 1 and `WCL_AUTHORING_DATASET_VERSION` before ingestion/embedding/generation. Existing production schema has not been upgraded and its authoring adapters will fail closed until an explicitly reviewed migration is applied elsewhere. Operational migration and paid authoring require separate authorization.
 
 ## Time and input trust
 

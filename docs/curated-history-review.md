@@ -1,6 +1,6 @@
 # Curated historical selection: publication review
 
-Review ID: `wcl-curated-2026-v2`. Evidence access/review date: **2026-11-03**. Implementation baseline: `5fc076d`. Decision: **OWNER_DIRECTED_EDITORIAL_RELEASE of exactly five independently selected records and original retrospective commentary**, in the public source repository and noncommercial portfolio demonstration. The owner explicitly superseded the previous internal HOLD. That HOLD was a conservative release decision, not a legal determination that factual reporting is prohibited.
+Review ID: `wcl-curated-2026-v2`. Evidence access/review date: **2026-11-03**. Implementation baseline: `5fc076d`. Decision: **OWNER_DIRECTED_EDITORIAL_RELEASE of exactly five independently selected records and original retrospective commentary**, in the public source repository and noncommercial portfolio demonstration. This recorded project release decision supersedes the earlier internal HOLD; it does not establish a general licence to the source material.
 
 This is a narrow editorial decision, not blanket FIFA permission, an open-data licence, definitive trademark clearance, or permission to redistribute a provider database. Remaining questions are recorded below; they have not been transformed into legal certainty.
 
@@ -32,7 +32,7 @@ Date caveat: FIFA's Argentina report is published the day after its explicitly s
 
 - [FIFA Terms of Service](https://legal.fifa.com/terms-of-service), §§5.3, 6.2, 6.4 and 7: §6.4 provides a conditional, non-transferable noncommercial website-display licence, requiring attribution, source links where possible and no implied endorsement. It does not expressly settle this repository's public source-distribution scope; the owner proceeds with the narrow factual/editorial selection rather than claiming a blanket licence. General restrictions must be read alongside that express permission, not presented as a blanket prohibition on credited editorial reporting.
 - [Official legal/branding FAQ](https://inside.fifa.com/organisation/contact-fifa/legal-branding-and-rights), C–E: supports credited, purely editorial noncommercial use of FIFA.com text/statistics; excludes protected images, logos and material originating elsewhere. This supports a possible website use, not a provider export or automatic approval of this entire release.
-- [Official 2026 IP guidelines](https://digitalhub.fifa.com/m/3567360896991b48/original/FIFA-World-Cup-26-IP-Guidelines.pdf), June 2024 v2, pp2, 7, 14, 18, 21–22: accept descriptive editorial apps/schedule uses subject to conditions; identify “World Cup” as a wordmark and restrict official IP in domains. The existing name/domain retains branding uncertainty. The owner directs this unofficial, visually independent editorial release with a clear non-affiliation notice; no-logo presentation alone is not definitive clearance. The guidance is not case-specific clearance and excludes third-party rights.
+- [Official 2026 IP guidelines](https://digitalhub.fifa.com/m/3567360896991b48/original/FIFA-World-Cup-26-IP-Guidelines.pdf), June 2024 v2, pp2, 7, 14, 18, 21–22: accept descriptive editorial apps/schedule uses subject to conditions; identify “World Cup” as a wordmark and restrict official IP in domains. The existing name/domain retains branding uncertainty. The release uses an unofficial, visually independent presentation with a non-affiliation notice; no-logo presentation alone is not definitive clearance. The guidance is not case-specific clearance and excludes third-party rights.
 - [GitHub Terms](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service), D.3–D.5: public repositories involve hosting/copying and user forking permissions; uploaders must have compatible rights. Whether these independently selected factual fields need or already have sufficient rights for that use is unresolved here. Neither an attribution notice nor absence of a repository licence answers that question by itself.
 
 No advertising/payment functionality was identified in the inspected public UI. That supports, but does not establish, the purely editorial/noncommercial classification of a portfolio intended to demonstrate professional work. No monetisation restriction, legal entitlement, rights-holder approval or ownership exemption was invented. FIFA permission is not inferred for federation cross-check material; those sources are references only.
@@ -44,7 +44,7 @@ No advertising/payment functionality was identified in the inspected public UI. 
 | Newly authored retrospective commentary | Original expression grounded only in approved facts | Original retrospective expression, labeled authored and separate from Match Lens pipeline output, not predictive | OWNER_DIRECTED_EDITORIAL_RELEASE; original copy in this module only |
 | Logos, photos, official typefaces, crests, badges, video, article excerpts | Protected/third-party expression | Excluded from proposed selection | NOT_APPROVED; not downloaded into repository |
 | API-FOOTBALL/Supabase records and cached prose | Separate legacy/provider corpus | Existing unresolved restrictions apply | NOT_APPROVED; no export or rights upgrade |
-| Product name/domain and portfolio context | Branding/use context | Needs scoped assessment | UNRESOLVED clearance; owner-directed unofficial editorial use, no endorsement claim |
+| Product name/domain and portfolio context | Branding/use context | Needs scoped assessment | UNRESOLVED clearance; scoped unofficial editorial use, no endorsement claim |
 
 ## Release scope and remaining uncertainty
 
@@ -56,8 +56,8 @@ Official logos, article wording, PDFs, photographs, graphics, crests, fonts and 
 
 ```mermaid
 flowchart TD
-  Sources[Official reports and results with federation cross-checks] --> Review[Independent factual and rights review]
-  Review --> Decision[Owner-directed narrow editorial release]
+  Sources[Official reports and results with federation cross-checks] --> Review[Source and publication review]
+  Review --> Decision[Scoped editorial release]
   Decision --> Local[Five date-only records and original commentary]
   Local --> UI[Curated public replay with attribution and non-affiliation notice]
   Review --> Unknown[Branding and broader reuse remain unresolved]
@@ -73,4 +73,4 @@ Deterministic record/validation tests and rendered HTTP checks verify the releas
 
 ## Editorial redesign revision
 
-The v2 module changes only original editorial wording and presentation. The five stable IDs, factual tuples, primary URLs, evidence dates and explicit unknowns are preserved from v1. Recaps now state the result/progression plainly; they add no player, event, tactical or clock-time claims. Owner-directed publication remains limited to the same five factual records and original commentary, not a wider dataset or new rights grant. Review/access dates refer to the factual review, not a fresh publisher snapshot. The design adds only original geometric decoration and typographic abbreviations; no official imagery or association mark is an input.
+The v2 module changes only original editorial wording and presentation. The five stable IDs, factual tuples, primary URLs, evidence dates and explicit unknowns are preserved from v1. Recaps now state the result/progression plainly; they add no player, event, tactical or clock-time claims. Publication remains limited to the same five factual records and original commentary, not a wider dataset or new rights grant. Review/access dates refer to the factual review, not a fresh publisher snapshot. The design adds only original geometric decoration and typographic abbreviations; no official imagery or association mark is an input.
