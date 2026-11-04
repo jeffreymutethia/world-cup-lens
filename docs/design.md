@@ -42,3 +42,18 @@ Independent code/accessibility/copy review found no substantive guard, fact, dat
 Browser testing additionally found a long-name wrap for Switzerland at 320px; narrower center tracks and a modest name-size adjustment fixed it and all five heroes passed. The detail badge now says Final result, avoiding ambiguity alongside extra time. A fixed/offscreen skip-link layer appeared in earlier scrolled full-page captures; standard clipped hiding and scroll-reset/two-frame repaint before capture removed it. The final captures show no stray overlay. Production follow-up inspection also increased fictional question buttons to 44px, allowed label wrapping and removed their color transition. Capture waits now let finite transitions settle, preventing intermediate colors from appearing as a final state. Initial harness errors (wrong Q&A route and incomplete Enter dispatch) were corrected; only the final complete passing run is reported above.
 
 Limits: this is headless Chromium and emulated viewports, not physical devices, Safari/Firefox coverage, a screen-reader audit or full WCAG certification. Inline prose/source links are not part of the primary-control target-height assertion. No screenshot is evidence of historical accuracy or legal clearance. Production verification is recorded separately in [deployment.md](deployment.md).
+
+
+## Production recheck — passed 2026-11-04
+
+Runtime **`1bf320c26720479fd84f8152a5ebc1cb54489a25`** was observed deployed at https://world-cup-lens-one.vercel.app with [hosted CI passing](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/41829456592). The same isolated browser suite passed the full matrix, interaction/focus/reduced-motion and 44px question-target checks on the public domain. [Production report](screenshots/redesign-production/qa-report.json) records zero console errors/external page requests. All 15 settled production PNGs matched the reviewed local PNGs byte-for-byte; no reference/mockup image is presented as production output.
+
+| CSS viewport | Production homepage | Production detail |
+| --- | --- | --- |
+| 320 | [Capture](screenshots/redesign-production/home-320.png) | [Capture](screenshots/redesign-production/detail-320.png) |
+| 390 | [Capture](screenshots/redesign-production/home-390.png) | [Capture](screenshots/redesign-production/detail-390.png) |
+| 768 | [Capture](screenshots/redesign-production/home-768.png) | [Capture](screenshots/redesign-production/detail-768.png) |
+| 1280 | [Capture](screenshots/redesign-production/home-1280.png) | [Capture](screenshots/redesign-production/detail-1280.png) |
+| 1440 | [Capture](screenshots/redesign-production/home-1440.png) | [Capture](screenshots/redesign-production/detail-1440.png) |
+
+Production details: [keyboard focus](screenshots/redesign-production/home-390-keyboard-focus.png), [menu](screenshots/redesign-production/home-390-menu-open.png), [source notes](screenshots/redesign-production/detail-390-source-open.png), [long team name](screenshots/redesign-production/detail-argentina-320.png), [44px fictional Q&A](screenshots/redesign-production/lab-390-questions.png). The headless/emulation, inline-link target and broader accessibility limits above still apply. The documentation-only follow-up does not change this runtime; its latest delivery status is verified separately.

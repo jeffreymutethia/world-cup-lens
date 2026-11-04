@@ -1,0 +1,135 @@
+{
+  "base": "https://world-cup-lens-one.vercel.app",
+  "capturedAt": "2026-11-04T12:28:53.105Z",
+  "browser": "Chrome/156.0.8078.80",
+  "widths": [
+    {
+      "width": 320,
+      "home": {
+        "width": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320,
+        "h1s": 1,
+        "score": "43px",
+        "main": 1,
+        "dates": {
+          "client": 304,
+          "scroll": 529
+        }
+      },
+      "detail": {
+        "width": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320,
+        "h1s": 1,
+        "score": "43px",
+        "main": 1,
+        "dates": null
+      }
+    },
+    {
+      "width": 390,
+      "home": {
+        "width": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "h1s": 1,
+        "score": "48px",
+        "main": 1,
+        "dates": {
+          "client": 374,
+          "scroll": 529
+        }
+      },
+      "detail": {
+        "width": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "h1s": 1,
+        "score": "48px",
+        "main": 1,
+        "dates": null
+      }
+    },
+    {
+      "width": 768,
+      "home": {
+        "width": 768,
+        "clientWidth": 753,
+        "scrollWidth": 753,
+        "h1s": 1,
+        "score": "80px",
+        "main": 1,
+        "dates": {
+          "client": 697,
+          "scroll": 697
+        }
+      },
+      "detail": {
+        "width": 768,
+        "clientWidth": 753,
+        "scrollWidth": 753,
+        "h1s": 1,
+        "score": "80px",
+        "main": 1,
+        "dates": null
+      }
+    },
+    {
+      "width": 1280,
+      "home": {
+        "width": 1280,
+        "clientWidth": 1265,
+        "scrollWidth": 1265,
+        "h1s": 1,
+        "score": "80px",
+        "main": 1,
+        "dates": {
+          "client": 1209,
+          "scroll": 1209
+        }
+      },
+      "detail": {
+        "width": 1280,
+        "clientWidth": 1265,
+        "scrollWidth": 1265,
+        "h1s": 1,
+        "score": "80px",
+        "main": 1,
+        "dates": null
+      }
+    },
+    {
+      "width": 1440,
+      "home": {
+        "width": 1440,
+        "clientWidth": 1425,
+        "scrollWidth": 1425,
+        "h1s": 1,
+        "score": "80px",
+        "main": 1,
+        "dates": {
+          "client": 1296,
+          "scroll": 1296
+        }
+      },
+      "detail": {
+        "width": 1440,
+        "clientWidth": 1425,
+        "scrollWidth": 1425,
+        "h1s": 1,
+        "score": "80px",
+        "main": 1,
+        "dates": null
+      }
+    }
+  ],
+  "checks": [
+    "keyboard skip/date/focus/Enter; selected date/back; single-match isolation",
+    "fictional lab 44px question targets and stored Q&A keyboard switching",
+    "all five match heroes fit at 320px without splitting single-word team names",
+    "about navigation and reduced-motion styles"
+  ],
+  "consoleErrorCount": 0,
+  "externalRequestCount": 0
+}

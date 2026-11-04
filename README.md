@@ -106,12 +106,12 @@ Existing Vercel project `jt254/world-cup-lens` tracks `main`, Next.js at reposit
 
 The editorial redesign follows the supplied desktop/mobile direction: one responsive header, a forest-green scoreboard, four matchday tabs, short recaps and source notes. The featured match is never repeated in the secondary listing. The fictional lab stays separate. See [design decisions and visual evidence](docs/design.md).
 
-Local production-build captures from 2026-11-04, using isolated headless Chromium. These are genuine application screenshots, not the supplied mockups. [Full five-width matrix, interaction checks and limits](docs/design.md).
+Production captures from 2026-11-04, runtime `1bf320c`, using isolated headless Chromium. These are genuine application screenshots, not the supplied mockups. [Full five-width matrix, interaction checks and limits](docs/design.md).
 
-<img src="docs/screenshots/redesign-local/home-1440.png" alt="Redesigned desktop archive with a forest-green Norway–England scoreboard, matchday tabs and Argentina–Switzerland card" width="800">
+<img src="docs/screenshots/redesign-production/home-1440.png" alt="Redesigned desktop archive with a forest-green Norway–England scoreboard, matchday tabs and Argentina–Switzerland card" width="800">
 
-<img src="docs/screenshots/redesign-local/home-390.png" alt="Redesigned archive at a 390-pixel mobile viewport" width="300">
+<img src="docs/screenshots/redesign-production/home-390.png" alt="Redesigned archive at a 390-pixel mobile viewport" width="300">
 
-[Desktop match detail](docs/screenshots/redesign-local/detail-1280.png) · [320-pixel detail](docs/screenshots/redesign-local/detail-320.png) · [Visible keyboard focus](docs/screenshots/redesign-local/home-390-keyboard-focus.png)
+[Desktop match detail](docs/screenshots/redesign-production/detail-1280.png) · [320-pixel detail](docs/screenshots/redesign-production/detail-320.png) · [Visible keyboard focus](docs/screenshots/redesign-production/home-390-keyboard-focus.png)
 
 Remaining work: broaden accessibility/browser checks, maintain source evidence/review versions, assess rights before broader reuse, track reproducible database contracts/RLS, and repair upstream placeholder inputs and immutable historical lineage. No production-readiness or legal-clearance claim is made.
