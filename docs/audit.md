@@ -1,10 +1,32 @@
 # Repository audit
 
+## Portfolio freeze audit
+
+Baseline `cbd9b901e8da9a9529d59b4252e9deb124d1c0df`; reviewed 2026-11-04. **This is the current readiness assessment.** Sections below preserve dated implementation history; statements such as “missing tests/SQL/CI”, “deployment unavailable” or “browser blocked” describe their earlier milestone, not the current repository.
+
+Scope: public/private route boundaries, server/client code, data/provenance/rights modules, RAG adapters/core, both SQL migrations and seed/assertions, CI/scripts, documentation, repository hygiene and actual deployed HTTP/browser behavior. Independent review used another Codex context; this is not an external human security audit, legal opinion or penetration test. No paid model/provider request or production write/migration occurred.
+
+| Severity / ID | Finding and evidence | Impact and final disposition |
+| --- | --- | --- |
+| Critical/high F0 | Registry audit identified advisory-affected Next.js 16.2.9/Zod and a large shadcn CLI dependency tree | **Security remediation:** update Next and matching lint config within major 16, update Zod within major 4, retain only the exact MIT-licensed shadcn CSS and remove the unused CLI tree. Next/eslint-config-next 16.4.5 and Zod 4.6.6 are pinned; compatible transitive fixes applied. The post-repair snapshot reports zero production entries, zero high/critical overall and 16 moderate development-only minimatch/lint-chain entries. No forced downgrade/major override was applied; no exploit or production compromise was demonstrated. |
+| Medium F1 | `sync-fixtures.ts:syncWorldCupFixtures` wrote canonical scheduled for every provider status | Finished/cancelled fixtures were internally misclassified. **Fixed:** `normalize.ts:canonicalFixtureStatus` maps supported categories and rejects ambiguous/unknown states before batch writes; raw provider status is preserved. Three new synthetic fixture tests cover mapping, unsupported states, unknown geography/metrics and knockout stage. No existing DB rows were changed. |
+| Medium F2 | `normalizeApiFootballFixture` copied `league.country` into venue country | Competition scope such as World became false venue geography. **Fixed:** absent venue-country data is Unknown; no guessed country. No provider API or production cleanup was run. |
+| Low F3 | README's remaining-work paragraph described new SQL/lineage as absent; audit/roadmap mixed current and historical status | Misleading portfolio scan. **Fixed:** current summary, historical labels, recruiter-first README and concrete walkthrough/interview/decision/portfolio materials. Local link/heading/image/command checks are now tracked in CI. |
+| Medium F4, gated private debt | `safeTeamSlug/safeVenueSlug`, `deriveTeamCode/deriveFlag`, and team `group_name` overwrite in fixture sync | Name/unknown-venue collisions, incomplete aliases and last-round team profiles remain possible. **Deferred private ingestion defects:** resolve with reviewed identity/stage contracts before operational authoring. They do not supply public curated facts, and private operation is disabled in production. Penalty breakdown remains unsupported rather than invented. |
+| Medium F5, integration limit | SQL/core tests run complementary layers; `PersistenceFailure` checkpoint is in-memory; publishable provider reader conflicts with reconstructed default-deny policy | **Explicit scope limits:** no complete gateway/vendor end-to-end result or process-loss recovery. Separate authenticated operator reads and durable jobs are required before an operational backend claim. No anonymous policy was widened. |
+| Disclosure gate F6 | No root code LICENSE; broader FIFA/provider/source reuse, branding and historical Git content remain uncleared | **Owner/external decision:** no new licence selected or rights expanded. Existing narrow five-record/original-fiction decisions and package notices remain. Public visibility is not an open-data/software grant. |
+
+Critical/high dependency findings triggered remediation and a complete rerun; remaining moderate lint/glob entries are disclosed and excluded from a claim of a wholly clean dependency audit. Freeze requires the final release checks in deployment evidence. No application-specific critical/high exploit was established by this review. Passing checks do not establish general production readiness, model factuality or legal clearance. The final recommendation applies to a portfolio demonstration and tested backend foundation only; private ingestion defects and operational activation remain outside that claim. [Remaining work](roadmap.md#portfolio-freeze-and-remaining-work) separates defects, deferred engineering, external questions and optional features.
+
+**Verification record:** final local/hosted/deployed revision evidence is recorded in [deployment.md](deployment.md). Browser checks genuinely executed on the public domain at 320/390/768/1280/1440, including stored Q&A and keyboard/navigation checks; this is not physical-device, screen-reader or full WCAG coverage. Publisher link targets/source metadata are checked in rendered pages; permanent external source availability is not guaranteed. Existing visual captures are retained with their original revision, not passed off as new screenshots.
+
+## Historical audit record
+
 Audit date: 2026-11-02. Scope: tracked files, dependency manifests/configuration, routes, types, clients/repository, ingestion, AI pipeline, caching, cron, presentation, tests/CI, and README. Initial `git status --short` was clean. No application code, dependencies, environment files, or migrations were changed. No Supabase queries, provider/paid API calls, admin routes, embedding routes, or cron routes were invoked. Findings describe static code unless explicitly marked as check results; live data and infrastructure were not inspected.
 
 ## Replay milestone follow-up — 2026-11-02
 
-The findings below preserve the initial audit evidence. Current resolution status is scoped to demonstrated local implementation:
+The findings below preserve the November 2 audit evidence. Resolution status at that historical milestone is scoped to demonstrated local implementation:
 
 - **H1 resolved in public selection code:** `src/lib/replay.ts:parseReplaySelection/loadReplay/findReplayMatch` and both public pages now use explicit modes and fixed dates, with no seed fallback. Tests cover empty/error states and cross-mode/date mismatches. Actual database availability is still unverified.
 - **H2 partially mitigated in presentation only:** `ReplayNotice` labels cached archive analysis retrospective and explicitly disclaims an authenticated pre-kickoff cutoff. Historical source filtering and immutable lineage are still missing.

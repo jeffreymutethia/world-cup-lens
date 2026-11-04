@@ -214,7 +214,7 @@ export async function syncWorldCupFixtures(): Promise<
     signal_tags: [],
     // The database status constraint uses the app's canonical state, while
     // API-FOOTBALL's provider-specific value is retained in status_short.
-    status: "scheduled",
+    status: match.status,
     data_origin: "provider",
     external_provider:
       match.external_provider,

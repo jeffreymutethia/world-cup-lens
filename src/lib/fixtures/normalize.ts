@@ -64,6 +64,17 @@ function safeTeamSlug(
     `api-football-team-${team.id}`;
 }
 
+// Canonical states describe the provider category, not evidence of a currently live event.
+// Ambiguous awarded/abandoned results need a separate policy; never guess "scheduled".
+export function canonicalFixtureStatus(status: string): "scheduled" | "live" | "finished" | "postponed" | "cancelled" {
+  if (["TBD", "NS"].includes(status)) return "scheduled";
+  if (["1H", "HT", "2H", "ET", "BT", "P", "SUSP", "INT", "LIVE"].includes(status)) return "live";
+  if (["FT", "AET", "PEN"].includes(status)) return "finished";
+  if (status === "PST") return "postponed";
+  if (status === "CANC") return "cancelled";
+  throw new Error("Unsupported provider fixture status; normalization policy required");
+}
+
 export function normalizeApiFootballFixture(
   fixture: ApiFootballFixtureResponse,
 ) {
@@ -138,8 +149,8 @@ export function normalizeApiFootballFixture(
       id: venueId,
       name: venueName,
       city: venueCity,
-      country:
-        fixture.league.country,
+      // This fixture response has no venue-country field. Competition country is not geography.
+      country: "Unknown",
       capacity: null,
       story: null,
       external_provider: "api-football",
@@ -157,7 +168,7 @@ export function normalizeApiFootballFixture(
       group,
       kickoffAt:
         fixture.fixture.date,
-      status: fixture.fixture.status.short,
+      status: canonicalFixtureStatus(fixture.fixture.status.short),
       external_provider: "api-football",
       external_id:
         String(fixture.fixture.id),

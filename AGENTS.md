@@ -1,10 +1,15 @@
 # Working on World Cup Lens
 
-World Cup Lens is a Next.js 16.2.9 / React 19 / strict TypeScript football intelligence app using Supabase, OpenAI embeddings and Responses structured outputs, API-FOOTBALL, and Tailwind/Radix UI. The product target is a reproducible historical replay demo; public deployment defaults to credential-free curated history with a separate fictional lab; archive requires exact server opt-in; ingestion and generation retain legacy live-operation APIs.
+World Cup Lens is a Next.js 16.4.5 / React 19 / strict TypeScript football intelligence app using Supabase, OpenAI embeddings and Responses structured outputs, API-FOOTBALL, and Tailwind/Radix UI. The product target is a reproducible historical replay demo; public deployment defaults to credential-free curated history with a separate fictional lab; archive requires exact server opt-in; ingestion and generation retain legacy live-operation APIs.
 
 <!-- BEGIN:nextjs-agent-rules -->
+
 ## This is NOT the Next.js you know
-Read the relevant guide in `node_modules/next/dist/docs/` before writing code. APIs, conventions, and structure may differ from prior versions. Heed deprecation notices.
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
 <!-- END:nextjs-agent-rules -->
 
 ## Navigate first
@@ -45,3 +50,9 @@ Never auto-commit, push, deploy, or mutate production data without explicit inst
 Public copy should be concise, factual and editorial. Keep curated recaps separate from fictional samples and actual cached AI output. Put detailed limitations in About/source disclosures while preserving a short non-affiliation footer. Do not duplicate the featured match in secondary listings or publish design mockups as screenshots. Verify real browser behavior before claiming visual/accessibility QA.
 
 Backend verification: `npm run db:test` (or `db:bootstrap`) creates/tests/destroys its own PostgreSQL/pgvector instance and accepts no remote database URL. Requires Docker daemon or installed PostgreSQL/pgvector. `npm run check:credentials` checks reviewable files without printing values. Never report PostgreSQL integration success from mocks. The Supabase CLI adapter is optional and not equivalent to executed gateway/Auth tests. New private authoring requires contract v1 and `WCL_AUTHORING_DATASET_VERSION`; version source/input/prompt/schema changes rather than deleting history. Cutoff eligibility requires publication and capture evidence plus exact input attestation; legacy records remain retrospective and unknowns stay null. Do not serialize persistence checkpoints or upstream error bodies. SQL default-denies provider publication; public archive grants must never be broadened merely to populate a demo.
+
+## Portfolio freeze
+
+The public demo and tested backend-contract MVP are frozen after the final audit. Only verified substantive correctness/security defects justify maintenance changes; product expansion or operational backend activation requires a new explicit owner scope. Read `docs/technical-walkthrough.md`, `docs/engineering-decisions.md`, `docs/audit.md#portfolio-freeze-audit` and the categorized remainder in `docs/roadmap.md` before proposing changes. Keep public, mocked core, real PostgreSQL and unverified gateway/vendor claims distinct. `npm run check:docs` validates local Markdown/image/heading links and npm command names; it does not verify external publisher availability. Do not select a repository code licence, certify historical forecasts, upgrade UNKNOWN rights or imply an external human audit. Disclose substantial Codex assistance and distinguish recorded owner direction from unverified personal review depth.
+
+Security maintenance is allowed within freeze for verified defects: `npm run check:security` runs registry advisory checks and fails high/critical findings, including dev dependencies. The final snapshot has no production advisories and 16 moderate dev-only lint/glob entries; never describe that as zero vulnerabilities. Avoid forced downgrades or incompatible overrides merely to silence an audit. `src/app/shadcn-base.css` preserves the exact 4.11.0 CSS body with its MIT notice after removing the unused CLI; any change needs source/licence/hash review and visual regression checks.

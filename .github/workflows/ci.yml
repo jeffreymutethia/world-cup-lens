@@ -43,6 +43,12 @@ jobs:
       - name: Credential patterns and environment-file policy
         run: npm run check:credentials
         timeout-minutes: 1
+      - name: Documentation links and commands
+        run: npm run check:docs
+        timeout-minutes: 1
+      - name: Known high and critical dependency advisories
+        run: npm run check:security
+        timeout-minutes: 2
       - name: Deterministic tests
         run: npm test
         timeout-minutes: 2

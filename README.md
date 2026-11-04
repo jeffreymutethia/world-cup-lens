@@ -1,131 +1,104 @@
 # World Cup Lens
 
-An independent football engineering portfolio: **five independently curated 2026 World Cup matches** are the public centerpiece, with original retrospective context and primary source links. A separate **fictional AI lab** demonstrates cached Match Lens/Q&A presentation. A private Supabase archive and protected RAG authoring pipeline remain separate integrations.
+A football archive portfolio: **five source-linked 2026 matches**, original retrospective recaps and a separate fictional lab. The public demo needs no database connection or paid API credentials. A private, tested Postgres/pgvector RAG foundation demonstrates the backend contracts separately.
 
-**[Open the public replay](https://world-cup-lens-one.vercel.app)** · [Fictional lab](https://world-cup-lens-one.vercel.app/?mode=illustrative&date=2026-06-11) · [How it works](https://world-cup-lens-one.vercel.app/about)
+**[Public demo](https://world-cup-lens-one.vercel.app)** · [Fictional lab](https://world-cup-lens-one.vercel.app/?mode=illustrative&date=2026-06-11) · [Technical walkthrough](docs/technical-walkthrough.md) · [Architecture](docs/architecture.md) · [CI](https://github.com/jeffreymutethia/world-cup-lens/actions)
 
-Unofficial portfolio project. Not affiliated with, sponsored by or endorsed by FIFA or any national association. No official logos, photographs, crests, article text, PDF copies or provider exports are bundled.
+- **Product:** date-only historical facts, source notes, four matchdays and working detail/back navigation.
+- **Backend:** entity/time-filtered retrieval, immutable source/run history, versioned cache, strict final validation and default-deny permissions.
+- **Evidence:** deterministic tests, real disposable PostgreSQL tests, credential-free HTTP checks and genuine browser captures. Significant Codex assistance, owner direction/review and independent agent review are disclosed; no external audit or model-quality score is claimed.
 
-## Historical selection
-
-| Event day | Match | Stage | Final score |
-| --- | --- | --- | --- |
-| June 11, 2026 | Mexico–South Africa | Group A | 2–0 |
-| June 12, 2026 | USA–Paraguay | Group D | 4–1 |
-| July 11, 2026 | Norway–England | Quarter-final | 1–2 AET |
-| July 11, 2026 | Argentina–Switzerland | Quarter-final | 3–1 AET |
-| July 19, 2026 | Spain–Argentina | Final | 1–0 AET |
-
-The initial public replay date is July 11. Four matchday tabs, a featured scoreboard and secondary fixtures and selection-preserving detail/back navigation work without credentials or a database connection. Details separate verified facts, original retrospective editorial context, source identity/link, evidence review/access date and explicit unknowns. AET means the final score includes extra time. No kickoff clock times, lineups, goal minutes, regulation-time breakdowns, player statistics, predictive ratings or tactical measurements are invented.
-
-Sources and verification methods are in the [curated review](docs/curated-history-review.md). Two official PDFs were directly readable; three FIFA article/results entries were rechecked through indexed official evidence and federation cross-checks. Argentina–Switzerland preserves FIFA's explicit July 11 local event day separately from its July 12 article date and UEFA's differing July 12 entry.
-
-Publication is an **owner-directed, narrowly scoped editorial release** of `wcl-curated-2026-v2`, not blanket FIFA permission, an open-data licence, definitive trademark clearance or permission to redistribute a provider database. Broader source/forking/branding and commercial-use questions remain unresolved. See [data rights](docs/data-rights.md). Unrelated historical/provider sources and cached AI corpus retain UNKNOWN rights.
-
-## Run locally
-
-Use **Node 22.13.0 or newer within major 22** (`.nvmrc`) and npm:
-
-```bash
+```sh
+# Node 22.13+ within major 22 (.nvmrc)
 npm ci
 npm run dev
-```
-
-Open [localhost:3000](http://localhost:3000). No environment file or service credential is required. Missing/unrecognized `WCL_DEPLOYMENT_MODE` fails closed to `demo-only`. An explicit production-style local run is:
-
-```bash
-WCL_DEPLOYMENT_MODE=demo-only npm run build
-WCL_DEPLOYMENT_MODE=demo-only npm start
-```
-
-Curated records store date-only facts and preserve the reviewed source's local event day; they are not converted into fake kickoff timestamps. Fictional and private archive fixtures retain timestamp-based **America/Los_Angeles** day boundaries. Dates are validated strictly; empty selections, invalid dates, missing matches and query/validation errors have distinct messages. No dataset silently substitutes for another.
-
-## Four distinct parts
-
-| Part | Content and behavior |
-| --- | --- |
-| Curated history, `?mode=curated` | Five local date-only results and repository-authored retrospective editorial context; public demo default; no Match Lens generation or cache lookup |
-| Fictional lab, `?mode=illustrative&date=2026-06-11` | Four synthetic teams, three scenarios on June 11–12, stored sample Lens/Q&A; no real results or actual pipeline run claimed |
-| Supabase archive, `?mode=archive` | Stored provider fixtures and actual cached AI commentary; requires exact server setting `WCL_DEPLOYMENT_MODE=archive-enabled`; defaults to archive July 11 in that private setting |
-| Private authoring pipeline | Ingestion → provider documents → chunks/embeddings → retrieval → structured generation/proofreading → cache; disabled in public deployments |
-
-`demo-only` blocks archive reads, six admin POST routes and cron GET/HEAD before auth/work, even when credentials exist. No recurring cron is declared. The public UI never needs Supabase, OpenAI or API-FOOTBALL, and ordinary browsing never generates/embeds content. Exact `archive-enabled` is a server setting for separately configured local/private use, not a browser/URL override and not authorization to execute authoring.
-
-## Stack and architecture
-
-Next.js 16.2.9 App Router, React 19, strict TypeScript, Tailwind, Radix UI and Lucide. System fonts avoid Google build-time fetches. The original icon and licensed software/icon notices are served at `/icon.svg` and `/third-party-notices.txt`.
-
-The retained backend uses Supabase Postgres, a pgvector retrieval RPC call, OpenAI embeddings and Responses structured outputs with Zod, and API-FOOTBALL ingestion. Disposable PostgreSQL/pgvector migrations, default-deny RLS and a reconstructed retrieval RPC are tracked and tested. New private authoring has immutable source/run lineage, final validation and gated cutoff filtering; no production migration has been applied. Old cached commentary has no authenticated historical cutoff and may rely on placeholder strengths. Context snippets are not claim-level citations. Cache modification time never becomes an analysis-generation timestamp or pre-match forecast.
-
-Curated context was newly written during agent-assisted implementation and reviewed against selected facts. It is separate from the application's Match Lens generation pipeline. Fictional sample text is explicitly synthetic; private cached AI commentary remains unverified retrospective interpretation. No numerical Team Edges bars are presented as measured performance.
-
-Read [architecture and Mermaid diagrams](docs/architecture.md), including a [worked Norway–England example](docs/architecture.md#curated-history-contract-and-worked-example), [provenance/time semantics](docs/data-provenance.md), [rights inventory](docs/data-rights.md), [audit](docs/audit.md) and [roadmap](docs/roadmap.md).
-
-## Private archive configuration
-
-```bash
-WCL_DEPLOYMENT_MODE=archive-enabled npm run dev
-```
-
-Only this exact server opt-in enables archive access. Configure names in an ignored `.env.local` or authorized private deployment; never print/commit values:
-
-| Variable names | Purpose |
-| --- | --- |
-| `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Matching existing project URL/key for SELECTs, subject to grants/RLS |
-| `SUPABASE_SECRET_KEY` | Server-only privileged operator client; not needed by public demo |
-| `OPENAI_API_KEY`, optional `OPENAI_EMBEDDING_MODEL`, `OPENAI_MATCH_LENS_MODEL` | Private embedding/generation only |
-| `API_FOOTBALL_KEY`, optional `API_FOOTBALL_BASE_URL`, `API_FOOTBALL_WORLD_CUP_LEAGUE_ID`, `API_FOOTBALL_WORLD_CUP_SEASON` | Private provider ingestion only |
-| `WCL_AUTHORING_DATASET_VERSION` | Explicit dataset identity required with backend contract v1 before private authoring; not needed by demo |
-| `ADMIN_GENERATION_SECRET`, `CRON_SECRET` | Existing operator gates, additionally disabled by demo-only policy |
-
-Do not run ingestion, generation, embedding or cron as setup/smoke testing. Prior read-only verification of two real archive rows/joins/lenses establishes limited connectivity, not complete coverage, historical accuracy, stable uptime, RLS guarantees or publication rights. No provider data is copied into the curated module.
-
-## Reproducible backend foundation
-
-```bash
-npm run db:test
-npm run check:credentials
-```
-
-The database command bootstraps, seeds, checks and destroys an owned PostgreSQL/pgvector environment, with no production connection URL, real credentials or model calls. Docker uses isolated PostgreSQL 17/pgvector 0.8.2; installed native PostgreSQL with pgvector is also supported. Only original synthetic fixtures, deterministic vectors and mock outputs are used. `npm run db:bootstrap` is the same disposable smoke bootstrap, not a persistent database or production deployment.
-
-The SQL is a reconstruction from application dependencies and limited read-only column discovery, **not** a production schema dump. Provider/source/vector/history rows default private; publishable clients cannot use this contract to expose provider data. Private authoring uses a privileged boundary. Generation records preserve inputs/source versions and cache history; an exact input attestation plus established publication/capture times gates as-of experiments. This does not authenticate old forecasts or guarantee model factuality.
-
-Follow the [database contract and ER diagram](docs/database-contract.md), [role/security boundaries](docs/backend-security.md), [retrieval rules](docs/retrieval-design.md), and [RAG sequence, cache/failure flow and complete Maple–Harbor worked example](docs/rag-pipeline.md). Durable jobs, authenticated publisher evidence, grounding evaluation and an explicitly authorized production upgrade remain separate work.
-
-## Verification
-
-```bash
+# In another terminal:
 npm test
+```
+
+Open [localhost:3000](http://localhost:3000). No environment file is required for the public demo.
+
+<img src="docs/screenshots/redesign-production/home-1440.png" alt="World Cup Lens desktop archive: Norway–England scoreboard, four matchdays and the other July 11 fixture" width="720">
+
+[Mobile screenshot](docs/screenshots/redesign-production/home-390.png) · [Match detail](docs/screenshots/redesign-production/detail-1280.png) · [Keyboard focus](docs/screenshots/redesign-production/home-390-keyboard-focus.png) · [Full visual evidence and limits](docs/design.md)
+
+These genuine production screenshots were captured on 2026-11-04 at visual revision `1bf320c`. The final audit rechecked the unchanged interface with real Chromium at five viewport widths; revision-specific evidence is in [deployment](docs/deployment.md). They are not supplied design mockups.
+
+## What runs where
+
+| Part | Source and behavior | Verification boundary |
+| --- | --- | --- |
+| Public curated history | Five local records, date-only facts, authored recaps and primary-source links; default July 11 | Public HTTP/browser checks and deterministic record validation |
+| Public fictional lab | Three invented scenarios over two dates, original stored sample Lens/Q&A | Local sample reads; no actual model generation claimed |
+| Private provider archive | Supabase fixtures and compatible cached AI commentary; exact `WCL_DEPLOYMENT_MODE=archive-enabled` required | Archive HTTP mocks; earlier limited read-only live samples are not complete production guarantees |
+| Private RAG authoring | Supabase/OpenAI/API-FOOTBALL adapters and dependency-injected generation core | Mocked model/embedding tests plus real PostgreSQL SQL tests; **not** a verified end-to-end deployed AI service |
+
+Missing or invalid server configuration defaults to `demo-only`. Public pages never substitute among datasets, generate a Lens, embed documents or call the provider. Explicit archive requests and all six admin POST/cron GET/HEAD handlers are denied before work. `vercel.json` has no schedule. Local datasets are static inputs; Next.js renders request-aware pages, rather than exporting a static HTML site.
+
+The public recaps are original editorial interpretation, not output of the application's OpenAI/RAG pipeline. Fiction is labeled synthetic. Legacy cached AI text stays retrospective: a replay date, cache write or kickoff cannot establish a pre-match information cutoff. Unsupported numerical Team Edges are withheld; retrieved excerpts are context, not claim-level proof.
+
+## Engineering map
+
+Next.js 16.4.5 App Router, React 19, strict TypeScript, Tailwind/Radix/Lucide; Supabase clients, Postgres/pgvector, OpenAI SDK/Responses structured-output adapters and Zod; Node tests, GitHub Actions and Vercel. System fonts require no Google build-time fetch. No additional vector service, accounts, free-form chat or background queue is implemented. The unused shadcn CLI was removed; its exact existing CSS body is vendored with the MIT notice, without redesigning the interface.
+
+Start with the [complete walkthrough and synthetic trace](docs/technical-walkthrough.md), then [database contract/ER diagram](docs/database-contract.md), [security boundaries](docs/backend-security.md), [retrieval](docs/retrieval-design.md), [RAG/cache/failure diagrams](docs/rag-pipeline.md) and [engineering decisions](docs/engineering-decisions.md). For presentations use the [interview guide](docs/interview-guide.md) and [portfolio summary](docs/portfolio-summary.md).
+
+The SQL is a clean-database **reconstruction**, informed by application dependencies and limited read-only column/type discovery. It is not proven production parity and has not been applied to production. New provider rows remain private, so the existing publishable provider reader sees none under this contract; privileged authoring has a separate reader. No grant is widened merely to populate archive pages.
+
+New private runs retain source/chunk versions, exact input snapshots, distinct clocks, prompt/schema/model labels and immutable cache history. As-of core experiments require established source publication/capture and an exact input attestation. These checks do not authenticate publisher clocks, model training cutoffs or factual claims. The HTTP adapter remains retrospective. Complete Supabase gateway/Auth integration, grounding evaluation and durable recovery remain deferred.
+
+## Run the checks
+
+```sh
+npm test
+npm run db:test
+npm run test:replay-http
+npm run test:demo-http
 npm run lint
 npm run typecheck
 npm run build
-npm run test:replay-http
-npm run test:demo-http
-DEMO_TEST_DEPLOYMENT_VALUE=invalid-value npm run test:demo-http
-DEMO_TEST_PRODUCTION=1 npm run test:demo-http
+npm run check:credentials
+npm run check:docs
+npm run check:security
+git diff --check
 ```
 
-HTTP suites run sequentially with localhost access, request/run deadlines and bounded child cleanup. Archive checks use a local mock Supabase. Demo checks clear service credentials, exercise all five results/four dates/detail attribution, fictional isolation, empty/invalid states and disabled methods with dummy secrets. An active fetch-denial tripwire verifies no application service requests on these local paths. This is not complete production infrastructure egress monitoring.
+`db:test` creates, migrates, seeds, checks and destroys an owned PostgreSQL/pgvector database. It accepts no remote database URL and loads only original synthetic records/vectors/mock outputs. Use a Docker daemon (isolated PostgreSQL 17/pgvector 0.8.2) or installed PostgreSQL with pgvector; `WCL_PG_BIN` selects native binaries. `db:bootstrap` is the same **disposable** smoke bootstrap, not a persistent database. [Setup and role details](docs/database-contract.md). Do not link or push these migrations to production.
 
-[GitHub Actions](.github/workflows/ci.yml) uses pinned official actions, Node 22, `npm ci`, read-only permissions, no real credentials and explicit deadlines for tests/lint/typecheck/build/HTTP/whitespace checks, plus a separate disposable PostgreSQL/pgvector integration job. [Hosted results](https://github.com/jeffreymutethia/world-cup-lens/actions) are verified separately from local checks.
+HTTP suites run sequentially, start local servers and have bounded deadlines/cleanup. Archive tests use a local Supabase mock; demo tests clear service credentials and actively deny service fetches. `DEMO_TEST_PRODUCTION=1 npm run test:demo-http` tests the built server; `DEMO_TEST_DEPLOYMENT_VALUE=invalid-value npm run test:demo-http` checks invalid policy. CI retains these, pinned official actions/Node major, locked installation, SQL integration and whitespace/credential/documentation and known high/critical advisory checks without real API keys. Counts and actual hosted results are in the [final audit](docs/audit.md#portfolio-freeze-audit).
 
-Optional real-browser QA uses an existing Chromium installation, a temporary profile and no additional dependencies. Start a demo-only production build on localhost port 3107, then run `npm run test:design`. `CHROMIUM_PATH` selects an already installed binary; `DESIGN_CAPTURE_DIR` selects the capture directory. The script does not install a browser or attach to your profile. It is separate from hosted CI.
+Optional `npm run test:design` uses an existing Chromium installation against localhost:3107 and a temporary profile; it downloads no browser and is not part of hosted CI. `npm run test:production-http` explicitly checks the authorized public demo, including unauthenticated denial responses; never target a private/authoring-enabled deployment. HTTP, browser, SQL and mocked generation evidence are distinct.
 
-`npm run test:production-http` explicitly checks the authorized public URL with bounded unauthenticated requests. It verifies demo policy before disabled admin/cron method checks; it never sends real secrets or executes authoring. Do not point this command at an archive-enabled/private deployment.
+## Historical scope, attribution and rights
 
-## Deployment and screenshots
+| Event day, 2026 | Match | Stage | Final score |
+| --- | --- | --- | --- |
+| June 11 | Mexico–South Africa | Group A | 2–0 |
+| June 12 | USA–Paraguay | Group D | 4–1 |
+| July 11 | Norway–England | Quarter-final | 1–2 AET |
+| July 11 | Argentina–Switzerland | Quarter-final | 3–1 AET |
+| July 19 | Spain–Argentina | Final | 1–0 AET |
 
-Existing Vercel project `jt254/world-cup-lens` tracks `main`, Next.js at repository root, Node 22 and only non-secret `WCL_DEPLOYMENT_MODE=demo-only`; no service credentials or recurring cron are needed. [Deployment evidence](docs/deployment.md) separates revision-specific CI/deployment, public HTTP and browser QA from implementation claims.
+This is a selection, not the complete tournament. Curated days preserve the reviewed source's local event day; fictional/provider timestamp selection uses America/Los_Angeles. No kickoff clock, goal minute, lineup, regulation-score breakdown, player statistic or prediction is invented. Argentina–Switzerland keeps FIFA's July 11 event day separate from its July 12 article date and UEFA's differing July 12 entry.
 
-The editorial redesign follows the supplied desktop/mobile direction: one responsive header, a forest-green scoreboard, four matchday tabs, short recaps and source notes. The featured match is never repeated in the secondary listing. The fictional lab stays separate. See [design decisions and visual evidence](docs/design.md).
+[Source review](docs/curated-history-review.md) records two directly readable official PDFs and three indexed official article/results entries with federation cross-checks; complete direct article bodies were unavailable in those three cases. Tests compare implementation against reviewed tuples, not independently authenticated publisher snapshots.
 
-Production captures from 2026-11-04, runtime `1bf320c`, using isolated headless Chromium. These are genuine application screenshots, not the supplied mockups. [Full five-width matrix, interaction checks and limits](docs/design.md).
+Publication is an owner-directed narrow editorial release of exactly five selected records and original commentary. It is **not** blanket FIFA permission, an open-data licence, definitive trademark clearance or permission to redistribute a provider database. Unrelated provider rows, excerpts and cached AI corpus retain UNKNOWN rights. No official logo, photo, crest, article/PDF copy, video or provider export is bundled. [Rights](docs/data-rights.md) and [provenance](docs/data-provenance.md) remain separate from software licensing.
 
-<img src="docs/screenshots/redesign-production/home-1440.png" alt="Redesigned desktop archive with a forest-green Norway–England scoreboard, matchday tabs and Argentina–Switzerland card" width="800">
+**No repository code licence has been selected.** Do not describe public GitHub visibility as an unrestricted software/data grant. [Owner options](docs/engineering-decisions.md#code-licence-decision-remains-with-the-owner) are documented without selecting one. Existing package/icon notices remain at [third-party-notices.txt](public/third-party-notices.txt); they are not a full transitive licence clearance.
 
-<img src="docs/screenshots/redesign-production/home-390.png" alt="Redesigned archive at a 390-pixel mobile viewport" width="300">
+Unofficial portfolio project. Not affiliated with, sponsored by or endorsed by FIFA or any national association.
 
-[Desktop match detail](docs/screenshots/redesign-production/detail-1280.png) · [320-pixel detail](docs/screenshots/redesign-production/detail-320.png) · [Visible keyboard focus](docs/screenshots/redesign-production/home-390-keyboard-focus.png)
+## Private configuration and deployment
 
-Remaining work: broaden accessibility/browser checks, maintain source evidence/review versions, assess rights before broader reuse, track reproducible database contracts/RLS, and repair upstream placeholder inputs and immutable historical lineage. No production-readiness or legal-clearance claim is made.
+The existing Vercel project `jt254/world-cup-lens` tracks main at repository root. The public URL above is verified; [deployment evidence](docs/deployment.md) distinguishes current HTTP/commit status from earlier dashboard/environment inspection. Public operation requires no service credentials and must remain demo-only.
+
+Private integration variable **names only**: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, server-only `SUPABASE_SECRET_KEY`, `OPENAI_API_KEY`, `OPENAI_MATCH_LENS_MODEL`, `OPENAI_EMBEDDING_MODEL` (contract v1 accepts only text-embedding-3-small), `API_FOOTBALL_KEY`, optional provider base/league/season variables documented in `fixtures/api-football.ts`, `ADMIN_GENERATION_SECRET`, `CRON_SECRET`, and `WCL_AUTHORING_DATASET_VERSION`. Exact private server opt-in is not permission to execute paid work. Authoring also requires backend contract v1; the existing production database was not upgraded.
+
+Never print/commit values or run ingestion, embedding, generation or cron as setup/smoke testing. A future production upgrade, broader source publication or paid evaluation requires separate approval.
+
+The final dependency snapshot reports zero production advisories and no high/critical entries overall. Sixteen moderate development-only lint/glob audit entries remain; see the [audit](docs/audit.md#portfolio-freeze-audit). `check:security` fails on high/critical findings, including development dependencies. These advisory checks run on push/PR and explicit command, not a security certification or an assertion of zero vulnerabilities.
+
+## MVP freeze
+
+The freeze covers the public demonstration and tested backend contracts, with the limits above. It is not a production forecasting-service certification. Only verified substantive defects justify maintenance changes; optional product expansion needs a new owner-approved scope. [Current findings and checks](docs/audit.md#portfolio-freeze-audit) and [remaining work by category](docs/roadmap.md#portfolio-freeze-and-remaining-work) distinguish true defects, deferred engineering, external rights/licence questions and optional features.

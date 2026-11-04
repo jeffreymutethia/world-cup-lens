@@ -1,5 +1,24 @@
 # Historical replay and portfolio roadmap
 
+## Portfolio freeze and remaining work
+
+The reviewed public demonstration and testable private backend contracts are the MVP freeze scope. Refer to the [current audit](audit.md#portfolio-freeze-audit), [walkthrough](technical-walkthrough.md), [interview guide](interview-guide.md), [decisions](engineering-decisions.md) and [portfolio materials](portfolio-summary.md). Final release checks and hosted revision evidence live in [deployment](deployment.md). The chronological plan below records how the project reached this scope; it is not an instruction to continue implementing every deferred phase.
+
+Completed: credential-free curated/fictional separation, historical date/detail/source UI, truthful analysis labels, scoped source/rights inventory, responsive redesign and genuine browser evidence, disposable SQL/RLS/vector contracts, synthetic real-database integration, versioned source/output lineage, final generation validation, CI/deployment checks and technical presentation materials. The final audit fixes private canonical-status and venue-country mapping, adds regression tests, reconciles stale docs and applies same-major security updates/removes an unused CLI dependency tree. No public UI/fact expansion or production migration was made.
+
+| Category | Remaining work | Gate / priority |
+| --- | --- | --- |
+| True defects, gated private ingestion | Name-based/missing-venue identity collisions; incomplete code/flag aliases; global team group/stage overwrite | Before any operational private ingestion: reviewed identity/stage policy, synthetic regression and safe migration proposal; no guessed production repair |
+| Deferred engineering | Full isolated Supabase gateway/Auth tests; authenticated operator archive reads; durable jobs/checkpoints; query-embedding memoization; corpus snapshot semantics; reviewed grounding evaluation | Next backend scope, only with explicit owner authorization; no claim these already work end-to-end |
+| Deferred dependency maintenance | Sixteen moderate dev-only lint/glob audit entries and deprecated ESLint 9 remain; current React/a11y plugin peers exclude ESLint 10; no production or high/critical findings in the final snapshot | Monitor upstream compatible fixes; no forced downgrade/major override to hide findings. CI high/critical gate remains active |
+| Deferred assurance | Physical-device, screen-reader and Safari/Firefox coverage; dependency/security and transitive licence monitoring | Maintain evidence accurately; repair verified substantive defects without adding product features |
+| External legal/rights | Owner's code licence choice; historical Git content review; broader FIFA name/domain, redistribution, commercial use and provider/excerpt/model rights | No automatic approval; source-specific evidence and owner/professional review before broader reuse |
+| Optional future features | More fixtures, live coverage, accounts, chat or new predictive metrics | Outside frozen MVP; not queued work and not justification to unfreeze by default |
+
+A newly verified security/correctness defect can reopen maintenance. New public features, backend activation, paid evaluation or rights expansion require a separate owner-approved milestone. Freeze does not mean all private operational risks are resolved or that legacy analysis becomes an authentic forecast.
+
+## Historical milestone plan
+
 Status after the first replay implementation milestone (2026-11-02): public selection and presentation changes are implemented and locally validated, including independent review fixes; the original audit is committed separately. Delivery does not imply production archive availability. The current public default is the five-record curated historical branch; the fictional lab and private archive remain distinct. Later phases remain proposals. Use one focused PR per slice, each with evidence, tests, documentation, and an explicit completion check. Keep external services mocked by default and leave production mutations/deployment behind explicit user instructions. Findings refer to [audit.md](audit.md).
 
 ## 1. Establish an honest replay surface (H1; public surface implemented)
@@ -131,7 +150,7 @@ Supersedes the earlier internal HOLD for exactly five independently selected fac
 
 **Implemented acceptance:** public demo defaults to curated July 11; four working event-day links; five exact final results/stages/venues/AET labels; date-only storage with explicit unknowns; featured/list/detail/back navigation; original retrospective editorial context separate from Match Lens; primary attribution/review metadata; unofficial shared footer; separate explicit fictional lab and unchanged private Supabase archive/authoring guards. No external service is required for public browsing. The [worked example](architecture.md#curated-history-contract-and-worked-example) traces Norway–England.
 
-**Tests:** deterministic exact tuple, precision, AET, metadata, malformed-record/enum, empty/error, featured and isolation cases; shared local/remote HTTP expectations for all five details/four dates, attribution and guards; active local fetch-denial instrumentation; private archive mock regressions. Runtime `104f984` passed hosted CI, automatic Vercel deployment and seven production HTTP groups. Current interactive/browser QA remains blocked by automation availability; earlier fictional screenshots are not historical UI evidence. Details are revision-specific in [deployment.md](deployment.md).
+**Tests:** deterministic exact tuple, precision, AET, metadata, malformed-record/enum, empty/error, featured and isolation cases; shared local/remote HTTP expectations for all five details/four dates, attribution and guards; active local fetch-denial instrumentation; private archive mock regressions. Runtime `104f984` passed hosted CI, automatic Vercel deployment and seven production HTTP groups. At that historical release, interactive/browser QA was blocked by automation availability; later redesign and freeze checks below supersede that blocker; earlier fictional screenshots are not historical UI evidence. Details are revision-specific in [deployment.md](deployment.md).
 
 **Next independent phases:**
 

@@ -27,7 +27,7 @@ test('canonical cache identity is stable across key order and rejects non-JSON',
   for (const value of [undefined, NaN, { a: undefined }])
     assert.throws(() => canonicalJson(value));
 });
-test('successful mocked generation records immutable inputs, sources and real injected clock', async () => {
+test('successful mocked generation records immutable inputs, sources and deterministic injected clock', async () => {
   const h = harness();
   const result = await runVersionedLens(options, h.deps);
   assert.equal(result.cached, false);
