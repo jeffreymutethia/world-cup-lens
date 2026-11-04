@@ -100,10 +100,10 @@ export function normalizeApiFootballFixture(
       form: null,
       story: null,
       strengths: {
-        attack: 50,
-        midfield: 50,
-        defense: 50,
-        transitions: 50,
+        attack: null,
+        midfield: null,
+        defense: null,
+        transitions: null,
       },
       external_provider: "api-football",
       external_id:
@@ -121,10 +121,10 @@ export function normalizeApiFootballFixture(
       form: null,
       story: null,
       strengths: {
-        attack: 50,
-        midfield: 50,
-        defense: 50,
-        transitions: 50,
+        attack: null,
+        midfield: null,
+        defense: null,
+        transitions: null,
       },
       external_provider: "api-football",
       external_id:

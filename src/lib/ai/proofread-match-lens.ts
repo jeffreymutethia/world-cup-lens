@@ -42,6 +42,7 @@ function selectText(
 export async function proofreadMatchLens(
   lens: MatchLens,
   model: string,
+  onResponse?: (trace: {operation:"proofread";responseId:string;model:string}) => void,
 ): Promise<MatchLens> {
   const openai = createOpenAIClient();
 
@@ -70,6 +71,8 @@ export async function proofreadMatchLens(
         ),
       },
     });
+
+  onResponse?.({operation:"proofread",responseId:response.id,model:response.model});
 
   if (!response.output_parsed) {
     throw new Error(

@@ -55,7 +55,7 @@ Curated records store date-only facts and preserve the reviewed source's local e
 
 Next.js 16.2.9 App Router, React 19, strict TypeScript, Tailwind, Radix UI and Lucide. System fonts avoid Google build-time fetches. The original icon and licensed software/icon notices are served at `/icon.svg` and `/third-party-notices.txt`.
 
-The retained backend uses Supabase Postgres, a pgvector retrieval RPC call, OpenAI embeddings and Responses structured outputs with Zod, and API-FOOTBALL ingestion. Database migrations/RPC SQL/RLS are not yet tracked. Retrieval has no authenticated historical knowledge cutoff, and old cached commentary may rely on placeholder strengths. Context snippets are not claim-level citations. Cache modification time never becomes an analysis-generation timestamp or pre-match forecast.
+The retained backend uses Supabase Postgres, a pgvector retrieval RPC call, OpenAI embeddings and Responses structured outputs with Zod, and API-FOOTBALL ingestion. Disposable PostgreSQL/pgvector migrations, default-deny RLS and a reconstructed retrieval RPC are tracked and tested. New private authoring has immutable source/run lineage, final validation and gated cutoff filtering; no production migration has been applied. Old cached commentary has no authenticated historical cutoff and may rely on placeholder strengths. Context snippets are not claim-level citations. Cache modification time never becomes an analysis-generation timestamp or pre-match forecast.
 
 Curated context was newly written during agent-assisted implementation and reviewed against selected facts. It is separate from the application's Match Lens generation pipeline. Fictional sample text is explicitly synthetic; private cached AI commentary remains unverified retrospective interpretation. No numerical Team Edges bars are presented as measured performance.
 
@@ -75,9 +75,23 @@ Only this exact server opt-in enables archive access. Configure names in an igno
 | `SUPABASE_SECRET_KEY` | Server-only privileged operator client; not needed by public demo |
 | `OPENAI_API_KEY`, optional `OPENAI_EMBEDDING_MODEL`, `OPENAI_MATCH_LENS_MODEL` | Private embedding/generation only |
 | `API_FOOTBALL_KEY`, optional `API_FOOTBALL_BASE_URL`, `API_FOOTBALL_WORLD_CUP_LEAGUE_ID`, `API_FOOTBALL_WORLD_CUP_SEASON` | Private provider ingestion only |
+| `WCL_AUTHORING_DATASET_VERSION` | Explicit dataset identity required with backend contract v1 before private authoring; not needed by demo |
 | `ADMIN_GENERATION_SECRET`, `CRON_SECRET` | Existing operator gates, additionally disabled by demo-only policy |
 
 Do not run ingestion, generation, embedding or cron as setup/smoke testing. Prior read-only verification of two real archive rows/joins/lenses establishes limited connectivity, not complete coverage, historical accuracy, stable uptime, RLS guarantees or publication rights. No provider data is copied into the curated module.
+
+## Reproducible backend foundation
+
+```bash
+npm run db:test
+npm run check:credentials
+```
+
+The database command bootstraps, seeds, checks and destroys an owned PostgreSQL/pgvector environment, with no production connection URL, real credentials or model calls. Docker uses isolated PostgreSQL 17/pgvector 0.8.2; installed native PostgreSQL with pgvector is also supported. Only original synthetic fixtures, deterministic vectors and mock outputs are used. `npm run db:bootstrap` is the same disposable smoke bootstrap, not a persistent database or production deployment.
+
+The SQL is a reconstruction from application dependencies and limited read-only column discovery, **not** a production schema dump. Provider/source/vector/history rows default private; publishable clients cannot use this contract to expose provider data. Private authoring uses a privileged boundary. Generation records preserve inputs/source versions and cache history; an exact input attestation plus established publication/capture times gates as-of experiments. This does not authenticate old forecasts or guarantee model factuality.
+
+Follow the [database contract and ER diagram](docs/database-contract.md), [role/security boundaries](docs/backend-security.md), [retrieval rules](docs/retrieval-design.md), and [RAG sequence, cache/failure flow and complete Maple–Harbor worked example](docs/rag-pipeline.md). Durable jobs, authenticated publisher evidence, grounding evaluation and an explicitly authorized production upgrade remain separate work.
 
 ## Verification
 
@@ -94,7 +108,7 @@ DEMO_TEST_PRODUCTION=1 npm run test:demo-http
 
 HTTP suites run sequentially with localhost access, request/run deadlines and bounded child cleanup. Archive checks use a local mock Supabase. Demo checks clear service credentials, exercise all five results/four dates/detail attribution, fictional isolation, empty/invalid states and disabled methods with dummy secrets. An active fetch-denial tripwire verifies no application service requests on these local paths. This is not complete production infrastructure egress monitoring.
 
-[GitHub Actions](.github/workflows/ci.yml) uses pinned official actions, Node 22, `npm ci`, read-only permissions, no real credentials and explicit deadlines for tests/lint/typecheck/build/HTTP/whitespace checks. [Hosted results](https://github.com/jeffreymutethia/world-cup-lens/actions) are verified separately from local checks.
+[GitHub Actions](.github/workflows/ci.yml) uses pinned official actions, Node 22, `npm ci`, read-only permissions, no real credentials and explicit deadlines for tests/lint/typecheck/build/HTTP/whitespace checks, plus a separate disposable PostgreSQL/pgvector integration job. [Hosted results](https://github.com/jeffreymutethia/world-cup-lens/actions) are verified separately from local checks.
 
 Optional real-browser QA uses an existing Chromium installation, a temporary profile and no additional dependencies. Start a demo-only production build on localhost port 3107, then run `npm run test:design`. `CHROMIUM_PATH` selects an already installed binary; `DESIGN_CAPTURE_DIR` selects the capture directory. The script does not install a browser or attach to your profile. It is separate from hosted CI.
 

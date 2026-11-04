@@ -1,10 +1,12 @@
 import "server-only";
 
-import { randomUUID } from "node:crypto";
+import { providerDocumentId, documentCaptureTime, isCanonicalProviderProfile } from "@/lib/rag/document-identity";
 
 import {
   createAdminSupabaseClient,
 } from "@/lib/supabase/admin";
+
+import { requireAuthoringContract } from "@/lib/supabase/authoring";
 
 const PROVIDER = "api-football";
 
@@ -31,6 +33,9 @@ type ProviderVenueRow = {
 type ExistingDocumentRow = {
   id: string;
   doc_type: string;
+  body: string;
+  captured_at: string | null;
+  match_id: string | null;
   team_id: string | null;
   venue_id: string | null;
 };
@@ -46,12 +51,7 @@ function teamDocumentBody(team: ProviderTeamRow) {
     `Code: ${team.code}`,
     `Tournament group or stage: ${team.group_name}`,
     `Summary: ${team.summary}`,
-    "Provider-derived tactical strength profile:",
-    `Attack: ${team.strength_attack}/100`,
-    `Midfield: ${team.strength_midfield}/100`,
-    `Defense: ${team.strength_defense}/100`,
-    `Transitions: ${team.strength_transitions}/100`,
-    "These provider-synced strength values are placeholders until the team profile is enriched with validated source material.",
+    "No validated numerical performance measurements are available.",
   ].join("\n");
 }
 
@@ -67,6 +67,7 @@ function venueDocumentBody(venue: ProviderVenueRow) {
 export async function syncProviderDocuments(): Promise<
   SyncProviderDocumentsResult
 > {
+  await requireAuthoringContract();
   const supabase = createAdminSupabaseClient();
 
   const [teamsResult, venuesResult, documentsResult] = await Promise.all([
@@ -94,7 +95,8 @@ export async function syncProviderDocuments(): Promise<
       .order("name"),
     supabase
       .from("documents")
-      .select("id, doc_type, team_id, venue_id")
+      .select("id, doc_type, body, captured_at, team_id, venue_id, match_id")
+      .eq("source_provider", PROVIDER)
       .in("doc_type", ["team_profile", "venue_profile"])
       .order("created_at"),
   ]);
@@ -122,30 +124,39 @@ export async function syncProviderDocuments(): Promise<
   const existingDocuments =
     (documentsResult.data ?? []) as ExistingDocumentRow[];
 
-  const teamDocumentIds = new Map<string, string>();
-  const venueDocumentIds = new Map<string, string>();
+  const teamDocumentIds = new Map<string, ExistingDocumentRow>();
+  const venueDocumentIds = new Map<string, ExistingDocumentRow>();
 
   for (const document of existingDocuments) {
+    if (!isCanonicalProviderProfile(document)) continue;
     if (document.doc_type === "team_profile" && document.team_id) {
       if (!teamDocumentIds.has(document.team_id)) {
-        teamDocumentIds.set(document.team_id, document.id);
+        teamDocumentIds.set(document.team_id, document);
       }
     }
 
     if (document.doc_type === "venue_profile" && document.venue_id) {
       if (!venueDocumentIds.has(document.venue_id)) {
-        venueDocumentIds.set(document.venue_id, document.id);
+        venueDocumentIds.set(document.venue_id, document);
       }
     }
   }
 
   const updatedAt = new Date().toISOString();
   const teamDocuments = teams.map((team) => ({
-    id: teamDocumentIds.get(team.id) ?? randomUUID(),
+    id: teamDocumentIds.get(team.id)?.id ?? providerDocumentId("team_profile",team.id),
     title: `${team.name} team profile`,
     doc_type: "team_profile",
     body: teamDocumentBody(team),
     source_url: null,
+    source_provider: PROVIDER,
+    source_identity: "API-FOOTBALL; application-authored profile template",
+    source_kind: "provider",
+    captured_at: documentCaptureTime(teamDocumentIds.get(team.id),teamDocumentBody(team),updatedAt),
+    published_at: null,
+    availability_verified: false,
+    availability_evidence: null,
+    dataset_version: process.env.WCL_AUTHORING_DATASET_VERSION!,
     team_id: team.id,
     venue_id: null,
     match_id: null,
@@ -153,11 +164,19 @@ export async function syncProviderDocuments(): Promise<
   }));
 
   const venueDocuments = venues.map((venue) => ({
-    id: venueDocumentIds.get(venue.id) ?? randomUUID(),
+    id: venueDocumentIds.get(venue.id)?.id ?? providerDocumentId("venue_profile",venue.id),
     title: `${venue.name} venue profile`,
     doc_type: "venue_profile",
     body: venueDocumentBody(venue),
     source_url: null,
+    source_provider: PROVIDER,
+    source_identity: "API-FOOTBALL; application-authored profile template",
+    source_kind: "provider",
+    captured_at: documentCaptureTime(venueDocumentIds.get(venue.id),venueDocumentBody(venue),updatedAt),
+    published_at: null,
+    availability_verified: false,
+    availability_evidence: null,
+    dataset_version: process.env.WCL_AUTHORING_DATASET_VERSION!,
     team_id: null,
     venue_id: venue.id,
     match_id: null,

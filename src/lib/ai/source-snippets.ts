@@ -17,7 +17,7 @@ function buildSnippet(
 
   const candidate = normalized.slice(
     0,
-    maxLength + 1,
+    maxLength - 1,
   );
 
   const sentenceBoundary = Math.max(
@@ -45,7 +45,7 @@ function buildSnippet(
   }
 
   return `${normalized
-    .slice(0, maxLength)
+    .slice(0, maxLength - 1)
     .trim()}…`;
 }
 
@@ -53,15 +53,15 @@ export function hydrateLensSources(
   lens: MatchLens,
   retrievedContext: RetrievedChunk[],
 ): MatchLens {
-  const seenTitles = new Set<string>();
+  const seenDocuments = new Set<string>();
 
   const sources = retrievedContext.flatMap(
     (chunk) => {
-      if (seenTitles.has(chunk.title)) {
+      if (seenDocuments.has(chunk.documentId) || seenDocuments.size >= 5) {
         return [];
       }
 
-      seenTitles.add(chunk.title);
+      seenDocuments.add(chunk.documentId);
 
       return [
         {

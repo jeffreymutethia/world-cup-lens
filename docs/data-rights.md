@@ -69,3 +69,9 @@ FIFA's published terms/branding guidance provide conditional support for attribu
 ## v2 wording and design scope
 
 The v2 curated module retains exactly the same five independently selected factual records; only original retrospective copy is edited. `curated-history-2026-v2` is an explicit continuation of the owner's narrow editorial source/web decision, not approval of new records or blanket reuse. The v2 fictional module's new original copy has its own explicit registry entry and [publication review](demo-publication-review.md). Official source content/media and the private provider/cached corpus remain outside both decisions. No official assets, downloaded fonts or provider payloads are added by the redesign.
+
+## Disposable backend corpus — 2026-11-04
+
+`supabase/seed.sql`, `supabase/tests/integration.sql` and `tests/rag.test.ts` contain newly authored fictional Maple/Harbor/Other Eleven names, Test Ground, short original document/commentary/Q&A text and locally constructed basis vectors. They contain no provider payload, production row, external article excerpt, badge or media. Publication decision: **APPROVED only for these original synthetic test inputs and deterministic mock outputs in this repository**. Their synthetic availability metadata is not real historical evidence; `generator_kind=mock` and synthetic embedding labels preserve that distinction. This decision does not approve any legacy/provider/model-generated production corpus or broaden the curated five-match release.
+
+New database provider/source/history rows default private; only explicit synthetic-public presentation records are readable anonymously. Database membership, embeddings, source links or model transformation do not establish downstream rights. Retention/embedding rights for real sources and any future corpus export still need source-specific review; UNKNOWN stays UNKNOWN.

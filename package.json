@@ -12,7 +12,10 @@
     "typecheck": "next typegen && tsc --noEmit --incremental false",
     "test:demo-http": "node scripts/verify-demo.mjs",
     "test:production-http": "node scripts/verify-production.mjs",
-    "test:design": "node scripts/verify-design.mjs"
+    "test:design": "node scripts/verify-design.mjs",
+    "db:test": "node scripts/database.mjs",
+    "db:bootstrap": "node scripts/database.mjs",
+    "check:credentials": "node scripts/check-credentials.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",

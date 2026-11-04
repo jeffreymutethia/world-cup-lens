@@ -1,4 +1,4 @@
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, rmSync, readdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -10,7 +10,7 @@ try {
   if (compile.error) throw compile.error;
   if (compile.status !== 0) process.exitCode = compile.status ?? 1;
   else {
-    const tests = spawnSync(process.execPath, ["--test", join(output, "tests/replay.test.js")], { stdio: "inherit" });
+    const tests = spawnSync(process.execPath, ["--test", ...readdirSync(join(output,"tests")).filter(n=>n.endsWith(".test.js")).map(n=>join(output,"tests",n))], { stdio: "inherit", env:{...process.env,NODE_PATH:join(process.cwd(),"node_modules")} });
     if (tests.error) throw tests.error;
     process.exitCode = tests.status ?? 1;
   }

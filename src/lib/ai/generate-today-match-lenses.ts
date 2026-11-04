@@ -3,12 +3,7 @@ import "server-only";
 import {
   generateAndSaveMatchLens,
 } from "@/lib/ai/generate-and-save-match-lens";
-import {
-  createAdminSupabaseClient,
-} from "@/lib/supabase/admin";
-import {
-  getProviderMatchesForLocalDate,
-} from "@/lib/supabase/repository";
+import { requireAuthoringContract, getAuthoringMatchesForLocalDate } from "@/lib/supabase/authoring";
 
 const LIVE_STATUSES = new Set([
   "1H",
@@ -40,79 +35,37 @@ export type GenerateTodayMatchLensesResult = {
 };
 
 export async function generateTodayMatchLenses({
-  refresh = false,
+  refresh: _refresh = false,
 }: {
   refresh?: boolean;
 } = {}): Promise<GenerateTodayMatchLensesResult> {
-  const todayMatches = await getProviderMatchesForLocalDate();
-  const selectedMatches = todayMatches.filter(({ match }) => {
-    const status = match.statusShort;
-    return Boolean(
-      status &&
-        (LIVE_STATUSES.has(status) || UPCOMING_STATUSES.has(status)),
-    );
-  });
-  const existingLensIds = new Set<string>();
-
-  if (!refresh && selectedMatches.length > 0) {
-    const supabase = createAdminSupabaseClient();
-    const { data, error } = await supabase
-      .from("match_lenses")
-      .select("match_id")
-      .in(
-        "match_id",
-        selectedMatches.map(({ match }) => match.id),
-      );
-
-    if (error) {
-      throw new Error(
-        `Failed to load existing Match Lenses: ${error.message}`,
-      );
-    }
-
-    for (const row of data ?? []) {
-      existingLensIds.add(row.match_id as string);
-    }
-  }
-
+  await requireAuthoringContract();
+  // Legacy refresh argument never bypasses a versioned cache or destroys history.
+  void _refresh;
+  const todayMatches = await getAuthoringMatchesForLocalDate();
+  const selectedMatches = todayMatches.filter(row => Boolean(row.status_short && (LIVE_STATUSES.has(row.status_short) || UPCOMING_STATUSES.has(row.status_short))));
   const results: TodayMatchLensResult[] = [];
 
   for (const viewModel of selectedMatches) {
     const baseResult = {
-      matchId: viewModel.match.id,
-      homeTeam: viewModel.homeTeam.name,
-      awayTeam: viewModel.awayTeam.name,
-      statusShort: viewModel.match.statusShort ?? null,
+      matchId: viewModel.id,
+      homeTeam: viewModel.home_team.name,
+      awayTeam: viewModel.away_team.name,
+      statusShort: viewModel.status_short ?? null,
     };
 
-    if (!refresh && existingLensIds.has(viewModel.match.id)) {
-      results.push({
-        ...baseResult,
-        action: "skipped",
-        error: null,
-      });
-      continue;
-    }
-
     try {
-      await generateAndSaveMatchLens(viewModel);
+      const result = await generateAndSaveMatchLens({match:{id:viewModel.id}});
       results.push({
         ...baseResult,
-        action: "generated",
+        action: result.cached ? "skipped" : "generated",
         error: null,
       });
-    } catch (error) {
-      console.error(
-        `[generate-today-lenses] ${viewModel.match.id} failed:`,
-        error,
-      );
+    } catch {
       results.push({
         ...baseResult,
         action: "failed",
-        error:
-          error instanceof Error
-            ? error.message
-            : "Unexpected Match Lens generation failure",
+        error: "Match Lens authoring failed",
       });
     }
   }

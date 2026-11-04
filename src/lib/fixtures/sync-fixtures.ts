@@ -1,4 +1,5 @@
 import "server-only";
+import { requireAuthoringContract } from "@/lib/supabase/authoring";
 
 import {
   fetchWorldCupFixtures,
@@ -140,6 +141,7 @@ function uniqueById<T extends { id: string }>(
 export async function syncWorldCupFixtures(): Promise<
   SyncFixturesResult
 > {
+  await requireAuthoringContract();
   const fixtures =
     await fetchWorldCupFixtures();
 
@@ -169,10 +171,11 @@ export async function syncWorldCupFixtures(): Promise<
     flag: deriveFlag(team.name),
     group_name: team.group,
     summary: buildTeamSummary(team.name),
-    strength_attack: 50,
-    strength_midfield: 50,
-    strength_defense: 50,
-    strength_transitions: 50,
+    strength_attack: null,
+    strength_midfield: null,
+    strength_defense: null,
+    strength_transitions: null,
+    data_origin: "provider",
     external_provider:
       team.external_provider,
     external_id: team.external_id,
@@ -192,6 +195,7 @@ export async function syncWorldCupFixtures(): Promise<
       venue.city,
       venue.country,
     ),
+    data_origin: "provider",
     external_provider:
       venue.external_provider,
     external_id: venue.external_id,
@@ -211,6 +215,7 @@ export async function syncWorldCupFixtures(): Promise<
     // The database status constraint uses the app's canonical state, while
     // API-FOOTBALL's provider-specific value is retained in status_short.
     status: "scheduled",
+    data_origin: "provider",
     external_provider:
       match.external_provider,
     external_id: match.external_id,

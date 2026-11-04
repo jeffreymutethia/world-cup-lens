@@ -1,4 +1,5 @@
 import { authoringDisabled } from "@/lib/deployment-mode";
+import { AuthoringMatchNotFoundError } from "@/lib/rag/errors";
 import OpenAI from "openai";
 import {
   NextRequest,
@@ -47,29 +48,14 @@ export async function POST(
     }
 
     const { generateAndSaveMatchLens } = await import("@/lib/ai/generate-and-save-match-lens");
-    const { getMatchViewModel } = await import("@/lib/supabase/repository");
 
     const { id } = await context.params;
-
-    const viewModel =
-      await getMatchViewModel(id);
-
-    if (!viewModel) {
-      return NextResponse.json(
-        {
-          error: "Match not found",
-        },
-        {
-          status: 404,
-        },
-      );
-    }
 
     const {
       lens: generatedLens,
       model,
       retrievedSources,
-    } = await generateAndSaveMatchLens(viewModel);
+    } = await generateAndSaveMatchLens({ match: { id } });
 
     return NextResponse.json({
       matchId: id,
@@ -78,10 +64,7 @@ export async function POST(
       lens: generatedLens,
     });
   } catch (error) {
-    console.error(
-      "[generate-lens] failed:",
-      error,
-    );
+    if (error instanceof AuthoringMatchNotFoundError) return NextResponse.json({ error: "Match not found" }, { status: 404 });
 
     if (
       error instanceof OpenAI.APIError &&
@@ -121,10 +104,7 @@ export async function POST(
 
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Unexpected generation failure",
+        error: "Authoring operation failed",
       },
       {
         status: 500,

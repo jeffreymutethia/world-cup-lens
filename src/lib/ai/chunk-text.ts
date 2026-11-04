@@ -11,6 +11,7 @@ export function chunkText(
   maxCharacters = DEFAULT_MAX_CHARACTERS,
   overlapCharacters = DEFAULT_OVERLAP_CHARACTERS,
 ): TextChunk[] {
+  if (!Number.isInteger(maxCharacters) || maxCharacters < 64 || !Number.isInteger(overlapCharacters) || overlapCharacters < 0 || overlapCharacters >= maxCharacters) throw new Error("Invalid chunk boundaries");
   const normalized = text
     .replace(/\r\n/g, "\n")
     .replace(/[ \t]+/g, " ")

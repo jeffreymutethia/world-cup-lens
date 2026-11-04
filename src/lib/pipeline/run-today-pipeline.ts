@@ -83,19 +83,14 @@ export async function runTodayPipeline({
       refresh,
       steps,
     };
-  } catch (error) {
-    console.error(`[today-pipeline] ${failedStep} failed:`, error);
-
+  } catch {
     return {
       ok: false,
       refresh,
       failedStep,
       completedSteps,
       steps,
-      error:
-        error instanceof Error
-          ? error.message
-          : "Unexpected today pipeline failure",
+      error: "Authoring operation failed",
     };
   }
 }

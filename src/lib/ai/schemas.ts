@@ -7,7 +7,7 @@ export const TeamEdgeLabelSchema = z.enum([
   "Transitions",
 ]);
 
-export const MatchLensSchema = z.object({
+export const MatchLensSchema = z.strictObject({
   headline: z
     .string()
     .min(12)
@@ -48,7 +48,7 @@ export const MatchLensSchema = z.object({
 
   teamEdges: z
     .array(
-      z.object({
+      z.strictObject({
         label: TeamEdgeLabelSchema,
         homeValue: z
           .number()
@@ -62,7 +62,7 @@ export const MatchLensSchema = z.object({
           .max(100),
       }),
     )
-    .length(4),
+    .length(0),
 
   whatToWatch: z
     .array(
@@ -85,7 +85,7 @@ export const MatchLensSchema = z.object({
 
   sources: z
     .array(
-      z.object({
+      z.strictObject({
         title: z
           .string()
           .min(4)
@@ -96,7 +96,7 @@ export const MatchLensSchema = z.object({
           .max(180),
       }),
     )
-    .min(2)
+    .min(0)
     .max(5),
 });
 

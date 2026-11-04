@@ -30,16 +30,11 @@ export async function POST(request: NextRequest) {
       provider: "api-football",
       ...result,
     });
-  } catch (error) {
-    console.error("[sync-provider-documents] failed:", error);
-
+  } catch {
     return NextResponse.json(
       {
         ok: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Unexpected provider document sync failure",
+        error: "Authoring operation failed",
       },
       { status: 500 },
     );

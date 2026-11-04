@@ -1,6 +1,6 @@
 # Verified current architecture
 
-Inspected 2026-11-03. World Cup Lens now has a self-contained curated historical replay, secondary fictional lab, and separately configured Supabase archive/authoring path. This describes repository code and local/CI checks, not an invented deployment or a reproducible production database. No migrations/RPC SQL/RLS definitions are tracked.
+Inspected 2026-11-04. World Cup Lens now has a self-contained curated historical replay, secondary fictional lab, and separately configured Supabase archive/authoring path. This describes repository code and local/CI checks, not an invented deployment or a reproducible production database. Disposable migrations/RPC/RLS are now tracked and tested; they reconstruct the application contract and are not production schema parity. See [database contract](database-contract.md).
 
 ## Deployment and trust boundaries
 
@@ -42,7 +42,7 @@ Both public pages await Next.js 16 promise-based `searchParams`. `parseReplaySel
 
 `src/app/page.tsx` routes curated mode to `CuratedHome`: an editorial introduction, scoreboard hero, four matchday links and secondary fixtures excluding the featured ID. Single-match dates render the hero without a duplicate list card. Fictional/private modes retain a date form and collection notice. `src/app/matches/[id]/page.tsx` resolves the ID inside the same dataset/day result; missing IDs show a useful selection-specific message (not a dedicated 404). `replayHref` preserves mode/date in card/back links. Empty days, invalid selections, missing matches/cache, and archive query errors have different messages. `src/app/loading.tsx` supplies loading UI. Curated history covers four dates; the separate fictional lab covers two dates. Neither claims complete tournament coverage.
 
-`getProviderMatchesForDate` uses explicit local-midnight UTC boundaries and provider-only matches with joined team/venue rows, followed by a batched Lens lookup. `dateBounds` computes each Los Angeles midnight independently, including DST; a selected date is not a UTC instant or knowledge cutoff. Missing relations fail rather than silently omitting fixtures. Missing/invalid/unreadable lenses preserve fixtures with cache-state notices. Cached questions have a separate unavailable state. `getProviderMatchesForLocalDate` remains for legacy today-based authoring and retains live-first ordering; public replay never uses its real-clock default.
+`getProviderMatchesForDate` uses explicit local-midnight UTC boundaries and provider-only matches with joined team/venue rows, followed by a batched Lens lookup. `dateBounds` computes each Los Angeles midnight independently, including DST; a selected date is not a UTC instant or knowledge cutoff. Missing relations fail rather than silently omitting fixtures. Missing/invalid/unreadable lenses preserve fixtures with cache-state notices. Cached questions have a separate unavailable state. `getProviderMatchesForLocalDate` remains a legacy reader with live-first ordering; authoring now uses a separate privileged reader; public replay never uses its real-clock default.
 
 ## Reviewed demo and presentation
 
@@ -60,22 +60,26 @@ All six admin POST routes under `src/app/api/admin/` and `GET /api/cron/today` c
 
 ```mermaid
 flowchart LR
-  Source[API-FOOTBALL reported records] --> Ingest[Fixture ingestion and normalization]
-  Ingest --> Rows[(Supabase teams venues matches)]
-  Rows --> Documents[Templated provider documents]
-  Other[Other documents with unknown origin] --> Chunks
-  Documents --> Chunks[Chunking and OpenAI embeddings]
-  Chunks --> RPC[Vector retrieval RPC call]
-  RPC --> Generation[Responses structured generation and proofreading]
-  RPC --> Snippets[Title-deduplicated context snippets]
-  Snippets --> Cache[(Lens cache)]
-  Generation --> Cache
-  Cache -->|archive-enabled reads only| UI[Replay UI]
+  Source[Provider records - private rights UNKNOWN] --> Ingest[Contract preflight then privileged fixture upserts]
+  Ingest --> Rows[(Teams venues matches)]
+  Rows --> Documents[Provider template with null publication and unknown measurements]
+  Other[Original synthetic corpus or separately authorized sources] --> Documents
+  Documents --> Pending[Only changed input model or chunker versions]
+  Pending --> Atomic[Atomic document version and embedding chunks]
+  Atomic --> RPC[Current-version entity and optional cutoff retrieval]
+  RPC --> Identity[Canonical input source prompt model cache identity]
+  Identity --> Hit[Validated cache lookup]
+  Hit -->|miss with evidence| Generation[Structured generation proofreading final validation]
+  Generation --> Commit[Atomic immutable run and cache commit]
+  Commit --> Legacy[Private retrospective legacy Lens adapter]
+  Legacy -->|existing grants and RLS| UI[Archive replay]
 ```
 
-`runTodayPipeline` awaits fixtures → provider document synthesis → full-corpus embedding → today's live/upcoming Lens generation. Fixture ingestion uses provider IDs/status/goals but assigns placeholder strengths, derived codes/flags, and league country to venues. Document sync synthesizes profiles with null source URLs. Embedding deletes/replaces chunks per document without atomic versioning. Retrieval calls `match_document_chunks` with entity filters but no historical cutoff; RPC SQL/indexes are not tracked. Generation parses Zod structured output, proofreads, normalizes, and attaches snippets before saving one mutable JSON/model/update row per match. Source IDs/URLs and immutable lineage are lost; snippets are not mapped to claims. Cache presence, not content versions, controls skip behavior. No authoring operation was executed by this milestone.
+`runTodayPipeline` retains today's live/upcoming selection for legacy private operations, but first requires backend contract v1 and an explicit authoring dataset version. No authoring was executed in this milestone. Fixture upserts are separate transactions, still derive codes/flags and venue country from provider conventions, and now store unknown strengths as null. Document sync uses stable provider-scoped identities, keeps unchanged capture clocks, omits fake metrics, and does not invent publication time. Embedding selects at most 50 stale heads, validates dimensions/indices, and atomically appends immutable revisions/chunks instead of deleting old data.
 
-`server.ts` uses publishable credentials; `admin.ts` and OpenAI factories remain server-only. Actual backend policies/dimensions are unverified. Private/archive configuration and [historical source rights](data-rights.md) are separate gates; neither demo publication nor API subscription grants historical export permission. `vercel.json` schedules no cron.
+`rag/engine.ts` injects embedding/model/cache/persistence dependencies for deterministic tests. It supports retrospective and strictly gated as-of experiments; the HTTP adapter uses retrospective only. As-of eligibility needs both established source availability and an attestation bound to the exact match/team/venue fingerprint. Shape validation after every transformation cannot guarantee factual grounding or model compliance. Full source lineage is stored separately from the five display excerpts; snippets remain context, not claim proof. Generation/cache history is immutable; changed inputs/versions get new identities. Persistence retries reuse the exact private envelope, with process-loss/durable recovery still deferred.
+
+`server.ts` remains a publishable reader. `admin.ts`, `authoring.ts` and provider/model adapters are server-only. The new local schema defaults provider records private, so the existing publishable provider archive cannot read them; privileged authoring no longer relies on public reads. Production policies/function bodies remain unverified and no production migration was applied. The existing hosted demo never enters these branches. `vercel.json` remains schedule-free. See [security boundaries](backend-security.md), [retrieval](retrieval-design.md), and [RAG/cache sequence and failure diagrams](rag-pipeline.md).
 
 ## Verification and delivery
 

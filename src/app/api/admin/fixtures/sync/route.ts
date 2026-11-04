@@ -44,19 +44,11 @@ export async function POST(
       provider: "api-football",
       ...result,
     });
-  } catch (error) {
-    console.error(
-      "[fixtures-sync] failed:",
-      error,
-    );
-
+  } catch {
     return NextResponse.json(
       {
         ok: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Unexpected fixture sync failure",
+        error: "Authoring operation failed",
       },
       { status: 500 },
     );

@@ -6,10 +6,10 @@ Historical evidence inspected 2026-11-03 against baselines `25d414e`/`5dff6a3`; 
 
 | Finding | Repository evidence | Consequence / presentation policy |
 | --- | --- | --- |
-| Fabricated strength defaults | `src/lib/fixtures/normalize.ts:normalizeApiFootballFixture`, `sync-fixtures.ts:syncWorldCupFixtures`: every strength is 50; `5dff6a3:src/data/seed.ts:teams/cachedLenses` had values such as 56/44; that legacy module is now replaced | No measured methodology or per-field source exists. All numerical Team Edges bars are removed from public presentation in both modes; unavailable is not zero/equality. Legacy stored fields remain unchanged. |
-| Defaults become apparent evidence | `sync-provider-documents.ts:teamDocumentBody` embeds scores in a “Provider-derived” tactical profile with a caveat; `ai/prompts.ts:buildMatchLensPrompt` instructs exact edge values | Existing commentary may reason from placeholders. Keep prose unchanged, label it unverified stored commentary, and do not claim hiding bars repairs its factual grounding. |
+| Fabricated strength defaults | `src/lib/fixtures/normalize.ts:normalizeApiFootballFixture`, `sync-fixtures.ts:syncWorldCupFixtures`: historically assigned every strength 50; current ingestion stores null; `5dff6a3:src/data/seed.ts:teams/cachedLenses` had values such as 56/44; that legacy module is now replaced | No measured methodology or per-field source exists. All numerical Team Edges bars are removed from public presentation in both modes; unavailable is not zero/equality. Legacy stored fields remain unchanged. |
+| Defaults become apparent evidence | `5dff6a3:src/lib/documents/sync-provider-documents.ts:teamDocumentBody` embedded placeholder scores; the removed `5dff6a3:src/lib/ai/prompts.ts:buildMatchLensPrompt` required exact edges. Current templates/prompts omit them | Existing commentary may reason from placeholders. Keep prose unchanged, label it unverified stored commentary, and do not claim hiding bars repairs its factual grounding. |
 | Non-calibrated opinions | `MatchLens.confidence/volatility/slightEdge` and `MatchForecastCard`, featured/list cards | Labels are now explicitly stored, uncalibrated opinions. Null edge means “No edge stated”, not “Even”. No probability or measured edge is inferred. |
-| Context is not citations | `ai/source-snippets.ts:hydrateLensSources` attaches every distinct retrieved title, truncates content, drops IDs/URLs, and does not map claims to excerpts | UI says stored context snippets (illustrative context examples in synthetic mode), with a non-citation caveat and empty-context state. |
+| Context is not citations | `ai/source-snippets.ts:hydrateLensSources` attaches document-deduplicated excerpts to legacy display JSON; immutable full metadata now lives separately in generation history and is not mapped per claim | UI says stored context snippets (illustrative context examples in synthetic mode), with a non-citation caveat and empty-context state. |
 | Event time is not knowledge time | `Match.kickoffAt`, date selection, `generate-and-save-match-lens.ts:generateAndSaveMatchLens` writes wall-clock `updated_at` | The selected date filters fixtures; neither it nor kickoff nor last cache write authenticates a pre-kickoff forecast. |
 | Unverified identity/geography/stage/results | `deriveTeamCode` appends external ID, `deriveFlag` uses finite aliases; venue country uses `league.country`; group/stage share `group_name`; writer discards penalty breakdown | Fixture fields are labeled stored provider records, not independent verification. No flags, venue country, result events, or stage correctness is repaired by AI prose. Existing score/status safeguards remain. |
 
@@ -46,32 +46,27 @@ Rights/attribution and separate GitHub-versus-web decisions for these categories
 
 The UI shows these distinct fields on Lens detail. Timestamp parsing requires a full ISO timestamp with offset and a valid calendar date. New illustrative metadata is labeled synthetic and distinguishes authored copy from model generation; its fixture time does not become real event provenance. Inputs that claim a cutoff/version are not promoted by this legacy display adapter. Source URLs/IDs/timestamps are absent from cached title/snippet references and remain unresolved.
 
-## Actual pipeline and missing lineage
+## Current versioned pipeline and legacy boundary
 
 ```mermaid
-flowchart TD
-  Source[API-FOOTBALL source - reported records] --> Ingest[Fixture ingestion and normalization]
-  Ingest --> Rows[(Stored teams venues and matches)]
-  Rows --> Document[Templated provider document]
-  Other[Other stored documents - original source UNKNOWN] --> Chunk
-  Document --> Chunk[Chunking and embeddings]
-  Chunk --> Store[(document_chunks with document ID and metadata)]
-  Store --> Retrieval[match_document_chunks RPC call]
-  Query[Matchup query embedding] --> Retrieval
-  Retrieval -->|RPC SQL and temporal filtering unverified| Generation[Responses structured generation and proofreading]
-  Generation --> Cache[(Cached Lens JSON model updated_at)]
-  Retrieval --> Snippet[Title-deduplicated context snippets]
-  Snippet -->|IDs URLs and source dates lost| Cache
-  Cache -->|No immutable source or generation lineage| UI[Replay UI - stored retrospective commentary]
-  Rows --> UI
-  Seed[Synthetic local examples] --> UI
+flowchart LR
+  Source[Source identity and availability evidence] --> Ingest[Private ingestion or original synthetic seed]
+  Ingest --> Document[Document input hash and metadata]
+  Document --> Version[Immutable document version]
+  Version --> Chunk[Immutable chunk hash and embedding version]
+  Chunk --> Retrieval[Entity and optional cutoff eligibility]
+  Retrieval --> Generate[Structured generation then final validation]
+  Generate --> Cached[Immutable run and versioned cache]
+  Cached --> Adapter[Retrospective legacy Lens adapter]
+  Adapter --> UI[Archive replay subject to RLS]
+  Missing[Legacy unknown source and time boundaries] -. not backfilled .-> UI
 ```
 
-The RPC implementation is not tracked. There is no source-publication cutoff argument in `retrieveMatchContext`; entity IDs and similarity are not historical eligibility. Snippets are attached deterministically after generation rather than per claim. The cache upsert overwrites per match and loses prior versions. The diagram describes code calls, not verified infrastructure or a guarantee that all stored documents followed this pipeline.
+The local reconstruction now retains source/provider identity, versioned content, publication/capture evidence, chunk/embedding lineage, exact input snapshot, retrieval clocks, generation clocks and prompt/schema/model/cache versions. It does not establish the live RPC implementation or authenticate legacy records. As-of experiments require exact input attestation and both source clocks before cutoff; public/legacy displays remain retrospective. Detailed executable contracts and a complete synthetic worked example are in [database contract](database-contract.md) and [RAG pipeline](rag-pipeline.md). No existing record was regenerated, rewritten or given invented provenance.
 
-## Proposed provenance contract — not migrated or backfilled
+## Broader provenance proposal — production not migrated or backfilled
 
-Design a reviewed, immutable contract before making authenticated historical forecasts or exporting data:
+The local MVP implements versioned documents/chunks, runs and exact input attestations. The broader contract below still needs authenticated upstream evidence, dataset manifests, rights decisions and claim review before historical forecast certification or exports:
 
 - **Source revision:** stable source ID, publisher/rights-holder ID, canonical URL where known, content hash, publication and capture times with timezone and evidence, source kind, explicit unknown values, and a rights-review ID. Revisions do not overwrite original evidence.
 - **Rights decision:** distinct permissions for web display, dataset redistribution, snippet use, embeddings, and retention; status UNKNOWN/PENDING/APPROVED/REJECTED; evidence reference, approved scope/attribution/expiry, reviewer and review time. An unknown upstream decision propagates to derived content; it is never converted by inference.

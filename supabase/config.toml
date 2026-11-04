@@ -1,0 +1,21 @@
+# Optional Supabase CLI adapter. Actual integration runner uses owned PostgreSQL.
+project_id = "world-cup-lens-local"
+[api]
+port = 54321
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 17
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+[studio]
+enabled = false
+[inbucket]
+enabled = false
+[auth]
+enabled = false
+[storage]
+enabled = false

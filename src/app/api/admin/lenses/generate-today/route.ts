@@ -28,16 +28,11 @@ export async function POST(request: NextRequest) {
     const result = await generateTodayMatchLenses({ refresh });
 
     return NextResponse.json({ ok: true, ...result });
-  } catch (error) {
-    console.error("[generate-today-lenses] failed:", error);
-
+  } catch {
     return NextResponse.json(
       {
         ok: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Unexpected today's Match Lens generation failure",
+        error: "Authoring operation failed",
       },
       { status: 500 },
     );

@@ -42,7 +42,7 @@ export function validateGeneratedCopy(
 
     if (matchedPattern) {
       throw new Error(
-        `Generated copy failed quality validation: "${text}"`,
+        "Generated copy failed quality validation",
       );
     }
   }

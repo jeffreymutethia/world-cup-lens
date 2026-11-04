@@ -1,15 +1,16 @@
 import "server-only";
 
+import { EMBEDDING_MODEL, validateEmbedding, validateEmbeddingBatch } from "@/lib/rag/contract";
 import { createOpenAIClient } from "@/lib/ai/openai";
 
 export async function createEmbedding(
   text: string,
 ): Promise<number[]> {
-  const openai = createOpenAIClient();
-
   const model =
     process.env.OPENAI_EMBEDDING_MODEL ??
-    "text-embedding-3-small";
+    EMBEDDING_MODEL;
+  if (model !== EMBEDDING_MODEL) throw new Error("Unsupported embedding model for contract v1");
+  const openai = createOpenAIClient();
 
   const response =
     await openai.embeddings.create({
@@ -27,7 +28,7 @@ export async function createEmbedding(
     );
   }
 
-  return embedding;
+  return validateEmbedding(embedding);
 }
 
 export async function createEmbeddings(
@@ -37,11 +38,11 @@ export async function createEmbeddings(
     return [];
   }
 
-  const openai = createOpenAIClient();
-
   const model =
     process.env.OPENAI_EMBEDDING_MODEL ??
-    "text-embedding-3-small";
+    EMBEDDING_MODEL;
+  if (model !== EMBEDDING_MODEL) throw new Error("Unsupported embedding model for contract v1");
+  const openai = createOpenAIClient();
 
   const response =
     await openai.embeddings.create({
@@ -50,15 +51,5 @@ export async function createEmbeddings(
       encoding_format: "float",
     });
 
-  const ordered = [...response.data]
-    .sort((a, b) => a.index - b.index)
-    .map((item) => item.embedding);
-
-  if (ordered.length !== texts.length) {
-    throw new Error(
-      "Embedding response count did not match input count.",
-    );
-  }
-
-  return ordered;
+  return validateEmbeddingBatch(response.data,texts.length);
 }

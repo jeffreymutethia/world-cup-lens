@@ -24,15 +24,10 @@ export async function POST(request: NextRequest) {
     const { embedDocuments } = await import("@/lib/documents/embed-documents");
 
     return NextResponse.json(await embedDocuments());
-  } catch (error) {
-    console.error("[embed-documents] failed:", error);
-
+  } catch {
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Unexpected embedding failure",
+        error: "Authoring operation failed",
       },
       { status: 500 },
     );
