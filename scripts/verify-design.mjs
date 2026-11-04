@@ -70,7 +70,7 @@ async function click(selector) {
   await command("Input.dispatchMouseEvent", { type: "mouseReleased", ...rect, button: "left", clickCount: 1 });
 }
 async function screenshot(name) {
-  await evaluate("scrollTo(0,0); new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))");
+  await evaluate("scrollTo(0,0); Promise.race([Promise.allSettled(document.getAnimations().filter(a => a.playState === 'running' && a.effect?.getTiming().iterations !== Infinity).map(a => a.finished)), new Promise(resolve => setTimeout(resolve,1000))]).then(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))");
   const metrics = await command("Page.getLayoutMetrics");
   const { width, height } = metrics.cssContentSize;
   const capture = await command("Page.captureScreenshot", { format: "png", captureBeyondViewport: true, clip: { x: 0, y: 0, width, height, scale: 1 } });
@@ -150,12 +150,13 @@ try {
   await navigate("/?mode=illustrative&date=2026-06-11", ".collection-heading");
   await click('a[href="/matches/copper-tidal?mode=illustrative&date=2026-06-11"]');
   await waitFor("Boolean(document.querySelector('button[aria-pressed]'))");
+  assert.equal(await evaluate("[...document.querySelectorAll('button[aria-pressed]')].every(e => e.getBoundingClientRect().height >= 44)"), true, "Q&A needs 44px targets");
   const before = await evaluate("document.querySelector('[aria-live]').textContent");
   await evaluate("document.querySelectorAll('button[aria-pressed]')[1].focus()"); await key("Enter");
   await waitFor(`document.querySelector('[aria-live]').textContent !== ${JSON.stringify(before)}`);
   assert.equal(await evaluate("document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1"), true);
   await screenshot("lab-390-questions");
-  report.checks.push("fictional lab stored Q&A keyboard switching");
+  report.checks.push("fictional lab 44px question targets and stored Q&A keyboard switching");
   await command("Emulation.setDeviceMetricsOverride", { width: 320, height: 900, deviceScaleFactor: 1, mobile: true });
   for (const [id, date] of [["mexico-south-africa-2026-06-11", "2026-06-11"], ["usa-paraguay-2026-06-12", "2026-06-12"], ["argentina-switzerland-2026-07-11", "2026-07-11"], ["spain-argentina-2026-07-19", "2026-07-19"]]) {
     await navigate(`/matches/${id}?mode=curated&date=${date}`, ".recap-panel");

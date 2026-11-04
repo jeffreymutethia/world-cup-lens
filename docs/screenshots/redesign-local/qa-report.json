@@ -1,6 +1,6 @@
 {
   "base": "http://127.0.0.1:3107",
-  "capturedAt": "2026-11-04T12:15:46.300Z",
+  "capturedAt": "2026-11-04T12:26:54.637Z",
   "browser": "Chrome/156.0.8078.80",
   "widths": [
     {
@@ -126,7 +126,7 @@
   ],
   "checks": [
     "keyboard skip/date/focus/Enter; selected date/back; single-match isolation",
-    "fictional lab stored Q&A keyboard switching",
+    "fictional lab 44px question targets and stored Q&A keyboard switching",
     "all five match heroes fit at 320px without splitting single-word team names",
     "about navigation and reduced-motion styles"
   ],

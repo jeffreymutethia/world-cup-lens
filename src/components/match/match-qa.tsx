@@ -61,8 +61,8 @@ export function MatchQa({ answers, mode }: MatchQaProps) {
                   variant={isSelected ? "default" : "outline"}
                   className={
                     isSelected
-                      ? "bg-emerald-700 hover:bg-emerald-800"
-                      : ""
+                      ? "min-h-11 whitespace-normal text-left transition-none bg-emerald-700 hover:bg-emerald-800"
+                      : "min-h-11 whitespace-normal text-left transition-none"
                   }
                   aria-pressed={isSelected}
                   onClick={() => setSelectedKey(answer.key)}
