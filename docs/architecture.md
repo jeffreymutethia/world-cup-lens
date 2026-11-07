@@ -1,139 +1,107 @@
-# Verified current architecture
+# Architecture
 
-Inspected 2026-11-04. World Cup Lens now has a self-contained curated historical replay, secondary fictional lab, and separately configured Supabase archive/authoring path. This describes repository code and local/CI checks, not an invented deployment or a reproducible production database. Disposable migrations/RPC/RLS are now tracked and tested; they reconstruct the application contract and are not production schema parity. See [database contract](database-contract.md).
+World Cup Lens separates a self-contained public tournament archive from a private Supabase/RAG system. Public Match Lenses are original retrospective editorial records; they are not presented as OpenAI output. The database migrations reconstruct a disposable contract and do not establish production schema parity. Deployment evidence belongs in [deployment](deployment.md); source and publication boundaries belong in [the historical review](curated-history-review.md).
 
-## Deployment and trust boundaries
+## Public archive
 
-`src/lib/deployment-mode.ts:deploymentMode` reads the non-public server variable `WCL_DEPLOYMENT_MODE`. Only exact `archive-enabled` opts in to the historical/backend boundary. Missing, invalid, or `demo-only` values select `demo-only`. Lower-level replay helpers also default closed. No URL, client control, credential presence, or fallback can enable archive functionality.
+`src/data/curated-records.json` contains 104 date-only results. `src/data/curated-lenses.json` supplies ten deeper retrospectives; `src/data/curated-history.ts` combines those inputs with concise tournament context and publication/version metadata. `src/lib/curated-contract.ts` defines a separate contract from timestamp-based private provider fixtures.
 
 ```mermaid
 flowchart TD
-  Browser[Browser mode date and optional match ID] --> Policy{Server deployment policy}
-  Policy --> Public[Public datasets available in either policy]
-  Public --> Select{Strict mode and date selection}
-  Select -->|curated - public default July 11| Curated[Five local date-only editorial records]
-  Curated --> Validate{Version and record validation}
-  Validate -->|valid matches| History[Historical list detail sources and original context]
-  Validate -->|valid empty date| Empty[Explicit curated empty state]
-  Validate -->|invalid records| Error[Explicit curated error - no substitution]
-  Select -->|illustrative| Fiction[Local synthetic records and sample Lens and QA]
-  Fiction --> Lab[Fictional lab UI - no model call]
-  Select -->|archive| ArchiveGuard{Archive-enabled server policy}
-  ArchiveGuard -->|no| Disabled[Disabled state - no database call]
-  ArchiveGuard -->|yes| Archive[Los Angeles day reader - private default July 11]
-  Archive --> Client[Publishable Supabase client]
-  Client --> DB[(Provider fixtures relations cached lenses and questions)]
-  DB --> ArchiveUI[Unverified provider data and retrospective cached AI commentary]
-  Browser --> Author[Admin POST or cron GET and HEAD]
-  Author --> Guard{Server authoring guard}
-  Guard -->|demo-only| Denied[404 before auth or work]
-  Guard -->|archive-enabled| Auth[Existing secret gate]
-  Auth --> Pipeline[Lazy imported private authoring pipeline]
+  Sources[Official results and independently checked reports] --> Review[Fact and scoped publication review]
+  Review --> Records[104 date-only factual records]
+  Review --> Editorial[Original retrospective context and ten extended Lenses]
+  Records --> Module[Versioned local curated module]
+  Editorial --> Module
+  URL[Date stage group team search page URL] --> Selection[Server validation and filtering]
+  Module --> Selection
+  Selection -->|valid results| Listing[Featured scoreboard and paginated results]
+  Selection -->|no matching results| Empty[Explicit empty state]
+  Selection -->|invalid input or module| Error[Invalid or unavailable state]
+  Listing --> Detail[Result and retrospective Match Lens]
+  Detail --> Navigation[Previous next related matches and team journeys]
+  Detail --> Attribution[Primary links and source notes]
+  Old[Old illustrative selection] --> Redirect[Redirect to historical homepage]
 ```
 
+`src/lib/curated-history.ts` validates record identities, stage totals, group coverage, results, source metadata and knockout progression. It distinguishes malformed data from valid empty selections. No result is substituted from a fictional or private collection when validation fails. A primary factual source must use an approved official FIFA hostname; linked evidence is not treated as a licence or automatic factual guarantee.
 
-The public demo is decoupled from the database so service availability, paid credentials, and uncleared historical data are not prerequisites for demonstrating UI/engineering work. Archive mode retains its meaning; it is not an alias for fictional content. The flag must be set consistently at build and runtime/deployment. `/about` uses request-time `connection()` so its explanation follows runtime policy rather than a stale static mode snapshot.
+The default public day is July 11, featuring Norway–England. Full-tournament browsing uses `date=all`; date, stage/group, team and text filters are URL-driven. The list is ordered by event day and tournament match number, a stable convention that does not invent kickoff order. The featured match is excluded from secondary cards. Pagination avoids rendering the entire tournament on the landing page.
 
-## Replay and public reads
+Each curated detail resolves its stable ID independently of the list filter, preserving a usable return link. `curatedHref` carries the selected state. `curatedNavigation` chooses previous/next within the matching selection when possible, otherwise the whole tournament; related links follow the participating teams. `groupRecord` derives a team's played/won/drawn/lost/points/goals through the selected tournament match number. It is not an official ranked group table or a tiebreaker implementation.
 
-Both public pages await Next.js 16 promise-based `searchParams`. `parseReplaySelection` validates mode plus strict `YYYY-MM-DD` within June 11–July 19, 2026. In demo-only mode missing mode/date selects curated July 11. Curated and illustrative modes are available; Explicit archive requests produce “Archive disabled in public demo”; the page contains no archive selector/link and does not substitute examples for an explicitly requested archive. In archive-enabled mode missing mode/date retains archive July 11. Duplicate/invalid input is a separate validation state.
+`finalScore` includes regulation and any extra-time goals. `penaltyShootout` is separate; an advancing team is checked against the deciding result. Unknown extra-time information stays null. Event dates remain `YYYY-MM-DD`, with `day` precision and source-local-event-day basis. No midnight kickoff, regulation score, lineup, historical cutoff or generated-at timestamp is manufactured.
 
-`src/lib/replay-access.ts` passes actual server policy to shared `loadReplay`/`loadReplayAnswers` and imports the Supabase repository only inside an allowed archive reader. Illustrative reads use the reviewed local `src/data/seed.ts` module, not a database or an AI API. `buildIllustrativeViewModel` handles missing relations and rejects incompatible cached text; missing commentary preserves available fixture details. `loadReplay` validates calendar timestamps, filters a half-open Los Angeles calendar day, sorts by kickoff/ID, and selects the first fixture as featured. It has distinct ready/empty/error results. It never silently falls back between datasets.
+## Match Lens presentation
 
-`src/app/page.tsx` routes curated mode to `CuratedHome`: an editorial introduction, scoreboard hero, four matchday links and secondary fixtures excluding the featured ID. Single-match dates render the hero without a duplicate list card. Fictional/private modes retain a date form and collection notice. `src/app/matches/[id]/page.tsx` resolves the ID inside the same dataset/day result; missing IDs show a useful selection-specific message (not a dedicated 404). `replayHref` preserves mode/date in card/back links. Empty days, invalid selections, missing matches/cache, and archive query errors have different messages. `src/app/loading.tsx` supplies loading UI. Curated history covers four dates; the separate fictional lab covers two dates. Neither claims complete tournament coverage.
+`CuratedHome` and `CuratedMatchDetail` preserve the forest-green editorial design: large scoreboards, restrained pitch geometry, date navigation and responsive fixture cards. The detail uses a consistent retrospective Lens structure: overview, significance, original interpretation, optional source-linked developments and explicit evidence limits. Optional sections avoid filling gaps with invented tactical prose. All records have concise context; ten have extended match-specific reporting.
 
-`getProviderMatchesForDate` uses explicit local-midnight UTC boundaries and provider-only matches with joined team/venue rows, followed by a batched Lens lookup. `dateBounds` computes each Los Angeles midnight independently, including DST; a selected date is not a UTC instant or knowledge cutoff. Missing relations fail rather than silently omitting fixtures. Missing/invalid/unreadable lenses preserve fixtures with cache-state notices. Cached questions have a separate unavailable state. `getProviderMatchesForLocalDate` remains a legacy reader with live-first ordering; authoring now uses a separate privileged reader; public replay never uses its real-clock default.
+The public interface has one responsive header, a skip link, a main landmark and a concise non-affiliation footer. `TopNav` is a small client component for mobile disclosure, Escape handling and focus return. Selection and match rendering remain server responsibilities. Public browsing does not request a database, embedding, model or provider service. Old illustrative selections redirect to `/?mode=curated`; the fictional lab is no longer a public product. Deterministic synthetic fixtures and private cached Q&A remain available to their existing test/private paths.
 
-## Reviewed demo and presentation
+Primary links are visible alongside source notes. Detailed evidence/version/unknown-field disclosures are progressively revealed rather than repeated across every card. Source excerpts are not copied into the public dataset, and original editorial text is never labeled generated analysis. The [design document](design.md) records visual decisions and actual browser evidence.
 
-The newly authored `wcl-synthetic-v2` contains four fictional teams with alphabetic initials, two fictional locations, three scenarios, stored sample commentary and preset questions. No real team profiles, national flags, provider records, external quotations, results, logo assets, or numerical strengths are inputs. Strength fields are null; `TeamStrengths` permits unknown values without assigning arbitrary numbers. All fixtures and copy are explicit fiction; “No real result” replaces result-like display in illustrative mode. The replaced legacy examples remain in Git history, not in current demo selection.
+## Deployment and service boundaries
 
-`DEMO_PUBLICATION` records a scoped review/version and evidence file, not a heuristic licensing engine. [Publication review](demo-publication-review.md) approves only this new original material and original icon. Existing UNKNOWN provider/editorial/legacy rights remain unknown. Starter SVGs/favicon were removed; system fonts and existing licensed software/icons are used, with named-package notices at `/third-party-notices.txt`.
+`src/lib/deployment-mode.ts:deploymentMode` reads the server-only `WCL_DEPLOYMENT_MODE`. Only exact `archive-enabled` opens the private boundary. Missing, invalid and `demo-only` values select demo-only. Neither URL values nor credential presence can override that policy.
 
-`MatchLensCards` preserves qualitative cards but withholds all numerical team comparisons. `PublicMatchLens` excludes unsupported edges; ignored malformed/missing numerical fields cannot erase otherwise compatible text. Archive confidence/volatility/edge values are labeled uncalibrated stored opinions; the fictional detail omits those forecast cards. A null archive edge means no edge stated. Lens/Q&A context is not claim-level citation proof. `MatchQa` is a client component switching between cached answers; it does not send a question to a service. `/about` explains the curated, fictional, private archive and authoring branches, evidence limits and publication scope and has functional navigation/license links. All visual layout remains Tailwind/Radix/Lucide-based.
+```mermaid
+flowchart TD
+  Browser[Browser] --> Public[Local curated archive and About]
+  Public --> Local[Reviewed results and editorial Lens records]
+  Browser --> Request{Private archive or authoring request}
+  Request --> Policy{Exact server archive-enabled policy}
+  Policy -->|no| Disabled[Denied before imports auth or work]
+  Policy -->|archive read| Reader[Lazy publishable Supabase reader]
+  Reader --> RLS[Existing database grants and RLS]
+  RLS --> Cached[Provider fixtures and retrospective cached AI text]
+  Policy -->|authoring| Auth[Operator secret gate]
+  Auth --> Preflight[Contract v1 and dataset version]
+  Preflight --> Privileged[Server-only privileged adapters]
+  Privileged --> Paid[Separately authorized provider embedding and model operations]
+```
 
-`analysisProvenance` separates recorded event reference from optional cache write time. Source publication/capture, model generation and historical cutoff remain unknown for archive rows, and its dataset version remains null. Synthetic mode identifies version `wcl-synthetic-v2` and labels model-generation/cutoff concepts not applicable to authored fiction. No historical timestamp is fabricated and no cached archive prose is rewritten. See [provenance/time contract](data-provenance.md).
+`replay-access.ts` lazily imports the Supabase repository only after the archive policy check. Private provider reads use half-open America/Los_Angeles calendar-day bounds, computed independently at each midnight. Curated event days do not pass through timezone conversion. Missing joined relations fail the private archive query rather than silently dropping fixtures; invalid/missing cache text leaves the available fixture visible.
 
-## Protected historical authoring path
+All six admin POST handlers and cron GET/implicit HEAD check the deployment guard before authentication and work. Private mode additionally requires the existing admin or cron secret. `vercel.json` has no schedule. Removing the public lab does not broaden database permissions or turn on any backend service. `/about` uses request-time `connection()` so its policy explanation reflects runtime configuration.
 
-All six admin POST routes under `src/app/api/admin/` and `GET /api/cron/today` check the deployment guard first. Demo-only responses are 404 even with matching secrets; implicit cron HEAD also receives the guarded result. Business functions are dynamically imported after the guard and existing auth. Archive-enabled operation still requires `x-admin-secret` / `ADMIN_GENERATION_SECRET`, or cron bearer `CRON_SECRET`. No route test authorizes real work.
+## Private authoring and database contracts
 
 ```mermaid
 flowchart LR
-  Source[Provider records - private rights UNKNOWN] --> Ingest[Contract preflight then privileged fixture upserts]
-  Ingest --> Rows[(Teams venues matches)]
-  Rows --> Documents[Document heads and source metadata]
-  Other[Original synthetic corpus or separately authorized sources] --> Documents
-  Documents --> Pending[Only changed input model or chunker versions]
-  Pending --> Atomic[Atomic document version and embedding chunks]
-  Atomic --> RPC[Current-version entity and optional cutoff retrieval]
-  RPC --> Identity[Canonical input source prompt model cache identity]
-  Identity --> Hit[Validated cache lookup]
-  Hit -->|miss with evidence| Generation[Structured generation proofreading final validation]
-  Generation --> Commit[Atomic immutable run and cache commit]
-  Commit --> Legacy[Private retrospective legacy Lens adapter]
-  Legacy -->|existing grants and RLS| UI[Archive replay]
+  Provider[Private provider records rights UNKNOWN] --> Ingest[Privileged normalization and separate upserts]
+  Ingest --> Documents[Document heads and source metadata]
+  Authorized[Original synthetic or separately authorized sources] --> Documents
+  Documents --> Pending[Changed input model or chunker versions]
+  Pending --> Revision[Atomic document version and embedding chunks]
+  Revision --> Retrieve[Entity version and optional cutoff eligibility]
+  Retrieve --> Identity[Canonical input source prompt model identity]
+  Identity --> Cache{Valid cache}
+  Cache -->|hit| Stored[Validated stored output]
+  Cache -->|miss with evidence| Generate[Structured generation and proofreading]
+  Generate --> Validate[Hydration normalization and final validation]
+  Validate --> Commit[Atomic immutable run and cache winner]
+  Commit --> Adapter[Private retrospective legacy adapter]
+  Adapter --> PrivateUI[Private archive subject to policy and RLS]
 ```
 
-`runTodayPipeline` retains today's live/upcoming selection for legacy private operations, but first requires backend contract v1 and an explicit authoring dataset version. Fixture upserts are separate transactions. They still derive codes/flags, but canonical statuses are explicitly mapped and venue country is Unknown when absent from the fixture response; competition country is not used as geography. Unsupported/ambiguous statuses fail normalization before writes. Unknown strengths are null. Document sync uses stable provider-scoped identities, keeps unchanged capture clocks, omits fake metrics, and does not invent publication time. Embedding selects at most 50 stale heads, validates dimensions/indices, and atomically appends immutable revisions/chunks instead of deleting old data.
+`runTodayPipeline` retains legacy live-operation selection, but requires contract v1 and `WCL_AUTHORING_DATASET_VERSION`. Fixture upserts are separate transactions. Normalization maps supported statuses explicitly, leaves missing venue country Unknown and unknown strengths null. Provider-derived documents have stable identities, preserve unchanged capture clocks and do not invent publication times. Embedding selects at most 50 stale heads and atomically appends revisions/chunks; it never deletes all history on a scheduled run.
 
-`rag/engine.ts` injects embedding/model/cache/persistence dependencies for deterministic tests. It supports retrospective and strictly gated as-of experiments; the HTTP adapter uses retrospective only. As-of eligibility needs both established source availability and an attestation bound to the exact match/team/venue fingerprint. Shape validation after every transformation cannot guarantee factual grounding or model compliance. Full source lineage is stored separately from the five display excerpts; snippets remain context, not claim proof. Generation/cache history is immutable; changed inputs/versions get new identities. Persistence retries reuse the exact private envelope, with process-loss/durable recovery still deferred.
+`rag/engine.ts:runVersionedLens` injects embedding, retrieval, model, cache and persistence dependencies. Entity and optional availability filters constrain semantic ranking. As-of experiments additionally require an exact input-fingerprint attestation; the HTTP authoring adapter remains retrospective. Final schema/team validation runs after all transformations, but does not guarantee factual grounding. Immutable source/run metadata is separate from the limited display excerpts. A failed persistence attempt retains an in-memory private retry envelope; durable recovery and corpus-wide serializability remain deferred.
 
-`server.ts` remains a publishable reader. `admin.ts`, `authoring.ts` and provider/model adapters are server-only. The new local schema defaults provider records private, so the existing publishable provider archive cannot read them; privileged authoring no longer relies on public reads. Production policies/function bodies remain unverified and no production migration was applied. The existing hosted demo never enters these branches. `vercel.json` remains schedule-free. See [security boundaries](backend-security.md), [retrieval](retrieval-design.md), and [RAG/cache sequence and failure diagrams](rag-pipeline.md).
+`server.ts` is the publishable reader; `admin.ts`, `authoring.ts` and service adapters are server-only. Reconstructed SQL defaults provider/source/history rows private. Anonymous reads allow only explicitly synthetic-public presentation rows, so the legacy provider-filtered reader cannot populate that database without a separately reviewed operator-read/publication design. No production policies or function bodies are inferred from TypeScript or direct SQL tests. See [database contract](database-contract.md), [security](backend-security.md), [retrieval](retrieval-design.md) and [RAG/cache failures](rag-pipeline.md).
 
-## Verification and delivery
+## Verification boundaries
 
-CI uses pinned actions, read-only token permissions, Node 22, `npm ci`, unit tests, lint, typecheck (`next typegen` first), build, archive-enabled mock HTTP checks, production-server and unset/invalid development-server demo isolation checks, and committed/generated whitespace validation. No real service credentials are supplied. The demo harness starts with empty service settings, asserts the fetch-denial preloader is active, checks browsing plus local guarded methods with matching dummy secrets, and asserts zero service fetches. These checks are not browser interactivity, full egress enforcement, production policy, or historical accuracy verification.
+Unit tests check curated contracts, filters/navigation, display labels and mocked generation behavior. Disposable PostgreSQL tests exercise actual constraints, invoker RPCs, vector ranking, grants/RLS, cutoffs, cache history and failure transactions. Archive HTTP tests mock the gateway; demo HTTP tests deny service fetches and exercise guarded routes with dummy settings. Browser checks establish specific layout/navigation/focus observations, not accessibility certification.
 
-The existing `jt254/world-cup-lens` Vercel project was inspected through its authorized dashboard and first deployed on 2026-11-03. It tracks `main`, uses Next.js at the repository root, and serves [the public demo](https://world-cup-lens-one.vercel.app). The November 3 dashboard inspection recorded only the non-secret demo-only policy variable and no service keys. Subsequent HTTP checks verify the active demo behavior, not a fresh environment inventory. Node 22 matches the repository engine constraint. No cron jobs were listed, and project cron execution was explicitly disabled. No new project, paid plan or data migration was created. See [deployment evidence](deployment.md) for revision-specific status, browser QA and evidence limits. The remote production HTTP check is explicit and is not part of CI.
+GitHub Actions uses Node 22, locked installs, deterministic tests, a disposable PostgreSQL/pgvector job, HTTP isolation checks, lint/typecheck/build and repository checks. Production smoke checks and browser captures are explicit, separate verification. Passing tests do not establish real-model grounding quality, authenticated historical forecasts, live Supabase gateway/Auth coverage, production schema parity or legal clearance. Revision-specific results must be recorded after execution, not assumed from this design.
 
+## Worked public example
 
-## Curated history contract and worked example
+1. The local factual module records `norway-england-2026-07-11`, match 99, quarter-final, Miami Stadium, 1–2 after extra time, with evidence metadata and explicit unknown clocks.
+2. The public default selects July 11; `loadCuratedHistory` validates the full dataset and chooses this fixture as featured without constructing a service client.
+3. `curatedHref` creates the detail URL carrying the current date/filter state. The secondary list excludes the featured ID.
+4. `CuratedMatchDetail` reads the original extended Lens, reports the sourced scoring sequence and limits, and links related team matches and the primary evidence.
+5. Returning to the list restores its selection. No cached private AI output, fictional record or model call is involved.
 
-`src/data/curated-history.ts:curatedMatches` holds five independently selected records, version `wcl-curated-2026-v2`. `CuratedMatch` in `src/lib/curated-history.ts` is separate from legacy timestamp-based `Match`: event day is `YYYY-MM-DD`, precision is `day`, basis is `source-local-event-day`, and unknown clock time/events/statistics/capture/generation/cutoff are explicit nulls. No fake midnight kickoff is stored. `formatMatchDay` formats calendar parts; curated filtering compares exact day keys without timezone conversion. Los Angeles boundaries remain unchanged for timestamp-based archive/fictional data.
-
-`CURATED_PUBLICATION` records the scoped editorial source/web publication decision, not an open-data licence or legal clearance. Source identity/URL, access/review days, known publication day, evidence access method, dataset version and original retrospective copy accompany every record. Official article bodies were index-accessible rather than directly readable in three cases; the UI and review document disclose this. Argentina–Switzerland uses FIFA's explicit July 11 local event day, distinct from its July 12 article date and UEFA's July 12 entry. No timezone explanation is invented.
-
-`loadCuratedHistory` validates the whole module, rejects malformed/duplicate records and distinguishes ready/empty/error. First in reviewed array order is featured; this is editorial order, never inferred kickoff order. Legacy `loadReplay` and `loadReplayAnswers` reject curated mode before any reader, so editorial context cannot acquire a cached-AI provenance label. Both public pages branch to curated components before entering legacy services. The shared footer gives an unofficial/non-affiliation notice.
-
-Follow Norway–England through the code:
-
-1. `curatedMatches` declares `norway-england-2026-07-11`, July 11, quarter-final, Miami Stadium, 1–2 and `afterExtraTime: true`, with FIFA source metadata and explicit unknowns.
-2. `parseReplaySelection({})` under demo-only selects `{ mode: "curated", date: "2026-07-11" }`.
-3. `loadCuratedHistory` returns Norway–England as editorial featured plus Argentina–Switzerland. No service client is created.
-4. `CuratedScoreboard` formats the featured result and extra-time label, and `replayHref` builds `/matches/norway-england-2026-07-11?mode=curated&date=2026-07-11`.
-5. Detail resolves that ID only within the selected curated day, renders `CuratedMatchDetail` facts/context/source metadata, and preserves the same back URL. No Lens lookup, generation or Q&A is performed for curated matches.
-
-Curated editorial context summarizes the selected facts; it is separate from stored Match Lens output and the application's RAG pipeline. Fictional sample copy and private actual cached AI commentary retain their own labels and contracts. See [publication evidence](curated-history-review.md), [rights](data-rights.md) and [deployment](deployment.md).
-
-
-## Editorial interface — design revision v2
-
-The supplied reference PNGs guide composition; their HTML/CSS and wording were not pasted into the application. `AppShell` now supplies one responsive `TopNav`, a skip link, one main landmark and a concise non-affiliation footer. The removed sidebar has no remaining imports. TopNav is a small client component only for the mobile disclosure: real button, expanded/controls state, Escape-to-close/focus return and route-close behavior. Match selection and reading remain server-side. The existing Q&A component remains client-side and reads stored answers only.
-
-```mermaid
-flowchart TD
-  URL[Mode date and match ID] --> Parse[Existing selection validation and server policy]
-  Parse -->|curated| Local[Validated five-record module v2]
-  Local --> Home[CuratedHome]
-  Home --> Hero[Featured scoreboard]
-  Home --> Tabs[Four real matchday links with current date]
-  Home --> Other[Secondary fixtures excluding featured ID]
-  Local --> Detail[CuratedMatchDetail scoreboard recap source notes]
-  Detail --> Related[Other match on same selected day only]
-  Parse -->|illustrative| Fiction[Separate sample Lens and QA v2]
-  Parse -->|archive-enabled only| Archive[Existing Supabase read path]
-  Policy[Unchanged demo-only guard] --> Deny[Admin and cron denied before work]
-```
-
-`CuratedMatchDetail` separates original recap from the source panel. An ordinary external source link is always visible; native `details` exposes review/access days, publication day, version, indexed-access limitation, explicit unknowns, Argentina date discrepancy and scoped publication uncertainty. This disclosure is presentation, not deletion of evidence. Norway is accurately labeled FIFA schedule and results rather than a match report. Related/back links preserve dataset/date.
-
-Presentation tokens in `globals.css` define forest/lime/paper colors, system type, geometric CSS pitch lines and responsive behavior. Muted text was darkened from the mockup for normal-text contrast. Date links scroll within their container, with padded focus rings; reduced motion is respected. Monograms are original typography, hidden from assistive technology with the duplicate visual scoreboard; the semantic match heading announces teams/result. No new dependency, remote font, media asset, API request, schema or service guard is introduced.
-
-Versions `wcl-curated-2026-v2` and `wcl-synthetic-v2` identify the copy revision. The five historical IDs/results/stages/venues/event-day/AET/source facts are unchanged; fictional styles remain authored assumptions. Private cached prose is never rewritten. Browser evidence and any limits are recorded separately in [design implementation](design.md) and [deployment](deployment.md).
-
-## Portfolio freeze boundaries
-
-The public product and tested disposable backend contracts are the frozen MVP. The [technical walkthrough](technical-walkthrough.md) maps actual server/client, ingestion, retrieval, generation and cache responsibilities; [engineering decisions](engineering-decisions.md) distinguishes documented choices from retrospective comparisons. [Current audit](audit.md#portfolio-freeze-audit) supersedes chronological early findings. No production database parity, real-model quality evaluation, authenticated forecast, Supabase gateway/Auth coverage or general rights clearance is claimed. The public route/data/component implementation is unchanged by the final documentation milestone.
-
-Security maintenance pins Next/eslint-config-next 16.4.5 and Zod 4.6.6. The application still uses the same server/client boundaries. The shadcn CLI is no longer installed: `globals.css` imports the exact original CSS body from `shadcn-base.css`, with source hash and MIT notice. CI also checks local documentation references and known high/critical dependency advisories. No application route, public fact or SQL grant is expanded.
+The [technical walkthrough](technical-walkthrough.md) separately traces the original Maple/Harbor synthetic input through actual backend code, SQL and tests. That test corpus remains independent of the public historical archive.

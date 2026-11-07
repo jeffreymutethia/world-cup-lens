@@ -20,7 +20,7 @@ Both commands create, migrate, seed, test and destroy an owned database. They ne
 
 ## Tables
 
-Read the migrations for exhaustive declarations. All clocks are `timestamptz`; no date-only curated record enters these tables.
+Read the migrations for exhaustive declarations. All clocks are `timestamptz`; no date-only curated record enters these tables. The public 104-match collection and editorial Match Lenses stay in repository JSON modules, not this database. Synthetic fixtures remain isolated test inputs after retirement of the public fictional lab.
 
 | Table | Contract |
 | --- | --- |

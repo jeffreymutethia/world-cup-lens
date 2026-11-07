@@ -1,4 +1,4 @@
-import { checkCuratedPages } from "./check-curated-pages.mjs";
+import { checkCuratedPages, assertHistoricalRedirect } from "./check-curated-pages.mjs";
 import assert from "node:assert/strict";
 
 // Explicit public destination only. No service credentials or auth headers are used.
@@ -12,23 +12,15 @@ async function page(path, method = "GET") {
 }
 try {
   await checkCuratedPages(page);
-  let result = await page("/matches/copper-tidal?mode=illustrative&date=2026-06-11");
-  assert.equal(result.status, 200);
-  assert.ok(result.html.includes("Patient passing against counterplay") && result.html.includes("Stored questions") && result.html.includes("wcl-synthetic-v2") && result.html.includes("No real result"));
-  console.log("PASS separate fictional lab retains sample Lens and Q&A");
-
-  for (const [path, expected] of [
-    ["/?mode=illustrative&date=2026-06-12", "second-day example"],
-    ["/about", "How it works"],
-    ["/?date=2026-02-30", "Invalid replay selection"],
-    ["/?mode=illustrative&date=2026-06-13", "No illustrative examples for this date"],
-  ]) {
-    result = await page(path);
-    assert.equal(result.status, 200);
-    assert.ok(result.html.includes(expected));
+  let result;
+  for (const [path, expected] of [["/about", "How it works"],["/?date=2026-02-30", "Invalid replay selection"],["/?date=2026-07-13", "No matches for this selection"]]) {
+    result = await page(path); assert.equal(result.status,200); assert.ok(result.html.includes(expected));
   }
-  console.log("PASS June 12, about, invalid-date and empty states");
-
+  for (const path of ["/?mode=illustrative", "/matches/copper-tidal?mode=illustrative&date=2026-06-11"]) {
+    const response = await fetch(new URL(path,base), {redirect:"manual",signal:AbortSignal.timeout(15000)});
+    assertHistoricalRedirect({response,status:response.status,html:await response.text()});
+  }
+  console.log("PASS about, invalid/empty states and retired illustrative redirects");
   // Verify demo policy before any supported authoring-method denial checks.
   for (const path of ["/?mode=archive", "/matches/provider-id?mode=archive&date=2026-07-11"]) {
     result = await page(path);

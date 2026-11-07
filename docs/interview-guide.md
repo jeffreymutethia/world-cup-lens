@@ -2,14 +2,14 @@
 
 Use the [walkthrough](technical-walkthrough.md) for the code-to-SQL trace and [engineering decisions](engineering-decisions.md) for tradeoffs. Answers distinguish four evidence levels:
 
-- **Deployed:** public replay and fictional lab, verified through HTTP/browser checks.
+- **Public product:** historical replay and editorial Match Lenses. Revision-specific deployment/HTTP/browser results are recorded in [deployment evidence](deployment.md), separately from implementation.
 - **Tested:** deterministic TypeScript behavior or real disposable PostgreSQL execution.
 - **Integration:** external-service adapters exist, but the reconstructed pipeline has not been exercised end-to-end through Supabase and paid model APIs.
 - **Proposed:** improvements not yet implemented.
 
 ## 1. Give a two-minute system walkthrough
 
-World Cup Lens provides a small historical archive and a separate fictional analysis lab. The public pages show five source-linked results, date navigation and retrospective editorial context. The fictional lab demonstrates stored commentary and Q&A. Neither public path needs a database connection or model request.
+World Cup Lens covers all 104 tournament matches with source-linked results and retrospective Match Lenses. Visitors browse by date, stage, group, team or text and follow related matches and team journeys. Ten games have deeper editorial accounts; remaining Lenses expose available facts and tournament context without inventing play-by-play. The public product needs no database connection or model request. The former fictional lab is retired.
 
 The private backend uses Supabase/PostgreSQL for fixtures, versioned documents, vector chunks and cached output. Retrieval combines pgvector cosine similarity with entity, version and optional temporal eligibility. On a cache miss with context, the generation core requests structured output, proofreads it, attaches excerpts and validates the final result. Atomic SQL preserves input/source lineage and selects a successful cache winner.
 
@@ -20,7 +20,7 @@ Tests exercise the generation core with injected responses and SQL contracts aga
 
 ## 2. Why Next.js, and what belongs on the server versus the client?
 
-Server components select URL-driven data and render match pages. The menu and stored-answer selector use client state. Server-only modules contain privileged Supabase and model adapters. This keeps data selection and credentials out of browser code while retaining small interactive components. It is a rationale for the current design, not a claim of a framework benchmark. Local datasets are static inputs; the application is not a static HTML export.
+Server components validate URL-driven archive filters and render match pages. The responsive menu uses client state; the private archive retains its separate stored-answer selector. Server-only modules contain privileged Supabase and model adapters. This keeps data selection and credentials out of browser code while retaining small interactive components. It is a rationale for the current design, not a claim of a framework benchmark. Local datasets are static inputs; the application is not a static HTML export.
 
 **References:** `src/app/{page.tsx,about/page.tsx,matches/[id]/page.tsx}`, `src/components/layout/top-nav.tsx`, `src/components/match/match-qa.tsx`.
 **Follow-up:** Why does About call `connection()`? What would break if a privileged module entered the client import graph?
@@ -129,14 +129,14 @@ Injected embeddings and model responses exercise the TypeScript core. Original s
 
 ## 17. Which architectural tradeoffs matter most?
 
-Public local content trades tournament coverage and live generation for reliable credential-free browsing. PostgreSQL consolidates consistency and permission boundaries but exact retrieval has scale limits. Immutable versions improve traceability while increasing storage. Default-deny policies protect publication-sensitive data but leave the legacy publishable provider reader incompatible with the new private defaults.
+Public local content provides complete tournament results and editorial context while keeping paid generation outside request-time browsing. PostgreSQL consolidates consistency and permission boundaries but exact retrieval has scale limits. Immutable versions improve traceability while increasing storage. Default-deny policies protect publication-sensitive data but leave the legacy publishable provider reader incompatible with the new private defaults.
 
 **References:** [engineering decisions](engineering-decisions.md).
 **Follow-up:** Which constraint would justify reversing a decision? Which comparison is conceptual rather than benchmarked?
 
 ## 18. What is the largest current limitation?
 
-The private backend is contract-tested, not a factually evaluated historical forecasting service. Complete gateway/Auth testing, durable recovery, production schema parity and authenticated source evidence remain open. The public product demonstrates replay and stored-sample behavior independently of those unfinished integrations.
+The private backend is contract-tested, not a factually evaluated historical forecasting service. Complete gateway/Auth testing, durable recovery, production schema parity and authenticated source evidence remain open. The public product demonstrates historical replay and source-linked editorial Match Lenses independently of those unfinished integrations.
 
 **References:** [current findings](audit.md#current-findings), [data rights](data-rights.md).
 **Follow-up:** What can be demonstrated directly today? What evidence would justify a stronger production claim?
@@ -156,3 +156,13 @@ A change should have targeted deterministic checks, real SQL tests when database
 
 **References:** `.github/workflows/ci.yml`, [verification strategy](engineering-decisions.md#adr-8--layered-verification-and-release-gates), [deployment evidence](deployment.md).
 **Follow-up:** How would an intermittent or unavailable gate be reported? Which verification is necessary for a documentation-only change?
+
+
+## 21. What makes a public Match Lens different from a generated private Lens?
+
+The public contract is `CuratedMatch`/`RetrospectiveLens`, defined in `src/lib/curated-contract.ts`. Reviewed factual JSON and original editorial copy feed the server-rendered archive. Ten records have extended source-linked developments; the rest use verified results and computed group/progression context. No model call produced that editorial copy, and no cached provider AI prose is exported into it.
+
+The private engine instead records document/chunk identities, model/prompt/schema versions, execution clocks and immutable output history. Its deterministic validation can reject malformed output, but cannot certify each football claim. Those contracts remain tested separately after the public fictional lab is removed.
+
+**References:** `src/data/curated-{records,lenses}.json`, `src/data/curated-history.ts`, `src/lib/rag/engine.ts`, [source review](curated-history-review.md).
+**Follow-up:** Why keep date-only facts separate from kickoff instants? How are shootout goals represented? What evidence would justify an event-level claim for a less documented match?

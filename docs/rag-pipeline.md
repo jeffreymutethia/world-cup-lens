@@ -2,7 +2,7 @@
 
 ## Implemented path
 
-`generateAndSaveMatchLens` is the server adapter; `rag/engine.ts:runVersionedLens` is the dependency-injected core. Public pages import neither generator. Every public authoring route still denies demo-only before authentication or work. The generation core is verified with mocked model/embedding responses; SQL behavior is tested separately against disposable PostgreSQL. Complete vendor/gateway execution and real-model quality evaluation remain open.
+`generateAndSaveMatchLens` is the server adapter; `rag/engine.ts:runVersionedLens` is the dependency-injected core. Public historical pages import neither generator; their Match Lenses come from original editorial records, not model calls. Every public authoring route still denies demo-only before authentication or work. The generation core is verified with mocked model/embedding responses; SQL behavior is tested separately against disposable PostgreSQL. Complete vendor/gateway execution and real-model quality evaluation remain open.
 
 ```mermaid
 sequenceDiagram
@@ -102,6 +102,6 @@ The match lock serializes cache commits for that match. Multiple successful atte
 3. `match_document_chunks` with both team IDs, venue/match and the same basis query includes the Maple profile/global guide; another-match source is excluded. A July 10 cutoff also excludes unknown/later capture records.
 4. `tests/rag.test.ts` injects a deterministic structured response: “A fictional matchup for the integration corpus.” Confidence Low, empty teamEdges, qualitative uncertainty and no invented result. Proofreading is mocked; source hydration and final checks execute actual code.
 5. `supabase/tests/integration.sql:test_payload/test_lens` supplies the same qualitative output contract to the actual SQL commit. It stores exact input, ordered chunk/version identities, versions, mock generator kind, actual clocks and final hash. Assertions read `match_lenses` and `qa_answers` as anon **only after explicit synthetic-public marking**. Failed attempts and later source versions remain in history.
-6. Production replay still reads its reviewed repository fiction, not this test database. Existing private archive Lens mapping can consume the legacy JSON adapter, but provider-filtered archive pages deliberately see no provider rows under the new RLS policy. There is no pretend provider ID or automatic publication bridge.
+6. Public replay reads its independently curated historical collection, not this test database. Existing private archive Lens mapping can consume the legacy JSON adapter, but provider-filtered archive pages deliberately see no provider rows under the new RLS policy. There is no pretend provider ID or automatic publication bridge.
 
 Unit engine and real SQL integration tests are complementary; the HTTP suites mock PostgREST, and the local PostgreSQL runner does not test the complete Supabase gateway. This is a tested foundation, not an assertion of production parity, verified football analysis or full end-to-end vendor integration.

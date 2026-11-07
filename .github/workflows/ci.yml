@@ -49,6 +49,9 @@ jobs:
       - name: Known high and critical dependency advisories
         run: npm run check:security
         timeout-minutes: 2
+      - name: Reviewed tournament dataset integrity
+        run: npm run check:data
+        timeout-minutes: 1
       - name: Deterministic tests
         run: npm test
         timeout-minutes: 2

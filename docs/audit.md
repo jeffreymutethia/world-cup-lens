@@ -2,58 +2,73 @@
 
 ## Portfolio freeze audit
 
-Baseline: `4c88da8399c8cdc3de8d96a2ee380f635f11fa98`. The portfolio-freeze assessment covers the public historical replay and tested private backend contracts. The detailed system trace is in the [walkthrough](technical-walkthrough.md); release-specific checks are in [deployment evidence](deployment.md).
+The earlier portfolio assessment covered baseline `4c88da8399c8cdc3de8d96a2ee380f635f11fa98`, a five-match public replay and tested private backend contracts. The November 7, 2026 owner-authorized assignment expands that public collection from candidate baseline `7d06bc4089881601f0f4502d17215a5cc27f75f4`; it does not turn on paid services or change production databases.
 
-The public demo is suitable for portfolio review. This assessment does not establish production AI readiness, historical forecast authenticity, factual grounding or legal clearance. The editorial maintenance following freeze changes documentation only.
+The current implementation covers all 104 matches with retrospective editorial Match Lenses. Final CI/deployment/browser evidence must be checked for the delivered revision before freezing the expanded MVP. The [walkthrough](technical-walkthrough.md) describes actual boundaries; [deployment](deployment.md) records executed release checks. No portfolio assessment establishes production AI readiness, authentic historical forecasts, measured grounding quality or legal clearance.
 
 ## Current findings
 
 | Priority | Evidence and impact | Status / next action |
 | --- | --- | --- |
-| High/critical dependency findings at pre-freeze baseline | The old Next/Zod lockfile and tooling tree had reported upstream advisories | Fixed at freeze with Next/eslint-config-next 16.4.5, Zod 4.6.6 and compatible transitive updates. The unused shadcn CLI was removed; its exact licensed CSS was retained. No exploit or compromise was established. |
-| Medium — private identity/stage normalization | `safeTeamSlug/safeVenueSlug`, `deriveTeamCode/deriveFlag` and fixture sync's team `group_name` update permit collisions, incomplete aliases and last-round profiles | Open private-ingestion defects. Require reviewed identity/stage contracts before operational use. They do not supply the curated public records. Penalty breakdown remains unsupported. |
-| Medium — integration and access compatibility | New SQL defaults provider rows private, while `repository.ts` uses publishable provider reads | Intentional default-deny boundary. Implement separately authorized operator reads and isolated gateway/Auth tests; do not widen anonymous access to populate pages. Production schema/policy parity is unknown. |
-| Medium — recovery and consistency | `PersistenceFailure` holds an in-memory envelope; source rechecks lock selected heads | SQL retry/rollback contracts are tested, but process-loss recovery and a corpus-wide serializable snapshot are not implemented. Durable jobs and stronger revision semantics are deferred. |
-| Moderate — development dependencies | November 4 snapshot: 8 development-only lint/glob audit entries; deprecated ESLint 9.39.5 with React/a11y peers excluding major 10 | Monitor compatible upstream fixes. No forced downgrade/major override was applied. CI rejects high/critical advisories; the snapshot is not a zero-vulnerability claim. |
-| Publication/licence boundary | Narrow five-record and original-fiction decisions; broader provider/excerpt/model rights and branding remain unresolved; no root code licence selected | Preserve scoped attribution and UNKNOWN states. Review software licensing separately from data/media and historical Git contents. |
+| Medium — private identity/stage normalization | `safeTeamSlug/safeVenueSlug`, `deriveTeamCode/deriveFlag` and fixture sync's team `group_name` permit collisions, incomplete aliases and last-round profiles; penalty breakdown is absent | Open before operational private ingestion. These paths do not supply the public curated records |
+| Medium — integration and access compatibility | New SQL defaults provider rows private while `repository.ts` uses publishable provider reads | Intentional default-deny boundary. Add separately authorized operator reads and isolated gateway/Auth coverage; do not broaden anonymous access. Production policy/schema parity is unknown |
+| Medium — recovery and consistency | `PersistenceFailure` holds an in-memory envelope; source rechecks lock selected heads | SQL retry/rollback tested; durable process-loss recovery and corpus-wide serializable snapshots deferred |
+| Moderate — development dependencies | November 4 snapshot retained 8 development-only lint/glob entries and deprecated ESLint 9.39.5 with React/a11y peers excluding major 10 | Monitor compatible fixes. CI rejects high/critical advisories; the historical snapshot is not a zero-vulnerability claim |
+| Publication/licence boundary | 104-record source/web release is scoped independent editorial reporting; full-compilation/source-forking, branding and portfolio-use questions remain unresolved | Preserve attribution/non-affiliation and no general data licence. Provider/excerpt/model material remains UNKNOWN; no root code licence is selected |
+| Coverage limitation — detailed commentary | All matches have tournament context; ten have deeper source-linked accounts | Deliberate evidence limit. Do not fill the remaining records with invented tactical/event prose or present editorial text as generated AI output |
 
-The pre-freeze canonical-status defect was fixed by `canonicalFixtureStatus`: supported provider states map explicitly, while ambiguous/unknown states fail before writes. Venue country now uses Unknown when absent from the fixture response rather than copying competition country. `tests/fixtures.test.ts` covers these policies with original synthetic inputs. Existing database rows were not changed.
+The earlier high/critical dependency findings were corrected with Next/eslint-config-next 16.4.5, Zod 4.6.6 and compatible updates. The unused shadcn CLI was removed while retaining its exact licensed CSS body. No exploit or compromise was established. Fresh security results must accompany the final revision.
+
+## Full-archive review findings and corrections
+
+| Finding | Evidence / correction |
+| --- | --- |
+| Conflicting secondary results | Official report/hub evidence resolved Netherlands–Morocco to match goals 1–1 with penalties 2–3, and Brazil–Norway to 1–2. Norway–Senegal's official June 22/New York New Jersey entry superseded a conflicting aggregate |
+| Noncanonical code suffix | A PDF filename token containing `-ALT` could contaminate match 98 identity. Canonical three-letter code/name bijection validation rejects suffixes and inconsistent identities |
+| Permissive metadata coercion | Enum checks could accept values through coercion. Explicit type/enum validation now rejects malformed source/editorial metadata |
+| Unsupported status certainty | Null extra-time status must not render as known normal/full time. Public score/commentary handling preserves unknown status; shootout goals remain separate from match goals |
+| Filter-state mismatch | Raw versus normalized filter values could diverge across data selection and navigation. Canonical date/all/stage/team/search/page selection is shared by rendering and links |
+| Weak progression check | Aggregate next-round participant sets do not prove the correct bracket pairing. Fixed knockout feeder validation checks actual participant relationships |
+| Retired fiction in runtime | Original synthetic data/helpers are moved to `tests/fixtures/illustrative.ts` and `tests/helpers/illustrative.ts`; old public illustrative selections redirect to `/?mode=curated` |
+| Ambiguous result timing | Public records store source-local date-only facts, with no fabricated kickoff, regulation-score breakdown, model-generation clock or historical cutoff. Sourced prose developments remain distinct from unstructured fields left unknown |
+
+These checks use deterministic contracts and the inspected primary evidence. They do not demonstrate model accuracy or authorize another corpus. [Source review](curated-history-review.md) records all 104 official report first-page checks, the results hubs, ten deeper editorial sources and publication limits.
 
 ## Verification evidence
 
-At the freeze release, **70 unit tests** and **78 real PostgreSQL assertions** passed, alongside lint, typecheck, build, local HTTP, documentation, credential and whitespace checks. Hosted CI exercised PostgreSQL 17; the local native run used PostgreSQL 14.17 with pgvector 0.8.2. See [verified release](deployment.md#portfolio-freeze--verified-release) for commit/CI/deployment references.
+The final local candidate passed **75 unit tests** and **78 real PostgreSQL assertions**, data integrity, archive/public HTTP suites, lint/typecheck/build, repository checks and five-width Chromium QA. The browser also checked all 104 details at 320px. Hosted CI and production delivery remain pending the release commit; see [deployment evidence](deployment.md) for revision-specific results.
 
-| Layer | What was exercised | Boundary |
+| Layer | What it establishes | Boundary |
 | --- | --- | --- |
-| TypeScript | Date/mode validation, dataset isolation, malformed values, generation/postprocessing, cache identity and failure behavior | Models/embeddings are injected mocks; no real-model quality score |
-| PostgreSQL | Clean migrations, constraints, grants/RLS, vector ranking, entity/cutoff filters, immutable writes, retry and partial-failure rollback | Disposable SQL execution, not production policy parity or complete Supabase gateway/Auth |
-| Local HTTP | Archive mocks; public pages with empty service settings and an active fetch-denial tripwire; authoring/cron denials | Application behavior under controlled settings, not all infrastructure egress |
-| Production HTTP/browser | Five results/four dates, detail/source navigation, fictional Q&A, invalid/empty states, disabled routes and five Chromium widths | No full accessibility, physical-device or cross-browser certification; publisher availability is not guaranteed |
-| Repository checks | Local links/images/headings/commands, common secret patterns and full change-range whitespace | Pattern checks are not exhaustive secret detection; external links are not fetched by `check:docs` |
+| Source review | 104 unique published results, stage coverage, separate shootouts and recorded discrepancy decisions | Not publisher infallibility, legal clearance or authenticated capture clocks |
+| TypeScript/data | Date/filter normalization, completeness/identity/progression, navigation, malformed metadata and injected generation/cache behavior | Mock responses do not establish real-model quality |
+| PostgreSQL | Clean migrations, constraints, grants/RLS, vector/entity/cutoff filters, immutable writes and rollback/retry | Disposable execution, not production parity or complete Supabase gateway/Auth |
+| Local HTTP | Archive mocks; credential-free public pages under active service tripwires; authoring/cron denials and retired-route handling | Controlled application behavior, not all infrastructure egress |
+| Browser/production | Specific observed layout/navigation/focus and revision-specific responses | No physical-device, full cross-browser or accessibility certification |
+| Repository checks | Local Markdown/image/heading/command links, common credential patterns and whitespace | Secret patterns are not exhaustive; `check:docs` does not fetch publisher URLs |
 
-The November 4 dependency snapshot reported no production audit entries and no high/critical entries overall. Security checks run on push/PR and explicit command. Fresh registry results can differ from that snapshot.
+The earlier freeze passed 70 unit tests and 78 SQL assertions, with hosted PostgreSQL 17 and native PostgreSQL 14.17/pgvector 0.8.2. Those are historical results, not substitutes for rechecking this change.
 
 ## Resolved audit themes
 
 | Earlier issue | Current implementation |
 | --- | --- |
-| Today/live defaults and silent seed fallback | Explicit fixed-date collection selection; distinct empty/error states; no cross-dataset substitution |
-| Misleading strength bars and source-like sample labels | Unknown strengths are null; numerical comparisons withheld; fictional Scenario notes and archive snippets have distinct labels |
-| Missing temporal semantics | Legacy commentary remains retrospective; new source/run contracts retain distinct clocks, cutoff evidence and input attestations |
-| Full-corpus re-embedding and delete/replace writes | Up to 50 stale heads selected; unchanged metadata avoids re-embedding; atomic immutable revisions retain old chunks |
-| Match-ID-only overwrites and unchecked transformations | Input/source/config-aware cache identities, immutable runs and final post-transform validation |
-| Unreproducible database assumptions | Tracked clean-database reconstruction, synthetic corpus, real SQL tests and explicit privileges |
-| External font build dependency and inactive controls | System fonts, functional date/detail navigation and responsive browser checks |
+| Today/live defaults and silent seed fallback | Fixed replay date and explicit public/private boundaries; distinct empty/error states; no fictional substitution |
+| Five-match-only public coverage | Independently curated 104-match module, all stage totals, source metadata and complete fixture navigation |
+| Fragmented public products | Unified retrospective Match Lens archive; fiction retained in tests rather than a public lab |
+| Misleading metrics and source-like labels | Unknown strengths null; numerical comparisons withheld; editorial public text distinct from private snippets/uncalibrated opinions |
+| Missing time/lineage semantics | Legacy text retrospective; new source/run contracts retain distinct clocks, cutoff evidence and exact-input attestations |
+| Full-corpus re-embedding and mutable overwrites | Up to 50 stale heads; atomic immutable revisions/runs and input/source/config-aware cache identities |
+| Unreproducible database assumptions | Tracked clean-database reconstruction, original synthetic corpus, real SQL tests and explicit grants |
+| External font build dependency | System fonts and no Google-font build fetch |
 
-Legacy records may still contain unsupported prose or bad geography. Current safeguards do not rewrite, authenticate or clear publication rights for those records.
+Canonical provider statuses are explicitly mapped and unsupported values fail before writes. Missing venue country is Unknown rather than competition country. `tests/fixtures.test.ts` covers those policies using synthetic inputs; existing production records were not changed. Legacy prose/geography may still be unsupported, and current controls do not authenticate or clear its publication rights.
 
 ## Historical evidence
 
-The initial November 2 audit described the former live application. Later source and release records supersede those implementation states; Git history retains the original detailed findings.
+- **Connectivity:** a configured Supabase hostname initially failed DNS, later resolved, and a subsequent 521 preceded successful read-only access. The original outage/paused-state trigger was not established. These were not empty database results; no replacement project or production write was needed.
+- **Legacy sample:** two July 11 provider fixtures had relations and cached Lenses; strengths were all 50 and venue country World, with no generation/cutoff provenance. [Sample limits](data-provenance.md#legacy-evidence-and-presentation).
+- **Publication scope:** an early internal HOLD was superseded first by a five-record editorial release, then by the explicit full-tournament assignment and updated source review. These are scoped project decisions, not blanket rights clearance.
+- **Earlier regressions:** browser checks caught narrow-screen clipping and hosted SQL caught a temporary-server readiness race; both were corrected. [Release history](deployment.md#release-history).
 
-- **Connectivity:** a previously configured Supabase hostname initially failed DNS, then resolved; a subsequent HTTP 521 preceded successful read-only access. The original outage/paused-state trigger was not established. The failures were not empty database results. No replacement project or production write was required.
-- **Legacy sample:** two July 11 provider fixtures had joined teams/venues and cached Lens rows; strengths were all 50 and venue countries World. No generation/cutoff provenance was established. [Sample limits](data-provenance.md#legacy-evidence-and-presentation).
-- **Publication:** the earlier internal HOLD on curated source/branding scope was superseded by the recorded five-match editorial release. This is a project publication decision, not blanket permission. [Decision and evidence](curated-history-review.md).
-- **Release regressions:** real browser checks caught narrow-screen clipping; hosted PostgreSQL tests caught Docker's temporary-server readiness race. Both were corrected and retested. [Release history](deployment.md#release-history).
-
-Remaining work is categorized in the [roadmap](roadmap.md#portfolio-freeze-and-remaining-work). The MVP remains frozen to product expansion; verified substantive defects can reopen maintenance.
+Remaining work is categorized in the [roadmap](roadmap.md#portfolio-freeze-and-remaining-work). Freeze the expanded MVP only after its actual delivery gates pass; substantive defects can reopen maintenance thereafter.

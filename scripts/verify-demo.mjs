@@ -1,4 +1,4 @@
-import { checkCuratedPages } from "./check-curated-pages.mjs";
+import { checkCuratedPages, assertHistoricalRedirect } from "./check-curated-pages.mjs";
 import assert from "node:assert/strict";
 import { createServer } from "node:net";
 import { spawn } from "node:child_process";
@@ -38,27 +38,14 @@ try {
   for (let i = 0; !ready && i < 100; i++) { assert.equal(app.exitCode, null); await delay(200); }
   assert.ok(ready);
   await checkCuratedPages(page);
-  let { html, response } = await page("/?mode=illustrative&date=2026-06-11");
-  assert.equal(response.status, 200);
-  assert.ok(html.includes("Copper Vale") && html.includes("Featured fictional scenario"));
-  assert.ok(html.includes("Invented teams") && html.includes("mode=illustrative&amp;date=2026-06-11"));
-  assert.ok(!html.includes("Mexico City Stadium") && !html.includes("Featured match"));
-  console.log("PASS explicit fictional lab stays synthetic and separate from curated history");
-  ({ html } = await page("/matches/copper-tidal?mode=illustrative&date=2026-06-11"));
-  assert.ok(html.includes("Patient passing against counterplay") && html.includes("Stored questions"));
-  assert.ok(html.includes("wcl-synthetic-v2") && html.includes("No real result"));
-  assert.ok(html.includes("Question the assumptions") && html.includes("Back to matches"));
-  assert.ok(!html.includes("Confidence label") && !html.includes("Volatility label"));
-  console.log("PASS sample Lens, Q&A, version and mode/date navigation");
-  ({ html } = await page("/?mode=illustrative&date=2026-06-12"));
-  assert.ok(html.includes("second-day example") && !html.includes("A Patient passing against counterplay"));
-  ({ html } = await page("/?mode=illustrative&date=2026-06-13"));
-  assert.ok(html.includes("No illustrative examples for this date"));
-  ({ html } = await page("/?date=2026-02-30"));
-  assert.ok(html.includes("Invalid replay selection"));
-  ({ html } = await page("/matches/missing?mode=illustrative&date=2026-06-11"));
-  assert.ok(html.includes("Match not found in this selection"));
-  console.log("PASS date exploration, invalid/empty selection and missing sample handling");
+  let html;
+  for (const path of ["/?mode=illustrative&date=2026-06-11", "/matches/copper-tidal?mode=illustrative&date=2026-06-11"]) {
+    const result = await page(path, { redirect: "manual" });
+    assertHistoricalRedirect(result);
+    const target = await page("/?mode=curated");
+    assert.ok(target.html.includes("Norway") && !target.html.includes("Copper Vale"));
+  }
+  console.log("PASS retired illustrative URLs redirect to historical homepage");
   for (const path of ["/?mode=archive", "/matches/provider-id?mode=archive&date=2026-07-11"]) {
     ({ html } = await page(path));
     assert.ok(html.includes("Archive disabled in public demo") && !html.includes("A Patient passing against counterplay"));

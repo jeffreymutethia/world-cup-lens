@@ -1,3 +1,4 @@
+import { assertHistoricalRedirect } from "./check-curated-pages.mjs";
 import assert from "node:assert/strict";
 import { createServer } from "node:http";
 import { spawn } from "node:child_process";
@@ -144,23 +145,16 @@ try {
   qaResponse = "valid";
   console.log("PASS malformed Lens/QA and cache query failures preserve fixture rendering");
   const reads = databaseReads;
-  html = await page("/?mode=illustrative&date=2026-06-11");
-  assert.ok(html.includes("Fictional examples") && html.includes("Copper Vale"));
-  assert.ok(html.includes("copper-tidal?mode=illustrative&amp;date=2026-06-11"));
-  html = await page("/matches/copper-tidal?mode=illustrative&date=2026-06-11");
-  assert.ok(html.includes("Fictional sample commentary") && html.includes("Copper Vale"));
-  assert.ok(html.includes("Scenario notes") && html.includes("Invented teams"));
-  assert.ok(!html.includes("VS</span>"));
-  assert.ok(html.includes('/?mode=illustrative&amp;date=2026-06-11'));
-  console.log("PASS explicit illustrative list/detail and back navigation");
-  html = await page("/matches/copper-tidal?mode=illustrative&date=2026-06-12");
-  assert.ok(html.includes("Match not found in this selection"));
-  for (const date of ["2026-02-30", "2026-07-20"]) {
-    html = await page(`/?mode=archive&date=${date}`);
-    assert.ok(html.includes("Invalid replay selection"));
+  for (const path of ["/?mode=illustrative&date=2026-06-11","/matches/copper-tidal?mode=illustrative&date=2026-06-11"]) {
+    const response = await fetch(base+path,{redirect:"manual",signal:AbortSignal.timeout(15000)});
+    assertHistoricalRedirect({response,status:response.status,html:await response.text()});
+    html = await page("/?mode=curated"); assert.ok(html.includes("Norway")&&!html.includes("Copper Vale"));
   }
-  assert.equal(databaseReads, reads, "Illustrative and invalid selections must not query Supabase");
-  console.log("PASS wrong-date detail / invalid and out-of-range inputs / zero archive reads in illustrative mode");
+  for (const date of ["2026-02-30", "2026-07-20"]) {
+    html = await page(`/?mode=archive&date=${date}`); assert.ok(html.includes("Invalid replay selection"));
+  }
+  assert.equal(databaseReads,reads,"Retired redirects and curated/invalid selections must not query Supabase");
+  console.log("PASS retired illustrative redirects, explicit curated isolation and invalid archive dates");
 } finally {
   clearTimeout(watchdog);
   signalApp("SIGTERM");

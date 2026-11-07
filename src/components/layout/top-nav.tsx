@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
-export type PageSection = "matches" | "lab" | "about" | "archive";
+export type PageSection = "matches" | "about" | "archive";
 
 export function TopNav({ section }: { section: PageSection }) {
   const [open, setOpen] = useState(false);
@@ -24,7 +24,6 @@ export function TopNav({ section }: { section: PageSection }) {
         <nav id="primary-navigation" aria-label="Primary" className="primary-navigation" data-open={open}>
           <Link href="/" aria-current={section === "matches" ? "page" : undefined} onClick={() => setOpen(false)}>Matches</Link>
           <Link href="/about" aria-current={section === "about" ? "page" : undefined} onClick={() => setOpen(false)}>How it works</Link>
-          <Link href="/?mode=illustrative&date=2026-06-11" aria-current={section === "lab" ? "page" : undefined} onClick={() => setOpen(false)}>Fictional lab</Link>
           <a className="github-link" href="https://github.com/jeffreymutethia/world-cup-lens">GitHub <ArrowUpRight size={15} aria-hidden="true" /></a>
         </nav>
       </div>

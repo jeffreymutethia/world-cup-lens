@@ -2,7 +2,7 @@ import { storedEdgeLabel } from "@/lib/analysis-presentation";
 import { replayHref, replayStatus, replayScore, stageLabel, type LegacyReplaySelection } from "@/lib/replay";
 import Link from "next/link";
 import type { Match, PublicMatchLens, Team, Venue } from "@/lib/types";
-import { formatKickoff } from "@/lib/lens";
+import { formatKickoff } from "@/lib/format-kickoff";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -29,7 +29,7 @@ export function FeaturedMatchCard({
     <Card className="overflow-hidden border-0 bg-white shadow-sm">
       <div className="bg-emerald-800 px-5 py-3 text-white">
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]">
-          {selection.mode === "illustrative" ? "Featured fictional scenario" : "Featured archived match"}
+          Featured archived match
         </div>
       </div>
 
@@ -75,10 +75,10 @@ export function FeaturedMatchCard({
 
         <div className="min-w-0 rounded-3xl bg-emerald-50 p-5">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-800">
-            {selection.mode === "illustrative" ? "Sample commentary" : "Stored commentary"}
+            Stored commentary
           </p>
 
-          {selection.mode === "archive" && <><div className="space-y-3">
+          <div className="space-y-3">
             <ForecastRow
               label="Edge opinion"
               value={lens ? (storedEdgeLabel(lens.slightEdge)) : "Unavailable"}
@@ -87,14 +87,14 @@ export function FeaturedMatchCard({
             <ForecastRow label="Volatility label" value={lens?.volatility ?? "Unavailable"} />
           </div>
 
-          <p className="mt-4 text-xs text-slate-600">Opinion labels, not measurements or probabilities.</p></>}
+          <p className="mt-4 text-xs text-slate-600">Opinion labels, not measurements or probabilities.</p>
           <p className="mt-5 text-sm leading-6 text-emerald-950">
             {lens?.expectedGame ?? "No cached analysis is available. Open the match to view its stored details."}
           </p>
 
           <Button asChild className="mt-5 w-full bg-emerald-700 hover:bg-emerald-800">
             <Link href={replayHref(selection, match.id)}>
-              {selection.mode === "illustrative" ? "View scenario" : "View match"}
+              View match
               <ArrowRight className="ml-2 size-4" />
             </Link>
           </Button>

@@ -1,4 +1,5 @@
-import { DEMO_DATASET_VERSION } from "../data/seed";
+// Retained only for legacy synthetic display metadata; public routes reject this mode.
+const LEGACY_DEMO_DATASET_VERSION = "wcl-synthetic-v2";
 import type { DatasetMode } from "./replay";
 
 export function analysisPresentation(mode: DatasetMode) {
@@ -51,6 +52,6 @@ export function analysisProvenance(input: {
     sourceCapturedAt: null,
     analysisGeneratedAt: null,
     knowledgeCutoffAt: null,
-    datasetVersion: input.mode === "illustrative" ? DEMO_DATASET_VERSION : null,
+    datasetVersion: input.mode === "illustrative" ? LEGACY_DEMO_DATASET_VERSION : null,
   };
 }

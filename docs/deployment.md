@@ -1,6 +1,18 @@
 # Deployment and release verification
 
-Public demo: **https://world-cup-lens-one.vercel.app**. Git-connected Vercel project: `jt254/world-cup-lens`. The public site uses reviewed local curated records and a separate fictional lab; private database and authoring services remain disabled.
+Public demo: **https://world-cup-lens-one.vercel.app**. Git-connected Vercel project: `jt254/world-cup-lens`. The candidate public site uses all 104 reviewed local records and retrospective editorial Match Lenses. Private database and authoring services remain disabled. The latest verified production revision is recorded below; implementation alone is not deployment evidence.
+
+## Full-tournament archive — release verification
+
+Candidate baseline: `7d06bc4089881601f0f4502d17215a5cc27f75f4`, November 7, 2026. This scope expands the public archive to 104 verified records, ten extended editorial Lenses, URL-driven date/stage/team/search browsing and paged results. It retires fictional public routes while preserving private RAG and isolated synthetic tests. Publication evidence and limits are in [the source review](curated-history-review.md).
+
+Local candidate checks passed: **75 unit tests**, **78 real PostgreSQL/pgvector assertions**, `check:data`, archive-mock HTTP, public development/built-server/invalid-policy HTTP, lint, typecheck, production build, documentation links, credential patterns and whitespace. Registry checking passed the high/critical gate with **8 moderate development-only entries** remaining; no dependency was changed to silence them.
+
+The isolated Chromium run covered 320/390/768/1280/1440px home/detail layouts; native date/stage/team/search controls; pagination; selected detail/back links; keyboard skip/menu/Escape/focus; source disclosure; penalty presentation; retired redirects; empty dates and reduced motion. All **104 canonical detail pages** were additionally checked at 320px. Zero console errors, external browser requests or document overflows were observed. [Local machine report](screenshots/archive/qa-local.json), [desktop](screenshots/archive/home-1440.png), [mobile](screenshots/archive/home-390.png) and [Lens detail](screenshots/archive/detail-1280.png) are actual candidate captures.
+
+New hosted CI and production verification are pending the release commit. This section does not yet claim a new deployment. The earlier public deployment remains the verified baseline until those checks complete.
+
+Git SSH authentication is unavailable in the current session. The authenticated GitHub connection supports Git-object/ref operations; any release through it must use the current expected main SHA, no force update, and a tree identical to the reviewed local index. Anonymous HTTPS fetch can verify and synchronize the resulting public commit without exporting credentials.
 
 ## Existing project configuration
 
@@ -35,6 +47,7 @@ Use Node 22 and locked dependencies. Routine checks need no service credentials:
 
 ```sh
 npm ci
+npm run check:data
 npm test
 npm run db:test
 npm run test:replay-http

@@ -2,7 +2,7 @@ import { storedEdgeLabel } from "@/lib/analysis-presentation";
 import { replayHref, replayStatus, replayScore, stageLabel, type LegacyReplaySelection } from "@/lib/replay";
 import Link from "next/link";
 import type { Match, PublicMatchLens, Team, Venue } from "@/lib/types";
-import { formatKickoff } from "@/lib/lens";
+import { formatKickoff } from "@/lib/format-kickoff";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin } from "lucide-react";
@@ -56,11 +56,11 @@ export function MatchCard({
 
           {lens ? (
             <div className="mt-4 rounded-2xl bg-emerald-50 p-3 text-xs text-emerald-950">
-              <p className="mb-1 font-semibold">{selection.mode === "archive" ? "Stored opinion labels" : "Sample commentary"}</p>
-              {selection.mode === "archive" && <p className="font-semibold">
+              <p className="mb-1 font-semibold">Stored opinion labels</p>
+              <p className="font-semibold">
                 {storedEdgeLabel(lens.slightEdge)} · {lens.confidence} confidence label ·{" "}
                 {lens.volatility} volatility label
-              </p>}
+              </p>
               <p className="mt-1 line-clamp-2 leading-5">
                 {lens.expectedGame}
               </p>

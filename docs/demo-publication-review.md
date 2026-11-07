@@ -1,40 +1,29 @@
-# Original public demo publication review
+# Original synthetic material: publication record
 
-Review date: 2026-11-03. Baseline: `5dff6a3`. This is a scoped repository decision for newly authored demonstration material, not a grant of rights over historical provider data or a comprehensive trademark/legal opinion.
+Original review: 2026-11-03, baseline `5dff6a3`. Public retirement: 2026-11-07. This document preserves the provenance decision for original synthetic material retained in source/tests; it no longer describes a separate public product.
 
-## Rejected legacy material
+## Replaced material
 
-The old `src/data/seed.ts` used real national-team names, codes, country flags, plausible June 2026 pairings, invented North American venues, tactical claims, numerical strengths, and source-like labels without a source/author/license record. It could not be established as independently authored factual analysis or licensed publisher excerpts. Its previous UNKNOWN rights are **not approved** by this review. The runtime examples were replaced together rather than selectively relabeled. Old copies remain in Git history; this milestone does not clear that history for reuse or redistribution.
+The former seed module mixed real national-team names/flags with invented pairings, venues, strengths, tactical copy and source-like labels without sufficient authorship/licence records. Its previous UNKNOWN rights were not upgraded. Historical copies remain in Git; this review does not clear them for reuse.
 
-Unused starter SVGs (including Next/Vercel marks) and the inherited automatically served favicon were removed. No provider logos, photographs, fonts, chart images, or raw fixture exports were added.
+Starter SVGs/favicon were removed. No provider logo, photograph, official typeface, chart image or raw fixture export was used to replace them.
 
-## Newly reviewed material
+## Scoped original-content decision
 
-| Material | Evidence / provenance | Scope of decision |
+| Material | Evidence | Scope |
 | --- | --- | --- |
-| `src/data/seed.ts`, version `wcl-synthetic-v1` | Original replacement material at the initial review: four fictional teams, two fictional venues, three scenarios over two navigation dates, original commentary and preset Q&A. No provider records, external excerpts, national flags, real team profiles, match events, or external images were inputs. | APPROVED_FOR_ORIGINAL_DEMO: include these original files in the repository and display this version in the public demo. No third-party dataset approval is implied. |
-| Context examples | Original design notes explaining the invented styles; no external publisher identity or research authority is claimed. | Same narrow approval; explicitly illustrative, not citations. |
-| `src/app/icon.svg` | Newly drawn geometric magnifier/plus mark in code; not a sports logo or copied starter image. | Same narrow demo/source approval. |
-| Existing UI icons and code | Installed `lucide-react` LICENSE supplies ISC notice and MIT notice for Feather-derived icons; Next/React/Radix/Tailwind package licenses are MIT. | Software/icon license evidence exists, separately from sports data. Named-package notices are retained in `public/third-party-notices.txt`, linked from `/about`. This is not a full transitive dependency audit. |
-| Typography | System-font stacks; no font binaries distributed. | No new font asset publication. |
+| `tests/fixtures/illustrative.ts`, `wcl-synthetic-v1` and rewritten `wcl-synthetic-v2` | Original four fictional teams, two fictional settings, three scenarios, qualitative sample copy and preset Q&A; no provider record, outside excerpt, national flag or real result | APPROVED_ORIGINAL_DEMO_ONLY for those specific original revisions; retained compatibility/test use does not create historical evidence or a general data licence |
+| Scenario notes | Original assumptions about invented styles | Not publisher research or claim-level citations |
+| Original icon and generic pitch geometry | Newly drawn code/typographic decoration | Independent identity, not an official sports mark |
+| Licensed software/icons | Named package notices in `public/third-party-notices.txt` | Separate from sports data and general repository licensing |
+| Typography | System font stacks | No font binary redistributed |
 
-The sample commentary and Q&A are original fictional material, not external research or stored output from the application's generation pipeline. Tactical styles are invented scenario assumptions. Numerical strengths are null, no final results are supplied, and the UI says “No real result”. Dates are navigational examples, not claims about official World Cup events.
+Fictional commentary was authored sample content, not output from the application's model pipeline. Strengths were null and no real result was claimed. No exhaustive incidental-name collision search or comprehensive legal clearance was established.
 
-The source registry adds a separate `reviewed-synthetic-demo-v1` decision. The original eight source categories, including legacy illustrative material, retain UNKNOWN publication rights. `DEMO_PUBLICATION` records this version and evidence file; it is not an automatic license detector. Future edits introducing outside text/assets or real entities require a new review/version. There is no new general-purpose content license or third-party indemnity.
+## Retirement boundary
 
-No exhaustive search for incidental fictional-name collisions was conducted. Names are plain scenario labels, with no claim of affiliation. World Cup Lens is the portfolio project name; no FIFA/tournament endorsement, official result, team branding, or logo permission is claimed.
+The current public product is the independently curated historical archive. Fictional navigation, promotion and public synthetic Q&A are removed. Old illustrative selections redirect to `/?mode=curated` rather than serving invented matches as history. Original synthetic fixtures remain useful for deterministic tests; `supabase/seed.sql` is a separately reviewed integration corpus and must not be relabeled a provider dataset.
 
-## Publication and security gate
+The scoped source registry records remain historical evidence, not a public-route switch. They do not approve provider rows, article excerpts, logos or private cached AI prose. Current historical use is governed by [the full-tournament source review](curated-history-review.md) and [rights inventory](data-rights.md).
 
-Only the reviewed module is reachable as public illustrative content. `WCL_DEPLOYMENT_MODE` defaults/fails closed to `demo-only`; the original release defaulted to illustrative June 11; the current public default is the separately reviewed curated history. Private archive controls are hidden; explicit archive requests and every supported admin/cron method are denied before auth/work. Archive readers and authoring work are imported lazily after the relevant checks. Missing production credentials are supported, not silently repaired with provider data.
-
-The demo HTTP harness runs with empty service credentials and an active fetch-denial tripwire, exercises browsing plus blocked local routes using matching dummy secrets, and asserts zero service fetches. These are local mock/security checks, not permission to run production authoring. No scheduled cron is declared. Runtime policy does not retroactively change dataset rights.
-
-Publication approval for these new examples is distinct from actual deployment. A deployment requires an identified existing authorized Vercel target and must use demo-only configuration without service keys. No new paid account/project, billing, cron, historical export, or production data write is authorized by this document. See the audit/final handoff for actual connection and deployment results.
-
-
-## v2 editorial cleanup and interface review
-
-`wcl-synthetic-v2` preserves the four fictional teams, two settings and three scenarios, with rewritten original sample copy/Q&A. Puzzle, blanket and garden metaphors were removed in favor of direct descriptions of assigned styles. No real-world evidence, outside excerpts, statistics, logo or photo was introduced. The same scoped original-demo/source/web decision applies to this original revision through the explicit `reviewed-synthetic-demo-v2` registry entry; unrelated UNKNOWN categories do not inherit approval.
-
-The redesigned header uses an original generic circular pitch/crosshair drawing and plain typographic abbreviations. Decorative shapes are not official badges or logos and are hidden from assistive technology. Existing Lucide icons remain covered by their software notices; system fonts require no binary redistribution. The source reference package remains reference material, not an app asset or a production screenshot. Actual release/visual evidence belongs in [deployment.md](deployment.md) and [design.md](design.md).
+`WCL_DEPLOYMENT_MODE` still fails closed to demo-only. Retiring public fiction neither enables archive access nor changes admin/cron guards, source RLS or paid-service isolation. The public archive needs no service credentials. Deployment and browser results belong in [deployment](deployment.md) and [design](design.md); a provenance record alone does not prove a release occurred.

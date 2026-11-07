@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "World Cup Lens | 2026 Match Archive",
-  description: "Five selected 2026 World Cup matches, with results and source-linked context. An independent archive with a separate fictional lab.",
+  description: "All 104 matches of the 2026 World Cup, with results, source links and retrospective Match Lens commentary. An independent historical archive.",
 };
 
 export default function RootLayout({

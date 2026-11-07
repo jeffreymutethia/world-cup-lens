@@ -1,6 +1,6 @@
 # Engineering decisions
 
-Status: accepted MVP boundaries, with costs and reversal conditions. These records describe the current implementation and its supporting tests. Alternatives below are **retrospective comparisons** unless a documented experiment is cited; no database/vendor/performance bake-off occurred. See [audit](audit.md#portfolio-freeze-audit) for unresolved work.
+Status: current architecture decisions, with costs and reversal conditions. The full-tournament scope supersedes the earlier five-match portfolio boundary. These records describe the current implementation and its supporting tests. Alternatives below are **retrospective comparisons** unless a documented experiment is cited; no database/vendor/performance bake-off occurred. See [audit](audit.md#portfolio-freeze-audit) for unresolved work.
 
 ## ADR 1 — Postgres and pgvector
 
@@ -66,11 +66,11 @@ Status: accepted MVP boundaries, with costs and reversal conditions. These recor
 
 - **Context:** The original live application depended on service availability and publication-sensitive data after the event ended.
 - **Alternatives:** Keep live/today defaults, silently fall back to seed fixtures, or expose the private corpus publicly.
-- **Decision:** Curated date-only local history is primary; original fiction is explicit and secondary; archive reads require exact server opt-in and database grants/RLS; authoring additionally requires a shared secret. The five-match release is scoped editorial use, with no media/provider export.
+- **Decision:** A complete 104-match date-only local archive is primary, with original retrospective Match Lenses and ten extended accounts. The public fictional lab is retired while synthetic tests remain. Private archive reads require exact server opt-in and database grants/RLS; authoring additionally requires a shared secret. Publication is a scoped factual/editorial decision, with no media/provider export.
 - **Reason:** Demonstrate the product with honest data boundaries and no service credentials. Local inputs are static; Next renders request-aware pages.
-- **Cost/limit:** Only five selected matches, no live features and no deployed end-to-end AI demonstration. Rights/branding and downstream reuse remain uncertain; no blanket FIFA permission is claimed.
+- **Cost/limit:** Detailed editorial accounts cover ten matches; the remaining context is limited to verified facts and tournament relationships. There are no live features or deployed end-to-end AI demonstration. Rights/branding and downstream reuse remain uncertain; no blanket FIFA permission is claimed.
 - **Evidence:** `deploymentMode`, `curated-history.ts`, publication reviews, public HTTP/browser tests and schedule-free `vercel.json`.
-- **Revisit:** Explicit owner authorization backed by source rights, security, operational and cost evidence; not just a working API key.
+- **Revisit:** Source rights, security, operational and cost evidence justify a different public capability; a working API key alone does not. The full-tournament expansion was explicitly authorized, but does not activate private generation or broaden UNKNOWN corpus rights.
 
 ## ADR 8 — Layered verification and release gates
 
@@ -95,7 +95,7 @@ Options for a later explicit owner decision include:
 | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) | Permissive software terms with explicit patent provisions and redistribution requirements | Are those additional terms appropriate for the contribution/ownership situation? |
 | Another owner-selected licence | Different reciprocity or distribution goals | Review actual terms and compatibility before choosing |
 
-This is an options inventory, not legal advice or an applied licence. Third-party package notices remain applicable. Any future code licence must explicitly separate curated facts/source references, original fiction, screenshots/media and UNKNOWN provider/excerpt/model corpora. A software licence cannot grant rights the owner does not hold; neither this document nor a future licence automatically clears FIFA branding, bulk data or historical Git content.
+This is an options inventory, not legal advice or an applied licence. Third-party package notices remain applicable. Any future code licence must explicitly separate curated facts/source references, original synthetic tests, screenshots/media and UNKNOWN provider/excerpt/model corpora. A software licence cannot grant rights the owner does not hold; neither this document nor a future licence automatically clears FIFA branding, bulk data or historical Git content.
 
 
 ## Final security maintenance — bounded dependency changes

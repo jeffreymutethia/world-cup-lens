@@ -2,57 +2,56 @@
 
 ## 30-second introduction
 
-World Cup Lens is a Next.js and TypeScript football archive with five source-linked 2026 matches, date-based browsing and a separate fictional analysis lab. Its private backend combines PostgreSQL, pgvector retrieval, structured model outputs and immutable generation history. The public demo is credential-free; deterministic tests and disposable database integration exercise the backend contracts without paid API calls.
+World Cup Lens is a Next.js and TypeScript archive of all 104 matches at the 2026 World Cup. Visitors can browse dates, stages, groups and teams, follow tournament journeys and read source-linked retrospective Match Lenses. The public archive is self-contained. A separate private backend combines PostgreSQL, pgvector retrieval, structured model outputs and immutable generation history, exercised through deterministic and disposable-database tests.
 
 ## Two-minute technical explanation
 
-World Cup Lens separates a public historical replay from a private analysis pipeline. Visitors can select one of four matchdays, inspect final scores and extra-time results, read retrospective recaps and open the supporting sources. A fictional lab demonstrates stored commentary and preset Q&A without mixing synthetic scenarios into the historical records.
+The public product makes a completed tournament readable. Each match has date-only facts, a final result with extra-time/shootout distinctions, source links and retrospective context. Ten selected games have deeper editorial Lenses based on match-specific reporting. URL-driven filters, related matches and team journeys connect the results without turning the homepage into a table of 104 cards. The public copy is original editorial work, not presented as model output.
 
-The backend uses Supabase/PostgreSQL for fixtures, document versions, vector chunks and cached outputs. Semantic retrieval runs in pgvector, but similarity is only one selection criterion: team, venue, match scope, source version and optional publication/capture cutoffs determine which chunks qualify. The generation core then checks a versioned cache, requests structured output on a miss with evidence, and validates the result again after proofreading, source hydration and normalization.
+The private system retains the original analysis infrastructure. Supabase/PostgreSQL stores fixtures, document revisions, vector chunks and cached outputs. Retrieval uses pgvector cosine similarity after entity, version and optional publication/capture eligibility checks. On a cache miss with useful evidence, structured generation is followed by proofreading, source hydration, normalization and final validation.
 
-Atomic SQL writes preserve the input snapshot, retrieved chunk identities and output history while selecting one successful cache winner. Grants and RLS keep source material and authoring operations privileged. Public pages use local records or cached reads rather than triggering model calls.
+Atomic SQL writes preserve exact inputs and retrieved chunk identities, append immutable output history and select a successful cache winner. Grants/RLS keep source material and authoring privileged. Public rendering never triggers these services and requires no database or paid API credentials.
 
-Verification combines TypeScript tests, real disposable PostgreSQL tests, HTTP isolation checks and browser regression checks. GitHub Actions runs unit, SQL, HTTP, type/lint/build and repository checks without production credentials. Browser and remote production checks run separately; Vercel serves the public demo. The main remaining work is complete Supabase gateway testing, durable job recovery and measured grounding evaluation. The public demonstration proves the replay experience; the synthetic tests prove specific backend contracts, not live model quality.
+Verification combines deterministic TypeScript tests, actual disposable PostgreSQL/pgvector assertions, archive-gateway mocks and public service-isolation checks. Browser and production HTTP checks establish separate UI/deployment observations. These layers test reproducible contracts; they do not establish real-model grounding quality, production database parity, full Supabase gateway integration or forecast accuracy.
 
 ## GitHub repository description
 
-Next.js football archive with source-linked historical replay, a fictional analysis lab, and a tested PostgreSQL/pgvector RAG backend with versioned caching and immutable lineage.
+Complete 2026 World Cup archive with source-linked Match Lenses, Next.js/TypeScript browsing and a tested PostgreSQL/pgvector RAG backend with immutable lineage and versioned caching.
 
 ## SWE resume bullets
 
-- Built a Next.js/TypeScript historical replay application with source-linked match records, date-preserving navigation and isolated curated, fictional and provider datasets.
-- Implemented PostgreSQL/pgvector retrieval with entity and temporal filters, default-deny RLS/grants, and atomic source revisions and generation history.
-- Established deterministic generation/cache tests, disposable PostgreSQL integration and GitHub CI release gates, with production HTTP and responsive-browser regression checks.
+- Built a 104-match Next.js/TypeScript historical archive with validated date-only results, URL-driven filters, retrospective Match Lenses and connected tournament navigation.
+- Implemented PostgreSQL/pgvector retrieval with entity and temporal eligibility, default-deny RLS/grants, atomic source revisions and immutable generation history.
+- Established deterministic generation/cache checks, disposable PostgreSQL integration and GitHub CI gates, with HTTP isolation and responsive-browser regression coverage.
 
 ## AI/backend engineering pitch
 
-The backend centers on evidence selection and output traceability. Entity filters constrain semantic ranking, source availability gates as-of retrieval, and immutable records retain the inputs behind a generated Lens. Structured outputs are revalidated after transformations, while cache identity changes with source, input and model/prompt/schema versions. Synthetic vectors and mocked model responses make failure and security tests reproducible. Real-model grounding quality and full vendor/gateway integration have not yet been evaluated.
+The backend centers on evidence selection and traceability. Entity scope constrains semantic ranking; source availability and exact-input attestations gate as-of experiments. Immutable records retain the inputs and versions behind a generated Lens. Final transformed output is revalidated, and cache identity changes with inputs, sources and model/prompt/schema versions. Synthetic vectors and injected responses make failure, permission and cache tests reproducible. Real-model grounding quality and complete vendor/gateway execution remain unevaluated; the public Match Lenses are separately authored retrospectives.
 
 ## Technologies
 
-Next.js 16.4.5, React 19, TypeScript, Tailwind CSS, Radix UI, Lucide, Supabase clients, PostgreSQL, pgvector, OpenAI SDK/Responses adapters, Zod, Node's test runner, Docker, GitHub Actions, Vercel and Chromium/CDP. API-FOOTBALL supplies the retained private ingestion integration, not the five public curated records.
+Next.js 16.4.5, React 19, TypeScript, Tailwind CSS, Radix UI, Lucide, Supabase clients, PostgreSQL, pgvector, OpenAI SDK/Responses adapters, Zod, Node's test runner, Docker, GitHub Actions, Vercel and Chromium/CDP. API-FOOTBALL is a retained private ingestion integration, not an acquisition source for the public curated collection.
 
 ## Significant decisions
 
-1. Separate public local content from private paid-service integrations so the demo does not depend on backend availability or unresolved provider publication rights.
-2. Keep relational scope, vectors and lineage in PostgreSQL rather than introducing another data service without a measured requirement.
-3. Filter by entity and temporal eligibility before semantic ranking.
-4. Cache generation outside page requests and preserve immutable attempts rather than overwriting the evidence behind a result.
-5. Validate final transformed output and test permission/failure contracts at their actual execution layers.
+1. Keep public facts and commentary local so archive browsing needs no paid service or unresolved provider export.
+2. Use date-only public records instead of fabricating kickoff instants.
+3. Store vectors, relational scope and immutable lineage in PostgreSQL rather than adding a second database without a measured requirement.
+4. Apply entity/temporal eligibility before semantic ranking, and cache generation outside page requests.
+5. Validate after every output transformation and test SQL permission/transaction behavior against a real disposable database.
 
-[Engineering decisions](engineering-decisions.md) records alternatives, costs and conditions for revisiting each choice.
+[Engineering decisions](engineering-decisions.md) records alternatives, costs and reversal conditions.
 
 ## Verification evidence
 
-| Layer | Evidence | Scope |
+| Layer | Evidence | Limit |
 | --- | --- | --- |
-| TypeScript | 70 tests at portfolio freeze | Replay validation, synthetic generation, postprocessing, cache/version/failure behavior and normalization |
-| PostgreSQL | 78 assertions; native PostgreSQL 14 and CI PostgreSQL 17 with pgvector | Constraints, grants/RLS, vector/entity/cutoff selection, immutable writes, rollback and retries |
-| HTTP and browser | Local archive mocks, public service-isolation checks, production smoke tests and five-width Chromium checks | Rendered pages, navigation, stored Q&A, source labels, responsive behavior and route denials |
-| Delivery | GitHub CI and Vercel commit status | Checked revisions and successful public-demo deployment |
-
-See [deployment evidence](deployment.md). These layers do not constitute a complete Supabase/OpenAI end-to-end test or production-load evaluation.
+| Factual compilation | Official match-specific reports, results hubs and recorded discrepancy decisions | Evidence review is not a general data licence or authenticated publisher-clock archive |
+| TypeScript | Deterministic curated, replay, normalization and injected generation/cache tests | Mocks do not evaluate model quality |
+| PostgreSQL | Disposable migrations, constraints, grants/RLS, vector filters, immutable writes and rollback/retry assertions | Direct SQL does not cover the full Supabase gateway/Auth stack |
+| HTTP/browser | Local service tripwires, archive mocks, navigation/layout/focus checks and explicit public smoke checks | No accessibility certification or production-load benchmark |
+| Delivery | Revision-specific GitHub CI and Vercel checks in [deployment evidence](deployment.md) | A successful push alone is not a verified release |
 
 ## Outstanding limitations
 
-Complete Supabase gateway/Auth testing, authenticated operator archive reads, durable recovery and a reviewed grounding evaluation remain open. Current-head retrieval is not a complete historical source snapshot, model aliases may change, and private cache lookup still requires a query embedding. Legacy commentary remains retrospective. Provider normalization defects, development-tool advisories and source/branding/licence questions are tracked in the [audit](audit.md#current-findings) and [roadmap](roadmap.md#portfolio-freeze-and-remaining-work).
+Detailed retrospectives cover ten games; remaining Lenses provide verified results and computed tournament context rather than invented play-by-play. Source/distribution/branding questions remain scoped in [data rights](data-rights.md). Backend work still includes isolated Supabase gateway/Auth coverage, authenticated operator archive reads, durable recovery and measured grounding evaluation. Current-head retrieval is not a complete historical corpus snapshot; legacy commentary stays retrospective. See the [audit](audit.md#current-findings) and [roadmap](roadmap.md#portfolio-freeze-and-remaining-work) for prioritized work and release limits.

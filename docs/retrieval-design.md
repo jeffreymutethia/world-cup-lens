@@ -1,6 +1,6 @@
 # Versioned retrieval design
 
-`supabase/migrations/20261104000200_versioned_retrieval.sql:match_document_chunks` is a chosen reconstruction. Production exposed the RPC name, but its body was not available. The six existing argument names are retained; cutoff/model/version arguments are additive defaults. Production installation is not implied.
+`supabase/migrations/20261104000200_versioned_retrieval.sql:match_document_chunks` is a chosen reconstruction. Production exposed the RPC name, but its body was not available. The six existing argument names are retained; cutoff/model/version arguments are additive defaults. Production installation is not implied. Public historical Match Lenses use separately authored local content and do not call this RPC; retirement of the fictional public lab does not change private retrieval or synthetic SQL fixtures.
 
 ## Metric and dimensions
 

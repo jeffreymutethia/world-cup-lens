@@ -1,5 +1,5 @@
-import type { Match, PublicMatchLens, MatchQuestionAnswer, PresetQuestionKey, Team, Venue } from "../lib/types";
-import { isCachedLens } from "../lib/cached-analysis";
+import type { Match, PublicMatchLens, MatchQuestionAnswer, PresetQuestionKey, Team, Venue } from "../../src/lib/types";
+import { isCachedLens } from "../../src/lib/cached-analysis";
 
 // Newly authored fictional material, scoped by docs/demo-publication-review.md.
 // No provider records, quotations, logos, flags, or real team profiles are inputs.

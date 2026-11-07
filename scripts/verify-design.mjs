@@ -143,20 +143,30 @@ try {
   assert.equal(await evaluate("document.querySelectorAll('[data-match-id]').length"), 1);
   assert.equal(await evaluate("document.querySelector('.matchday-tabs a[aria-current]').textContent.includes('19 Jul')"), true);
   await click(".lime-button"); await waitFor("Boolean(document.querySelector('.recap-panel'))");
-  assert.equal(await evaluate("Boolean(document.querySelector('.related-matches'))"), false);
+  assert.equal(await evaluate("document.querySelectorAll('.team-journeys .related-matches').length"), 2);
   await click(".match-breadcrumb a"); await waitFor("Boolean(document.querySelector('.matchday-tabs'))");
   assert.equal(await evaluate("new URL(location.href).searchParams.get('date')"), "2026-07-19");
   report.checks.push("keyboard skip/date/focus/Enter; selected date/back; single-match isolation");
-  await navigate("/?mode=illustrative&date=2026-06-11", ".collection-heading");
-  await click('a[href="/matches/copper-tidal?mode=illustrative&date=2026-06-11"]');
-  await waitFor("Boolean(document.querySelector('button[aria-pressed]'))");
-  assert.equal(await evaluate("[...document.querySelectorAll('button[aria-pressed]')].every(e => e.getBoundingClientRect().height >= 44)"), true, "Q&A needs 44px targets");
-  const before = await evaluate("document.querySelector('[aria-live]').textContent");
-  await evaluate("document.querySelectorAll('button[aria-pressed]')[1].focus()"); await key("Enter");
-  await waitFor(`document.querySelector('[aria-live]').textContent !== ${JSON.stringify(before)}`);
-  assert.equal(await evaluate("document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1"), true);
-  await screenshot("lab-390-questions");
-  report.checks.push("fictional lab 44px question targets and stored Q&A keyboard switching");
+  await navigate("/", ".archive-filters");
+  await evaluate("document.querySelector('[name=date]').value=''; document.querySelector('[name=stage]').value='Quarter-final'; document.querySelector('[name=team]').value='england'; document.querySelector('[name=q]').value='Norway';");
+  await click('.filter-button'); await waitFor("new URL(location.href).searchParams.get('team') === 'england' && Boolean(document.querySelector('.scoreboard-hero'))");
+  assert.equal(await evaluate("document.querySelectorAll('[data-match-id]').length"),1);
+  assert.equal(await evaluate("document.querySelector('.hero-kicker').textContent.includes('Quarter-final')"),true);
+  await screenshot("filtered-390");
+  await click('.lime-button'); await waitFor("Boolean(document.querySelector('.recap-panel'))");
+  assert.equal(await evaluate("new URL(location.href).searchParams.get('team')"),'england');
+  await click('.match-breadcrumb a'); await waitFor("Boolean(document.querySelector('.archive-filters'))");
+  assert.equal(await evaluate("document.querySelector('[name=team]').value"),'england');
+  await navigate('/?date=all&page=2','.results-pagination');
+  assert.equal(await evaluate("document.querySelector('.results-pagination [aria-current=page]').textContent"),'Page 2');
+  assert.equal(await evaluate("document.querySelectorAll('[data-match-id]').length"),25);
+  report.checks.push('native date/stage/team/search form, paged archive and filter-preserving detail/back');
+  await navigate('/?mode=illustrative&date=2026-06-11','.archive-filters');
+  assert.equal(await evaluate("new URL(location.href).searchParams.get('mode')"),'curated');
+  assert.equal(await evaluate("document.body.textContent.includes('Copper Vale')"),false);
+  await navigate('/?date=2026-07-13','.state-panel');
+  assert.equal(await evaluate("document.querySelector('.state-panel').textContent.includes('No matches for this selection')"),true);
+  report.checks.push('retired lab redirect and genuine empty date');
   await command("Emulation.setDeviceMetricsOverride", { width: 320, height: 900, deviceScaleFactor: 1, mobile: true });
   for (const [id, date] of [["mexico-south-africa-2026-06-11", "2026-06-11"], ["usa-paraguay-2026-06-12", "2026-06-12"], ["argentina-switzerland-2026-07-11", "2026-07-11"], ["spain-argentina-2026-07-19", "2026-07-19"]]) {
     await navigate(`/matches/${id}?mode=curated&date=${date}`, ".recap-panel");
@@ -164,7 +174,17 @@ try {
     if (id.startsWith("argentina")) await screenshot("detail-argentina-320");
     assert.equal(await evaluate("[...document.querySelectorAll('.team-name')].every(element => element.textContent.includes(' ') || element.getBoundingClientRect().height <= parseFloat(getComputedStyle(element).lineHeight) * 1.2)"), true, `Single-word team name wraps at 320: ${id}`);
   }
-  report.checks.push("all five match heroes fit at 320px without splitting single-word team names");
+  report.checks.push("original five match heroes fit at 320px without splitting single-word team names");
+  await navigate('/matches/netherlands-morocco-2026-06-29?date=all','.recap-panel');
+  await inspect(320); assert.equal(await evaluate("document.querySelector('.scoreboard-result').textContent.includes('2–3 on penalties')"),true);
+  await screenshot('penalty-320');
+  const tournament = JSON.parse(readFileSync(resolve("src/data/curated-records.json"),"utf8"));
+  for (const record of tournament) {
+    await navigate(`/matches/${record.id}?mode=curated&date=${record.eventDate}`,'.recap-panel');
+    assert.equal(await evaluate("document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1"),true,`320px overflow: ${record.id}`);
+    assert.equal(await evaluate("document.querySelectorAll('h1').length"),1);
+  }
+  report.checks.push('all 104 canonical detail pages checked at 320px for document overflow and one h1');
   await navigate("/about", ".about-intro"); assert.equal(await evaluate("document.querySelector('h1').textContent"), "How it works");
   await command("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "reduce" }] });
   assert.equal(await evaluate("matchMedia('(prefers-reduced-motion: reduce)').matches"), true);
@@ -175,7 +195,7 @@ try {
   assert.equal(externalRequests.length, 0, "A page attempted an external request; request was blocked");
   assert.equal(responseErrors.length, 0, "Unexpected HTTP errors in normal browser navigation");
   writeFileSync(join(output, "qa-report.json"), JSON.stringify(report, null, 2) + "\n");
-  console.log("PASS keyboard, date/detail/back, fictional Q&A, reduced motion; zero console errors/external requests");
+  console.log("PASS keyboard, archive filters/pages/detail/back, retirement, penalties, reduced motion; zero console errors/external requests");
 } finally {
   clearTimeout(watchdog); socket?.close(); signalBrowser("SIGTERM");
   await Promise.race([exited, delay(3_000)]); signalBrowser("SIGKILL");

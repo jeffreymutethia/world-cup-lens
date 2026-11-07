@@ -17,7 +17,8 @@
     "db:bootstrap": "node scripts/database.mjs",
     "check:credentials": "node scripts/check-credentials.mjs",
     "check:docs": "node scripts/check-docs.mjs",
-    "check:security": "npm audit --audit-level=high"
+    "check:security": "npm audit --audit-level=high",
+    "check:data": "node scripts/validate-curated.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",

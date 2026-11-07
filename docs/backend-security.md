@@ -1,10 +1,10 @@
 # Backend security boundaries
 
-The public demo stays `demo-only`: local curated history and original fiction only. No database credentials are required, no backend route is enabled, and no scheduled cron exists. The tracked SQL defines a disposable/private contract; it has not been applied to production.
+The public demo stays `demo-only`: local curated history and original retrospective Match Lenses only. The public fictional lab is retired; old illustrative selections redirect to the homepage. No database credentials are required, no backend route is enabled, and no scheduled cron exists. The tracked SQL defines a disposable/private contract; it has not been applied to production.
 
 ```mermaid
 flowchart TD
-  Browser[Public browser] --> Pages[Curated and fictional pages]
+  Browser[Public browser] --> Pages[Curated archive and About]
   Pages --> Local[Reviewed repository modules]
   Browser --> Guard[Server deployment guard]
   Guard -->|demo-only| Deny[404 before auth or work]

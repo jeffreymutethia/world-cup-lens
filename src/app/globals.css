@@ -380,3 +380,43 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* Full-tournament browsing builds on the existing editorial archive palette. */
+.archive-browser { margin-top: 30px; }
+.archive-filters { display: grid; grid-template-columns: 1fr 1fr 1fr 1.1fr auto; align-items: start; gap: 14px; margin: 18px 0 24px; }
+.archive-filters label { display: grid; gap: 7px; font-size: 12px; font-weight: 650; min-width: 0; }
+.archive-filters input, .archive-filters select { width: 100%; min-width: 0; min-height: 46px; border: 1px solid var(--archive-line); border-radius: 9px; background: white; color: var(--archive-ink); padding: 10px; font: inherit; font-size: 14px; }
+.archive-filters label small { font-size: 11px; font-weight: 400; color: var(--archive-muted); }
+.filter-button { min-height: 46px; margin-top: 25px; padding: 10px 17px; border-radius: 9px; background: var(--archive-forest, #143f33); color: white; font-size: 13px; font-weight: 650; cursor: pointer; }
+.day-navigation, .results-pagination, .match-explore, .match-sequence { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.day-navigation { justify-content: space-between; margin-top: 18px; font-size: 13px; color: var(--archive-muted); }
+.day-navigation a, .results-pagination a, .match-explore a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 12px; border: 1px solid var(--archive-line); background: white; border-radius: 8px; color: #143f33; font-size: 13px; font-weight: 600; }
+.results-pagination { margin-top: 20px; }
+.results-pagination [aria-current="page"] { background: #143f33; color: white; }
+.fixture-venue { color: var(--archive-muted); font-size: 12px; margin-top: 14px; }
+.scoreboard-result small { display: block; color: #c3e3d6; font-size: 12px; margin-top: 6px; }
+.match-explore { margin: 20px 0; }
+.lens-main { min-width: 0; display: grid; align-content: start; gap: 20px; }
+.lens-panel { min-width: 0; border: 1px solid var(--archive-line); border-radius: 16px; background: white; padding: 28px 35px; }
+.lens-panel h2 { font-size: 21px; font-weight: 700; letter-spacing: -.5px; }
+.lens-panel p { margin-top: 14px; line-height: 1.85; color: var(--archive-muted); font-size: 15px; }
+.significance-panel { background: #e9efe5; }
+.development-list li + li { margin-top: 18px; }
+.development-list a { display: inline-flex; align-items: center; gap: 4px; text-decoration: underline; font-size: 12px; margin-top: 6px; color: #155845; }
+.source-details ul { display: grid; gap: 10px; margin-top: 12px; }
+.source-details a { text-decoration: underline; overflow-wrap: anywhere; }
+.group-records { margin-top: 20px; display: grid; gap: 20px; }
+.group-records dl { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; margin-top: 12px; }
+.group-records dt { color: var(--archive-muted); font-size: 11px; }
+.group-records dd { margin-top: 4px; font-size: 18px; font-weight: 650; }
+.team-journeys { margin-top: 34px; }
+.journey-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.related-matches h3 { font-size: 20px; font-weight: 700; padding: 25px 28px 8px; }
+.match-sequence { justify-content: space-between; margin-top: 24px; }
+.match-sequence a { min-height: 48px; display: inline-flex; gap: 10px; align-items: center; padding: 10px 0; font-size: 13px; color: #155845; }
+.match-sequence small { display: block; color: var(--archive-muted); font-size: 11px; margin-bottom: 4px; }
+@media(max-width: 1000px) { .archive-filters { grid-template-columns: repeat(2,minmax(0,1fr)); } .filter-button { margin-top: 0; } }
+@media(max-width: 650px) { .journey-grid { grid-template-columns: 1fr; } .lens-panel { padding: 24px; } .lens-panel p { font-size: 14px; } .match-sequence { align-items: flex-start; } .match-sequence a { max-width: 46%; } .match-explore { gap: 8px; } .match-explore a { font-size: 12px; } .archive-filters { gap: 12px; } .archive-counts { flex-wrap: wrap; } }
+@media(prefers-reduced-motion: reduce) { .archive-browser *, .match-explore *, .match-sequence * { transition: none; } }
+
+.archive-filters input::placeholder { color: var(--archive-muted); opacity: 1; }

@@ -1,0 +1,5494 @@
+[
+  {
+    "matchNumber": 1,
+    "eventDate": "2026-06-11",
+    "homeTeam": "Mexico",
+    "awayTeam": "South Africa",
+    "stage": "Group A",
+    "venue": "Mexico City Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M01%20MEX%20V%20RSA.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "MEX",
+    "awayCode": "RSA",
+    "id": "mexico-south-africa-2026-06-11"
+  },
+  {
+    "matchNumber": 2,
+    "eventDate": "2026-06-11",
+    "homeTeam": "Korea Republic",
+    "awayTeam": "Czechia",
+    "stage": "Group A",
+    "venue": "Guadalajara Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M02%20KOR%20V%20CZE%20.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "KOR",
+    "awayCode": "CZE",
+    "id": "korea-republic-czechia-2026-06-11"
+  },
+  {
+    "matchNumber": 3,
+    "eventDate": "2026-06-12",
+    "homeTeam": "Canada",
+    "awayTeam": "Bosnia and Herzegovina",
+    "stage": "Group B",
+    "venue": "Toronto Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M03-CAN-V-BIH-V2.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "CAN",
+    "awayCode": "BIH",
+    "id": "canada-bosnia-and-herzegovina-2026-06-12"
+  },
+  {
+    "matchNumber": 4,
+    "eventDate": "2026-06-12",
+    "homeTeam": "USA",
+    "awayTeam": "Paraguay",
+    "stage": "Group D",
+    "venue": "Los Angeles Stadium",
+    "finalScore": {
+      "home": 4,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M04-USA-V-PAR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "USA",
+    "awayCode": "PAR",
+    "id": "usa-paraguay-2026-06-12"
+  },
+  {
+    "matchNumber": 5,
+    "eventDate": "2026-06-13",
+    "homeTeam": "Haiti",
+    "awayTeam": "Scotland",
+    "stage": "Group C",
+    "venue": "Boston Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M05-HAI-V-SCO.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "HAI",
+    "awayCode": "SCO",
+    "id": "haiti-scotland-2026-06-13"
+  },
+  {
+    "matchNumber": 6,
+    "eventDate": "2026-06-13",
+    "homeTeam": "Australia",
+    "awayTeam": "Türkiye",
+    "stage": "Group D",
+    "venue": "BC Place Vancouver",
+    "finalScore": {
+      "home": 2,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M06-AUS-V-TUR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "AUS",
+    "awayCode": "TUR",
+    "id": "australia-turkiye-2026-06-13"
+  },
+  {
+    "matchNumber": 7,
+    "eventDate": "2026-06-13",
+    "homeTeam": "Brazil",
+    "awayTeam": "Morocco",
+    "stage": "Group C",
+    "venue": "New York New Jersey Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M07-BRA-V-MAR%20POST-V2.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "BRA",
+    "awayCode": "MAR",
+    "venueAlias": "New York/New Jersey Stadium",
+    "id": "brazil-morocco-2026-06-13"
+  },
+  {
+    "matchNumber": 8,
+    "eventDate": "2026-06-13",
+    "homeTeam": "Qatar",
+    "awayTeam": "Switzerland",
+    "stage": "Group B",
+    "venue": "San Francisco Bay Area Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M08-QAT-V-SUI.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "QAT",
+    "awayCode": "SUI",
+    "id": "qatar-switzerland-2026-06-13"
+  },
+  {
+    "matchNumber": 9,
+    "eventDate": "2026-06-14",
+    "homeTeam": "Côte d’Ivoire",
+    "awayTeam": "Ecuador",
+    "stage": "Group E",
+    "venue": "Philadelphia Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M09-CIV-V-ECU.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "CIV",
+    "awayCode": "ECU",
+    "id": "cote-divoire-ecuador-2026-06-14"
+  },
+  {
+    "matchNumber": 10,
+    "eventDate": "2026-06-14",
+    "homeTeam": "Germany",
+    "awayTeam": "Curaçao",
+    "stage": "Group E",
+    "venue": "Houston Stadium",
+    "finalScore": {
+      "home": 7,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M10-GER-V-CUW-V2.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "GER",
+    "awayCode": "CUW",
+    "id": "germany-curacao-2026-06-14"
+  },
+  {
+    "matchNumber": 11,
+    "eventDate": "2026-06-14",
+    "homeTeam": "Netherlands",
+    "awayTeam": "Japan",
+    "stage": "Group F",
+    "venue": "Dallas Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M11-NED-V-JPN.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "NED",
+    "awayCode": "JPN",
+    "id": "netherlands-japan-2026-06-14"
+  },
+  {
+    "matchNumber": 12,
+    "eventDate": "2026-06-14",
+    "homeTeam": "Sweden",
+    "awayTeam": "Tunisia",
+    "stage": "Group F",
+    "venue": "Estadio Monterrey",
+    "finalScore": {
+      "home": 5,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M12-SWE-V-TUN.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "SWE",
+    "awayCode": "TUN",
+    "venueAlias": "Monterrey Stadium",
+    "id": "sweden-tunisia-2026-06-14"
+  },
+  {
+    "matchNumber": 13,
+    "eventDate": "2026-06-15",
+    "homeTeam": "Saudi Arabia",
+    "awayTeam": "Uruguay",
+    "stage": "Group H",
+    "venue": "Miami Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M13-KSA-V-URU.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "KSA",
+    "awayCode": "URU",
+    "id": "saudi-arabia-uruguay-2026-06-15"
+  },
+  {
+    "matchNumber": 14,
+    "eventDate": "2026-06-15",
+    "homeTeam": "Spain",
+    "awayTeam": "Cabo Verde",
+    "stage": "Group H",
+    "venue": "Atlanta Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M14-ESP-V-CPV.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ESP",
+    "awayCode": "CPV",
+    "id": "spain-cabo-verde-2026-06-15"
+  },
+  {
+    "matchNumber": 15,
+    "eventDate": "2026-06-15",
+    "homeTeam": "IR Iran",
+    "awayTeam": "New Zealand",
+    "stage": "Group G",
+    "venue": "Los Angeles Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M15-IRN-V-NZL.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "IRN",
+    "awayCode": "NZL",
+    "id": "ir-iran-new-zealand-2026-06-15"
+  },
+  {
+    "matchNumber": 16,
+    "eventDate": "2026-06-15",
+    "homeTeam": "Belgium",
+    "awayTeam": "Egypt",
+    "stage": "Group G",
+    "venue": "Seattle Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M16-BEL-V-EGY.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "BEL",
+    "awayCode": "EGY",
+    "id": "belgium-egypt-2026-06-15"
+  },
+  {
+    "matchNumber": 17,
+    "eventDate": "2026-06-16",
+    "homeTeam": "France",
+    "awayTeam": "Senegal",
+    "stage": "Group I",
+    "venue": "New York New Jersey Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M17-FRA-V-SEN.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "FRA",
+    "awayCode": "SEN",
+    "venueAlias": "New York/New Jersey Stadium",
+    "id": "france-senegal-2026-06-16"
+  },
+  {
+    "matchNumber": 18,
+    "eventDate": "2026-06-16",
+    "homeTeam": "Iraq",
+    "awayTeam": "Norway",
+    "stage": "Group I",
+    "venue": "Boston Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 4
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M18-IRQ-V-NOR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "IRQ",
+    "awayCode": "NOR",
+    "id": "iraq-norway-2026-06-16"
+  },
+  {
+    "matchNumber": 19,
+    "eventDate": "2026-06-16",
+    "homeTeam": "Argentina",
+    "awayTeam": "Algeria",
+    "stage": "Group J",
+    "venue": "Kansas City Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M19-ARG-V-ALG.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ARG",
+    "awayCode": "ALG",
+    "id": "argentina-algeria-2026-06-16"
+  },
+  {
+    "matchNumber": 20,
+    "eventDate": "2026-06-16",
+    "homeTeam": "Austria",
+    "awayTeam": "Jordan",
+    "stage": "Group J",
+    "venue": "San Francisco Bay Area Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M20-AUT-V-JOR-V3.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "AUT",
+    "awayCode": "JOR",
+    "id": "austria-jordan-2026-06-16"
+  },
+  {
+    "matchNumber": 21,
+    "eventDate": "2026-06-17",
+    "homeTeam": "Ghana",
+    "awayTeam": "Panama",
+    "stage": "Group L",
+    "venue": "Toronto Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M21-GHA-V-PAN-V2.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "GHA",
+    "awayCode": "PAN",
+    "id": "ghana-panama-2026-06-17"
+  },
+  {
+    "matchNumber": 22,
+    "eventDate": "2026-06-17",
+    "homeTeam": "England",
+    "awayTeam": "Croatia",
+    "stage": "Group L",
+    "venue": "Dallas Stadium",
+    "finalScore": {
+      "home": 4,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M22-ENG-V-CRO.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ENG",
+    "awayCode": "CRO",
+    "id": "england-croatia-2026-06-17"
+  },
+  {
+    "matchNumber": 23,
+    "eventDate": "2026-06-17",
+    "homeTeam": "Portugal",
+    "awayTeam": "Congo DR",
+    "stage": "Group K",
+    "venue": "Houston Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M23-POR-V-COD.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "POR",
+    "awayCode": "COD",
+    "id": "portugal-congo-dr-2026-06-17"
+  },
+  {
+    "matchNumber": 24,
+    "eventDate": "2026-06-17",
+    "homeTeam": "Uzbekistan",
+    "awayTeam": "Colombia",
+    "stage": "Group K",
+    "venue": "Mexico City Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 3
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M24-UZB-V-COL-V2.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "UZB",
+    "awayCode": "COL",
+    "id": "uzbekistan-colombia-2026-06-17"
+  },
+  {
+    "matchNumber": 25,
+    "eventDate": "2026-06-18",
+    "homeTeam": "Czechia",
+    "awayTeam": "South Africa",
+    "stage": "Group A",
+    "venue": "Atlanta Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M25-CZE-V-RSA.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "CZE",
+    "awayCode": "RSA",
+    "id": "czechia-south-africa-2026-06-18"
+  },
+  {
+    "matchNumber": 26,
+    "eventDate": "2026-06-18",
+    "homeTeam": "Switzerland",
+    "awayTeam": "Bosnia and Herzegovina",
+    "stage": "Group B",
+    "venue": "Los Angeles Stadium",
+    "finalScore": {
+      "home": 4,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M26-SUI-V-BIH.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "SUI",
+    "awayCode": "BIH",
+    "id": "switzerland-bosnia-and-herzegovina-2026-06-18"
+  },
+  {
+    "matchNumber": 27,
+    "eventDate": "2026-06-18",
+    "homeTeam": "Canada",
+    "awayTeam": "Qatar",
+    "stage": "Group B",
+    "venue": "BC Place Vancouver",
+    "finalScore": {
+      "home": 6,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M27-CAN-V-QAT.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "CAN",
+    "awayCode": "QAT",
+    "id": "canada-qatar-2026-06-18"
+  },
+  {
+    "matchNumber": 28,
+    "eventDate": "2026-06-18",
+    "homeTeam": "Mexico",
+    "awayTeam": "Korea Republic",
+    "stage": "Group A",
+    "venue": "Guadalajara Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M28-MEX-V-KOR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "MEX",
+    "awayCode": "KOR",
+    "id": "mexico-korea-republic-2026-06-18"
+  },
+  {
+    "matchNumber": 29,
+    "eventDate": "2026-06-19",
+    "homeTeam": "Brazil",
+    "awayTeam": "Haiti",
+    "stage": "Group C",
+    "venue": "Philadelphia Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M29-BRA-V-HAI.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "BRA",
+    "awayCode": "HAI",
+    "id": "brazil-haiti-2026-06-19"
+  },
+  {
+    "matchNumber": 30,
+    "eventDate": "2026-06-19",
+    "homeTeam": "Scotland",
+    "awayTeam": "Morocco",
+    "stage": "Group C",
+    "venue": "Boston Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M30-SCO-V-MAR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "SCO",
+    "awayCode": "MAR",
+    "id": "scotland-morocco-2026-06-19"
+  },
+  {
+    "matchNumber": 31,
+    "eventDate": "2026-06-19",
+    "homeTeam": "Türkiye",
+    "awayTeam": "Paraguay",
+    "stage": "Group D",
+    "venue": "San Francisco Bay Area Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M31-TUR-V-PAR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "TUR",
+    "awayCode": "PAR",
+    "id": "turkiye-paraguay-2026-06-19"
+  },
+  {
+    "matchNumber": 32,
+    "eventDate": "2026-06-19",
+    "homeTeam": "USA",
+    "awayTeam": "Australia",
+    "stage": "Group D",
+    "venue": "Seattle Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M32-USA-V-AUS.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "USA",
+    "awayCode": "AUS",
+    "id": "usa-australia-2026-06-19"
+  },
+  {
+    "matchNumber": 33,
+    "eventDate": "2026-06-20",
+    "homeTeam": "Germany",
+    "awayTeam": "Côte d’Ivoire",
+    "stage": "Group E",
+    "venue": "Toronto Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M33-GER-V-CIV.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "GER",
+    "awayCode": "CIV",
+    "id": "germany-cote-divoire-2026-06-20"
+  },
+  {
+    "matchNumber": 34,
+    "eventDate": "2026-06-20",
+    "homeTeam": "Ecuador",
+    "awayTeam": "Curaçao",
+    "stage": "Group E",
+    "venue": "Kansas City Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M34-ECU-V-CUW.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ECU",
+    "awayCode": "CUW",
+    "id": "ecuador-curacao-2026-06-20"
+  },
+  {
+    "matchNumber": 35,
+    "eventDate": "2026-06-20",
+    "homeTeam": "Netherlands",
+    "awayTeam": "Sweden",
+    "stage": "Group F",
+    "venue": "Houston Stadium",
+    "finalScore": {
+      "home": 5,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M35-NED-V-SWE.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "NED",
+    "awayCode": "SWE",
+    "id": "netherlands-sweden-2026-06-20"
+  },
+  {
+    "matchNumber": 36,
+    "eventDate": "2026-06-20",
+    "homeTeam": "Tunisia",
+    "awayTeam": "Japan",
+    "stage": "Group F",
+    "venue": "Estadio Monterrey",
+    "finalScore": {
+      "home": 0,
+      "away": 4
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M36-TUN-V-JPN.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "TUN",
+    "awayCode": "JPN",
+    "venueAlias": "Monterrey Stadium",
+    "id": "tunisia-japan-2026-06-20"
+  },
+  {
+    "matchNumber": 37,
+    "eventDate": "2026-06-21",
+    "homeTeam": "Uruguay",
+    "awayTeam": "Cabo Verde",
+    "stage": "Group H",
+    "venue": "Miami Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M37-URU-V-CPV.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "URU",
+    "awayCode": "CPV",
+    "id": "uruguay-cabo-verde-2026-06-21"
+  },
+  {
+    "matchNumber": 38,
+    "eventDate": "2026-06-21",
+    "homeTeam": "Spain",
+    "awayTeam": "Saudi Arabia",
+    "stage": "Group H",
+    "venue": "Atlanta Stadium",
+    "finalScore": {
+      "home": 4,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M38-ESP-V-KSA.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ESP",
+    "awayCode": "KSA",
+    "id": "spain-saudi-arabia-2026-06-21"
+  },
+  {
+    "matchNumber": 39,
+    "eventDate": "2026-06-21",
+    "homeTeam": "Belgium",
+    "awayTeam": "IR Iran",
+    "stage": "Group G",
+    "venue": "Los Angeles Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M39-BEL-V-IRN.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "BEL",
+    "awayCode": "IRN",
+    "id": "belgium-ir-iran-2026-06-21"
+  },
+  {
+    "matchNumber": 40,
+    "eventDate": "2026-06-21",
+    "homeTeam": "New Zealand",
+    "awayTeam": "Egypt",
+    "stage": "Group G",
+    "venue": "BC Place Vancouver",
+    "finalScore": {
+      "home": 1,
+      "away": 3
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M40-NZL-V-EGY.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "NZL",
+    "awayCode": "EGY",
+    "id": "new-zealand-egypt-2026-06-21"
+  },
+  {
+    "matchNumber": 41,
+    "eventDate": "2026-06-22",
+    "homeTeam": "Norway",
+    "awayTeam": "Senegal",
+    "stage": "Group I",
+    "venue": "New York New Jersey Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M41-NOR-V-SEN.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/norway-senegal-match-report-highlights",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-23"
+      }
+    ],
+    "evidenceNote": "FIFA report explicitly locates this match at New York New Jersey on June 22; Sky aggregate lists Toronto and next calendar day. Primary report takes precedence.",
+    "homeCode": "NOR",
+    "awayCode": "SEN",
+    "venueAlias": "New York/New Jersey Stadium",
+    "id": "norway-senegal-2026-06-22"
+  },
+  {
+    "matchNumber": 42,
+    "eventDate": "2026-06-22",
+    "homeTeam": "France",
+    "awayTeam": "Iraq",
+    "stage": "Group I",
+    "venue": "Philadelphia Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M42-FRA-V-IRQ.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "FRA",
+    "awayCode": "IRQ",
+    "id": "france-iraq-2026-06-22"
+  },
+  {
+    "matchNumber": 43,
+    "eventDate": "2026-06-22",
+    "homeTeam": "Argentina",
+    "awayTeam": "Austria",
+    "stage": "Group J",
+    "venue": "Dallas Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M43-ARG-V-AUT.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ARG",
+    "awayCode": "AUT",
+    "id": "argentina-austria-2026-06-22"
+  },
+  {
+    "matchNumber": 44,
+    "eventDate": "2026-06-22",
+    "homeTeam": "Jordan",
+    "awayTeam": "Algeria",
+    "stage": "Group J",
+    "venue": "San Francisco Bay Area Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M44-JOR-V-ALG.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "JOR",
+    "awayCode": "ALG",
+    "id": "jordan-algeria-2026-06-22"
+  },
+  {
+    "matchNumber": 45,
+    "eventDate": "2026-06-23",
+    "homeTeam": "England",
+    "awayTeam": "Ghana",
+    "stage": "Group L",
+    "venue": "Boston Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M45-ENG-V-GHA.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ENG",
+    "awayCode": "GHA",
+    "id": "england-ghana-2026-06-23"
+  },
+  {
+    "matchNumber": 46,
+    "eventDate": "2026-06-23",
+    "homeTeam": "Panama",
+    "awayTeam": "Croatia",
+    "stage": "Group L",
+    "venue": "Toronto Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M46-PAN-V-CRO.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "PAN",
+    "awayCode": "CRO",
+    "id": "panama-croatia-2026-06-23"
+  },
+  {
+    "matchNumber": 47,
+    "eventDate": "2026-06-23",
+    "homeTeam": "Portugal",
+    "awayTeam": "Uzbekistan",
+    "stage": "Group K",
+    "venue": "Houston Stadium",
+    "finalScore": {
+      "home": 5,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M47-POR-V-UZB-v2.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "POR",
+    "awayCode": "UZB",
+    "id": "portugal-uzbekistan-2026-06-23"
+  },
+  {
+    "matchNumber": 48,
+    "eventDate": "2026-06-23",
+    "homeTeam": "Colombia",
+    "awayTeam": "Congo DR",
+    "stage": "Group K",
+    "venue": "Guadalajara Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M48-COL-V-COD-V2.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "COL",
+    "awayCode": "COD",
+    "id": "colombia-congo-dr-2026-06-23"
+  },
+  {
+    "matchNumber": 49,
+    "eventDate": "2026-06-24",
+    "homeTeam": "Scotland",
+    "awayTeam": "Brazil",
+    "stage": "Group C",
+    "venue": "Miami Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 3
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M49-SCO-V-BRA.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "SCO",
+    "awayCode": "BRA",
+    "id": "scotland-brazil-2026-06-24"
+  },
+  {
+    "matchNumber": 50,
+    "eventDate": "2026-06-24",
+    "homeTeam": "Morocco",
+    "awayTeam": "Haiti",
+    "stage": "Group C",
+    "venue": "Atlanta Stadium",
+    "finalScore": {
+      "home": 4,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M50-MAR-V-HAI-V2.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "MAR",
+    "awayCode": "HAI",
+    "id": "morocco-haiti-2026-06-24"
+  },
+  {
+    "matchNumber": 51,
+    "eventDate": "2026-06-24",
+    "homeTeam": "Switzerland",
+    "awayTeam": "Canada",
+    "stage": "Group B",
+    "venue": "BC Place Vancouver",
+    "finalScore": {
+      "home": 2,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M51-SUI-V-CAN.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "SUI",
+    "awayCode": "CAN",
+    "id": "switzerland-canada-2026-06-24"
+  },
+  {
+    "matchNumber": 52,
+    "eventDate": "2026-06-24",
+    "homeTeam": "Bosnia and Herzegovina",
+    "awayTeam": "Qatar",
+    "stage": "Group B",
+    "venue": "Seattle Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M52-BIH-V-QAT.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "BIH",
+    "awayCode": "QAT",
+    "id": "bosnia-and-herzegovina-qatar-2026-06-24"
+  },
+  {
+    "matchNumber": 53,
+    "eventDate": "2026-06-24",
+    "homeTeam": "Czechia",
+    "awayTeam": "Mexico",
+    "stage": "Group A",
+    "venue": "Mexico City Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 3
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M53-CZE-V-MEX.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "CZE",
+    "awayCode": "MEX",
+    "id": "czechia-mexico-2026-06-24"
+  },
+  {
+    "matchNumber": 54,
+    "eventDate": "2026-06-24",
+    "homeTeam": "South Africa",
+    "awayTeam": "Korea Republic",
+    "stage": "Group A",
+    "venue": "Estadio Monterrey",
+    "finalScore": {
+      "home": 1,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M54-RSA-V-KOR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "RSA",
+    "awayCode": "KOR",
+    "venueAlias": "Monterrey Stadium",
+    "id": "south-africa-korea-republic-2026-06-24"
+  },
+  {
+    "matchNumber": 55,
+    "eventDate": "2026-06-25",
+    "homeTeam": "Curaçao",
+    "awayTeam": "Côte d’Ivoire",
+    "stage": "Group E",
+    "venue": "Philadelphia Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M55-CUW-V-CIV.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "CUW",
+    "awayCode": "CIV",
+    "id": "curacao-cote-divoire-2026-06-25"
+  },
+  {
+    "matchNumber": 56,
+    "eventDate": "2026-06-25",
+    "homeTeam": "Ecuador",
+    "awayTeam": "Germany",
+    "stage": "Group E",
+    "venue": "New York New Jersey Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M56-ECU-V-GER.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ECU",
+    "awayCode": "GER",
+    "venueAlias": "New York/New Jersey Stadium",
+    "id": "ecuador-germany-2026-06-25"
+  },
+  {
+    "matchNumber": 57,
+    "eventDate": "2026-06-25",
+    "homeTeam": "Japan",
+    "awayTeam": "Sweden",
+    "stage": "Group F",
+    "venue": "Dallas Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M57-JPN-V-SWE.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "JPN",
+    "awayCode": "SWE",
+    "id": "japan-sweden-2026-06-25"
+  },
+  {
+    "matchNumber": 58,
+    "eventDate": "2026-06-25",
+    "homeTeam": "Tunisia",
+    "awayTeam": "Netherlands",
+    "stage": "Group F",
+    "venue": "Kansas City Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 3
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M58-TUN-V-NED.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "TUN",
+    "awayCode": "NED",
+    "id": "tunisia-netherlands-2026-06-25"
+  },
+  {
+    "matchNumber": 59,
+    "eventDate": "2026-06-25",
+    "homeTeam": "Türkiye",
+    "awayTeam": "USA",
+    "stage": "Group D",
+    "venue": "Los Angeles Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M59-TUR-v-USA.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "TUR",
+    "awayCode": "USA",
+    "id": "turkiye-usa-2026-06-25"
+  },
+  {
+    "matchNumber": 60,
+    "eventDate": "2026-06-25",
+    "homeTeam": "Paraguay",
+    "awayTeam": "Australia",
+    "stage": "Group D",
+    "venue": "San Francisco Bay Area Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M60-PAR-V-AUS.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "PAR",
+    "awayCode": "AUS",
+    "id": "paraguay-australia-2026-06-25"
+  },
+  {
+    "matchNumber": 61,
+    "eventDate": "2026-06-26",
+    "homeTeam": "Norway",
+    "awayTeam": "France",
+    "stage": "Group I",
+    "venue": "Boston Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 4
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M61-NOR-V-FRA.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "NOR",
+    "awayCode": "FRA",
+    "id": "norway-france-2026-06-26"
+  },
+  {
+    "matchNumber": 62,
+    "eventDate": "2026-06-26",
+    "homeTeam": "Senegal",
+    "awayTeam": "Iraq",
+    "stage": "Group I",
+    "venue": "Toronto Stadium",
+    "finalScore": {
+      "home": 5,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M62-SEN-V-IRQ.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "SEN",
+    "awayCode": "IRQ",
+    "id": "senegal-iraq-2026-06-26"
+  },
+  {
+    "matchNumber": 63,
+    "eventDate": "2026-06-26",
+    "homeTeam": "Egypt",
+    "awayTeam": "IR Iran",
+    "stage": "Group G",
+    "venue": "Seattle Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M63-EGY-V-IRN.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "EGY",
+    "awayCode": "IRN",
+    "id": "egypt-ir-iran-2026-06-26"
+  },
+  {
+    "matchNumber": 64,
+    "eventDate": "2026-06-26",
+    "homeTeam": "New Zealand",
+    "awayTeam": "Belgium",
+    "stage": "Group G",
+    "venue": "BC Place Vancouver",
+    "finalScore": {
+      "home": 1,
+      "away": 5
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M64-NZL-V-BEL.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "NZL",
+    "awayCode": "BEL",
+    "id": "new-zealand-belgium-2026-06-26"
+  },
+  {
+    "matchNumber": 65,
+    "eventDate": "2026-06-26",
+    "homeTeam": "Cabo Verde",
+    "awayTeam": "Saudi Arabia",
+    "stage": "Group H",
+    "venue": "Houston Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M65-CPV-V-KSA.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "CPV",
+    "awayCode": "KSA",
+    "id": "cabo-verde-saudi-arabia-2026-06-26"
+  },
+  {
+    "matchNumber": 66,
+    "eventDate": "2026-06-26",
+    "homeTeam": "Uruguay",
+    "awayTeam": "Spain",
+    "stage": "Group H",
+    "venue": "Guadalajara Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M66-URU-V-ESP.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "URU",
+    "awayCode": "ESP",
+    "id": "uruguay-spain-2026-06-26"
+  },
+  {
+    "matchNumber": 67,
+    "eventDate": "2026-06-27",
+    "homeTeam": "Panama",
+    "awayTeam": "England",
+    "stage": "Group L",
+    "venue": "New York New Jersey Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M67-PAN-V-ENG.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "PAN",
+    "awayCode": "ENG",
+    "venueAlias": "New York/New Jersey Stadium",
+    "id": "panama-england-2026-06-27"
+  },
+  {
+    "matchNumber": 68,
+    "eventDate": "2026-06-27",
+    "homeTeam": "Croatia",
+    "awayTeam": "Ghana",
+    "stage": "Group L",
+    "venue": "Philadelphia Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M68-CRO-V-GHA.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "CRO",
+    "awayCode": "GHA",
+    "id": "croatia-ghana-2026-06-27"
+  },
+  {
+    "matchNumber": 69,
+    "eventDate": "2026-06-27",
+    "homeTeam": "Algeria",
+    "awayTeam": "Austria",
+    "stage": "Group J",
+    "venue": "Kansas City Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 3
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M69-ALG-V-AUT.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ALG",
+    "awayCode": "AUT",
+    "id": "algeria-austria-2026-06-27"
+  },
+  {
+    "matchNumber": 70,
+    "eventDate": "2026-06-27",
+    "homeTeam": "Jordan",
+    "awayTeam": "Argentina",
+    "stage": "Group J",
+    "venue": "Dallas Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 3
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M70-JOR-V-ARG.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "JOR",
+    "awayCode": "ARG",
+    "id": "jordan-argentina-2026-06-27"
+  },
+  {
+    "matchNumber": 71,
+    "eventDate": "2026-06-27",
+    "homeTeam": "Colombia",
+    "awayTeam": "Portugal",
+    "stage": "Group K",
+    "venue": "Miami Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M71-COL-V-POR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "COL",
+    "awayCode": "POR",
+    "id": "colombia-portugal-2026-06-27"
+  },
+  {
+    "matchNumber": 72,
+    "eventDate": "2026-06-27",
+    "homeTeam": "Congo DR",
+    "awayTeam": "Uzbekistan",
+    "stage": "Group K",
+    "venue": "Atlanta Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": null,
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M72-COD-V-UZB-v2.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-27"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-host-cities-in-focus",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "COD",
+    "awayCode": "UZB",
+    "id": "congo-dr-uzbekistan-2026-06-27"
+  },
+  {
+    "matchNumber": 73,
+    "eventDate": "2026-06-28",
+    "homeTeam": "South Africa",
+    "awayTeam": "Canada",
+    "stage": "Round of 32",
+    "venue": "Los Angeles Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Canada",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M73-RSA-V-CAN.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "RSA",
+    "awayCode": "CAN",
+    "id": "south-africa-canada-2026-06-28"
+  },
+  {
+    "matchNumber": 74,
+    "eventDate": "2026-06-29",
+    "homeTeam": "Germany",
+    "awayTeam": "Paraguay",
+    "stage": "Round of 32",
+    "venue": "Boston Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 1
+    },
+    "afterExtraTime": true,
+    "penaltyShootout": {
+      "home": 3,
+      "away": 4
+    },
+    "advancingTeam": "Paraguay",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M74-GER-V-PAR-V2.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/germany-paraguay-review-highlights",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-29"
+      },
+      {
+        "identity": "DFB",
+        "url": "https://www.dfb.de/news/germany-knocked-out-on-penalties-by-paraguay",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "GER",
+    "awayCode": "PAR",
+    "id": "germany-paraguay-2026-06-29"
+  },
+  {
+    "matchNumber": 75,
+    "eventDate": "2026-06-29",
+    "homeTeam": "Netherlands",
+    "awayTeam": "Morocco",
+    "stage": "Round of 32",
+    "venue": "Estadio Monterrey",
+    "finalScore": {
+      "home": 1,
+      "away": 1
+    },
+    "afterExtraTime": true,
+    "penaltyShootout": {
+      "home": 2,
+      "away": 3
+    },
+    "advancingTeam": "Morocco",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M75-NED-V-MAR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/brazil-paraguay-round-32-review-highlights",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-06-29"
+      }
+    ],
+    "evidenceNote": "FIFA recap confirms 1–1 after another 30 scoreless minutes, Morocco winning penalties 3–2. Sky aggregate has conflicting 2–2; not adopted.",
+    "homeCode": "NED",
+    "awayCode": "MAR",
+    "venueAlias": "Monterrey Stadium",
+    "id": "netherlands-morocco-2026-06-29"
+  },
+  {
+    "matchNumber": 76,
+    "eventDate": "2026-06-29",
+    "homeTeam": "Brazil",
+    "awayTeam": "Japan",
+    "stage": "Round of 32",
+    "venue": "Houston Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Brazil",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M76-BRA-V-JPN.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "BRA",
+    "awayCode": "JPN",
+    "id": "brazil-japan-2026-06-29"
+  },
+  {
+    "matchNumber": 77,
+    "eventDate": "2026-06-30",
+    "homeTeam": "France",
+    "awayTeam": "Sweden",
+    "stage": "Round of 32",
+    "venue": "New York New Jersey Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "France",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M77-FRA-V-SWE.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "FRA",
+    "awayCode": "SWE",
+    "venueAlias": "New York/New Jersey Stadium",
+    "id": "france-sweden-2026-06-30"
+  },
+  {
+    "matchNumber": 78,
+    "eventDate": "2026-06-30",
+    "homeTeam": "Côte d’Ivoire",
+    "awayTeam": "Norway",
+    "stage": "Round of 32",
+    "venue": "Dallas Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Norway",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M78-CIV-V-NOR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "CIV",
+    "awayCode": "NOR",
+    "id": "cote-divoire-norway-2026-06-30"
+  },
+  {
+    "matchNumber": 79,
+    "eventDate": "2026-06-30",
+    "homeTeam": "Mexico",
+    "awayTeam": "Ecuador",
+    "stage": "Round of 32",
+    "venue": "Mexico City Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Mexico",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M79-MEX-V-ECU.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "MEX",
+    "awayCode": "ECU",
+    "id": "mexico-ecuador-2026-06-30"
+  },
+  {
+    "matchNumber": 80,
+    "eventDate": "2026-07-01",
+    "homeTeam": "England",
+    "awayTeam": "Congo DR",
+    "stage": "Round of 32",
+    "venue": "Atlanta Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "England",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M80-ENG-V-COD.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ENG",
+    "awayCode": "COD",
+    "id": "england-congo-dr-2026-07-01"
+  },
+  {
+    "matchNumber": 81,
+    "eventDate": "2026-07-01",
+    "homeTeam": "USA",
+    "awayTeam": "Bosnia and Herzegovina",
+    "stage": "Round of 32",
+    "venue": "San Francisco Bay Area Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "USA",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M81-USA-V-BIH.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "USA",
+    "awayCode": "BIH",
+    "id": "usa-bosnia-and-herzegovina-2026-07-01"
+  },
+  {
+    "matchNumber": 82,
+    "eventDate": "2026-07-01",
+    "homeTeam": "Belgium",
+    "awayTeam": "Senegal",
+    "stage": "Round of 32",
+    "venue": "Seattle Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 2
+    },
+    "afterExtraTime": true,
+    "penaltyShootout": null,
+    "advancingTeam": "Belgium",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M82-BEL-V-SEN.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "BEL",
+    "awayCode": "SEN",
+    "id": "belgium-senegal-2026-07-01"
+  },
+  {
+    "matchNumber": 83,
+    "eventDate": "2026-07-02",
+    "homeTeam": "Portugal",
+    "awayTeam": "Croatia",
+    "stage": "Round of 32",
+    "venue": "Toronto Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Portugal",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M83-POR-V-CRO.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "POR",
+    "awayCode": "CRO",
+    "id": "portugal-croatia-2026-07-02"
+  },
+  {
+    "matchNumber": 84,
+    "eventDate": "2026-07-02",
+    "homeTeam": "Spain",
+    "awayTeam": "Austria",
+    "stage": "Round of 32",
+    "venue": "Los Angeles Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Spain",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M84-ESP-V-AUT.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ESP",
+    "awayCode": "AUT",
+    "id": "spain-austria-2026-07-02"
+  },
+  {
+    "matchNumber": 85,
+    "eventDate": "2026-07-02",
+    "homeTeam": "Switzerland",
+    "awayTeam": "Algeria",
+    "stage": "Round of 32",
+    "venue": "BC Place Vancouver",
+    "finalScore": {
+      "home": 2,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Switzerland",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M85-SUI-V-ALG.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "SUI",
+    "awayCode": "ALG",
+    "id": "switzerland-algeria-2026-07-02"
+  },
+  {
+    "matchNumber": 86,
+    "eventDate": "2026-07-03",
+    "homeTeam": "Argentina",
+    "awayTeam": "Cabo Verde",
+    "stage": "Round of 32",
+    "venue": "Miami Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 2
+    },
+    "afterExtraTime": true,
+    "penaltyShootout": null,
+    "advancingTeam": "Argentina",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M86-ARG-V-CPV.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ARG",
+    "awayCode": "CPV",
+    "id": "argentina-cabo-verde-2026-07-03"
+  },
+  {
+    "matchNumber": 87,
+    "eventDate": "2026-07-03",
+    "homeTeam": "Colombia",
+    "awayTeam": "Ghana",
+    "stage": "Round of 32",
+    "venue": "Kansas City Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Colombia",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M87-COL-V-GHA.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "COL",
+    "awayCode": "GHA",
+    "id": "colombia-ghana-2026-07-03"
+  },
+  {
+    "matchNumber": 88,
+    "eventDate": "2026-07-03",
+    "homeTeam": "Australia",
+    "awayTeam": "Egypt",
+    "stage": "Round of 32",
+    "venue": "Dallas Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 1
+    },
+    "afterExtraTime": true,
+    "penaltyShootout": {
+      "home": 2,
+      "away": 4
+    },
+    "advancingTeam": "Egypt",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M88-AUS-V-EGY.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/australia-egypt-match-report-highlights",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-03"
+      }
+    ],
+    "homeCode": "AUS",
+    "awayCode": "EGY",
+    "id": "australia-egypt-2026-07-03"
+  },
+  {
+    "matchNumber": 89,
+    "eventDate": "2026-07-04",
+    "homeTeam": "Paraguay",
+    "awayTeam": "France",
+    "stage": "Round of 16",
+    "venue": "Philadelphia Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "France",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M89-PAR-V-FRA.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "PAR",
+    "awayCode": "FRA",
+    "id": "paraguay-france-2026-07-04"
+  },
+  {
+    "matchNumber": 90,
+    "eventDate": "2026-07-04",
+    "homeTeam": "Canada",
+    "awayTeam": "Morocco",
+    "stage": "Round of 16",
+    "venue": "Houston Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 3
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Morocco",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M90-CAN-V-MAR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "CAN",
+    "awayCode": "MAR",
+    "id": "canada-morocco-2026-07-04"
+  },
+  {
+    "matchNumber": 91,
+    "eventDate": "2026-07-05",
+    "homeTeam": "Brazil",
+    "awayTeam": "Norway",
+    "stage": "Round of 16",
+    "venue": "New York New Jersey Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Norway",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M91-BRA-V-NOR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "CBF",
+        "url": "https://www.cbf.com.br/selecao-brasileira/noticias/selecao-masculina/a/brasil-e-superado-pela-noruega-em-nova-jersey",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-05"
+      }
+    ],
+    "evidenceNote": "FIFA schedule and CBF report agree Brazil 1–2 Norway, resolving Sky aggregate 0–2 typo.",
+    "homeCode": "BRA",
+    "awayCode": "NOR",
+    "venueAlias": "New York/New Jersey Stadium",
+    "id": "brazil-norway-2026-07-05"
+  },
+  {
+    "matchNumber": 92,
+    "eventDate": "2026-07-05",
+    "homeTeam": "Mexico",
+    "awayTeam": "England",
+    "stage": "Round of 16",
+    "venue": "Mexico City Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 3
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "England",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M92-MEX-V-ENG.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "MEX",
+    "awayCode": "ENG",
+    "id": "mexico-england-2026-07-05"
+  },
+  {
+    "matchNumber": 93,
+    "eventDate": "2026-07-06",
+    "homeTeam": "Portugal",
+    "awayTeam": "Spain",
+    "stage": "Round of 16",
+    "venue": "Dallas Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Spain",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M93-POR-V-ESP.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "POR",
+    "awayCode": "ESP",
+    "id": "portugal-spain-2026-07-06"
+  },
+  {
+    "matchNumber": 94,
+    "eventDate": "2026-07-06",
+    "homeTeam": "USA",
+    "awayTeam": "Belgium",
+    "stage": "Round of 16",
+    "venue": "Seattle Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 4
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Belgium",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M94-USA-V-BEL.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "USA",
+    "awayCode": "BEL",
+    "id": "usa-belgium-2026-07-06"
+  },
+  {
+    "matchNumber": 95,
+    "eventDate": "2026-07-07",
+    "homeTeam": "Argentina",
+    "awayTeam": "Egypt",
+    "stage": "Round of 16",
+    "venue": "Atlanta Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Argentina",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M95-ARG-V-EGY.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ARG",
+    "awayCode": "EGY",
+    "id": "argentina-egypt-2026-07-07"
+  },
+  {
+    "matchNumber": 96,
+    "eventDate": "2026-07-07",
+    "homeTeam": "Switzerland",
+    "awayTeam": "Colombia",
+    "stage": "Round of 16",
+    "venue": "BC Place Vancouver",
+    "finalScore": {
+      "home": 0,
+      "away": 0
+    },
+    "afterExtraTime": true,
+    "penaltyShootout": {
+      "home": 4,
+      "away": 3
+    },
+    "advancingTeam": "Switzerland",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M96-SUI-V-COL.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/switzerland-colombia-match-report-highlights",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-07"
+      }
+    ],
+    "homeCode": "SUI",
+    "awayCode": "COL",
+    "id": "switzerland-colombia-2026-07-07"
+  },
+  {
+    "matchNumber": 97,
+    "eventDate": "2026-07-09",
+    "homeTeam": "France",
+    "awayTeam": "Morocco",
+    "stage": "Quarter-final",
+    "venue": "Boston Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 0
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "France",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M97-FRA-V-MAR.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "FRA",
+    "awayCode": "MAR",
+    "id": "france-morocco-2026-07-09"
+  },
+  {
+    "matchNumber": 98,
+    "eventDate": "2026-07-10",
+    "homeTeam": "Spain",
+    "awayTeam": "Belgium",
+    "stage": "Quarter-final",
+    "venue": "Los Angeles Stadium",
+    "finalScore": {
+      "home": 2,
+      "away": 1
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Spain",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M98-ESP-V-BEL-ALT.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ESP",
+    "awayCode": "BEL",
+    "id": "spain-belgium-2026-07-10"
+  },
+  {
+    "matchNumber": 99,
+    "eventDate": "2026-07-11",
+    "homeTeam": "Norway",
+    "awayTeam": "England",
+    "stage": "Quarter-final",
+    "venue": "Miami Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 2
+    },
+    "afterExtraTime": true,
+    "penaltyShootout": null,
+    "advancingTeam": "England",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M99-NOR-V-ENG.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "NOR",
+    "awayCode": "ENG",
+    "id": "norway-england-2026-07-11"
+  },
+  {
+    "matchNumber": 100,
+    "eventDate": "2026-07-11",
+    "homeTeam": "Argentina",
+    "awayTeam": "Switzerland",
+    "stage": "Quarter-final",
+    "venue": "Kansas City Stadium",
+    "finalScore": {
+      "home": 3,
+      "away": 1
+    },
+    "afterExtraTime": true,
+    "penaltyShootout": null,
+    "advancingTeam": "Argentina",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M100-ARG-V-SUI.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "evidenceNote": "FIFA event day is July 11; some European-facing aggregate pages list July 12. Publication date is not substituted for event date.",
+    "homeCode": "ARG",
+    "awayCode": "SUI",
+    "id": "argentina-switzerland-2026-07-11"
+  },
+  {
+    "matchNumber": 101,
+    "eventDate": "2026-07-14",
+    "homeTeam": "France",
+    "awayTeam": "Spain",
+    "stage": "Semi-final",
+    "venue": "Dallas Stadium",
+    "finalScore": {
+      "home": 0,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Spain",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M101-FRA-V-ESP.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "FRA",
+    "awayCode": "ESP",
+    "id": "france-spain-2026-07-14"
+  },
+  {
+    "matchNumber": 102,
+    "eventDate": "2026-07-15",
+    "homeTeam": "England",
+    "awayTeam": "Argentina",
+    "stage": "Semi-final",
+    "venue": "Atlanta Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 2
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "Argentina",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M102-ENG-V-ARG.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ENG",
+    "awayCode": "ARG",
+    "id": "england-argentina-2026-07-15"
+  },
+  {
+    "matchNumber": 103,
+    "eventDate": "2026-07-18",
+    "homeTeam": "France",
+    "awayTeam": "England",
+    "stage": "Third-place",
+    "venue": "Miami Stadium",
+    "finalScore": {
+      "home": 4,
+      "away": 6
+    },
+    "afterExtraTime": false,
+    "penaltyShootout": null,
+    "advancingTeam": "England",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M103-FRA-V-ENG.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "FRA",
+    "awayCode": "ENG",
+    "id": "france-england-2026-07-18"
+  },
+  {
+    "matchNumber": 104,
+    "eventDate": "2026-07-19",
+    "homeTeam": "Spain",
+    "awayTeam": "Argentina",
+    "stage": "Final",
+    "venue": "New York New Jersey Stadium",
+    "finalScore": {
+      "home": 1,
+      "away": 0
+    },
+    "afterExtraTime": true,
+    "penaltyShootout": null,
+    "advancingTeam": "Spain",
+    "sources": [
+      {
+        "identity": "FIFA Training Centre post-match summary report",
+        "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M104-ESP-V-ARG.pdf",
+        "accessMethod": "direct-pdf",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA Training Centre",
+        "url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub-knockout-stage.php",
+        "accessMethod": "direct-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": "2026-07-20"
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      },
+      {
+        "identity": "FIFA",
+        "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/knockout-stage-match-schedule-bracket",
+        "accessMethod": "indexed-official-page",
+        "accessedOn": "2026-11-07",
+        "reviewedOn": "2026-11-07",
+        "publicationDate": null
+      }
+    ],
+    "homeCode": "ESP",
+    "awayCode": "ARG",
+    "venueAlias": "New York/New Jersey Stadium",
+    "id": "spain-argentina-2026-07-19"
+  }
+]

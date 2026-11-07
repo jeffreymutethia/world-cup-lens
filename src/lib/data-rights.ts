@@ -6,6 +6,10 @@ export const SOURCE_CATEGORIES = [
 export type SourceCategory = typeof SOURCE_CATEGORIES[number];
 
 export function sourceRights(category: unknown) {
+  if (category === "curated-history-2026-v3") return {
+    category, publicationRights: "OWNER_DIRECTED_EDITORIAL_SCOPE" as const,
+    publicGitHubDataset: "104_CURATED_RECORDS_ONLY" as const, publicWebDisplay: "104_CURATED_RECORDS_ONLY" as const,
+  };
   if (category === "curated-history-2026-v1" || category === "curated-history-2026-v2") return {
     category,
     publicationRights: "OWNER_DIRECTED_EDITORIAL_SCOPE" as const,

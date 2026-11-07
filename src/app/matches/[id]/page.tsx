@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, MapPin } from "lucide-react";
 import { AppShell } from "@/components/layout/app-shell";
@@ -9,12 +10,11 @@ import { MatchQa } from "@/components/match/match-qa";
 import { ReplayControls, ReplayNotice, ReplayState } from "@/components/replay/replay-controls";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatKickoff } from "@/lib/lens";
+import { formatKickoff } from "@/lib/format-kickoff";
 import { findReplayMatch, parseReplaySelection, replayHref, replayScore, replayStatus, stageLabel, type ReplaySearchParams } from "@/lib/replay";
 import { loadSelectedReplay, loadSelectedAnswers } from "@/lib/replay-access";
 import { deploymentMode } from "@/lib/deployment-mode";
-import { loadCuratedHistory, secondaryCuratedMatches } from "@/lib/curated-history";
-import { formatMatchDay } from "@/lib/calendar-date";
+import { findCuratedMatch, curatedHref } from "@/lib/curated-history";
 import { CuratedMatchDetail } from "@/components/match/curated-match";
 
 type MatchPageProps = {
@@ -25,32 +25,34 @@ type MatchPageProps = {
 export default async function MatchPage({ params, searchParams }: MatchPageProps) {
   const { id } = await params;
   const deployment = deploymentMode();
-  const parsed = parseReplaySelection(await searchParams, deployment);
+  const query = await searchParams;
+  if (query.mode === "illustrative") redirect("/?mode=curated");
+  const parsed = parseReplaySelection(query, deployment);
   if (!parsed.ok) {
     return <AppShell><div className="mx-auto max-w-7xl space-y-6"><ReplayControls demoOnly={deployment === "demo-only"} /><ReplayState level={1} title={parsed.reason === "disabled" ? "Archive disabled in public demo" : "Invalid replay selection"}>{parsed.message}</ReplayState></div></AppShell>;
   }
   const { selection } = parsed;
   if (selection.mode === "curated") {
-    const curated = loadCuratedHistory(selection.date);
-    const match = curated.matches.find(match => match.id === id);
+    const match = findCuratedMatch(id);
     return <AppShell><div className="mx-auto max-w-7xl space-y-6">
-      <nav aria-label="Breadcrumb" className="match-breadcrumb"><Link href={replayHref(selection)}><ArrowLeft size={14} aria-hidden="true" />Matches</Link><span aria-hidden="true">/</span><span>{formatMatchDay(selection.date, true)}</span>{match && <><span aria-hidden="true">/</span><span>{match.homeTeam} vs {match.awayTeam}</span></>}</nav>
-      {match ? <CuratedMatchDetail match={match} related={secondaryCuratedMatches(curated.matches, match.id)} /> : <ReplayState level={1} title={curated.state === "error" ? "Curated history unavailable" : "Match not found in this selection"}>{curated.state === "error" ? "The selected records could not be loaded. No other collection has been substituted." : "This match is not in the selected collection and date. Return to Matches to choose a game."}</ReplayState>}
+      <nav aria-label="Breadcrumb" className="match-breadcrumb"><Link href={curatedHref(selection)}><ArrowLeft size={14} aria-hidden="true" />Matches</Link>{match && <><span aria-hidden="true">/</span><span>{match.homeTeam} vs {match.awayTeam}</span></>}</nav>
+      {match ? <CuratedMatchDetail match={match} filters={selection} /> : <ReplayState level={1} title="Match not found">This match is not in the historical collection. Return to Matches to choose a game.</ReplayState>}
     </div></AppShell>;
   }
+
   const result = await loadSelectedReplay(selection);
   const viewModel = findReplayMatch(result, id);
   const back = <Button asChild variant="ghost"><Link href={replayHref(selection)}><ArrowLeft className="mr-2 size-4" />Back to matches</Link></Button>;
   if (!viewModel) {
-    return <AppShell section={selection.mode === "illustrative" ? "lab" : "archive"}><div className="mx-auto max-w-7xl space-y-6">{back}<ReplayNotice selection={selection} /><ReplayState level={1} title={result.state === "error" ? (selection.mode === "archive" ? "Archive could not be loaded" : "Illustrative examples unavailable") : "Match not found in this selection"}>
-      {result.state === "error" ? (selection.mode === "archive" ? "The archive could not be read. Return to the match listing to try again; no fictional matches have been substituted." : "The sample records could not be loaded. No external service was requested.") : "This match is not in the selected collection and Los Angeles date. Return to the listing to choose a match."}
+    return <AppShell section="archive"><div className="mx-auto max-w-7xl space-y-6">{back}<ReplayNotice selection={selection} /><ReplayState level={1} title={result.state === "error" ? "Archive could not be loaded" : "Match not found in this selection"}>
+      {result.state === "error" ? "The archive could not be read. Return to the match listing to try again; no other dataset has been substituted." : "This match is not in the selected collection and Los Angeles date. Return to the listing to choose a match."}
     </ReplayState></div></AppShell>;
   }
   const { match, homeTeam, awayTeam, venue, lens } = viewModel;
   const policy = analysisPresentation(selection.mode);
   const cached = await loadSelectedAnswers(selection, match.id);
   return (
-    <AppShell section={selection.mode === "illustrative" ? "lab" : "archive"}>
+    <AppShell section="archive">
       <div className="mx-auto max-w-7xl space-y-6">
         {back}
         <ReplayNotice selection={selection} />
@@ -69,14 +71,13 @@ export default async function MatchPage({ params, searchParams }: MatchPageProps
             <span>{formatKickoff(match.kickoffAt)}</span>
             <span className="flex items-center gap-1"><MapPin className="size-4" />{venue.name}, {venue.city}</span>
           </div>
-          <p className="mt-4 text-center text-xs text-slate-500">{selection.mode === "illustrative" ? "Authored fictional scenario. No real event or outcome is represented." : "Recorded data only. Unverified intermediate scores are not displayed as final results."}</p>
+          <p className="mt-4 text-center text-xs text-slate-500">Recorded data only. Unverified intermediate scores are not displayed as final results.</p>
         </section>
         {lens ? <>
           <p className="text-sm font-semibold text-emerald-800">{policy.label}</p>
           <AnalysisProvenanceCard mode={selection.mode} match={match} cacheUpdatedAt={viewModel.lensCacheUpdatedAt} />
-          {selection.mode === "archive" && <MatchForecastCard lens={lens} />}
+          <MatchForecastCard lens={lens} />
           <section><h2 className="mb-4 text-2xl font-semibold tracking-tight">{lens.headline}</h2>
-            {selection.mode === "illustrative" && <p className="mb-5 leading-7 text-slate-600">{lens.expectedGame}</p>}
             <MatchLensCards lens={lens} mode={selection.mode} />
           </section>
         </> : <ReplayState title="Cached Match Lens unavailable">The match record is available above. Stored commentary is missing or unavailable; this page does not generate new analysis.</ReplayState>}

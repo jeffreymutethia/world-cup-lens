@@ -1,39 +1,36 @@
 import { isDateKey } from "./calendar-date";
 export { isDateKey } from "./calendar-date";
-import { DEFAULT_CURATED_DATE } from "./curated-history";
-import { DEMO_PUBLICATION, DEMO_DATASET_VERSION } from "../data/seed";
+import { curatedHref, parseCuratedFilters } from "./curated-history";
 import type { DeploymentMode } from "./deployment-mode";
 import { isCachedLens, isCachedAnswer } from "./cached-analysis";
 import type { Match, MatchQuestionAnswer, MatchViewModel } from "./types";
-import { getAllMatchViewModels, getCachedAnswersForMatch } from "./lens";
 
 export const REPLAY_TIME_ZONE = "America/Los_Angeles";
 export const DEFAULT_ARCHIVE_DATE = "2026-07-11";
-export const DEFAULT_ILLUSTRATIVE_DATE = "2026-06-11";
 export const REPLAY_MIN_DATE = "2026-06-11";
 export const REPLAY_MAX_DATE = "2026-07-19";
 export type DatasetMode = "archive" | "illustrative";
-export type LegacyReplaySelection = { mode: DatasetMode; date: string };
-export type ReplaySelection = LegacyReplaySelection | { mode: "curated"; date: string };
+export type LegacyReplaySelection = { mode: "archive"; date: string };
+export type CuratedSelection = { mode: "curated"; date: string | "all"; stage?: string; team?: string; q?: string; page?: string };
+export type ReplaySelection = LegacyReplaySelection | CuratedSelection;
 export type ReplaySearchParams = Record<string, string | string[] | undefined>;
 export type SelectionResult =
   | { ok: true; selection: ReplaySelection }
   | { ok: false; message: string; reason?: "disabled" };
 
 export function parseReplaySelection(params: ReplaySearchParams, deployment: DeploymentMode = "demo-only"): SelectionResult {
+  if (Object.values(params).some(Array.isArray)) return { ok: false, message: "Use each selection parameter once." };
   const mode = params.mode ?? (deployment === "demo-only" ? "curated" : "archive");
-  if (mode === "archive" && deployment === "demo-only") return { ok: false, reason: "disabled", message: "Archive access is disabled in this public demo. Curated history and the fictional lab remain available." };
-  if (mode !== "archive" && mode !== "illustrative" && mode !== "curated") {
-    return { ok: false, message: "Choose World Cup matches, the fictional lab or an enabled private archive." };
+  if (mode === "archive" && deployment === "demo-only") return { ok: false, reason: "disabled", message: "Archive access is disabled in this public deployment. The historical collection remains available." };
+  if (mode === "curated") {
+    const parsed = parseCuratedFilters(params);
+    return parsed.ok ? { ok: true, selection: { mode: "curated", ...parsed.filters } } : parsed;
   }
-  const date = params.date ?? (mode === "archive" ? DEFAULT_ARCHIVE_DATE : mode === "curated" ? DEFAULT_CURATED_DATE : DEFAULT_ILLUSTRATIVE_DATE);
-  if (typeof date !== "string" || !isDateKey(date)) {
-    return { ok: false, message: "Enter a valid date in YYYY-MM-DD format." };
-  }
-  if (date < REPLAY_MIN_DATE || date > REPLAY_MAX_DATE) {
-    return { ok: false, message: `Choose a date from ${REPLAY_MIN_DATE} to ${REPLAY_MAX_DATE}.` };
-  }
-  return { ok: true, selection: { mode, date } };
+  if (mode !== "archive") return { ok: false, message: "Choose the historical collection or an enabled private archive." };
+  const date = params.date ?? DEFAULT_ARCHIVE_DATE;
+  if (typeof date !== "string" || !isDateKey(date)) return { ok: false, message: "Enter a valid date in YYYY-MM-DD format." };
+  if (date < REPLAY_MIN_DATE || date > REPLAY_MAX_DATE) return { ok: false, message: `Choose a date from ${REPLAY_MIN_DATE} to ${REPLAY_MAX_DATE}.` };
+  return { ok: true, selection: { mode: "archive", date } };
 }
 
 export function localDateKey(date: Date, timeZone = REPLAY_TIME_ZONE) {
@@ -72,6 +69,7 @@ export function dateBounds(date: string, timeZone = REPLAY_TIME_ZONE) {
 }
 
 export function replayHref(selection: ReplaySelection, matchId?: string) {
+  if (selection.mode === "curated") return curatedHref(selection, matchId);
   const path = matchId === undefined ? "/" : `/matches/${encodeURIComponent(matchId)}`;
   return `${path}?${new URLSearchParams({ mode: selection.mode, date: selection.date })}`;
 }
@@ -85,14 +83,9 @@ export type ArchiveReader = (date: string) => Promise<MatchViewModel[]>;
 
 export async function loadReplay(selection: ReplaySelection, readArchive: ArchiveReader, deployment: DeploymentMode = "demo-only"): Promise<ReplayResult> {
   // Validate at the service boundary too, so callers cannot accidentally query a real-clock day.
-  if (selection.mode === "curated" || !parseReplaySelection(selection, deployment).ok) return { state: "error", matches: [], featured: null };
+  if (selection.mode !== "archive" || !parseReplaySelection(selection, deployment).ok) return { state: "error", matches: [], featured: null };
   try {
-    if (selection.mode === "illustrative" && (DEMO_PUBLICATION.decision !== "APPROVED_FOR_ORIGINAL_DEMO" || DEMO_PUBLICATION.datasetVersion !== DEMO_DATASET_VERSION)) {
-      throw new Error("Demo publication review is missing.");
-    }
-    const candidates = selection.mode === "archive"
-      ? await readArchive(selection.date)
-      : getAllMatchViewModels();
+    const candidates = await readArchive(selection.date);
     if (candidates.some(({ match }) => !Number.isFinite(Date.parse(match.kickoffAt)))) {
       throw new Error("Stored fixture timestamp is invalid.");
     }
@@ -120,11 +113,9 @@ export async function loadReplayAnswers(
   readArchive: (id: string) => Promise<MatchQuestionAnswer[]>,
   deployment: DeploymentMode = "demo-only",
 ) {
-  if (selection.mode === "curated" || !parseReplaySelection(selection, deployment).ok) return { answers: [], failed: true };
+  if (selection.mode !== "archive" || !parseReplaySelection(selection, deployment).ok) return { answers: [], failed: true };
   try {
-    const answers = selection.mode === "illustrative"
-      ? getCachedAnswersForMatch(matchId)
-      : await readArchive(matchId);
+    const answers = await readArchive(matchId);
     if (!answers.every(isCachedAnswer)) return { answers: [], failed: true };
     return { answers, failed: false };
   } catch {

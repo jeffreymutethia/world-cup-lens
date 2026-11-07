@@ -1,6 +1,23 @@
-# Editorial archive redesign
+# Editorial archive design
 
 Reference: supplied `world-cup-lens-design-reference-v2.zip`, SHA-256 `1307d2134d6d927f6af9e7cc632341ad40f14d65385a021a3f1f1a23a47c3ab6`. Baseline `8cd2323`. The package's PNGs establish visual direction; its copy guide establishes tone. HTML/CSS prototypes are reference material, not application code or production evidence. No reference images, fonts or official sports assets are bundled in the app.
+
+## Full-tournament archive — November 7, 2026
+
+The current implementation extends the existing forest-green editorial design; it does not introduce a second visual system. The public product is the historical archive. Fictional lab navigation, samples and Q&A are removed from public pages; old illustrative links redirect to the historical homepage. Synthetic examples remain test fixtures.
+
+- The default July 11 page retains the Norway–England scoreboard hero and excludes it from the secondary list.
+- Native date, stage/group, team and search controls submit URL-driven GET filters. A blank date means all dates. Four editorial shortcuts supplement the full calendar; previous/next matchday links use the 34 verified event dates.
+- Full-tournament results are paged at 24 secondary cards plus the featured match. All 104 are accessible without crowding the initial page. Selected filters survive detail/back and related-match navigation.
+- Match Lens adapts the original July cards into retrospective overview, significance, optional reported developments/interpretation, group-record context, source notes and uncertainty. There are no fabricated confidence ratings, strengths or predictions. All public commentary is editorial; private cached AI remains separate.
+- Team journeys expose related fixtures across the tournament. Previous/next links use the selected result set when it contains multiple matches, otherwise tournament order. Match number supplies deterministic ordering when clock times are unknown.
+- Scores exclude penalty shootout kicks; PEN and separate shootout scores distinguish those outcomes from AET. Unknown extra-time status cannot be labeled normal time. Typography remains system-based; no official assets or remote fonts are introduced.
+
+The isolated Chromium script now checks the five required widths, real date/filter/pagination/detail/back interactions, retired redirects, penalty presentation, source disclosure, keyboard focus/menu behavior and reduced motion. The final local run passed, including all 104 detail pages at 320px; [actual metrics](screenshots/archive/qa-local.json), [desktop](screenshots/archive/home-1440.png), [mobile](screenshots/archive/home-390.png) and [Lens detail](screenshots/archive/detail-1280.png) are candidate captures. Production verification is recorded separately in [deployment](deployment.md). A checked viewport is not physical-device or complete screen-reader/cross-browser certification.
+
+## Earlier five-match redesign — historical evidence
+
+The following design and capture records describe the November 4 five-match interface, not the current full-tournament release. Their original revision labels and source images are retained.
 
 ## Implemented decisions
 
