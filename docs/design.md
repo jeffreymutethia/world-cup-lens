@@ -8,12 +8,16 @@ The current implementation extends the existing forest-green editorial design; i
 
 - The default July 11 page retains the Norway–England scoreboard hero and excludes it from the secondary list.
 - Native date, stage/group, team and search controls submit URL-driven GET filters. A blank date means all dates. Four editorial shortcuts supplement the full calendar; previous/next matchday links use the 34 verified event dates.
-- Full-tournament results are paged at 24 secondary cards plus the featured match. All 104 are accessible without crowding the initial page. Selected filters survive detail/back and related-match navigation.
-- Match Lens adapts the original July cards into retrospective overview, significance, optional reported developments/interpretation, group-record context, source notes and uncertainty. There are no fabricated confidence ratings, strengths or predictions. All public commentary is editorial; private cached AI remains separate.
+- Full-tournament results are paged at 24 secondary cards plus the featured match. All 104 are accessible without crowding the initial page. Match links identify the actual destination date; separately validated return filters preserve the original listing and page across detail, related-match and team-journey navigation.
+- Match Lens adapts the original July cards into retrospective overview, significance, optional reported developments/interpretation, group-record context, source notes and uncertainty. Basic Lenses are labeled Match context (94); the ten extended retrospectives are labeled Match analysis. There are no fabricated confidence ratings, strengths or predictions. All public commentary is editorial; private cached AI remains separate.
 - Team journeys expose related fixtures across the tournament. Previous/next links use the selected result set when it contains multiple matches, otherwise tournament order. Match number supplies deterministic ordering when clock times are unknown.
 - Scores exclude penalty shootout kicks; PEN and separate shootout scores distinguish those outcomes from AET. Unknown extra-time status cannot be labeled normal time. Typography remains system-based; no official assets or remote fonts are introduced.
 
 The isolated Chromium script now checks the five required widths, real date/filter/pagination/detail/back interactions, retired redirects, penalty presentation, source disclosure, keyboard focus/menu behavior and reduced motion. The final local and production runs passed, including all 104 detail pages at 320px. [Local metrics](screenshots/archive/qa-local.json) and [production metrics](screenshots/archive/qa-production.json) retain separate origins. The [desktop](screenshots/archive/home-1440.png), [mobile](screenshots/archive/home-390.png) and [Lens detail](screenshots/archive/detail-1280.png) are genuine production captures of `3198043`. All 16 production PNGs matched local output byte-for-byte; only three are retained to avoid duplicate assets. [Deployment evidence](deployment.md) records CI and release status. A checked viewport is not physical-device or complete screen-reader/cross-browser certification.
+
+## Maintenance verification boundary
+
+The final maintenance changes preserve this visual system and the 104 factual records. They correct cross-date/return navigation, distinguish context from extended analysis, add match-specific metadata and give unknown curated IDs HTTP 404 semantics. Existing captures below remain revision-specific evidence; new deployment/browser results belong in [deployment](deployment.md). These changes do not establish a new visual or accessibility certification.
 
 ## Earlier five-match redesign — historical evidence
 

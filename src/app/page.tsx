@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import { ReplayLoading } from "@/components/replay/replay-loading";
 import { redirect } from "next/navigation";
 import { AppShell } from "@/components/layout/app-shell";
 import { FeaturedMatchCard } from "@/components/match/featured-match-card";
@@ -8,7 +10,11 @@ import { loadSelectedReplay } from "@/lib/replay-access";
 import { deploymentMode } from "@/lib/deployment-mode";
 import { CuratedHome } from "@/components/replay/curated-home";
 
-export default async function Home({ searchParams }: { searchParams: Promise<ReplaySearchParams> }) {
+type HomeProps = { searchParams: Promise<ReplaySearchParams> };
+export default function Home(props: HomeProps) {
+  return <Suspense fallback={<ReplayLoading />}><HomeContent {...props} /></Suspense>;
+}
+async function HomeContent({ searchParams }: HomeProps) {
   const deployment = deploymentMode();
   const demoOnly = deployment === "demo-only";
   const query = await searchParams;

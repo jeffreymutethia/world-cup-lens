@@ -1,4 +1,4 @@
-import { NON_AFFILIATION_NOTICE } from "../src/lib/curated-history";
+import { NON_AFFILIATION_NOTICE, parseCuratedReturn } from "../src/lib/curated-history";
 import { formatMatchDay } from "../src/lib/calendar-date";
 import { buildIllustrativeViewModel } from "./helpers/illustrative";
 import { deploymentMode, type DeploymentMode } from "../src/lib/deployment-mode";
@@ -318,8 +318,14 @@ test("curated navigation preserves date, stage, team, search and page state", ()
   const selection: ReplaySelection = { mode: "curated", date: "all", stage: "Quarter-final", team: "england", q: "England", page: "2" };
   for (const id of [undefined, "norway-england-2026-07-11"]) {
     const url: URL = new URL(replayHref(selection, id), "https://local.invalid");
-    assert.deepEqual(Object.fromEntries(url.searchParams), selection);
-    assert.deepEqual(parseReplaySelectionCore(Object.fromEntries(url.searchParams)), { ok: true, selection });
+    if (id === undefined) {
+      assert.deepEqual(Object.fromEntries(url.searchParams), selection);
+      assert.deepEqual(parseReplaySelectionCore(Object.fromEntries(url.searchParams)), { ok: true, selection });
+    } else {
+      assert.equal(url.searchParams.get("date"),"2026-07-11");
+      const returned=parseCuratedReturn(Object.fromEntries(url.searchParams),{date:"2026-07-11"});
+      assert.ok(returned.ok); const {mode: _mode,...filters}=selection; assert.deepEqual(returned.filters,filters);void _mode;
+    }
   }
   for (const key of ["mode", "date", "stage", "team", "q", "page"]) {
     assert.equal(parseReplaySelectionCore({ mode: "curated", [key]: ["first", "second"] }).ok, false);

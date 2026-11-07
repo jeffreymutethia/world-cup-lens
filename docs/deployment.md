@@ -2,6 +2,20 @@
 
 Public demo: **https://world-cup-lens-one.vercel.app**. Git-connected Vercel project: `jt254/world-cup-lens`. The public site uses all 104 reviewed local records and retrospective editorial Match Lenses. Private database and authoring services remain disabled. The latest verified production revision is recorded below; implementation alone is not deployment evidence.
 
+## Final maintenance — candidate verification
+
+Baseline `803c5745391e33e33d9313cca84bec5bc1999241`. This maintenance separates canonical match dates from validated return filters, labels concise context versus extended analysis, adds private-safe public match metadata and uses native `notFound()` for missing curated IDs. All factual/editorial records and private service boundaries remain unchanged.
+
+The installed Next version may return a minimal initial error shell for a pre-stream `notFound()`. Local built-server checks observed **HTTP 404 with noindex**; an isolated Chromium check confirmed the custom Match not found page, one heading/main and usable archive link after JavaScript hydration. This is separate from normal-navigation zero-console-error checks because a deliberate 404 is an expected network response. Non-JavaScript rendering of that custom message is not established. Loading is explicitly scoped to home/private reads rather than a global boundary that would prematurely commit HTTP 200.
+
+`npm run check:sources -- --limit 3` was manually sampled: three healthy responses (two bounded Range GET fallbacks and one HEAD). This is not a claim that every publisher link was checked. The command is report-only by default, uses no credentials, does not consume or store response bodies and never mutates records. Normal CI uses mocked source-health tests only.
+
+Local checks passed: **88 unit tests**, **78 real disposable PostgreSQL/pgvector assertions**, data validation, archive-mock/public/built-server HTTP suites, lint, clean-output typecheck/build, documentation links, credential patterns and whitespace. The registry high/critical gate passed with **8 moderate development-only entries** remaining. Duplicate generated build artifacts were cleared before the final clean checks; no source or dependency change was needed.
+
+[Local browser evidence](screenshots/maintenance/qa-local.json) covers 320/390/768/1280/1440px, all 104 details at 320px, canonical cross-date journeys and returning to the original paged list, keyboard/focus/menu behavior, sources and reduced motion. No document overflow, console errors or external browser requests were observed in normal navigation. The deliberate [missing-match check](screenshots/maintenance/missing-match-390.png) verified the hydrated 404 page separately.
+
+Committed-revision CI/deployment verification is pending; no new production revision is claimed by this candidate section.
+
 ## Full-tournament archive — release verification
 
 Released runtime: **`31980439e06dd6d65789eaef6513126f0796b074`**, November 7, 2026. [Hosted CI passed](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/42393535016), including the PostgreSQL 17/pgvector job. [Vercel completed deployment](https://vercel.com/jt254/world-cup-lens/FsUzE8bSC3dfwWX4ycgG9kM1NWHU) through the existing Git connection. This scope expands the public archive to 104 verified records, ten extended editorial Lenses, URL-driven date/stage/team/search browsing and paged results. It retires fictional public routes while preserving private RAG and isolated synthetic tests. Publication evidence and limits are in [the source review](curated-history-review.md).

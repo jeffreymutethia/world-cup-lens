@@ -34,9 +34,21 @@ The earlier high/critical dependency findings were corrected with Next/eslint-co
 
 These checks use deterministic contracts and the inspected primary evidence. They do not demonstrate model accuracy or authorize another corpus. [Source review](curated-history-review.md) records all 104 official report first-page checks, the results hubs, ten deeper editorial sources and publication limits.
 
+## Final maintenance corrections
+
+| Finding | Evidence / correction |
+| --- | --- |
+| Cross-date detail URLs retained the originating date | `curatedMatchHref` uses the destination’s event date; `parseCuratedReturn` validates a separate filter/page whitelist. Legacy detail URLs redirect; breadcrumbs restore the original list rather than changing its selection |
+| Basic context looked equivalent to extended reporting | `matchLensLabel` selects Match context for 94 basic records and Match analysis for ten extended records. Facts and commentary are unchanged |
+| Missing match-specific discovery metadata | `historicalMatchMetadata` uses local facts for title/description/Open Graph and fixed-origin canonical URLs. Return filters are excluded; private/invalid/missing selections receive generic noindex metadata |
+| Unknown curated IDs rendered a successful page | The detail now calls `notFound()` before any loading response is streamed. Explicit loading boundaries remain on the homepage/private path; empty searches and malformed selections retain distinct feedback |
+| No bounded source availability check | Manual `check:sources` separates missing links from blocked/network/timeouts, bounds HTTPS publisher requests and cancels bodies. Mocked tests run offline; publisher downtime is not an ordinary CI failure or grounds to rewrite facts |
+
+The maintenance candidate passed 88 unit tests, including cross-date return-state, metadata, source-checker and pre-aborted-request regressions. A bounded three-source live sample was healthy (two Range GET fallbacks and one HEAD); this does not establish all-source availability or reverify historical facts. Release-wide HTTP, CI and production outcomes are recorded separately in [deployment](deployment.md).
+
 ## Verification evidence
 
-The final local candidate passed **75 unit tests** and **78 real PostgreSQL assertions**, data integrity, archive/public HTTP suites, lint/typecheck/build, repository checks and five-width Chromium QA. The browser also checked all 104 details at 320px. Hosted CI, Vercel deployment and the full production HTTP/browser suites passed for `3198043`; see [deployment evidence](deployment.md) for links and scope.
+The earlier full-archive candidate passed **75 unit tests** and **78 real PostgreSQL assertions**, data integrity, archive/public HTTP suites, lint/typecheck/build, repository checks and five-width Chromium QA. The browser also checked all 104 details at 320px. Hosted CI, Vercel deployment and the full production HTTP/browser suites passed for `3198043`; see [deployment evidence](deployment.md) for links and scope.
 
 | Layer | What it establishes | Boundary |
 | --- | --- | --- |

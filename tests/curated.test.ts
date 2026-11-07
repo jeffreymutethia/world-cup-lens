@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { curatedMatches, CURATED_DATASET_VERSION } from "../src/data/curated-history";
-import { validateCuratedDataset, isCuratedMatch, validSource, loadCuratedHistory, parseCuratedFilters, selectCuratedMatches, paginateCuratedMatches, curatedNavigation, curatedHref, curatedResultLabel, groupRecord, teamKey, teamMonogram, matchWinner, CURATED_DATES, CURATED_TEAMS, EXPECTED_STAGE_COUNTS, tournamentStage } from "../src/lib/curated-history";
+import { validateCuratedDataset, isCuratedMatch, validSource, loadCuratedHistory, parseCuratedFilters, selectCuratedMatches, paginateCuratedMatches, curatedNavigation, curatedHref, curatedMatchHref, curatedCanonicalPath, parseCuratedReturn, matchLensLabel, curatedResultLabel, groupRecord, teamKey, teamMonogram, matchWinner, CURATED_DATES, CURATED_TEAMS, EXPECTED_STAGE_COUNTS, tournamentStage } from "../src/lib/curated-history";
 import { sourceRights } from "../src/lib/data-rights";
 const match = (number: number) => curatedMatches.find(m => m.matchNumber === number)!;
 
@@ -92,7 +92,7 @@ test("paged results cover all secondary fixtures exactly once with useful out-of
 
 test("detail and related navigation preserve return filters while looking up canonical records",()=>{
   const filters={date:"all",stage:"Quarter-final",team:"england",q:"Norway",page:"1"};
-  const url=new URL(curatedHref(filters,match(99).id),"https://example.test");assert.deepEqual(Object.fromEntries(url.searchParams),{mode:"curated",...filters});
+  const url=new URL(curatedHref(filters,match(99).id),"https://example.test");assert.equal(url.searchParams.get("date"),match(99).eventDate); assert.deepEqual(parseCuratedReturn(Object.fromEntries(url.searchParams),{date:match(99).eventDate}),{ok:true,filters});
   const nav=curatedNavigation(match(99),{date:"2026-07-11"});assert.equal(nav.next?.matchNumber,100);assert.equal(nav.previous,null);
   assert.ok(nav.related.some(m=>m.matchNumber===102));assert.ok(nav.related.every(m=>m.id!==match(99).id&&[m.homeTeam,m.awayTeam].some(t=>["Norway","England"].includes(t))));
   assert.equal(curatedNavigation(match(104),{date:"2026-07-19"}).next,null);
@@ -129,4 +129,28 @@ test("correct winner sets cannot conceal swapped quarter-final bracket opponents
   const swapped=curatedMatches.map(m=>m.matchNumber===97?{...m,awayTeam:match(98).awayTeam,awayCode:match(98).awayCode}:m.matchNumber===98?{...m,awayTeam:match(97).awayTeam,awayCode:match(97).awayCode}:m);
   assert.ok(swapped.every(isCuratedMatch));
   assert.ok(validateCuratedDataset(swapped).some(issue=>issue.includes("Conflicting bracket")));
+});
+
+test("cross-date match links carry actual event days and preserve original paged result filters",()=>{
+  const origin={date:"all",stage:"Group stage",team:"spain",q:"Spain",page:"2"};
+  const first=new URL(curatedMatchHref(match(99),origin),"https://local.invalid");
+  assert.equal(first.searchParams.get("date"),"2026-07-11");
+  const next=new URL(curatedMatchHref(match(104),origin),"https://local.invalid");
+  assert.equal(next.searchParams.get("date"),"2026-07-19");
+  assert.equal(next.searchParams.get("returnDate"),"all");
+  const parsed=parseCuratedReturn(Object.fromEntries(next.searchParams),{date:"2026-07-19"});
+  assert.ok(parsed.ok);assert.deepEqual(parsed.filters,origin);
+  assert.equal(curatedHref(parsed.filters),"/?mode=curated&date=all&stage=Group+stage&team=spain&q=Spain&page=2");
+  assert.equal(new URL(curatedMatchHref(match(1),parsed.filters),"https://local.invalid").searchParams.get("date"),"2026-06-11");
+  assert.equal(curatedCanonicalPath(match(104)),"/matches/spain-argentina-2026-07-19?mode=curated&date=2026-07-19");
+});
+test("return navigation validates only curated filters and does not accept arbitrary destinations",()=>{
+  for(const params of [{returnDate:"https://evil.invalid"},{returnStage:"Final"},{returnDate:["all"]},{returnDate:"all",returnTeam:"unknown"},{returnDate:"all",returnPage:"99"},{returnDate:"all",returnQ:["a","b"]}])assert.equal(parseCuratedReturn(params,{date:"2026-07-11"}).ok,false);
+  assert.deepEqual(parseCuratedReturn({returnTo:"https://evil.invalid"},{date:"2026-07-11"}),{ok:true,filters:{date:"2026-07-11"}});
+  assert.equal(new URL(curatedMatchHref(match(104),{date:"2026-07-11"}),"https://local.invalid").searchParams.get("returnDate"),"2026-07-11");
+  assert.throws(()=>curatedHref({date:"all"},"missing-match"));
+});
+test("analysis labels distinguish all94 contextual records and10 extended retrospectives",()=>{
+  assert.equal(curatedMatches.filter(m=>matchLensLabel(m)==="Match context").length,94);
+  assert.equal(curatedMatches.filter(m=>matchLensLabel(m)==="Match analysis").length,10);
 });

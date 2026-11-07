@@ -18,7 +18,8 @@
     "check:credentials": "node scripts/check-credentials.mjs",
     "check:docs": "node scripts/check-docs.mjs",
     "check:security": "npm audit --audit-level=high",
-    "check:data": "node scripts/validate-curated.mjs"
+    "check:data": "node scripts/validate-curated.mjs",
+    "check:sources": "node scripts/check-sources.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",

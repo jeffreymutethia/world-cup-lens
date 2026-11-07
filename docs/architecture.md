@@ -18,7 +18,11 @@ flowchart TD
   Selection -->|valid results| Listing[Featured scoreboard and paginated results]
   Selection -->|no matching results| Empty[Explicit empty state]
   Selection -->|invalid input or module| Error[Invalid or unavailable state]
-  Listing --> Detail[Result and retrospective Match Lens]
+  Listing --> Identity[Canonical match ID and actual event date]
+  Direct[Direct match URL] --> Identity
+  Identity --> Detail[Result and retrospective Match Lens]
+  Identity -->|unknown curated ID| NotFound[HTTP 404 and noindex]
+  Detail --> Return[Validated originating filters and page]
   Detail --> Navigation[Previous next related matches and team journeys]
   Detail --> Attribution[Primary links and source notes]
   Old[Old illustrative selection] --> Redirect[Redirect to historical homepage]
@@ -28,17 +32,23 @@ flowchart TD
 
 The default public day is July 11, featuring Norway–England. Full-tournament browsing uses `date=all`; date, stage/group, team and text filters are URL-driven. The list is ordered by event day and tournament match number, a stable convention that does not invent kickoff order. The featured match is excluded from secondary cards. Pagination avoids rendering the entire tournament on the landing page.
 
-Each curated detail resolves its stable ID independently of the list filter, preserving a usable return link. `curatedHref` carries the selected state. `curatedNavigation` chooses previous/next within the matching selection when possible, otherwise the whole tournament; related links follow the participating teams. `groupRecord` derives a team's played/won/drawn/lost/points/goals through the selected tournament match number. It is not an official ranked group table or a tiebreaker implementation.
+Each curated detail resolves its stable ID independently of the list filter. `curatedMatchHref` places the destination’s actual event date in the match URL; validated `returnDate`, `returnStage`, `returnTeam`, `returnQ` and `returnPage` preserve the originating list separately. `parseCuratedReturn` accepts only that filter contract, not an arbitrary return URL. Breadcrumbs and back links use `curatedHref` to restore the origin, including pagination. Older detail URLs carrying another date or list filters redirect to this canonical shape. `curatedNavigation` chooses previous/next within the matching selection when possible, otherwise the whole tournament; related links follow the participating teams. `groupRecord` derives a team's played/won/drawn/lost/points/goals through the selected tournament match number. It is not an official ranked group table or a tiebreaker implementation.
 
 `finalScore` includes regulation and any extra-time goals. `penaltyShootout` is separate; `advancingTeam` is checked against the deciding result; in the final and third-place record it denotes the winner, and stage-aware copy does not imply another round. Unknown extra-time information stays null. Event dates remain `YYYY-MM-DD`, with `day` precision and source-local-event-day basis. No midnight kickoff, regulation score, lineup, historical cutoff or generated-at timestamp is manufactured.
 
 ## Match Lens presentation
 
-`CuratedHome` and `CuratedMatchDetail` preserve the forest-green editorial design: large scoreboards, restrained pitch geometry, date navigation and responsive fixture cards. The detail uses a consistent retrospective Lens structure: overview, significance, original interpretation, optional source-linked developments and explicit evidence limits. Optional sections avoid filling gaps with invented tactical prose. All records have concise context; ten have extended match-specific reporting.
+`CuratedHome` and `CuratedMatchDetail` preserve the forest-green editorial design: large scoreboards, restrained pitch geometry, date navigation and responsive fixture cards. The detail uses a consistent retrospective Lens structure: overview, significance, original interpretation, optional source-linked developments and explicit evidence limits. Optional sections avoid filling gaps with invented tactical prose. The 94 basic records are labeled **Match context**; ten extended records with match-specific reporting are labeled **Match analysis**. These labels do not imply tactical measurements or model generation.
 
 The public interface has one responsive header, a skip link, a main landmark and a concise non-affiliation footer. `TopNav` is a small client component for mobile disclosure, Escape handling and focus return. Selection and match rendering remain server responsibilities. Public browsing does not request a database, embedding, model or provider service. Old illustrative selections redirect to `/?mode=curated`; the fictional lab is no longer a public product. Deterministic synthetic fixtures and private cached Q&A remain available to their existing test/private paths.
 
 Primary links are visible alongside source notes. Detailed evidence/version/unknown-field disclosures are progressively revealed rather than repeated across every card. Source excerpts are not copied into the public dataset, and original editorial text is never labeled generated analysis. The [design document](design.md) records visual decisions and actual browser evidence.
+
+## Metadata and HTTP responses
+
+`src/lib/match-metadata.ts:historicalMatchMetadata` builds titles, descriptions, Open Graph fields and canonical URLs only from validated local curated records. Canonicals use the fixed public origin and actual event date, excluding return filters. Private, malformed and missing selections receive generic noindex metadata without echoing IDs or private content; metadata never reads Supabase.
+
+The curated detail calls Next.js `notFound()` for an unknown ID. There is no global route loading boundary that can stream a successful response before that decision. `ReplayLoading` is used by explicit Suspense boundaries on the homepage and private detail path. Valid empty searches and invalid selection feedback remain separate page states.
 
 ## Deployment and service boundaries
 
@@ -96,11 +106,13 @@ Unit tests check curated contracts, filters/navigation, display labels and mocke
 
 GitHub Actions uses Node 22, locked installs, deterministic tests, a disposable PostgreSQL/pgvector job, HTTP isolation checks, lint/typecheck/build and repository checks. Production smoke checks and browser captures are explicit, separate verification. Passing tests do not establish real-model grounding quality, authenticated historical forecasts, live Supabase gateway/Auth coverage, production schema parity or legal clearance. Revision-specific results must be recorded after execution, not assumed from this design.
 
+Published source availability can be checked manually with `npm run check:sources`. The optional checker reads only committed source URLs, restricts HTTPS requests and redirects to reviewed publisher hosts, uses four workers with eight seconds per source and a 90-second overall budget, and cancels response bodies. Unsupported HEAD responses use a byte-range GET. It distinguishes access blocks, missing pages, HTTP/network failures and timeouts; default reports do not fail on publisher downtime or alter facts. CI tests these behaviors with mocked fetches rather than contacting publishers.
+
 ## Worked public example
 
 1. The local factual module records `norway-england-2026-07-11`, match 99, quarter-final, Miami Stadium, 1–2 after extra time, with evidence metadata and explicit unknown clocks.
 2. The public default selects July 11; `loadCuratedHistory` validates the full dataset and chooses this fixture as featured without constructing a service client.
-3. `curatedHref` creates the detail URL carrying the current date/filter state. The secondary list excludes the featured ID.
+3. `curatedMatchHref` creates a detail URL dated July 11, with any originating list filters/page stored separately. The secondary list excludes the featured ID.
 4. `CuratedMatchDetail` reads the original extended Lens, reports the sourced scoring sequence and limits, and links related team matches and the primary evidence.
 5. Returning to the list restores its selection. No cached private AI output, fictional record or model call is involved.
 

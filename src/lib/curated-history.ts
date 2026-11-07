@@ -134,9 +134,14 @@ export function loadCuratedHistory(dateOrFilters: string | CuratedFilters, recor
 }
 export function findCuratedMatch(id: string) { return validateCuratedDataset(curatedMatches).length ? null : curatedMatches.find(m => m.id === id) ?? null; }
 export function curatedHref(filters: CuratedFilters, id?: string) {
+  if (id !== undefined) {
+    const match = curatedMatches.find(match => match.id === id);
+    if (!match) throw new Error("Cannot link an unknown historical match.");
+    return curatedMatchHref(match,filters);
+  }
   const query = new URLSearchParams({ mode: "curated", date: filters.date });
   for (const key of ["stage","team","q","page"] as const) if (filters[key]) query.set(key, filters[key]);
-  return `${id ? `/matches/${encodeURIComponent(id)}` : "/"}?${query}`;
+  return `/?${query}`;
 }
 export function curatedNavigation(match: CuratedMatch, filters: CuratedFilters) {
   const all = selectCuratedMatches(curatedMatches, { date: "all" });
@@ -163,3 +168,27 @@ export function groupRecord(match: CuratedMatch, team: string) {
   for (const m of played) { const home=m.homeTeam === team; const gf=home?m.finalScore.home:m.finalScore.away; const ga=home?m.finalScore.away:m.finalScore.home; goalsFor+=gf; goalsAgainst+=ga; if(gf>ga)won++;else if(gf===ga)drawn++;else lost++; }
   return { played: played.length, won, drawn, lost, points: won*3+drawn, goalsFor, goalsAgainst };
 }
+
+// Match identity/date and originating list state are separate navigation contracts.
+const returnKeys = { date: "returnDate", stage: "returnStage", team: "returnTeam", q: "returnQ", page: "returnPage" } as const;
+export function curatedCanonicalPath(match: CuratedMatch) {
+  return `/matches/${encodeURIComponent(match.id)}?${new URLSearchParams({ mode: "curated", date: match.eventDate })}`;
+}
+export function curatedMatchHref(match: CuratedMatch, returnFilters: CuratedFilters = { date: match.eventDate }) {
+  const parsed = parseCuratedFilters(returnFilters);
+  if (!parsed.ok) throw new Error("Invalid historical return filters.");
+  const filters = parsed.filters;
+  const query = new URLSearchParams({ mode: "curated", date: match.eventDate });
+  if (filters.date !== match.eventDate || filters.stage || filters.team || filters.q || filters.page) {
+    for (const key of Object.keys(returnKeys) as (keyof typeof returnKeys)[]) if (filters[key]) query.set(returnKeys[key], filters[key]);
+  }
+  return `/matches/${encodeURIComponent(match.id)}?${query}`;
+}
+export function parseCuratedReturn(params: Record<string, string | string[] | undefined>, fallback: CuratedFilters) {
+  if (!Object.values(returnKeys).some(key => params[key] !== undefined)) return parseCuratedFilters(fallback);
+  if (typeof params.returnDate !== "string" || !params.returnDate) return { ok: false as const, message: "Choose a valid return date or all dates." };
+  const filters: Record<string,string|string[]|undefined> = {};
+  for (const key of Object.keys(returnKeys) as (keyof typeof returnKeys)[]) filters[key] = params[returnKeys[key]];
+  return parseCuratedFilters(filters);
+}
+export function matchLensLabel(match: CuratedMatch) { return match.editorial.depth === "extended" ? "Match analysis" : "Match context"; }

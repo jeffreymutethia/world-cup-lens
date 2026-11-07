@@ -1,4 +1,8 @@
-import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import { ReplayLoading } from "@/components/replay/replay-loading";
+import type { Metadata } from "next";
+import { historicalMatchMetadata } from "@/lib/match-metadata";
+import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, MapPin } from "lucide-react";
 import { AppShell } from "@/components/layout/app-shell";
@@ -11,16 +15,21 @@ import { ReplayControls, ReplayNotice, ReplayState } from "@/components/replay/r
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatKickoff } from "@/lib/format-kickoff";
-import { findReplayMatch, parseReplaySelection, replayHref, replayScore, replayStatus, stageLabel, type ReplaySearchParams } from "@/lib/replay";
+import { findReplayMatch, parseReplaySelection, replayHref, replayScore, replayStatus, stageLabel, type ReplaySearchParams, type LegacyReplaySelection } from "@/lib/replay";
 import { loadSelectedReplay, loadSelectedAnswers } from "@/lib/replay-access";
 import { deploymentMode } from "@/lib/deployment-mode";
-import { findCuratedMatch, curatedHref } from "@/lib/curated-history";
+import { findCuratedMatch, curatedHref, curatedMatchHref, parseCuratedReturn } from "@/lib/curated-history";
 import { CuratedMatchDetail } from "@/components/match/curated-match";
 
 type MatchPageProps = {
   params: Promise<{ id: string }>;
   searchParams: Promise<ReplaySearchParams>;
 };
+
+export async function generateMetadata({ params, searchParams }: MatchPageProps): Promise<Metadata> {
+  const [{ id }, query] = await Promise.all([params,searchParams]);
+  return historicalMatchMetadata(id,query,deploymentMode());
+}
 
 export default async function MatchPage({ params, searchParams }: MatchPageProps) {
   const { id } = await params;
@@ -34,12 +43,21 @@ export default async function MatchPage({ params, searchParams }: MatchPageProps
   const { selection } = parsed;
   if (selection.mode === "curated") {
     const match = findCuratedMatch(id);
+    if (!match) notFound();
+    const hasListState = ["date","stage","team","q","page"].some(key => query[key] !== undefined);
+    const returned = parseCuratedReturn(query, hasListState ? selection : { date: match.eventDate });
+    if (!returned.ok) return <AppShell><ReplayState level={1} title="Invalid return selection">{returned.message} <Link className="text-link" href={curatedHref({ date: match.eventDate })}>Browse this matchday</Link></ReplayState></AppShell>;
+    if (selection.date !== match.eventDate || selection.stage || selection.team || selection.q || selection.page) redirect(curatedMatchHref(match, returned.filters));
     return <AppShell><div className="mx-auto max-w-7xl space-y-6">
-      <nav aria-label="Breadcrumb" className="match-breadcrumb"><Link href={curatedHref(selection)}><ArrowLeft size={14} aria-hidden="true" />Matches</Link>{match && <><span aria-hidden="true">/</span><span>{match.homeTeam} vs {match.awayTeam}</span></>}</nav>
-      {match ? <CuratedMatchDetail match={match} filters={selection} /> : <ReplayState level={1} title="Match not found">This match is not in the historical collection. Return to Matches to choose a game.</ReplayState>}
+      <nav aria-label="Breadcrumb" className="match-breadcrumb"><Link href={curatedHref(returned.filters)}><ArrowLeft size={14} aria-hidden="true" />Matches</Link>{match && <><span aria-hidden="true">/</span><span>{match.homeTeam} vs {match.awayTeam}</span></>}</nav>
+      <CuratedMatchDetail match={match} filters={returned.filters} />
     </div></AppShell>;
   }
 
+  return <Suspense fallback={<ReplayLoading />}><PrivateMatch id={id} selection={selection} /></Suspense>;
+}
+
+async function PrivateMatch({ id, selection }: { id: string; selection: LegacyReplaySelection }) {
   const result = await loadSelectedReplay(selection);
   const viewModel = findReplayMatch(result, id);
   const back = <Button asChild variant="ghost"><Link href={replayHref(selection)}><ArrowLeft className="mr-2 size-4" />Back to matches</Link></Button>;

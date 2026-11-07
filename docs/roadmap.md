@@ -28,6 +28,12 @@ The [audit](audit.md#current-findings) records implementation findings; [deploym
 
 These are implementation corrections, not claims of measured model quality, legal clearance or a new deployed revision. Revision-specific test/deployment results are recorded in the delivery evidence.
 
+## Final maintenance
+
+Implemented maintenance preserves the archive scope: canonical match dates with separate validated list-return state, cross-date/related/team-journey navigation, Match context versus Match analysis labels, public match metadata, genuine missing-ID 404s, and an optional bounded source checker. The candidate has 88 passing unit tests; all-release checks and deployed-revision evidence belong in [deployment](deployment.md). A three-link live sample was healthy; source health remains a manual operational check, not proof that all publishers are available or permission to change results.
+
+The source checker is report-only by default and does not run external requests in ordinary CI. Explicit strict mode is available for a deliberate manual gate. Future source failures need review; access blocks, network errors and missing pages are distinct outcomes. No new Lens prose, records, public backend access or publication rights are introduced.
+
 ## True defects — private ingestion
 
 Name-based team and missing-venue identities can collide; flag/code aliases are incomplete; team-level group/stage updates can reflect the last imported round. The provider response mapping omits penalty breakdown. These paths are disabled in public production and do not supply curated facts.

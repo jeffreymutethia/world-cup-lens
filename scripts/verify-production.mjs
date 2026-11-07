@@ -6,9 +6,10 @@ const base = new URL(process.env.DEMO_URL ?? "https://world-cup-lens-one.vercel.
 assert.equal(base.protocol, "https:");
 assert.ok(!base.username && !base.password && !base.search && !base.hash && base.pathname === "/");
 const watchdog = setTimeout(() => { console.error("Public demo checks exceeded 120 seconds"); process.exit(1); }, 120_000);
-async function page(path, method = "GET") {
-  const response = await fetch(new URL(path, base), { method, redirect: "error", signal: AbortSignal.timeout(15_000) });
-  return { status: response.status, html: await response.text() };
+async function page(path, options = "GET") {
+  const settings=typeof options === "string" ? { method: options } : options;
+  const response = await fetch(new URL(path, base), { redirect: "manual", ...settings, signal: AbortSignal.timeout(15_000) });
+  return { response, status: response.status, html: await response.text() };
 }
 try {
   await checkCuratedPages(page);
