@@ -30,7 +30,7 @@ The default public day is July 11, featuring Norway–England. Full-tournament b
 
 Each curated detail resolves its stable ID independently of the list filter, preserving a usable return link. `curatedHref` carries the selected state. `curatedNavigation` chooses previous/next within the matching selection when possible, otherwise the whole tournament; related links follow the participating teams. `groupRecord` derives a team's played/won/drawn/lost/points/goals through the selected tournament match number. It is not an official ranked group table or a tiebreaker implementation.
 
-`finalScore` includes regulation and any extra-time goals. `penaltyShootout` is separate; an advancing team is checked against the deciding result. Unknown extra-time information stays null. Event dates remain `YYYY-MM-DD`, with `day` precision and source-local-event-day basis. No midnight kickoff, regulation score, lineup, historical cutoff or generated-at timestamp is manufactured.
+`finalScore` includes regulation and any extra-time goals. `penaltyShootout` is separate; `advancingTeam` is checked against the deciding result; in the final and third-place record it denotes the winner, and stage-aware copy does not imply another round. Unknown extra-time information stays null. Event dates remain `YYYY-MM-DD`, with `day` precision and source-local-event-day basis. No midnight kickoff, regulation score, lineup, historical cutoff or generated-at timestamp is manufactured.
 
 ## Match Lens presentation
 

@@ -4,7 +4,7 @@
 
 The earlier portfolio assessment covered baseline `4c88da8399c8cdc3de8d96a2ee380f635f11fa98`, a five-match public replay and tested private backend contracts. The November 7, 2026 owner-authorized assignment expands that public collection from candidate baseline `7d06bc4089881601f0f4502d17215a5cc27f75f4`; it does not turn on paid services or change production databases.
 
-The current implementation covers all 104 matches with retrospective editorial Match Lenses. Final CI/deployment/browser evidence must be checked for the delivered revision before freezing the expanded MVP. The [walkthrough](technical-walkthrough.md) describes actual boundaries; [deployment](deployment.md) records executed release checks. No portfolio assessment establishes production AI readiness, authentic historical forecasts, measured grounding quality or legal clearance.
+The current implementation covers all 104 matches with retrospective editorial Match Lenses. The expanded MVP is frozen after the verified `3198043` release. The [walkthrough](technical-walkthrough.md) describes actual boundaries; [deployment](deployment.md) records executed release checks. No portfolio assessment establishes production AI readiness, authentic historical forecasts, measured grounding quality or legal clearance.
 
 ## Current findings
 
@@ -36,7 +36,7 @@ These checks use deterministic contracts and the inspected primary evidence. The
 
 ## Verification evidence
 
-The final local candidate passed **75 unit tests** and **78 real PostgreSQL assertions**, data integrity, archive/public HTTP suites, lint/typecheck/build, repository checks and five-width Chromium QA. The browser also checked all 104 details at 320px. Hosted CI and production delivery remain pending the release commit; see [deployment evidence](deployment.md) for revision-specific results.
+The final local candidate passed **75 unit tests** and **78 real PostgreSQL assertions**, data integrity, archive/public HTTP suites, lint/typecheck/build, repository checks and five-width Chromium QA. The browser also checked all 104 details at 320px. Hosted CI, Vercel deployment and the full production HTTP/browser suites passed for `3198043`; see [deployment evidence](deployment.md) for links and scope.
 
 | Layer | What it establishes | Boundary |
 | --- | --- | --- |
@@ -71,4 +71,4 @@ Canonical provider statuses are explicitly mapped and unsupported values fail be
 - **Publication scope:** an early internal HOLD was superseded first by a five-record editorial release, then by the explicit full-tournament assignment and updated source review. These are scoped project decisions, not blanket rights clearance.
 - **Earlier regressions:** browser checks caught narrow-screen clipping and hosted SQL caught a temporary-server readiness race; both were corrected. [Release history](deployment.md#release-history).
 
-Remaining work is categorized in the [roadmap](roadmap.md#portfolio-freeze-and-remaining-work). Freeze the expanded MVP only after its actual delivery gates pass; substantive defects can reopen maintenance thereafter.
+Remaining work is categorized in the [roadmap](roadmap.md#portfolio-freeze-and-remaining-work). The expanded MVP is frozen after its verified delivery; substantive defects can reopen maintenance.

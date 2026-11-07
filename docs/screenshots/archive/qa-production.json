@@ -1,0 +1,137 @@
+{
+  "base": "https://world-cup-lens-one.vercel.app",
+  "capturedAt": "2026-11-07T16:55:05.575Z",
+  "browser": "Chrome/156.0.8078.81",
+  "widths": [
+    {
+      "width": 320,
+      "home": {
+        "width": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320,
+        "h1s": 1,
+        "score": "43px",
+        "main": 1,
+        "dates": {
+          "client": 304,
+          "scroll": 529
+        }
+      },
+      "detail": {
+        "width": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320,
+        "h1s": 1,
+        "score": "43px",
+        "main": 1,
+        "dates": null
+      }
+    },
+    {
+      "width": 390,
+      "home": {
+        "width": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "h1s": 1,
+        "score": "48px",
+        "main": 1,
+        "dates": {
+          "client": 374,
+          "scroll": 529
+        }
+      },
+      "detail": {
+        "width": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "h1s": 1,
+        "score": "48px",
+        "main": 1,
+        "dates": null
+      }
+    },
+    {
+      "width": 768,
+      "home": {
+        "width": 768,
+        "clientWidth": 768,
+        "scrollWidth": 768,
+        "h1s": 1,
+        "score": "80px",
+        "main": 1,
+        "dates": {
+          "client": 712,
+          "scroll": 712
+        }
+      },
+      "detail": {
+        "width": 768,
+        "clientWidth": 768,
+        "scrollWidth": 768,
+        "h1s": 1,
+        "score": "80px",
+        "main": 1,
+        "dates": null
+      }
+    },
+    {
+      "width": 1280,
+      "home": {
+        "width": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "h1s": 1,
+        "score": "80px",
+        "main": 1,
+        "dates": {
+          "client": 1224,
+          "scroll": 1224
+        }
+      },
+      "detail": {
+        "width": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "h1s": 1,
+        "score": "80px",
+        "main": 1,
+        "dates": null
+      }
+    },
+    {
+      "width": 1440,
+      "home": {
+        "width": 1440,
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "h1s": 1,
+        "score": "80px",
+        "main": 1,
+        "dates": {
+          "client": 1296,
+          "scroll": 1296
+        }
+      },
+      "detail": {
+        "width": 1440,
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "h1s": 1,
+        "score": "80px",
+        "main": 1,
+        "dates": null
+      }
+    }
+  ],
+  "checks": [
+    "keyboard skip/date/focus/Enter; selected date/back; single-match isolation",
+    "native date/stage/team/search form, paged archive and filter-preserving detail/back",
+    "retired lab redirect and genuine empty date",
+    "original five match heroes fit at 320px without splitting single-word team names",
+    "all 104 canonical detail pages checked at 320px for document overflow and one h1",
+    "about navigation and reduced-motion styles"
+  ],
+  "consoleErrorCount": 0,
+  "externalRequestCount": 0
+}

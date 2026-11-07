@@ -2,7 +2,7 @@
 
 ## Portfolio freeze and remaining work
 
-The November 7, 2026 full-tournament assignment is an explicit owner-authorized expansion of the earlier five-match MVP. It covers the 104-match historical archive, retrospective Match Lenses, public-lab retirement and delivery verification. It does not authorize production backend activation, paid generation, provider exports or database migrations. Freeze the expanded MVP after successful review, CI and verified deployment; later product features require a new scope.
+The November 7, 2026 full-tournament assignment is an explicit owner-authorized expansion of the earlier five-match MVP. It covers the 104-match historical archive, retrospective Match Lenses, public-lab retirement and delivery verification. It does not authorize production backend activation, paid generation, provider exports or database migrations. The expanded MVP is now frozen after successful review, CI and verified deployment of `3198043`; later product features require a new scope.
 
 The [audit](audit.md#current-findings) records implementation findings; [deployment evidence](deployment.md) records revision-specific release results. The [walkthrough](technical-walkthrough.md), [decisions](engineering-decisions.md), [interview guide](interview-guide.md) and [portfolio summary](portfolio-summary.md) explain the system without implying a live public RAG service.
 
@@ -15,7 +15,7 @@ The [audit](audit.md#current-findings) records implementation findings; [deploym
 | Browsing | Default July 11 featured fixture, all-date archive, calendar, stage/group/team/text filters, pagination, detail/back/previous/next and related team journeys | URL state and empty/invalid cases tested; stable event-day/match-number ordering never claims kickoff precision |
 | Fictional lab retirement | Public fiction/navigation/Q&A removed; old illustrative selections redirect to `/?mode=curated`; synthetic data/helpers moved into tests | HTTP redirect checks and runtime-import isolation; preserve original private RAG/SQL corpus and fixtures |
 | Security boundaries | Demo-only fail-closed policy, protected private archive/authoring, no service calls or cron schedule | Existing dummy-setting service tripwires and permission tests retained; no public RAG activation or broadened RLS |
-| Review and delivery | Data/code/security/editorial review and documentation aligned with the implementation | Run all final local gates, five-width browser QA, committed-revision CI and production verification before calling the release complete; see [deployment](deployment.md) |
+| Review and delivery | Data/code/security/editorial review and documentation aligned with the implementation | Completed for `3198043`: 75 unit tests, 78 SQL assertions, all required local checks, hosted CI and production HTTP/five-width browser verification; see [deployment](deployment.md) |
 
 ## Corrections made during archive review
 
@@ -26,7 +26,7 @@ The [audit](audit.md#current-findings) records implementation findings; [deploym
 - Canonical filter normalization is used for selection, pagination and return navigation; legacy illustrative requests cannot open another dataset.
 - Knockout progression checks validate the fixed feeder participants, not merely aggregate winner sets.
 
-These are implementation corrections, not claims of measured model quality, legal clearance or a new deployed revision. Final test/deployment results remain separate.
+These are implementation corrections, not claims of measured model quality, legal clearance or a new deployed revision. Revision-specific test/deployment results are recorded in the delivery evidence.
 
 ## True defects — private ingestion
 
