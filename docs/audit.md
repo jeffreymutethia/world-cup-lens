@@ -44,7 +44,7 @@ These checks use deterministic contracts and the inspected primary evidence. The
 | Unknown curated IDs rendered a successful page | The detail now calls `notFound()` before any loading response is streamed. Explicit loading boundaries remain on the homepage/private path; empty searches and malformed selections retain distinct feedback |
 | No bounded source availability check | Manual `check:sources` separates missing links from blocked/network/timeouts, bounds HTTPS publisher requests and cancels bodies. Mocked tests run offline; publisher downtime is not an ordinary CI failure or grounds to rewrite facts |
 
-The maintenance candidate passed 88 unit tests, including cross-date return-state, metadata, source-checker and pre-aborted-request regressions. A bounded three-source live sample was healthy (two Range GET fallbacks and one HEAD); this does not establish all-source availability or reverify historical facts. Release-wide HTTP, CI and production outcomes are recorded separately in [deployment](deployment.md).
+Runtime `9315f1e` passed 88 unit tests, 78 disposable PostgreSQL assertions and the required local checks, including cross-date return-state, metadata, source-checker and pre-aborted-request regressions. Production HTTP and five-width Chromium checks passed, including all 104 details, actual destination dates and preserved return state. A bounded three-source live sample was healthy (two Range GET fallbacks and one HEAD); this does not establish all-source availability or reverify historical facts. Release-wide HTTP, CI and production outcomes are recorded separately in [deployment](deployment.md).
 
 ## Verification evidence
 

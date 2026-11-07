@@ -2,7 +2,7 @@
 
 Public demo: **https://world-cup-lens-one.vercel.app**. Git-connected Vercel project: `jt254/world-cup-lens`. The public site uses all 104 reviewed local records and retrospective editorial Match Lenses. Private database and authoring services remain disabled. The latest verified production revision is recorded below; implementation alone is not deployment evidence.
 
-## Final maintenance — candidate verification
+## Final maintenance — release verification
 
 Baseline `803c5745391e33e33d9313cca84bec5bc1999241`. This maintenance separates canonical match dates from validated return filters, labels concise context versus extended analysis, adds private-safe public match metadata and uses native `notFound()` for missing curated IDs. All factual/editorial records and private service boundaries remain unchanged.
 
@@ -14,7 +14,13 @@ Local checks passed: **88 unit tests**, **78 real disposable PostgreSQL/pgvector
 
 [Local browser evidence](screenshots/maintenance/qa-local.json) covers 320/390/768/1280/1440px, all 104 details at 320px, canonical cross-date journeys and returning to the original paged list, keyboard/focus/menu behavior, sources and reduced motion. No document overflow, console errors or external browser requests were observed in normal navigation. The deliberate [missing-match check](screenshots/maintenance/missing-match-390.png) verified the hydrated 404 page separately.
 
-Committed-revision CI/deployment verification is pending; no new production revision is claimed by this candidate section.
+Verified runtime: **`9315f1e392d7e2785e674c6ea4476cf53c43c309`**, November 7, 2026. The existing Git connection completed [Vercel deployment](https://vercel.com/jt254/world-cup-lens/Axp5T5dzvY6xQheHr7R42hr6UQ91). Hosted [CI passed](https://github.com/jeffreymutethia/world-cup-lens/actions/runs/42402843369), including both the complete verification job and disposable PostgreSQL 17/pgvector job.
+
+Production HTTP checks passed all 104 match details and 34 event dates, metadata/canonical links, cross-date navigation and original filter/page return, legacy redirects, missing-ID 404/noindex, empty/invalid selections, retired fiction, About and private archive/admin/cron denials. No authoring credentials or operations were used.
+
+[Production Chromium evidence](screenshots/maintenance/qa-production.json) repeats the five-width suite and all 104 details at 320px. Normal browsing recorded zero console errors, external browser requests and document overflow. All 16 settled production PNGs were byte-identical to the local captures; the retained [desktop homepage](screenshots/maintenance/home-1440.png), [mobile homepage](screenshots/maintenance/home-390.png) and [detail](screenshots/maintenance/detail-1280.png) are copied from production. The separate production missing-match probe confirmed usable hydrated feedback, with the same initial-shell limitation above.
+
+The maintenance changes no factual/editorial records, database contract, credentials, publication permissions or deployment policy. These results support continuing the MVP freeze; they do not establish full accessibility certification, all-publisher availability, real-model quality or production database parity.
 
 ## Full-tournament archive — release verification
 

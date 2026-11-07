@@ -30,7 +30,7 @@ These are implementation corrections, not claims of measured model quality, lega
 
 ## Final maintenance
 
-Implemented maintenance preserves the archive scope: canonical match dates with separate validated list-return state, cross-date/related/team-journey navigation, Match context versus Match analysis labels, public match metadata, genuine missing-ID 404s, and an optional bounded source checker. The candidate has 88 passing unit tests; all-release checks and deployed-revision evidence belong in [deployment](deployment.md). A three-link live sample was healthy; source health remains a manual operational check, not proof that all publishers are available or permission to change results.
+Implemented maintenance preserves the archive scope: canonical match dates with separate validated list-return state, cross-date/related/team-journey navigation, Match context versus Match analysis labels, public match metadata, genuine missing-ID 404s, and an optional bounded source checker. Runtime `9315f1e` has 88 passing unit tests, 78 SQL assertions, the required local checks and verified production HTTP/five-width Chromium behavior. Revision-specific CI and delivery evidence belong in [deployment](deployment.md). A three-link live sample was healthy; source health remains a manual operational check, not proof that all publishers are available or permission to change results.
 
 The source checker is report-only by default and does not run external requests in ordinary CI. Explicit strict mode is available for a deliberate manual gate. Future source failures need review; access blocks, network errors and missing pages are distinct outcomes. No new Lens prose, records, public backend access or publication rights are introduced.
 

@@ -8,9 +8,9 @@ The public archive is self-contained: no database connection, paid API calls or 
 
 <img src="docs/screenshots/maintenance/home-1440.png" alt="World Cup Lens full tournament archive with Norway–England featured and date, stage, team and search controls" width="720">
 
-[Mobile archive](docs/screenshots/maintenance/home-390.png) · [Match Lens detail](docs/screenshots/maintenance/detail-1280.png) · [Local browser checks](docs/screenshots/maintenance/qa-local.json)
+[Mobile archive](docs/screenshots/maintenance/home-390.png) · [Match Lens detail](docs/screenshots/maintenance/detail-1280.png) · [Production browser checks](docs/screenshots/maintenance/qa-production.json)
 
-Local maintenance-candidate captures, November 7, 2026. [Release verification](docs/deployment.md) records the separately verified production revision.
+Production captures, November 7, 2026, runtime `9315f1e`. [Release verification](docs/deployment.md) records HTTP, browser and deployment evidence.
 
 ## Explore the archive
 
